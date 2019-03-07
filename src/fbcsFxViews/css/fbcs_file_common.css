@@ -1,0 +1,105 @@
+@charset "utf-8";
+/*@import url("initTag.min.css");*/
+#fbcs_file{font-size: 0;}
+#fbcs_file .test{font-size: 16px;border: 1px solid silver;padding: 5px 10px;}
+#fbcs_file .hide{display: none !important;}
+#fbcs_file .show{display: block !important;}
+#fbcs_file input{font-size: 14px;color: #666;height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;vertical-align: middle; border-radius: 4px;}
+#fbcs_file input:focus{border: 2px solid #32ccF9;}
+#fbcs_file ::-webkit-input-placeholder{color: #BBB;}
+#fbcs_file input:disabled{background: #F5F7FA;color: #C0C4CC;border: 1px solid #E4E7ED;cursor: not-allowed;}
+#fbcs_file textarea:disabled{background: #F8F8F8;}
+/*elment-ui*/
+.v-modal{z-index: 1 !important;}
+#fbcs_file .el-tabs__header{z-index: 1;}
+#fbcs_file .el-popper{z-index: 2 !important;}
+#fbcs_file .el-dialog__wrapper{z-index: 3 !important;}
+#fbcs_file .el-menu{border: none;}
+
+#fbcs_file .el-select__input{border: none;margin: 0;}
+#fbcs_file .el-select__input:focus{border: none;}
+/*#fbcs_file .el-select__tags{overflow: auto;max-height: 300px;}*/
+#fbcs_file .el-select__tags-text{max-width: 230px;overflow: hidden;text-overflow: ellipsis;}
+
+/*elment-ui 表格*/
+#fbcs_file .el-table thead{color: #333;}
+#fbcs_file .el-table__header th{background: #E5EAF0;}
+#fbcs_file .el-table__header .cell{white-space: nowrap;}
+#fbcs_file .tableBG{background: #E5EAF0;}
+#fbcs_file .el-table__body tr.current-row>td{background: #CFE0F3;}
+#fbcs_file .el-table td{padding: 10px 0;}
+#fbcs_file .el-table .cell{line-height: 20px;}
+#fbcs_file .el-table--enable-row-hover .el-table__body tr:hover>td { background: inherit; }
+#fbcs_file .el-table--enable-row-hover .el-table__body tr.current-row:hover>td { background: #CFE0F3; }
+/*elment-ui 日期*/
+#fbcs_file .picker{width: 192px;}
+#fbcs_file .picker .el-input__inner{padding-left: 30px;}
+#fbcs_file .picker .el-input__suffix{line-height: 30px;font-size: 0;}
+#fbcs_file .el-input__icon{line-height: 30px;font-size: 14px;}
+#fbcs_file .el-picker-panel__link-btn.el-button--text{display: none;}
+
+
+/*按钮*/
+#fbcs_file .blueBtn, #fbcs_file .defBtn{display: inline-block;min-width: 68px;height: 30px;border-radius: 6px;vertical-align: middle;
+	font-size: 12px;line-height: 30px;padding: 0 10px;min-width: 88px;}
+#fbcs_file .blueBtn{background: #06BFF5;color: #FFF;}
+#fbcs_file .blueBtn:hover{background: #17cbff;}
+#fbcs_file .blueBtn:active{background: #00b5ea;}
+#fbcs_file .defBtn{color: #0DB9EB;border: 1px solid #0DB9EB;background: #FFF;}
+#fbcs_file .defBtn:active{box-shadow: 0px 0px 1px 0px #0DB9EB;}
+#fbcs_file button{-moz-user-select: none;-webkit-user-select: none;}
+#fbcs_file button:disabled{background: #F5F7FA;color: #C0C4CC;border: 1px solid #E4E7ED;cursor: not-allowed;pointer-events: none;}
+/* MaskLayer */
+#fbcs_file .maskLayer{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.5);z-index: 9;}
+#fbcs_file .loadPanle{font-size: 16px;color: #06BFF5;line-height: 30px;}
+
+#fbcs_file .maskBlack{background: rgba(0,0,0,0.5);}/*rgba(255,255,255,0.5)*/
+#fbcs_file .tipsPanle{display: block;margin: 10% auto 0;width: 600px;background: #FFF;border-radius: 4px;}
+#fbcs_file .tipsPanle .title{border-bottom: 1px solid #EDEFF4;height: 50px;overflow: hidden;}
+#fbcs_file .tipsPanle .title b{font-size: 18px;line-height: 50px;margin-left: 20px;color: #656a73;}
+#fbcs_file .tipsPanle .message{text-align: center;}
+#fbcs_file .tipsIcon{width: 40px;height: 40px;}
+#fbcs_file .tipsPanle .alert {font-size: 0;padding: 40px 0;}
+#fbcs_file .tipsPanle .alert > div{display: inline-block;vertical-align: top;max-height: 120px;}
+#fbcs_file .tipsPanle .alert .left{width: 110px;text-align: right;padding: 0 30px;}
+#fbcs_file .tipsPanle .alert .right{max-width: 488px;padding-right: 40px;font-size: 14px;color: #666;line-height: 24px;text-align: left;overflow: auto;}
+#fbcs_file .tipsPanle .confirm {font-size: 14px;color: #666;max-height: 200px;padding: 40px;overflow: auto;}
+#fbcs_file .tipsPanle .footBtn{height: 50px;border-top: 1px solid #EDEFF4;text-align: right;padding-top: 10px;}/*#D7D8DA,*/
+#fbcs_file .tipsPanle .footBtn button{margin-right: 15px;}
+
+/*搜索栏*/
+#fbcs_file .searchBar{margin-bottom: 10px;white-space: nowrap;}
+#fbcs_file .searchBar *{vertical-align: middle;}
+#fbcs_file .searchBar .label{font-size: 14px;color: #333;line-height: 30px;height: 30px;margin-right: 10px;}
+#fbcs_file .searchBar .words{margin-right: 35px;}
+
+/*功能按钮区*/
+#fbcs_file .fnField{margin-bottom: 10px;white-space: nowrap;-moz-user-select: none;-webkit-user-select: none;}
+#fbcs_file .fnField *{vertical-align: middle;}
+#fbcs_file .fnField li{display: inline-block;margin-right: 35px;cursor: pointer;}
+#fbcs_file .fnField .icon{height: 30px;width: 30px;}
+#fbcs_file .fnField .label{font-size: 14px;color: #5C759D;line-height: 30px;height: 30px;margin-left: 4px;}
+
+/*对话框*/
+#fbcs_file .el-dialog{width: 600px;}
+#fbcs_file .el-dialog__header{padding: 13px 20px;}
+#fbcs_file .el-dialog__title{color: #666;}
+#fbcs_file .el-dialog__body{padding: 0;}
+#fbcs_file .el-dialog__footer{padding: 0;}
+
+#fbcs_file ._dialog{font-size: 0;padding: 40px;width: 600px;min-height:200px;border-top: 1px solid #EDEEF0;}
+#fbcs_file ._dialog li{margin-bottom: 10px;}
+#fbcs_file ._dialog li:last-child{margin-bottom: 0;}
+#fbcs_file ._dialog .left *,#fbcs_file ._dialog .right *{vertical-align: middle;}
+#fbcs_file ._dialog .left,#fbcs_file ._dialog .right{display: inline-block;width: 140px;vertical-align: top;}
+#fbcs_file ._dialog .left{text-align: right;}
+#fbcs_file ._dialog .txt{font-size: 14px;color: #666;line-height: 30px;}
+#fbcs_file .red{font-size: 14px;color: #F00;}
+#fbcs_file ._dialog .right{width: auto;}
+#fbcs_file ._footBtn{padding: 10px 0px;border-top: 1px solid #EDEEF0;text-align: right;}
+#fbcs_file ._footBtn button{margin-right: 15px;}
+
+/*返回头部*/
+#fbcs_file .backHead{height: 50px;margin: -20px 0 20px -20px;border-bottom: 1px solid #d8D8D8;padding-top: 10px;}
+#fbcs_file .backHead .back{font-size: 13px;color: #5A719D;line-height: 30px;vertical-align: middle;padding: 0 20px;cursor: pointer;border-right: 1px solid #EDEEF0;}
+#fbcs_file .backHead .h1{font-size: 16px;color: #656A73;line-height: 30px;vertical-align: middle;padding: 0 20px;}

@@ -1,0 +1,100 @@
+var obj = {
+	tips: {
+		ok: '确定', now: '立即下发', cancel: '取消', build: '创建', back:'返回',
+		modify: '修改', edit: '编辑', submit: '提交', contrast: '对比', close: '关闭',
+		date: '选择日期时间', title: '提示',
+	},
+	components: {
+		placeholder: '输入关键字', not: '暂无数据', paging1: '已显示全部', paging2: '条数据',
+		reviewTitle: '复核操作', reviewName: '复核操作员：', reviewPwd: '复核员密码：',
+		isSubmit: '是否要立即下发！', reviewSame: '复核员不能是登陆用户!', reviewNull: '复核员或密码不能为空!',
+		
+	},
+	searchBar: {
+		userID: '用户ID：', userName: '用户名称：', placeholder: '输入关键字', search: '查询',
+		ekeyName: 'Ekey名称：', addSignal: '创建通信关系', businessType: '业务类型',
+		
+	},
+	fnField: {
+		addUser: '创建用户', delUser: '删除用户', editPwd: '修改密码', importInformation: '导入运维扩展信息', importInBop: '导入BOP扩展信息',
+		addEkey: '创建Ekey', editEkey: '修改Ekey', exportEkey: '批量导出Ekey',
+		addSignal: '创建通信关系', delSignal: '删除通信关系', exportSignal: '批量导出通信关系',
+		bigVer: '生成大版本', getCfg: '获取中登配置', newVer: '校验最新版本',
+	},
+	tableTitle: {
+		userID: '用户ID', userName: '用户名称', operation: '操作',
+		ekeyName: 'Ekey名称', ekeyDate: 'Ekey有效期', ekeyInfo: 'Ekey描述',
+	},
+	tableDefined: {
+		editUser: '修改基本信息', editEkey: '修改Ekey', addSignal: '创建通信关系', delEkey: '删除Ekey',
+		delUser: '删除用户', delSignal: '删除通信关系', back: '回退', detail: '详情',
+	},
+	
+	userHome: {
+		info: '基本信息', ekey: 'Ekey', signal:'通信关系', information:'扩展信息', 
+		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！'
+	},
+	userInfo: {
+		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 
+		group: '所在组：', speed: '最大收发速度：', maxUser: '最大关系数：', hard: '硬加密', soft: '软加密',
+		online: '不在线报警：', EncFlag: '加密方式：', beginTime: '软加密开始时间：', endTime: '软加密结束时间：', broadcast: '是否允许广播发送：',
+		connFlag: '允许连接标志：', switchMsg: '允许消息交换：', publishTopicCount: '发布主题个数上限：', subscribeTopicCount: '订阅主题个数上限：',
+		maxPublishTopicDay: '发布主题有效期天数：', maxSimultTaskCount: '单用户任务并发数：', maxCltOneDayTaskCount: '单用户最大发送文件个数：', 
+		webFlag:'单用户互联网标识', isModifyDefaultPasswd: '新加用户修改默认密码标识：', userPasswd: '系统密码：', expiredTimeFlag: '密码有效期标识：',
+		more: '展开更多设置', Kbit: '-1或0为不限速', indate: '密码有效期：',
+	},
+	password: {
+		id: '用户ID：', pwd: '修改用户密码：', new: '新密码：', again: '确认密码：', indate: '有效期：',
+		def: '默认', hm: '手动', reset: '重置密码：', not: '请在列表中选择一条记录！',
+		options: [{label: '默认', value: '1'},{label: '立即失效', value: '0'},{label: '永不过期', value: '-1'}],
+		pwdErr: '新密码不能为空！', againErr: '确认密码不能为空！', same: '两次输入的密码不一致！',
+	},
+	Ekey: {
+		userID: '用户ID：', ekeyName: 'Ekey名称：', ekeyPwd: 'Ekey密码：', ekeyDate: 'Ekey有效期：', 
+		ekeyInfo:'Ekey描述：', tips: '小于V5版用户必填',
+	},
+	relation: {
+		addSignal: '创建通信关系', delSignal: '删除通信关系', userID1: '用户ID：', userID2: '对端用户：',
+		clear: '清空', errid1: '用户ID不能为空！', errid2: '对端用户不能为空！', errSignal: '至少选择一条通信关系！', 
+		errid3: '立即下发只能选择一条通信关系！', sureSignal: '是否确认要删除通信关系'
+	},
+	
+	suConfig: {
+		first: '全局静态配置', second: '全局动态配置', 'static': '静态配置文件：', dynamic: '动态配置文件：',
+		only: '只读', edit: '编辑', h2: '对比内容：' , section:'段名', type:'操作类型', detail:'详情',
+		field:'字段名' , oldValue:'原数据' , modifyValue:'修改数据' , range:'合理范围' , 
+		err: '异常提示'
+	},
+	dispatch: {
+		options: [{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},{label: '用户密码信息表', value: '3'}],
+		nodeName:'节点名', cuName:'CU名称', errcode:'错误码', errinfo:'错误信息', type:'操作类型',
+		setFile:'配置文件：', hots1:'分发主机：', hots2:'主机列表', res:'分发结果：',
+		t1:'(系统动态配置文件为：userinfo.db,userekey.db,usercomm.db,mxdynamic.ini)',
+		t2:'(系统静态配置文件为：mxstatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)'
+	},
+	audit: {
+		operator:'操作员', reviewer:'审核员', operatorRole:'操作员角色', operatorType:'操作类型',
+		operatorTime:'操作时间',errorCode:'操作错误码', errorInfo:'操作错误描述', uuid:'流水号',
+		sort: '排序方式 ：', lately: '最近', early: '最早', times: '时间段：', today: '今天', week: '近一周',
+		month: '近一个月', begin: '开始时间', end: '结束时间',
+	},
+	
+	versionQuery: {
+		options: [{label: '全部', value: '0'},{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},
+			{label: '用户密码信息表', value: '3'},{label: '中登配置', value: '4'},{label: '回滚', value: '5'}],
+		type:'版本类型', version:'版本号', versionPath:'版本路径', operationTime: '下发时间', 
+		operater: '下发人员', reviewer: '审核人员', operationType:'下发类型', 
+		rollback: '您确定要回退到此版本？',
+	},
+	versionDetail: {
+		title: '版本详情', type: '版本类型', fileName: '文件名' , cfgInfo: '文件内容',
+		fileSize: '文件大小', fileMd5: '文件Md5', fileTime: '文件时间',
+		ctplst: 'ctplst', zdrela: 'zdrela',
+	},
+	versionContrast: {
+		options: [{label: '用户密码信息表', value: '3'},{label: '中登配置', value: '4'}],
+		type:'版本类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比',
+		section: '段名', field: '字段名', detail: '详情'
+	},
+};
+module.exports = {fbcsFile: obj};
