@@ -32,7 +32,10 @@
 			</li><li @click="getCfg">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.getCfg')}}</span>
-			</li><li @click="newVer">
+			</li><li @click="checkVer(0)">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
+				<span class="label">{{$t('fbcsFile.fnField.checkZd')}}</span>
+			</li><li @click="checkVer(1)">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.newVer')}}</span>
 			</li>
@@ -46,15 +49,34 @@
 			
 			<div class="_dialog">
 				<el-table :data="detailList" :row-class-name="rowClass" max-height="294" border>
-					<el-table-column prop="section" :label="$t('fbcsFile.suConfig.section')"></el-table-column>
 					<el-table-column prop="type" :label="$t('fbcsFile.suConfig.type')"></el-table-column>
-					<el-table-column prop="detail" :label="$t('fbcsFile.suConfig.detail')"></el-table-column>
+					<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>
+					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
+					<el-table-column prop="fileSize" :label="$t('fbcsFile.versionDetail.fileSize')"></el-table-column>
+					<el-table-column prop="fileMd5" :label="$t('fbcsFile.versionDetail.fileMd5')"></el-table-column>
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
 				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
+		
+		<el-dialog :visible.sync="checkDialog" :title="checkTitle" v-dialogDrag
+			:close-on-click-modal='false' :show-close="false">
+			
+			<div class="_dialog">
+				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
+					<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>
+					<el-table-column prop="version" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
+					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileSize')"></el-table-column>
+					<el-table-column prop="equalMask" :label="$t('fbcsFile.versionDetail.fileMd5')"></el-table-column>
+				</el-table>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="defBtn" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+			</div>
+		</el-dialog>
+		
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='submit' :txt='reviewTxt'></lgy-review>
 		<lgy-wheelReq :parameter="parameter"></lgy-wheelReq>
 	</div>

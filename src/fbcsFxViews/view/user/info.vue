@@ -159,7 +159,7 @@
 				<div class="right">
 					<input v-model="info.webUserFlag" />
 				</div>
-			</li><li>
+			</li><li v-if="isAdd=='add'">
 				<div class="label">{{$t('fbcsFile.userInfo.indate')}}</div>
 				<div class="right">
 					<el-select v-model="info.expiredTimeFlag">

@@ -1,11 +1,12 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
+import md5 from '@/fbcsFxViews/libs/md5.js';
 
 var _this, info = {
 	userID: '', userName: '', userType: '', userPasswd:'111111', inZone: '',linkGroupName: '', speedCtrl: '',
 	maxRelationUser: '',notOnlineAlarm: 0, EncFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
 	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1,allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
 	maxPublishTopicDay: 7, maxSimultTaskCount: '',maxCltOneDayTaskCount: '', webUserFlag: '',
-	isModifyDefaultPasswd: '', userPasswd: '', expiredTimeFlag: '',
+	isModifyDefaultPasswd: '', expiredTimeFlag: '',
 }, 
 data = {
 	info,
@@ -57,7 +58,7 @@ export default {
 			let params = Object.assign({}, this.info);
 			params.url = 'userinfo/add';
 			params.cmdID = '600003';
-			params.userPasswd = this.info;
+			params.userPasswd = md5(this.info.userPasswd);
 			console.log(params)
 			
 			utils.post(params).then(function(res){
@@ -74,7 +75,7 @@ export default {
 			let params = Object.assign({},this.info);
 			params.url = 'userinfo/addImmediately';
 			params.cmdID = '600006';
-			params.userPasswd = this.passwd;
+			params.userPasswd = md5(this.info.userPasswd);
 			params.reviewer = obj.name;
 			
 			utils.post(params).then(function(res){

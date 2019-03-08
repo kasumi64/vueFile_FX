@@ -1,6 +1,12 @@
 @charset "utf-8";
 /*@import url("initTag.min.css");*/
-#fbcs_file{font-size: 0;}
+
+#fbcs_file {
+	font-size: 0;word-break: break-word;font-style: normal; font-weight: normal;
+	font-family: "Microsoft YaHei", "HiraginoSansGB", "Helvetica", "Arial", "Consolas", "sans-serif", "宋体";
+}
+#fbcs_file *{-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
 #fbcs_file .test{font-size: 16px;border: 1px solid silver;padding: 5px 10px;}
 #fbcs_file .hide{display: none !important;}
 #fbcs_file .show{display: block !important;}
@@ -40,7 +46,7 @@
 
 
 /*按钮*/
-#fbcs_file .blueBtn, #fbcs_file .defBtn{display: inline-block;min-width: 68px;height: 30px;border-radius: 6px;vertical-align: middle;
+#fbcs_file .blueBtn, #fbcs_file .defBtn{display: inline-block;height: 30px;border-radius: 6px;vertical-align: middle;
 	font-size: 12px;line-height: 30px;padding: 0 10px;min-width: 88px;}
 #fbcs_file .blueBtn{background: #06BFF5;color: #FFF;}
 #fbcs_file .blueBtn:hover{background: #17cbff;}

@@ -65,6 +65,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import md5 from '@/fbcsFxViews/libs/md5.js';
 
 var _this, data = {
 	info: {
@@ -101,7 +102,7 @@ export default {
 			let params = Object.assign({}, this.info);
 			params.url = 'userpasswd/modify';
 			params.cmdID = '600009';
-			params.userPasswd = this.passwd;
+			params.userPasswd = md5(this.passwd);
 			
 			utils.post(params).then(function(res){
 				utils.alert({txt: res.errinfo});
@@ -116,7 +117,7 @@ export default {
 			let params = Object.assign({},this.info);
 			params.url = 'userpasswd/modifyImmediately';
 			params.cmdID = '600010';
-			params.userPasswd = this.passwd;
+			params.userPasswd = md5(this.passwd);
 			params.reviewer = obj.name;
 			
 			utils.post(params).then(function(res){

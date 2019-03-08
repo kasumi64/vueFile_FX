@@ -19,7 +19,7 @@ var obj = {
 		addUser: '创建用户', delUser: '删除用户', editPwd: '修改密码', importInformation: '导入运维扩展信息', importInBop: '导入BOP扩展信息',
 		addEkey: '创建Ekey', editEkey: '修改Ekey', exportEkey: '批量导出Ekey',
 		addSignal: '创建通信关系', delSignal: '删除通信关系', exportSignal: '批量导出通信关系',
-		bigVer: '生成大版本', getCfg: '获取中登配置', newVer: '校验最新版本',
+		bigVer: '生成大版本', getCfg: '获取中登配置', checkZd: '比对中枢配置最新版本', newVer: '比对客户端文件最新版本',
 	},
 	tableTitle: {
 		userID: '用户ID', userName: '用户名称', operation: '操作',
@@ -83,8 +83,9 @@ var obj = {
 		options: [{label: '全部', value: '0'},{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},
 			{label: '用户密码信息表', value: '3'},{label: '中登配置', value: '4'},{label: '回滚', value: '5'}],
 		type:'版本类型', version:'版本号', versionPath:'版本路径', operationTime: '下发时间', 
-		operater: '下发人员', reviewer: '审核人员', operationType:'下发类型', 
-		rollback: '您确定要回退到此版本？',
+		operater: '下发人员', reviewer: '审核人员', operationType:'下发类型', checkVer: '比对最新版本MD5',
+		rollback: '您确定要回退到此版本？', bigVer: '您确定要生成大版本？', ZdCfg: '是否获取中登配置？',
+		equal0: '一致', equal1: '不一致', equal2: '文件不存在',
 	},
 	versionDetail: {
 		title: '版本详情', type: '版本类型', fileName: '文件名' , cfgInfo: '文件内容',

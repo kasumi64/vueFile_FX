@@ -35,7 +35,9 @@ var _this, data = {
 	reqsv: {},
 	reviewTxt: '',
 	parameter: null,
-	
+	checkDialog: false,
+	checkTitle: '',
+	checkList: []
 };
 var rollRow;
 
@@ -56,13 +58,6 @@ function detail2(row){
 	utils.setArgs('version', row);
 	_this.$router.push({path: '/main/fxCfg/version/detail'});
 }
-function review(row, scope, uri){
-	rollRow = row;
-	_this.reviewTxt = _this.$t('fbcsFile.versionQuery.rollback');
-	_this.reqsv = {uri:uri || 'version/rollback'};
-	_this.showReview = true;
-}
-
 function rollback(obj){
 	let params = {
 		url: obj.uri,
@@ -83,9 +78,32 @@ function bigVer(obj){
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!=0) return utils.alert({txt: res.errinfo});
+		res.type = 1;
 		_this.parameter = res;
 	});
 }
+function fnback(row, scope){
+	rollRow = row;
+	let uri = 'version/rollback',
+	txt = _this.$t('fbcsFile.versionQuery.rollback');
+	review(uri, txt);
+}
+function review(uri, txt){
+	_this.reqsv = {uri};
+	_this.reviewTxt = txt;
+	_this.showReview = true;
+}
+function zdCfg(obj){
+	let params = {
+		url: 'version/getZdCfg',
+		cmdID: '600078',
+		reviewer: obj.name
+	};
+	utils.post(params).then(function(res){
+		utils.alert({txt: res.errinfo});
+	});
+}
+
 
 export default {
 	data(){
@@ -102,7 +120,7 @@ export default {
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 112,
 			items: [
-				{src:require('@/fbcsFxViews/img/table/restore.png'), click: review, tips: this.$t('fbcsFile.tableDefined.back')},
+				{src:require('@/fbcsFxViews/img/table/restore.png'), click: fnback, tips: this.$t('fbcsFile.tableDefined.back')},
 				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail1, tips: this.$t('fbcsFile.tableDefined.detail'), enable: 'fileSize'},
 				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.tableDefined.detail'),enable: 'zdCfg'},
 			]
@@ -127,36 +145,39 @@ export default {
 					rollback(obj); break;
 				case "version/createBigVersion": 
 					bigVer(obj); break;
+				case "version/getZdCfg": 
+					zdCfg(obj); break;
 				default: break;
 			}
 		},
 		bigVer(){
-			review('','','version/createBigVersion');
+			let uri = 'version/createBigVersion',
+			txt = _this.$t('fbcsFile.versionQuery.bigVer');
+			review(uri, txt);
 		},
 		getCfg(){
-			let params = {
-				url: 'version/querySize',
-				cmdID: '600075',
-				type: row.type,
-				version: row.version
-			};
-			utils.post(params).then(function(res){
-				if(res.errcode!=0) return utils.alert({txt: res.errinfo});
-				_this.list = res.lists;
-				_this.showDialog = true;
-			});
+			let uri = 'version/getZdCfg',
+			txt = _this.$t('fbcsFile.versionQuery.ZdCfg');
+			review(uri, txt);
 		},
-		newVer(){
+		checkVer(type){
 			let params = {
-				url: 'version/querySize',
-				cmdID: '600075',
-				type: row.type,
-				version: row.version
-			};
+				url: 'version/compareMd5',
+				cmdID: '600079',
+				type,
+			}, tit = 'fbcsFile.fnField.';
+			
+			if(type==0) tit += 'checkZd';
+			else tit += 'newVer';
+			this.checkTitle = this.$t(tit);
 			utils.post(params).then(function(res){
 				if(res.errcode!=0) return utils.alert({txt: res.errinfo});
-				_this.list = res.lists;
-				_this.showDialog = true;
+				for (let i = 0; i < res.lists.length; i++) {
+					let obj = res.lists[i], equal = obj.isEqual;
+					obj.equalMask = _this.$t('fbcsFile.versionQuery.equal'+equal);
+				}
+				_this.checkList = res.lists;
+				_this.checkDialog = true;
 			});
 		},
 	},
@@ -167,7 +188,9 @@ export default {
 		info.type = '0';
 		info.pageSize = 20; 
 		this.page = 1;
+		this.checkDialog = this.showDialog = false;;
 		this.radio = 4;
+		getDay(4);
 		this.search();
 	},
 	watch: {
