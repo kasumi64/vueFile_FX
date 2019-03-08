@@ -49,7 +49,6 @@
 			
 			<div class="_dialog">
 				<el-table :data="detailList" :row-class-name="rowClass" max-height="294" border>
-					<el-table-column prop="type" :label="$t('fbcsFile.suConfig.type')"></el-table-column>
 					<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>
 					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
 					<el-table-column prop="fileSize" :label="$t('fbcsFile.versionDetail.fileSize')"></el-table-column>
