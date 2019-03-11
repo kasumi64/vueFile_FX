@@ -19,7 +19,7 @@
 					<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
 					<el-table-column prop="errcode" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
 					<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
-					<el-table-column prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
+					<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
@@ -38,6 +38,7 @@ var _this, data = {
 	cuList: [
 //		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok', operationType:'用户'},
 	],
+	checkType: 0,
 };
 
 function WheelReq(sv){
@@ -64,7 +65,9 @@ function WheelReq(sv){
 			return setTimeout(req, 2000);
 		}
 		_this.cuList = res.lists;
-		_this.showDialog = true;
+		_this.checkType = res.type;
+		if(!_this.hide) _this.showDialog = true;
+		_this.$emit('update:cuList', res.lists);
 		stop();
 	}
 	function stop(){
@@ -83,19 +86,23 @@ export default {
 	name: 'lgy-review',
 	data() { return data; },
 	props: {
-		parameter: null //轮询参数
+		parameter: null, //轮询参数
+		hide: {
+			type: Boolean,
+			default: false
+		}
 	},
 	methods:{
 		rowClass({row, rowIndex}){
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
-		},
-		
+		}
 	},
 	created(){
 		_this = this;
 		this.loading = false;
 		this.showDialog = false;
+		this.checkType = 0;
 	},
 	watch: {
 		parameter(param){

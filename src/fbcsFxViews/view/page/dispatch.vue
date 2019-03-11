@@ -32,13 +32,12 @@
 						<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
 						<el-table-column prop="errcode" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
 						<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
-						<el-table-column prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
 					</el-table>
 				</div>
 			</li>
 		</ul>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='submit' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq :parameter.sync="parameter"></lgy-wheelReq>
+		<lgy-wheelReq :parameter.sync="parameter" :cuList.sync='cuList' :hide="true"></lgy-wheelReq>
 	</div>
 </template>
 
@@ -48,14 +47,14 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 var _this, data = {
 	type: '1',
 	nodeList: [
-		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok', operationType:'用户'},
+		{nodeName:'深圳', cuName:'CU-2'},
 	],
 	cuList: [
-		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok', operationType:'用户'},
+		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok'},
 	],
 	showReview: false,
 	reqsv: {},
-	parameter: null
+	parameter: null,
 	
 };
 var nodes, dict;

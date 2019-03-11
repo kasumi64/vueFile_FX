@@ -8,9 +8,9 @@
 			</el-select>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.versionContrast.ver1')}}</label>
-			<lgy-candidateWords v-model="id1" :keywords="ver1" @input="input1" class="words" ></lgy-candidateWords>
+			<lgy-candidateWords v-model="id1" :keywords="ver1" :disabled="disabled" @input="input1" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.versionContrast.ver2')}}</label>
-			<lgy-candidateWords v-model="id2" :keywords="ver2" @input="input2" class="words"></lgy-candidateWords>
+			<lgy-candidateWords v-model="id2" :keywords="ver2" :disabled="disabled" @input="input2" class="words"></lgy-candidateWords>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.versionContrast.btn')}}</button>
 		</div>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
@@ -26,7 +26,8 @@ var _this, data = {
 	id2: '',
 	ver1: [],
 	ver2: [],
-	type: '3',
+	type: 3,
+	disabled: false,
 	list: '',
 	page: 1,
 	total: 1
@@ -42,15 +43,8 @@ export default {
 			type: this.$t('fbcsFile.versionContrast.type'),
 			detail: this.$t('fbcsFile.versionContrast.detail')
 		};
-//		data.defined = {
-//			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
-//			items: [
-//				{src:require('@/fbcsFxViews/img/logo.png'), click: showEditEkey, tips: this.$t('fbcsFile.tableDefined.editEkey') },
-//			]
-//		};
 		return data;
 	},
-	props: {},
 	methods:{
 		search(){
 			this.page = 1;
@@ -70,9 +64,8 @@ export default {
 	},
 	created(){
 		_this = this;
-		this.id1 = this. id2 = '';
 		this.ver1 = this.ver2 = [];
-		this.type = '3';
+		this.type = 1;
 		this.page = 1;
 		this.total = 1;
 		this.list = [];
@@ -80,6 +73,14 @@ export default {
 			verWords = [].concat(arr);
 			_this.ver1 = _this.ver2 = arr;
 		});
+	},
+	mounted(){
+		changeType(1);
+	},
+	watch: {
+		type(val){
+			changeType(val);
+		}
 	}
 };
 
@@ -88,6 +89,7 @@ function keywords(val, fn){
 		url: 'version/queryCompare',
 		cmdID: '600072',
 		version: val,
+		type: _this.type,
 		pageSize: 100,
 		currentPage: 1
 	};
@@ -106,8 +108,9 @@ function search(){
 	let params = {
 		url: 'version/compare',
 		cmdID: '600074',
-		userID1: _this.id,
-		userID2: _this.name,
+		type: _this.type,
+		userID1: _this.id1,
+		userID2: _this.id2,
 		pageSize: 20,
 		currentPage: _this.page
 	};
@@ -121,6 +124,19 @@ function search(){
 		_this.page = res.currentPage;
 		_this.total = res.totalSize;
 	});
+}
+function changeType(val){
+	switch (val){
+		case 1: case 2: 
+			_this.id1 = _this.$t('fbcsFile.versionContrast.temp');
+			_this.id2 = _this.$t('fbcsFile.versionContrast.online');
+			_this.disabled = true;
+			break;
+		default:
+			_this.id1 = _this.id2 = '';
+			_this.disabled = false;
+			break;
+	}
 }
 </script>
 

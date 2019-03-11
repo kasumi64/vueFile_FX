@@ -68,21 +68,21 @@
 					<input v-model="info.maxRelationUser" />
 				</div>
 			</li><li>
-				<div class="label" style="vertical-align: top;">{{$t('fbcsFile.userInfo.EncFlag')}}</div>
+				<div class="label" style="vertical-align: top;">{{$t('fbcsFile.userInfo.encFlag')}}</div>
 				<div class="right">
-					<el-radio-group v-model="info.EncFlag" class="radio">
+					<el-radio-group v-model="info.encFlag" class="radio">
 						<el-radio :label="1">{{$t('fbcsFile.userInfo.hard')}}</el-radio>
 						<el-radio :label="2">{{$t('fbcsFile.userInfo.soft')}}</el-radio>
 					</el-radio-group>
 				</div>
-			</li><li v-if="info.EncFlag==1">
+			</li><li v-if="info.encFlag==1">
 				<div class="label">{{$t('fbcsFile.userInfo.beginTime')}}</div>
 				<div class="right">
 					<el-date-picker v-model="info.beginSoftEncTime" class="picker" type="datetime" :clearable="false" :editable="false"
 						:picker-options="pickerBegin" :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00">
 					</el-date-picker>
 				</div>
-			</li><li v-if="info.EncFlag==1">
+			</li><li v-if="info.encFlag==1">
 				<div class="label">{{$t('fbcsFile.userInfo.endTime')}}</div>
 				<div class="right">
 					<el-date-picker v-model="info.endSoftEncTime" class="picker" type="datetime" :clearable="false" :editable="false"

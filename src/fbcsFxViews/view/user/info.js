@@ -3,7 +3,7 @@ import md5 from '@/fbcsFxViews/libs/md5.js';
 
 var _this, info = {
 	userID: '', userName: '', userType: '', userPasswd:'111111', inZone: '',linkGroupName: '', speedCtrl: '',
-	maxRelationUser: '',notOnlineAlarm: 0, EncFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
+	maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
 	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1,allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
 	maxPublishTopicDay: 7, maxSimultTaskCount: '',maxCltOneDayTaskCount: '', webUserFlag: '',
 	isModifyDefaultPasswd: '', expiredTimeFlag: '',
@@ -28,7 +28,7 @@ export default {
 	props: {
 		isAdd: {
 			type: String,
-//			default: 'add'
+			default: 'add'
 		}
 	},
 	methods:{
@@ -56,8 +56,13 @@ export default {
 		},
 		submit(){
 			let params = Object.assign({}, this.info);
-			params.url = 'userinfo/add';
-			params.cmdID = '600003';
+			if(this.isAdd == 'add'){
+				params.url = 'userinfo/add';
+				params.cmdID = '600003';
+			} else {
+				params.url = 'userinfo/modify';
+				params.cmdID = '600004';
+			}
 			params.userPasswd = md5(this.info.userPasswd);
 			console.log(params)
 			
@@ -68,13 +73,22 @@ export default {
 		},
 		now(){
 //			if(!pass()) return;
-			this.reqsv = {uri: 'userpasswd/modifyImmediately'};
+			if(this.isAdd == 'add'){
+				this.reqsv = {uri: 'userinfo/addImmediately'};
+			} else {
+				this.reqsv = {uri: 'userinfo/modifyImmediately'};
+			}
 			this.showReview = true;
 		},
 		review(obj){
 			let params = Object.assign({},this.info);
-			params.url = 'userinfo/addImmediately';
-			params.cmdID = '600006';
+			if(this.isAdd == 'add'){
+				params.url = 'userinfo/addImmediately';
+				params.cmdID = '600006';
+			} else {
+				params.url = 'userinfo/modifyImmediately';
+				params.cmdID = '600007';
+			}
 			params.userPasswd = md5(this.info.userPasswd);
 			params.reviewer = obj.name;
 			
@@ -123,7 +137,7 @@ function initDate(){
 	for (let k in info) info[k] = '';
 	info.isModifyDefaultPasswd = 0;
 	info.userPasswd = '111111';
-	info.EncFlag = 1,
+	info.encFlag = 1,
 	info.notOnlineAlarm=0,
 	info.allowBroadcast= 0, 
 	info.allowConnFlag= 1, 

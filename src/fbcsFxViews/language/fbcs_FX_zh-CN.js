@@ -37,7 +37,7 @@ var obj = {
 	userInfo: {
 		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 
 		group: '所在组：', speed: '最大收发速度：', maxUser: '最大关系数：', hard: '硬加密', soft: '软加密',
-		online: '不在线报警：', EncFlag: '加密方式：', beginTime: '软加密开始时间：', endTime: '软加密结束时间：', broadcast: '是否允许广播发送：',
+		online: '不在线报警：', encFlag: '加密方式：', beginTime: '软加密开始时间：', endTime: '软加密结束时间：', broadcast: '是否允许广播发送：',
 		connFlag: '允许连接标志：', switchMsg: '允许消息交换：', publishTopicCount: '发布主题个数上限：', subscribeTopicCount: '订阅主题个数上限：',
 		maxPublishTopicDay: '发布主题有效期天数：', maxSimultTaskCount: '单用户任务并发数：', maxCltOneDayTaskCount: '单用户最大发送文件个数：', 
 		webFlag:'单用户互联网标识', isModifyDefaultPasswd: '新加用户修改默认密码标识：', userPasswd: '系统密码：', expiredTimeFlag: '密码有效期标识：',
@@ -83,9 +83,11 @@ var obj = {
 		options: [{label: '全部', value: '0'},{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},
 			{label: '用户密码信息表', value: '3'},{label: '中登配置', value: '4'},{label: '回滚', value: '5'}],
 		type:'版本类型', version:'版本号', versionPath:'版本路径', operationTime: '下发时间', 
-		operater: '下发人员', reviewer: '审核人员', operationType:'下发类型', checkVer: '比对最新版本MD5',
+		operator: '下发人员', reviewer: '审核人员', operationType:'下发类型', checkVer: '比对最新版本MD5',
 		rollback: '您确定要回退到此版本？', bigVer: '您确定要生成大版本？', ZdCfg: '是否获取中登配置？',
-		equal0: '一致', equal1: '不一致', equal2: '文件不存在',
+		equal0: '一致', equal1: '不一致', equal2: '文件不存在', operationType1: '全量下发' , operationType2: '增量下发',
+		operationType3: 'cu上传' , type1: '系统动态配置', type2: '系统静态配置', type3: '用户密码信息表', 
+		type4: '中登配置', type5: '回滚',
 	},
 	versionDetail: {
 		title: '版本详情', type: '版本类型', fileName: '文件名' , cfgInfo: '文件内容',
@@ -93,8 +95,9 @@ var obj = {
 		ctplst: 'ctplst', zdrela: 'zdrela',
 	},
 	versionContrast: {
-		options: [{label: '用户密码信息表', value: '3'},{label: '中登配置', value: '4'}],
-		type:'版本类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比',
+		options: [{label: '全局动态配置', value: 1},{label: '全局静态配置', value: 2},{label: '用户密码信息表', value: 3},
+			{label: '中登CTPLST', value: 4},{label: '中登ZDRela', value: 5}],
+		type:'版本类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比', temp: '临时版本', online: '线上版本',
 		section: '段名', field: '字段名', detail: '详情'
 	},
 };

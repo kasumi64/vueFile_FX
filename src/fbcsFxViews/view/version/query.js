@@ -109,13 +109,13 @@ export default {
 	data(){
 		data.options = this.$t('fbcsFile.versionQuery.options');
 		data.title = {
-			type: this.$t('fbcsFile.versionQuery.type'),
+			typeMask: this.$t('fbcsFile.versionQuery.type'),
 			version: this.$t('fbcsFile.versionQuery.version'),
 			versionPath: this.$t('fbcsFile.versionQuery.versionPath'),
 			operationTime: this.$t('fbcsFile.versionQuery.operationTime'),
-			operater: this.$t('fbcsFile.versionQuery.operater'),
+			operator: this.$t('fbcsFile.versionQuery.operator'),
 			reviewer: this.$t('fbcsFile.versionQuery.reviewer'),
-			operationType: this.$t('fbcsFile.versionQuery.operationType')
+			send: this.$t('fbcsFile.versionQuery.operationType')
 		};
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 112,
@@ -205,7 +205,7 @@ function search(){
 	params.url = 'version/queryLists';
 	params.cmdID = '600071';
 	params.currentPage = _this.page;
-	console.log(params)
+//	console.log(params);
 	utils.post(params).then(res => {
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		if(res.totalPage>1 && _this.page > res.totalPage){
@@ -225,6 +225,8 @@ function search(){
 					obj.zdCfg = false;
 					break;
 			}
+			obj.send = _this.$t('fbcsFile.versionQuery.operationType'+ obj.operationType);
+			obj.typeMask = _this.$t('fbcsFile.versionQuery.type'+ obj.type);
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

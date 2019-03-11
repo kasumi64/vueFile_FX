@@ -2,7 +2,7 @@
 .lgy-candidateWords {display: inline-block;position: relative;}
 .lgy-candidateWords .inp{font-size: 12px;padding: 0 10px;height: 30px;border:1px solid #dcdfe6;border-radius: 4px;color: #666;}
 .lgy-candidateWords .inp:focus{border:1px solid #0DB9EB;}
-.lgy-candidateWords .arrow{position: absolute;top: 7px;right: 7px;font-size: 14px;color: #c0c4cc;transition: transform 0.3s;}
+.lgy-candidateWords .arrow{position: absolute;top: 7px;right: 7px;font-size: 14px;color: #c0c4cc;transition: transform 0.3s;display: none;}
 .lgy-candidateWords .inTip {
 	display: none;position: absolute;padding: 5px 0;max-height: 200px;background: #FFF;top: 35px;left: 0;
 	width: 100%;overflow-x: hidden;overflow-y: auto;border: 1px solid #e4e7ed;border-radius: 4px;z-index: 2;
@@ -15,7 +15,7 @@
 	<div class="lgy-candidateWords">
 		<input :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" 
 			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle"/>
-		<i ref='arrow' @click='close' class="el-icon-circle-close arrow" :class="{hide: hide}"></i>
+		<i ref='arrow' @click='close' class="el-icon-circle-close arrow"></i>
 		<ul ref='inTip' class="inTip" @scroll="scrollHandle">
 			<li v-for="o in keywords" @mousedown="clickHandle(o, $event)">{{o.lable}}</li>
 			<li v-if="isNull()"><center>{{$t('fbcsFile.components.not')}}</center></li>
@@ -26,8 +26,7 @@
 <script>
 var _this, t, data = {
 	list: [],
-	placeholder: 'placeholder',
-	hide: true
+	placeholder: 'placeholder'
 };
 export default {
 	name: 'lgy-candidateWords',
@@ -78,8 +77,7 @@ export default {
 			t = setTimeout(function(){
 				let val = e.target.value;
 				self.$emit('input', val, e);
-				_this.hide = val ? false : true;
-//				_this.focusHandle(e);
+				self.$refs.arrow.style.display = val ? 'block' : 'none';
 			}, 300);
 		},
 		changeHandle(e){
@@ -92,8 +90,10 @@ export default {
 			return 1;
 		},
 		close(e){
+			if(disabled) return;
 			this.$emit('input', '', e);
 			this.$emit('close', e);
+			this.$refs.arrow.style.display = 'none';
 		}
 	},
 	created(){
@@ -101,6 +101,11 @@ export default {
 		this.$emit('input', '');
 		let p = this.placeholder;
 		if(!p) this.placeholder = this.$t('fbcsFile.components.placeholder');
+	},
+	watch: {
+		disabled(val){
+			this.$refs.arrow.style.display = 'none';
+		}
 	}
 };
 </script>

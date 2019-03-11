@@ -59,6 +59,8 @@
 				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
+		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
+		<lgy-wheelReq :parameter.sync="parameter"></lgy-wheelReq>
 	</div>
 </template>
 
@@ -79,7 +81,10 @@ var _this, data = {
 	ekeyInfo: {
 		userID: '', userName: '', validDate: '', ekeyComment: '', 
 	},
-	disabled: false
+	disabled: false,
+	showReview: false,
+    reqsv: {uri:''},
+    parameter: ''
 };
 
 function delEkey(row){

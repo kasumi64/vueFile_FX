@@ -52,7 +52,7 @@
 					<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>
 					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
 					<el-table-column prop="fileSize" :label="$t('fbcsFile.versionDetail.fileSize')"></el-table-column>
-					<el-table-column prop="fileMd5" :label="$t('fbcsFile.versionDetail.fileMd5')"></el-table-column>
+					<!--<el-table-column prop="fileMd5" :label="$t('fbcsFile.versionDetail.fileMd5')"></el-table-column>-->
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">

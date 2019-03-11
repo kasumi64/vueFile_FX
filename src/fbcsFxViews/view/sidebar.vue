@@ -82,7 +82,7 @@ export default {
 		},
 	},
 	created(){
-		this.select('/main/fxCfg/userInfo');
+		this.select('/main/fxCfg/version/query');
 //		this.select('/main/fxCfg/userHome');
 	}
 };
