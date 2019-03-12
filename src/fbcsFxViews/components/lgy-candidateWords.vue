@@ -90,7 +90,7 @@ export default {
 			return 1;
 		},
 		close(e){
-			if(disabled) return;
+			if(this.disabled) return;
 			this.$emit('input', '', e);
 			this.$emit('close', e);
 			this.$refs.arrow.style.display = 'none';

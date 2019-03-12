@@ -109,13 +109,13 @@ function search(){
 		url: 'version/compare',
 		cmdID: '600074',
 		type: _this.type,
-		userID1: _this.id1,
-		userID2: _this.id2,
+		version1: _this.id1,
+		version2: _this.id2,
 		pageSize: 20,
 		currentPage: _this.page
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn(res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

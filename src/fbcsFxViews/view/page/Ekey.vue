@@ -84,11 +84,42 @@ var _this, data = {
 	disabled: false,
 	showReview: false,
     reqsv: {uri:''},
-    parameter: ''
+    parameter: null,
 };
 
 function delEkey(row){
-	console.log('delEkey');
+	utils.confirm({
+		txt: _this.$t('fbcsFile.Ekey.delEkey'),
+		ok: () => {
+			let params = {}
+			params.url = 'userEkey/delete';
+			params.cmdID = '600034';
+			params.ekeyName = row.ekeyName;
+			
+			utils.post(params).then(function(res){
+				utils.alert({txt: res.errinfo});
+			});
+		},
+		now: obj => {
+			obj.uri = 'userEkey/deleteImmediately';
+			_this.reqsv = obj;
+			_this.showReview = true;
+		},
+		btn: 3
+	}, {now: row})
+}
+function delNow(obj){
+//	console.log(obj);
+	let params = {}
+	params.url = 'userEkey/delete';
+	params.cmdID = '600034';
+	params.ekeyName = obj.ekeyName;
+	params.reviewer = obj.name;
+	
+	utils.post(params).then(function(res){
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		_this.parameter = res;
+	});
 }
 function showEditEkey(row){
 	_this.dialogTitle = _this.$t('fbcsFile.fnField.editEkey');
@@ -126,7 +157,11 @@ export default {
 	},
 	methods:{
 		search(){
-			console.log('search');
+			this.page = 1;
+			search();
+		},
+		changePage(num){
+			search();
 		},
 		showAddEkey(){
 			this.dialogTitle = this.$t('fbcsFile.fnField.addEkey');
@@ -136,14 +171,30 @@ export default {
 			this.disabled = false;
 			this.showDialog = true;
 		},
-		changePage(num){
-			console.log(num);
-		},
 		submit(){
+			if(check()) return;
 			this.disabled ? edit() : add();
 		},
 		now(){
-			this.disabled ? editNow() : addNow();
+			if(check()) return;
+			if(this.disabled){ //editNow
+				this.reqsv = {uri: 'userEkey/modifyImmediately'};
+			} else { //addNow
+				this.reqsv = {uri: 'userEkey/addImmediately'};
+			}
+			this.showReview = true;
+			this.showDialog = false;
+		},
+		review(obj){
+			switch (obj.uri){
+				case "userEkey/addImmediately": 
+					addNow(obj); break;
+				case "userEkey/modifyImmediately": 
+					editNow(obj); break;
+				case "userEkey/deleteImmediately": 
+					delNow(obj); break;
+				default: break;
+			}
 		},
 	},
 	created(){
@@ -151,19 +202,84 @@ export default {
 		this.id = this.name = ''
 		this.keywords = null;
 		this.showDialog = false;
+		search();
 	}
 }
 function add(){
-	console.log('add');
+	let params = Object.assign({}, _this.ekeyInfo);
+	params.url = 'userEkey/add';
+	params.cmdID = '600032';
+	params.validDate = _this.ekeyInfo.validDate / 1000;
+	
+	utils.post(params).then(function(res){
+		utils.alert({txt: res.errinfo});
+	});
 }
 function edit(){
-	console.log('edit');
+	let params = Object.assign({}, _this.ekeyInfo);
+	params.url = 'userEkey/modify';
+	params.cmdID = '600033';
+	params.validDate = _this.ekeyInfo.validDate / 1000;
+	
+	utils.post(params).then(function(res){
+		utils.alert({txt: res.errinfo});
+	});
 }
-function addNow(){
-	console.log('addNow');
+function addNow(obj){
+	let params = Object.assign({}, _this.ekeyInfo);
+	params.url = 'userEkey/addImmediately';
+	params.cmdID = '600035';
+	params.validDate = _this.ekeyInfo.validDate / 1000;
+	params.reviewer = obj.name;
+	
+	utils.post(params).then(function(res){
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		_this.parameter = res;
+	});
 }
-function editNow(){
-	console.log('editNow');
+function editNow(obj){
+	let params = Object.assign({}, _this.ekeyInfo);
+	params.url = 'userEkey/modifyImmediately';
+	params.cmdID = '600036';
+	params.validDate = _this.ekeyInfo.validDate / 1000;
+	params.reviewer = obj.name;
+	
+	utils.post(params).then(function(res){
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		_this.parameter = res;
+	});
+}
+
+function check(){
+	let info = _this.ekeyInfo;
+	if(!info.userID) {
+		utils.confirm({txt: _this.$t('fbcsFile.Ekey.errID'), btn: 1});
+		return true;
+	}
+	if(!info.ekeyName) {
+		utils.confirm({txt: _this.$t('fbcsFile.Ekey.errName'), btn: 1});
+		return true;
+	}
+	return false;
+}
+
+function search(){
+	let params = {
+		url: 'userEkey/query',
+		cmdID: '600031',
+		pageSize: 20,
+		currentPage: _this.page
+	};
+	utils.post(params).then(function(res){
+		if(res.errcode!='0') return console.warn(res.errinfo);
+		if(res.totalPage>1 && _this.page > res.totalPage){
+			_this.page = res.totalPage;
+			return search();
+		}
+		_this.list = res.lists;
+		_this.page = res.currentPage;
+		_this.total = res.totalSize;
+	});
 }
 </script>
 

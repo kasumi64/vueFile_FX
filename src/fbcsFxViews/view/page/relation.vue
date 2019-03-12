@@ -18,7 +18,7 @@
 			</li>
 		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :selection="true" :currentPage.sync="page"
-				@selectChange="selectChange" @changePage="changePage" >
+			@selectChange="selectChange" @changePage="changePage" >
 		</lgy-table>
 		
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.fnField.addSignal')" v-dialogDrag
@@ -270,7 +270,7 @@ function search(){
 		currentPage: _this.page
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn(res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

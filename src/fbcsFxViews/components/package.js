@@ -14,4 +14,4 @@ Vue.component("lgy-candidateWords", resolve => require(['./lgy-candidateWords.vu
 Vue.component("lgy-review", resolve => require(['./lgy-review.vue'], resolve));
 Vue.component("lgy-wheelReq", resolve => require(['./lgy-wheelReq.vue'], resolve));
 Vue.component("lgy-table", resolve => require(['./lgy-table.vue'], resolve));
-Vue.component("lgy-cuList", resolve => require(['./lgy-cuList.vue'], resolve));
+//Vue.component("lgy-cuList", resolve => require(['./lgy-cuList.vue'], resolve));

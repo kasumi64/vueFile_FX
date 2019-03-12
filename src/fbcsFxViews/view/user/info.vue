@@ -49,7 +49,7 @@
 				<div class="label">{{$t('fbcsFile.userInfo.group')}}</div>
 				<div class="right">
 					<el-select v-model="info.linkGroupName">
-						<el-option v-for="item in group" :key="item.id" :label="item.name" :value="item.id">
+						<el-option v-for="item in group" :key="item.groupID" :label="item.groupID" :value="item.groupID">
 						</el-option>
 					</el-select>
 				</div>
@@ -59,13 +59,20 @@
 					{{$t('fbcsFile.userInfo.speed')}}
 				</div>
 				<div class="right">
-					<input v-model="info.speedCtrl" />
+					<input v-model="info.speedCtrl" type="number"/>
 					<span class="small">Kbit/s({{$t('fbcsFile.userInfo.Kbit')}})</span>
+					<!--
+						oninput="if(value.length>5)value=value.slice(0,5)"
+						return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )
+					-->
 				</div>
 			</li><li>
-				<div class="label">{{$t('fbcsFile.userInfo.maxUser')}}</div>
+				<div class="label">
+					<i class="red">*</i>
+					{{$t('fbcsFile.userInfo.maxUser')}}
+				</div>
 				<div class="right">
-					<input v-model="info.maxRelationUser" />
+					<input v-model="info.maxRelationUser" type="number"/>
 				</div>
 			</li><li>
 				<div class="label" style="vertical-align: top;">{{$t('fbcsFile.userInfo.encFlag')}}</div>
@@ -157,7 +164,10 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.webFlag')}}</div>
 				<div class="right">
-					<input v-model="info.webUserFlag" />
+					<el-select v-model="info.webUserFlag">
+						<el-option v-for="item in blo" :key="item.value" :label="item.label" :value="item.value">
+						</el-option>
+					</el-select>
 				</div>
 			</li><li v-if="isAdd=='add'">
 				<div class="label">{{$t('fbcsFile.userInfo.indate')}}</div>

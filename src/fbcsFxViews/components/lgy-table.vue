@@ -43,7 +43,7 @@ export default {
 			default: null
 		},//{ defined 的结构
 //			label:'操作', width: "80px",
-//			items: [{src:require('@/fbcsFxViews/img/logo.png'), click:function(d,i){console.log(d,i)}, tips: '修改' },]
+//			items: [{src:require('@/fbcsFxViews/img/logo.png'), click:function(r,s){console.log(r,s)}, tips: '修改' },]
 //		}
 		sortable: { //与list的字段相同
 			type: Object,
@@ -102,7 +102,7 @@ export default {
 			this.$emit('update:currentPage', num);
 			this.$emit('changePage', num);
 		},
-		customShow(k, row){ //功能按钮是否隐藏
+		customShow(k, row){ //功能按钮是否隐藏, k为row的键
 			return row[k] === false ? false : true;
 		}
 	},

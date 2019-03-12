@@ -128,6 +128,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		getPwdTime();
 		this.options = this.$t('fbcsFile.password.options');
 		this.showReview = false;
 		this.parameter = null;
@@ -170,6 +171,16 @@ function pass(){
 		}
 	}
 	return true;
+}
+function getPwdTime(){
+	let params = {
+		url: 'userpasswd/queryExpiredFlag',
+		cmdID: '600011',
+	};
+	utils.post(params).then(function(res){
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		_this.info.expiredTimeFlag = res.userpassExpiredFlag;
+	});
 }
 </script>
 

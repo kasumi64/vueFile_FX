@@ -11,7 +11,7 @@
 			<li @click="addUser">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addUser')}}</span>
-			</li><li @click="delUser">
+			</li><li @click="showSignal">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.delUser')}}</span>
 			</li><li @click="editPwd">
@@ -28,6 +28,20 @@
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :selection='true' 
 			@select="select" @changePage="changePage" :currentSelect.sync="currSelect" :currentPage.sync="page">
 		</lgy-table>
+		
+		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.userHome.signal')" v-dialogDrag width="646px"
+			:close-on-click-modal='false' :show-close="false">
+			<div class="_dialog signal">
+				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
+					@changePage="signalChange" >
+				</lgy-table>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="blueBtn" @click="delUser">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.cancel')}}</button>
+			</div>
+		</el-dialog>
+		
 		<modifyPwd :show.sync="showPwd" :user="currSelect"></modifyPwd>
 	</div>
 </template>
@@ -44,7 +58,12 @@ var _this, data = {
 	],
 	page: 1,
 	total: 1,
-	currSelect: null
+	currSelect: null,
+	
+	showDialog: false,
+	signalList: [],
+	signalPage: 1,
+	signalTotal: 1,
 };
 
 function editUser(row){
@@ -71,6 +90,12 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/signal.png'), click: addRelation, tips: this.$t('fbcsFile.tableDefined.addSignal') }
 			]
 		};
+		data.signalTitle = {
+			userID1: this.$t('fbcsFile.tableTitle.userID'),
+			userName1: this.$t('fbcsFile.tableTitle.userName'),
+			userID2: this.$t('fbcsFile.tableTitle.userID'),
+			userName2: this.$t('fbcsFile.tableTitle.userName')
+		};
 		return data;
 	},
 	methods:{
@@ -85,10 +110,18 @@ export default {
 			utils.setArgs('userInfo', {tab: 'first', type: 'add'});
 			this.$router.push({path: '/main/fxCfg/userInfo'});
 		},
-		delUser(){
+		showSignal(){
 			var user = this.currSelect;
 			if(!user) return utils.confirm({txt: this.$t('fbcsFile.password.not'), btn: 1});
-			
+			this.signalPage = 1;
+			signalSearch();
+			this.showDialog = true;
+		},
+		signalChange(){
+			signalSearch();
+		},
+		delUser(){
+			var user = this.currSelect;
 			utils.confirm({
 				txt: this.$t('fbcsFile.userHome.del'), 
 				ok: () => {
@@ -102,6 +135,7 @@ export default {
 					});
 				}
 			});
+			this.showDialog = false;
 		},
 		editPwd(){
 			this.showPwd = true;
@@ -111,9 +145,6 @@ export default {
 		},
 		importInBop(){
 			console.log('importInBop');
-		},
-		changePage(num){
-			console.log(num);
 		},
 		select(arr, row, table){
 			if(arr.length > 1){
@@ -126,6 +157,7 @@ export default {
 		_this = this;
 		this.id = this.name = '';
 		this.currSelect = null;
+		this.showDialog = false;
 		this.search()
 	},
 	components: {
@@ -144,7 +176,7 @@ function search(){
 		type: 0
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn(res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
@@ -154,8 +186,31 @@ function search(){
 		_this.total = res.totalSize;
 	});
 }
+function signalSearch(){
+	_this.signalList = [];
+	var user = _this.currSelect;
+	let params = {
+		url: 'userComm/query',
+		cmdID: '600041',
+		userID1: user.userID,
+		userID2: '',
+		pageSize: 20,
+		currentPage: _this.signalPage
+	};
+	utils.post(params).then(res => {
+		if(res.errcode!='0') return console.warn(res.errinfo);
+		if(res.totalPage>1 && _this.signalPage > res.totalPage){
+			_this.signalPage = res.totalPage;
+			return signalSearch();
+		}
+		_this.signalList = res.lists;
+		_this.signalPage = res.currentPage;
+		_this.signalTotal = res.totalSize;
+	});
+}
 </script>
 
 <style scoped="scoped">
 	.userHome{min-width: 696px;padding-right: 20px;background: #FFF;}
+	#fbcs_file .signal{padding-bottom: 0;max-height: 320px;overflow: auto;width: 646px;}
 </style>

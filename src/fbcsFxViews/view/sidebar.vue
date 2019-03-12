@@ -82,8 +82,8 @@ export default {
 		},
 	},
 	created(){
-		this.select('/main/fxCfg/version/query');
-//		this.select('/main/fxCfg/userHome');
+//		this.select('/main/fxCfg/version/query');
+		this.select('/main/fxCfg/userHome');
 	}
 };
 </script>

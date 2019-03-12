@@ -64,11 +64,12 @@ export default {
 				params.cmdID = '600004';
 			}
 			params.userPasswd = md5(this.info.userPasswd);
-			console.log(params)
+			params.beginSoftEncTime = this.info.beginSoftEncTime / 1000;
+			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
+//			console.log(params)
 			
 			utils.post(params).then(function(res){
-				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
-				_this.group = res.lists;
+				utils.alert({txt: res.errinfo});
 			});
 		},
 		now(){
@@ -90,6 +91,8 @@ export default {
 				params.cmdID = '600007';
 			}
 			params.userPasswd = md5(this.info.userPasswd);
+			params.beginSoftEncTime = this.info.beginSoftEncTime / 1000;
+			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
 			params.reviewer = obj.name;
 			
 			utils.post(params).then(function(res){
@@ -115,19 +118,22 @@ function getDict(){
 	language = 0;
 	params = { url, cmdID, language, type: 1 };
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn({txt: res.errinfo});
 		_this.userType = res.lists;
 	});
 	
 	params= { url, cmdID, language, type: 2 };
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn({txt: res.errinfo});
 		_this.inZone = res.lists;
 	});
 	
-	params = { url, cmdID, language, type: 3 };
+	params = {
+		url: 'cuConfig/queryGroupID',
+		cmdID: '600093'
+	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn({txt: res.errinfo});
 		_this.group = res.lists;
 	});
 }
@@ -145,6 +151,7 @@ function initDate(){
 	info.allowPublishTopicCount= 5, 
 	info.allowSubscribeTopicCount= 5,
 	info.maxPublishTopicDay= 7;
+	info.webUserFlag = 1;
 	info.expiredTimeFlag = '1';
 	
 	_this.more = false;
@@ -161,6 +168,9 @@ function getUserInfo(obj){
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
-		_this.info = res.lists[0];
+		var obj = res.lists[0];
+		_this.info = obj;
+		_this.info.beginSoftEncTime = obj.beginSoftEncTime * 1000;
+		_this.info.endSoftEncTime = obj.endSoftEncTime * 1000;
 	});
 }

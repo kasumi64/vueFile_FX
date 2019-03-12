@@ -41,7 +41,7 @@ var _this, data = {
 	checkType: 0,
 };
 
-function WheelReq(sv){
+function WheelReq(sv, self){
 	var beginTime = 0, overTime = 30*1000, timeout = false;
 	function req(){
 		let param = {
@@ -57,27 +57,27 @@ function WheelReq(sv){
 		utils.post(param, response).catch(stop);
 	}
 	function response(res){
-		if(res.errcode!='0') {
+		if(res.errcode!='0'||res.type==2) {
 			utils.alert({txt: res.errinfo});
 			return stop();
 		}
 		if(res.lastQueryFlag != 0&&!timeout){
 			return setTimeout(req, 2000);
 		}
-		_this.cuList = res.lists;
-		_this.checkType = res.type;
-		if(!_this.hide) _this.showDialog = true;
-		_this.$emit('update:cuList', res.lists);
+		self.cuList = res.lists;
+		self.checkType = res.type;
+		if(!self.hide) self.showDialog = true;
+		self.$emit('update:cuList', res.lists);
 		stop();
 	}
 	function stop(){
-		_this.loading = false;
+		self.loading = false;
 		timeout = false;
-		_this.$emit('update:parameter', null);
+		self.$emit('update:parameter', null);
 	}
 	this.start = function(){
 		beginTime = Date.now();
-		_this.loading = true;
+		self.loading = true;
 		req();
 	}
 }
@@ -107,7 +107,7 @@ export default {
 	watch: {
 		parameter(param){
 			if(!param) return;
-			let w = new WheelReq(param);
+			let w = new WheelReq(param, this);
 			w.start();
 		}
 	}

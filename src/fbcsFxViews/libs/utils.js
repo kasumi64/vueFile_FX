@@ -214,11 +214,11 @@ function TipsConfirm(){
 			hide();
 		}).text( vue.$t('fbcsFile.tips.ok') ),
 		now : mask.find('.now').click( e => {
-			if(kit.isFn(notifyFn.now)) notifyFn.ok(notifyArgs.now);
+			if(kit.isFn(notifyFn.now)) notifyFn.now(notifyArgs.now);
 			hide();
 		}).text( vue.$t('fbcsFile.tips.now') ),
 		cancel : mask.find('.cancel').click( e => {
-			if(kit.isFn(notifyFn.cancel)) notifyFn.ok(notifyArgs.cancel);
+			if(kit.isFn(notifyFn.cancel)) notifyFn.cancel(notifyArgs.cancel);
 			hide();
 		}).text( vue.$t('fbcsFile.tips.cancel') )
 	};

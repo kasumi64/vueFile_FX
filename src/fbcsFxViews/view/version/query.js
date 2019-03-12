@@ -97,8 +97,10 @@ function zdCfg(obj){
 	let params = {
 		url: 'version/getZdCfg',
 		cmdID: '600078',
-		reviewer: obj.name
+		reviewer: obj.name,
+		type: 2
 	};
+	
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo});
 	});
@@ -207,7 +209,7 @@ function search(){
 	params.currentPage = _this.page;
 //	console.log(params);
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn(res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

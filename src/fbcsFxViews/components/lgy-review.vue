@@ -33,6 +33,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import md5 from '@/fbcsFxViews/libs/md5.js';
 
 var _this, data = {
 	name: '',
@@ -47,7 +48,11 @@ export default {
 			default: false
 		},
 		reqsv: {}, //复核参数
-		txt: '' //弹框文本
+		txt: '', //弹框文本
+//		useAlert: {
+//			type: Boolean,
+//			default: true
+//		}
 	},
 	methods:{
 		async reviewHandle(param){
@@ -55,10 +60,9 @@ export default {
 			if(this.name==''||this.pwd=='') return utils.confirm({txt:this.$t('fbcsFile.components.reviewNull'), btn:1});
 			let args = {
 				url: 'auth/review',
-//				cmd: '10001',
 				cmdID: '600122',
 				reviewer: this.name,
-//				password: md5.hex_md5(this.pwd),
+				password: md5(this.pwd),
 				language: utils.getArgs('lang') || 'zh'
 			}, uri = '/fedp/fx/';
 			if(kit.isFn(param)) param = param();
@@ -66,16 +70,26 @@ export default {
 			for (let k in param) { args[k] = param[k] };
 			args.uri = uri + (args.uri||'');
 //			console.log('dispatch:',args.uri);
+			let self = this;
+			param.name = self.name;
+			
+//			if('debug'){
+//				this.cancel();
+//				return self.$emit('submit', param);
+//			}
 
 			let res = await utils.post(args);
 			if(!res) return;
 			if(res.errcode != '0') return utils.alert({txt:res.errinfo, type:0});
 			
-			param.name = _this.name;
-			utils.confirm({
-				ok: obj => { _this.$emit('submit', obj); },
-				txt: _this.txt || this.$t('fbcsFile.components.isSubmit')
-			}, {ok: param});
+//			if(this.useAlert) {
+				utils.confirm({
+					ok: obj => { self.$emit('submit', obj); },
+					txt: self.txt || this.$t('fbcsFile.components.isSubmit')
+				}, {ok: param});
+//			} else {
+//				self.$emit('submit', param);
+//			}
 			this.cancel();
 		},
 		cancel(e){
