@@ -245,10 +245,11 @@ export default {
 		this.id = this.name = ''
 		this.showDialog = false;
 		this.idWords = this.nameWords = this.oneWords = null;
-		this.idWords = [{lable:'lable',value:123}];
+		this.list = [];
 		userid = allid = [];
 		this.showReview = false;
 		this.parameter = null;
+		return
 		this.search();
 		utils.keywords({}, arr => {
 			userid = [].concat(arr);

@@ -1,4 +1,5 @@
-import utils from '@/fbcsFxViews/libs/utils.js';
+import utils  from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var _this, data = {
 	radio: 0,
@@ -114,7 +115,7 @@ export default {
 			typeMask: this.$t('fbcsFile.versionQuery.type'),
 			version: this.$t('fbcsFile.versionQuery.version'),
 			versionPath: this.$t('fbcsFile.versionQuery.versionPath'),
-			operationTime: this.$t('fbcsFile.versionQuery.operationTime'),
+			ymd: this.$t('fbcsFile.versionQuery.operationTime'),
 			operator: this.$t('fbcsFile.versionQuery.operator'),
 			reviewer: this.$t('fbcsFile.versionQuery.reviewer'),
 			send: this.$t('fbcsFile.versionQuery.operationType')
@@ -192,6 +193,7 @@ export default {
 		this.page = 1;
 		this.checkDialog = this.showDialog = false;;
 		this.radio = 4;
+		this.list = [];
 		getDay(4);
 		this.search();
 	},
@@ -229,6 +231,7 @@ function search(){
 			}
 			obj.send = _this.$t('fbcsFile.versionQuery.operationType'+ obj.operationType);
 			obj.typeMask = _this.$t('fbcsFile.versionQuery.type'+ obj.type);
+			obj.ymd = monent(obj.operationTimestamp).format('YYYY-MM-DD hh:mm:ss');
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

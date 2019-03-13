@@ -66,6 +66,8 @@ export default {
 			params.userPasswd = md5(this.info.userPasswd);
 			params.beginSoftEncTime = this.info.beginSoftEncTime / 1000;
 			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
+			if(this.info.linkGroupName == '任意') params.linkGroupName = '';
+			
 //			console.log(params)
 			
 			utils.post(params).then(function(res){
@@ -94,6 +96,7 @@ export default {
 			params.beginSoftEncTime = this.info.beginSoftEncTime / 1000;
 			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
 			params.reviewer = obj.name;
+			if(this.info.linkGroupName == '任意') params.linkGroupName = '';
 			
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -103,10 +106,11 @@ export default {
 	},
 	created(){
 		_this = this;
-		args = utils.getArgs('userInfo') || {};
+		args = utils.getArgs('userInfo');
 		initDate();
 		getDict();
-		if(this.isAdd!='add'){
+		if(this.isAdd!='add'&&args){
+			console.log(args)
 			getUserInfo(args);
 		}
 	},
@@ -125,6 +129,7 @@ function getDict(){
 	params= { url, cmdID, language, type: 2 };
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn({txt: res.errinfo});
+		res.lists.unshift({name:'任意', id:''});
 		_this.inZone = res.lists;
 	});
 	
@@ -134,6 +139,7 @@ function getDict(){
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn({txt: res.errinfo});
+		res.lists.unshift({groupID: '任意'});
 		_this.group = res.lists;
 	});
 }
@@ -143,6 +149,9 @@ function initDate(){
 	for (let k in info) info[k] = '';
 	info.isModifyDefaultPasswd = 0;
 	info.userPasswd = '111111';
+	info.userType = '1',
+	info.inZone = '',
+	info.linkGroupName = '任意',
 	info.encFlag = 1,
 	info.notOnlineAlarm=0,
 	info.allowBroadcast= 0, 

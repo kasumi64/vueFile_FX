@@ -13,7 +13,9 @@
 			<lgy-candidateWords v-model="id2" :keywords="ver2" :disabled="disabled" @input="input2" class="words"></lgy-candidateWords>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.versionContrast.btn')}}</button>
 		</div>
-		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title1" class="hide" :class="{show:disabled}" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		</lgy-table>
+		<lgy-table :list="list" :title="title2" class="hide" :class="{show:!disabled}" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
 	</div>
 </template>
@@ -32,14 +34,18 @@ var _this, data = {
 	page: 1,
 	total: 1
 };
-var verWords = [];
+var verWords = [], words3 = [], words4 = [];
 
 export default {
 	data(){
 		data.options = this.$t('fbcsFile.versionContrast.options');
-		data.title = {
+		data.title1 = {
 			section: this.$t('fbcsFile.versionContrast.section'),
 			field: this.$t('fbcsFile.versionContrast.field'),
+			type: this.$t('fbcsFile.versionContrast.type'),
+			detail: this.$t('fbcsFile.versionContrast.detail')
+		};
+		data.title2 = {
 			type: this.$t('fbcsFile.versionContrast.type'),
 			detail: this.$t('fbcsFile.versionContrast.detail')
 		};
@@ -69,10 +75,8 @@ export default {
 		this.page = 1;
 		this.total = 1;
 		this.list = [];
-		keywords('', arr => {
-			verWords = [].concat(arr);
-			_this.ver1 = _this.ver2 = arr;
-		});
+		keywords('', arr => { words3 = arr; }, 3);
+		keywords('', arr => { words3 = arr; }, 4);
 	},
 	mounted(){
 		changeType(1);
@@ -84,12 +88,12 @@ export default {
 	}
 };
 
-function keywords(val, fn){
+function keywords(val, fn, t){
 	let params = {
 		url: 'version/queryCompare',
 		cmdID: '600072',
 		version: val,
-		type: _this.type,
+		type: t || _this.type,
 		pageSize: 100,
 		currentPage: 1
 	};
@@ -126,6 +130,7 @@ function search(){
 	});
 }
 function changeType(val){
+	_this.list = [];
 	switch (val){
 		case 1: case 2: 
 			_this.id1 = _this.$t('fbcsFile.versionContrast.temp');
@@ -137,6 +142,9 @@ function changeType(val){
 			_this.disabled = false;
 			break;
 	}
+	
+	verWords = [].concat(val==3 ? words3 : words4);
+	_this.ver1 = _this.ver2 = verWords;
 }
 </script>
 

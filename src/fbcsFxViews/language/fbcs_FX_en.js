@@ -51,7 +51,8 @@ var obj = {
 	},
 	Ekey: {
 		userID: '用户ID：', ekeyName: 'Ekey名称：', ekeyPwd: 'Ekey密码：', ekeyDate: 'Ekey有效期：', 
-		ekeyInfo:'Ekey描述：', tips: '小于V5版用户必填',
+		ekeyInfo:'Ekey描述：', tips: '小于V5版用户必填', errID: '用户ID不能为空！', errName: 'Ekey名称不能为空！',
+		delEkey: '是否要删除Ekey？',
 	},
 	relation: {
 		addSignal: '创建通信关系', delSignal: '删除通信关系', userID1: '用户ID：', userID2: '对端用户：',
@@ -88,6 +89,7 @@ var obj = {
 		equal0: '一致', equal1: '不一致', equal2: '文件不存在', operationType1: '全量下发' , operationType2: '增量下发',
 		operationType3: 'cu上传' , type1: '系统动态配置', type2: '系统静态配置', type3: '用户密码信息表', type4: '中登配置',
 		type5: '回滚_系统动态配置', type6: '回滚_系统静态配置', type7: '回滚_用户密码信息表', type8: '回滚_中登配置', 
+		isEqual: '是否一致'
 	},
 	versionDetail: {
 		title: '版本详情', type: '版本类型', fileName: '文件名' , cfgInfo: '文件内容',
@@ -97,7 +99,7 @@ var obj = {
 	versionContrast: {
 		options: [{label: '全局动态配置', value: 1},{label: '全局静态配置', value: 2},{label: '用户密码信息表', value: 3},
 			{label: '中登CTPLST', value: 4},{label: '中登ZDRela', value: 5}],
-		type:'版本类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比', temp: '临时版本', online: '线上版本',
+		type:'操作类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比', temp: '临时版本', online: '线上版本',
 		section: '段名', field: '字段名', detail: '详情'
 	},
 };

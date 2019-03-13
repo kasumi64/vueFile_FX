@@ -44,12 +44,30 @@
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
 		
+		<el-dialog :visible.sync="checkDialog" :title="checkTitle" v-dialogDrag
+			:close-on-click-modal='false' :show-close="false">
+			
+			<div class="_dialog">
+				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
+					<el-table-column type="index" width="50"></el-table-column>
+					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
+					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
+					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
+					<el-table-column prop="equalMask" :label="$t('fbcsFile.versionQuery.isEqual')"></el-table-column>
+				</el-table>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="defBtn" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+			</div>
+		</el-dialog>
+		
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.versionDetail.title')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
 			
 			<div class="_dialog">
 				<el-table :data="detailList" :row-class-name="rowClass" max-height="294" border>
-					<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>
+					<el-table-column type="index" width="50"></el-table-column>
+					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
 					<el-table-column prop="fileSize" :label="$t('fbcsFile.versionDetail.fileSize')"></el-table-column>
 					<!--<el-table-column prop="fileMd5" :label="$t('fbcsFile.versionDetail.fileMd5')"></el-table-column>-->
@@ -57,22 +75,6 @@
 			</div>
 			<div slot="footer" class="_footBtn">
 				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
-			</div>
-		</el-dialog>
-		
-		<el-dialog :visible.sync="checkDialog" :title="checkTitle" v-dialogDrag
-			:close-on-click-modal='false' :show-close="false">
-			
-			<div class="_dialog">
-				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
-					<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>
-					<el-table-column prop="version" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
-					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileSize')"></el-table-column>
-					<el-table-column prop="equalMask" :label="$t('fbcsFile.versionDetail.fileMd5')"></el-table-column>
-				</el-table>
-			</div>
-			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		

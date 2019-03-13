@@ -67,15 +67,18 @@ var _this, data = {
 };
 
 function editUser(row){
-	utils.setArgs('userInfo', {tab: 'first', type: 'edit'});
+	let obj = Object.assign({tab: 'first', type: 'edit'}, row);
+	utils.setArgs('userInfo', obj);
 	_this.$router.push({path: '/main/fxCfg/userInfo'});
 }
 function editEkey(row){
-	utils.setArgs('userInfo', {tab: 'second', type: 'ekey'});
+	let obj = Object.assign({tab: 'second', type: 'ekey'}, row);
+	utils.setArgs('userInfo', obj);
 	_this.$router.push({path: '/main/fxCfg/userInfo'});
 }
 function addRelation(row){
-	utils.setArgs('userInfo', {tab: 'third', type: 'signal'});
+	let obj = Object.assign({tab: 'third', type: 'signal'}, row);
+	utils.setArgs('userInfo', obj);
 	_this.$router.push({path: '/main/fxCfg/userInfo'});
 }
 
@@ -158,7 +161,8 @@ export default {
 		this.id = this.name = '';
 		this.currSelect = null;
 		this.showDialog = false;
-		this.search()
+//		this.list = [];
+		this.search();
 	},
 	components: {
 		ekey: resolve => require(['@/fbcsFxViews/view/page/Ekey.vue'], resolve),

@@ -6,7 +6,8 @@
 		</header>
 		
 		<el-table class="table" :data="zdList" :row-class-name="rowClass" max-height="294" border>
-			<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>
+			<el-table-column type="index" width="50"></el-table-column>
+			<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 			<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
 			<el-table-column prop="fileSize" :label="$t('fbcsFile.versionDetail.fileSize')"></el-table-column>
 			<el-table-column prop="fileMd5" :label="$t('fbcsFile.versionDetail.fileMd5')"></el-table-column>
@@ -73,6 +74,7 @@ function zdDetail(ver){
 		_this.zdList = res.lists;
 		cfgInfo.ctplst = res.lists[0].cfgInfo;
 		cfgInfo.zdrela = res.lists[1].cfgInfo;
+		_this.txtVal = cfgInfo.ctplst;
 	});
 }
 </script>
