@@ -6,10 +6,10 @@
 		</header>
 		<el-tabs v-model="tab" type="card" @tab-click="tabClick">
 			<el-tab-pane :label="$t('fbcsFile.userHome.info')" name="first">
-				<user :isAdd="type"></user>
+				<user :isAdd.sync="type" :tab.sync='tab' :isNew="isNew"></user>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.ekey')" name="second" :disabled="type=='add'">
-				<ekey :isPage="false"></ekey>
+				<ekey :isPage="false" :tab.sync='tab' :isNew="isNew"></ekey>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.signal')" name="third" :disabled="type=='add'">
 				<signal :isPage="false"></signal>
@@ -28,6 +28,7 @@ var _this, data = {
 	title: '',
 	tab: 'first',
 	type: 'edit',
+	isNew: false,
 }, args;
 
 
@@ -54,8 +55,10 @@ export default {
 		this.type = args.type;
 		if(args.type == 'add'){
 			this.title = this.$t('fbcsFile.userHome.addUser');
+			this.isNew = true;
 		} else {
 			this.title = this.$t('fbcsFile.userHome.editUser');
+			this.isNew = false;
 		}
 	},
 	components: {

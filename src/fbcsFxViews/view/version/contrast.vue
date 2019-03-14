@@ -76,7 +76,7 @@ export default {
 		this.total = 1;
 		this.list = [];
 		keywords('', arr => { words3 = arr; }, 3);
-		keywords('', arr => { words3 = arr; }, 4);
+		keywords('', arr => { words4 = arr; }, 4);
 	},
 	mounted(){
 		changeType(1);

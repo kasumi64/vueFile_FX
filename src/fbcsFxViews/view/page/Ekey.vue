@@ -35,7 +35,7 @@
 							{{$t('fbcsFile.Ekey.ekeyName')}}
 						</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.userName" />
+						<input v-model="ekeyInfo.ekeyName" />
 					</div>
 				</li><li>
 					<div class="left">
@@ -85,7 +85,8 @@ var _this, data = {
 	showReview: false,
     reqsv: {uri:''},
     parameter: null,
-};
+    jump: false,
+}, args;
 
 function delEkey(row){
 	utils.confirm({
@@ -125,7 +126,7 @@ function showEditEkey(row){
 	_this.dialogTitle = _this.$t('fbcsFile.fnField.editEkey');
 	_this.disabled = true;
 	_this.ekeyInfo.userID = row.userID;
-	_this.ekeyInfo.userName = row.userName;
+	_this.ekeyInfo.ekeyName = row.ekeyName;
 	_this.ekeyInfo.validDate = row.validDate;
 	_this.ekeyInfo.ekeyComment = row.ekeyComment;
 	_this.showDialog = true;
@@ -153,7 +154,9 @@ export default {
 		isPage: {
 			type: Boolean,
 			default: true
-		}
+		},
+		tab: '',
+		isNew: false
 	},
 	methods:{
 		search(){
@@ -168,7 +171,13 @@ export default {
 			for(let k in this.ekeyInfo){
 				this.ekeyInfo[k] = '';
 			}
-			this.disabled = false;
+			nextFrame()
+//			if(this.isPage){
+//				this.disabled = false;
+//			} else {
+//				this.ekeyInfo.userID = args.userID;
+//				this.disabled = true;
+//			}
 			this.showDialog = true;
 		},
 		submit(){
@@ -199,9 +208,14 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.jump = this.isNew;
+		args = utils.getArgs('userInfo');
 		this.id = this.name = ''
 		this.keywords = null;
 		this.showDialog = false;
+		if(!this.isPage && args){
+			this.id = args.userID;
+		}
 		search();
 	}
 }
@@ -213,6 +227,11 @@ function add(){
 	
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return
+		if(_this.jump){
+			_this.jump = false;
+			_this.$emit('update:tab', 'third');
+		}
 	});
 }
 function edit(){
@@ -267,6 +286,8 @@ function search(){
 	let params = {
 		url: 'userEkey/query',
 		cmdID: '600031',
+		userID: _this.id,
+		ekeyName: _this.name,
 		pageSize: 20,
 		currentPage: _this.page
 	};
@@ -280,6 +301,16 @@ function search(){
 		_this.page = res.currentPage;
 		_this.total = res.totalSize;
 	});
+}
+function nextFrame(){
+	setTimeout(() => {
+		if(_this.isPage){
+			_this.disabled = false;
+		} else {
+			_this.ekeyInfo.userID = args.userID;
+			_this.disabled = true;
+		}
+	}, 0);
 }
 </script>
 

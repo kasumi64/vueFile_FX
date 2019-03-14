@@ -180,7 +180,7 @@ function getPwdTime(){
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
-		_this.info.expiredTimeFlag = res.userpassExpiredFlag.toString();
+		_this.info.expiredTimeFlag = res.userpasswdExpiredFlag;
 	});
 }
 </script>

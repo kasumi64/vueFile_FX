@@ -31,7 +31,7 @@
 							{{$t('fbcsFile.relation.userID1')}}
 						</p>
 					</div><div class="right">
-						<lgy-candidateWords v-model="oneid" :keywords="oneWords" @input="oneInput"></lgy-candidateWords>
+						<lgy-candidateWords v-model="oneid" :keywords="oneWords" @input="oneInput" :disabled="oneDisable"></lgy-candidateWords>
 					</div>
 				</li><li>
 					<div class="left">
@@ -81,12 +81,13 @@ var _this, data = {
 	idarr: [
 		{value: 'HTML123', label: 'HTML'}, {value: 'CSS123', label: 'CSS'}, {value: 'JavaScript123', label: 'JavaScript'}
 	],
+	oneDisable: false,
     disabled: true,
     showReview: false,
     reqsv: {uri:''},
     parameter: ''
 };
-var userid, allid;
+var userid, allid, args;
 
 function del(row){
 	if(!(row instanceof Array)) row = [row];
@@ -146,30 +147,39 @@ export default {
 		},
 		idInput(val){
 			if(val=='') return this.idWords = [].concat(userid);
-			utils.keywords({id: val, type: 1}, arr => {
+			utils.keywords({id: val, type: 2}, arr => {
 				this.idWords = arr;
 			});
 		},
 		nameInput(val){
 			if(val=='') return this.nameWords = [].concat(userid);
-			utils.keywords({id: val, type: 1}, arr => {
+			utils.keywords({id: val, type: 2}, arr => {
 				this.nameWords = arr;
 			});
 		},
 		add(){
 			this.oneWords = [].concat(userid);
-			this.disabled = true;
-			this.oneid = '';
+//			if(this.isPage){
+//				this.disabled = true;
+//				this.oneid = '';
+//				this.oneDisable = false;
+//			} else {
+//				this.disabled = false;
+//				this.oneDisable = true;
+//				this.oneid = args.userID;
+////			}
+			nextFrame();
 			this.sid = [];
 			this.showDialog = true;
 		},
 		clear(){
-			this.disabled = true;
-			this.oneid = '';
+			if(this.isPage) {
+				this.disabled = true;
+				this.oneid = '';
+			}
 			this.sid = [];
 		},
 		selectChange(arr){
-			console.log(arr)
 			this.selected = arr;
 		},
 		dels(){
@@ -241,6 +251,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		args = utils.getArgs('userInfo');
 		this.page = 1;
 		this.id = this.name = ''
 		this.showDialog = false;
@@ -249,13 +260,17 @@ export default {
 		userid = allid = [];
 		this.showReview = false;
 		this.parameter = null;
-		return
+		
+		if(!this.isPage && args){
+			this.oneid = this.id = args.userID;
+			this.disabled = false;
+		}
 		this.search();
-		utils.keywords({}, arr => {
+		utils.keywords({type: 2}, arr => {
 			userid = [].concat(arr);
 			_this.idWords = _this.nameWords = _this.oneWords = arr;
 		});
-		utils.keywords({size: 30000}, arr => {
+		utils.keywords({type: 2, size: 30000}, arr => {
 			allid = arr;
 		});
 	},
@@ -281,6 +296,21 @@ function search(){
 		_this.total = res.totalSize;
 	});
 }
+
+function nextFrame(){
+	setTimeout(() => {
+		if(_this.isPage){
+			_this.disabled = true;
+			_this.oneid = '';
+			_this.oneDisable = false;
+		} else {
+			_this.disabled = false;
+			_this.oneDisable = true;
+			_this.oneid = args.userID;
+		}
+	}, 0);
+}
+
 </script>
 
 <style scoped="scoped">

@@ -54,7 +54,7 @@ var _this, data = {
 	name: '',
 	showPwd: false,
 	list: [
-		{userID: '01', userName: 'userName'},{userID: '02', userName: 'ABC'},{userID: '02', userName: 'ABC'}
+		{userID: '01', userName: 'userName'},{userID: '02', userName: 'ABC'},{userID: '03', userName: 'ABC'}
 	],
 	page: 1,
 	total: 1,

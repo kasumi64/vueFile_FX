@@ -231,7 +231,7 @@ function search(){
 			}
 			obj.send = _this.$t('fbcsFile.versionQuery.operationType'+ obj.operationType);
 			obj.typeMask = _this.$t('fbcsFile.versionQuery.type'+ obj.type);
-			obj.ymd = monent(obj.operationTimestamp).format('YYYY-MM-DD hh:mm:ss');
+			obj.ymd = moment(obj.operationTimestamp).format('YYYY-MM-DD hh:mm:ss');
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

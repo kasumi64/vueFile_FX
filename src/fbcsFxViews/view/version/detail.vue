@@ -21,7 +21,7 @@
 		</el-tabs>
 		
 		<div class="tabPane">{{txtVal}}</div>
-		
+		<!--<textarea class="tabPane" rows="14" v-model="txtVal" disabled autocomplete="off"></textarea>-->
 	</div>
 </template>
 
@@ -83,5 +83,5 @@ function zdDetail(ver){
 	.detail{}
 	.jg{height: 20px;}
 	.tabPane{font-size: 14px;line-height: 24px;border: 1px solid #DCDFE6;max-width: 800px;height: 300px;color: #666;
-		overflow: auto;white-space: normal;}
+		overflow: auto;white-space: pre-wrap;padding: 10px;}
 </style>

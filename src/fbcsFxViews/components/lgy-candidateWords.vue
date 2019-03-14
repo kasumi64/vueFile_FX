@@ -1,18 +1,18 @@
 <style>
-.lgy-candidateWords {display: inline-block;position: relative;}
-.lgy-candidateWords .inp{font-size: 12px;padding: 0 10px;height: 30px;border:1px solid #dcdfe6;border-radius: 4px;color: #666;}
-.lgy-candidateWords .inp:focus{border:1px solid #0DB9EB;}
-.lgy-candidateWords .arrow{position: absolute;top: 7px;right: 7px;font-size: 14px;color: #c0c4cc;transition: transform 0.3s;display: none;}
-.lgy-candidateWords .inTip {
+#lgy-candidateWords {display: inline-block;position: relative;}
+#lgy-candidateWords .inp{width: 192px;font-size: 12px;padding: 0 26px 0 10px;height: 30px;border:1px solid #dcdfe6;border-radius: 4px;color: #666;}
+/*#lgy-candidateWords .inp:focus{border:2px solid #32ccF9}*/
+#lgy-candidateWords .arrow{position: absolute;top: 7px;right: 7px;font-size: 14px;color: #c0c4cc;transition: transform 0.3s;display: none;}
+#lgy-candidateWords .inTip {
 	display: none;position: absolute;padding: 5px 0;max-height: 200px;background: #FFF;top: 35px;left: 0;
 	width: 100%;overflow-x: hidden;overflow-y: auto;border: 1px solid #e4e7ed;border-radius: 4px;z-index: 2;
 	-webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
 }
-.lgy-candidateWords .inTip li{font-size: 12px;padding: 0 10px;color: #666;line-height: 30px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
-.lgy-candidateWords .inTip li:hover{background: #f5f7fa;}
+#lgy-candidateWords .inTip li{font-size: 12px;padding: 0 10px;color: #666;line-height: 30px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+#lgy-candidateWords .inTip li:hover{background: #f5f7fa;}
 </style>
 <template>
-	<div class="lgy-candidateWords">
+	<div id="lgy-candidateWords">
 		<input :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" 
 			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle"/>
 		<i ref='arrow' @click='close' class="el-icon-circle-close arrow"></i>

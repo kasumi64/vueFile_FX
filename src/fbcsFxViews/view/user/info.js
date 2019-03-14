@@ -2,7 +2,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 
 var _this, info = {
-	userID: '', userName: '', userType: '', userPasswd:'111111', inZone: '',linkGroupName: '', speedCtrl: '',
+	userID: '', userName: '', userType: '', userPasswd:'111111', inZone: '',linkGroupName: '', speedCtrl: -1,
 	maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
 	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1,allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
 	maxPublishTopicDay: 7, maxSimultTaskCount: '',maxCltOneDayTaskCount: '', webUserFlag: '',
@@ -20,8 +20,8 @@ data = {
 	showReview: false,
 	reqsv: {},
 	parameter: null,
-},
-args;
+	jump: false,
+}, args;
 
 export default {
 	data(){ return data;},
@@ -29,7 +29,9 @@ export default {
 		isAdd: {
 			type: String,
 			default: 'add'
-		}
+		},
+		tab: '',
+		isNew: false
 	},
 	methods:{
 		back(){
@@ -59,19 +61,27 @@ export default {
 			if(this.isAdd == 'add'){
 				params.url = 'userinfo/add';
 				params.cmdID = '600003';
+				params.userPasswd = md5(this.info.userPasswd||'');
 			} else {
 				params.url = 'userinfo/modify';
 				params.cmdID = '600004';
+				delete params.userPasswd;
 			}
-			params.userPasswd = md5(this.info.userPasswd);
+			
 			params.beginSoftEncTime = this.info.beginSoftEncTime / 1000;
 			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
 			if(this.info.linkGroupName == '任意') params.linkGroupName = '';
 			
-//			console.log(params)
+			console.log(params);
 			
 			utils.post(params).then(function(res){
 				utils.alert({txt: res.errinfo});
+				if(res.errcode!='0') return
+				if(_this.jump){
+					_this.jump = false;
+					_this.$emit('update:isAdd', 'ekey');
+					_this.$emit('update:tab', 'second');
+				}
 			});
 		},
 		now(){
@@ -88,11 +98,11 @@ export default {
 			if(this.isAdd == 'add'){
 				params.url = 'userinfo/addImmediately';
 				params.cmdID = '600006';
+				params.userPasswd = md5(this.info.userPasswd);
 			} else {
 				params.url = 'userinfo/modifyImmediately';
 				params.cmdID = '600007';
 			}
-			params.userPasswd = md5(this.info.userPasswd);
 			params.beginSoftEncTime = this.info.beginSoftEncTime / 1000;
 			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
 			params.reviewer = obj.name;
@@ -106,15 +116,14 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.jump = this.isNew;
 		args = utils.getArgs('userInfo');
 		initDate();
 		getDict();
 		if(this.isAdd!='add'&&args){
-			console.log(args)
 			getUserInfo(args);
 		}
-	},
-	watch: {}
+	}
 }
 
 function getDict(){
@@ -152,6 +161,8 @@ function initDate(){
 	info.userType = '1',
 	info.inZone = '',
 	info.linkGroupName = '任意',
+	info.speedCtrl = -1,
+	info.maxRelationUser = 10,
 	info.encFlag = 1,
 	info.notOnlineAlarm=0,
 	info.allowBroadcast= 0, 
@@ -169,11 +180,11 @@ function initDate(){
 	_this.showReview = false;
 	_this.parameter = null;
 }
-function getUserInfo(obj){
+function getUserInfo(user){
 	let params = {
 		url: 'userinfo/query',
 		cmdID: '600002',
-		userID: obj.userID
+		userID: user.userID
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
