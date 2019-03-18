@@ -70,6 +70,7 @@ export default {
 		clickHandle(o, e){
 			let val = o.value||o.lable;
 			this.$emit('input', val, e);
+			this.$refs.arrow.style.display = 'block';
 		},
 		inputHandle(e){
 			let self = this;

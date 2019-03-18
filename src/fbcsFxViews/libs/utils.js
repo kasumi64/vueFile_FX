@@ -12,9 +12,10 @@ kit.extend(exp, {
 });
 
 var Events = {
-	on(Master, fn){ vue.$on(Master, fn); },
+	on(Master, cb){ vue.$on(Master, cb); },
 	emit(){ vue.$emit.apply(vue, arguments); },
-	off(Master, fn){vue.$off(Master, fn);}
+	off(Master, cb){vue.$off(Master, cb);},
+	once(Master, cb){vue.$once(Master, cb);}
 }
 
 //exp.on = function(Master, fn){ vue.$on(Master, fn); };
@@ -280,7 +281,7 @@ exp.keywords = function(obj, fn){
 		currentPage: 1
 	};
 	return exp.post(params).then(res => {
-		if(res.errcode!=0) return console.info(res.errinfo);
+		if(res.errcode!='0') return console.info(res.errinfo);
 		var i, arr = res.lists, len = arr.length, obj;
 		for(i = 0; i < len; i++){
 			obj = arr[i];

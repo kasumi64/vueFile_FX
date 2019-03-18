@@ -37,7 +37,7 @@
 			</li>
 		</ul>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='submit' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq :parameter.sync="parameter" :cuList.sync='cuList' :hide="true"></lgy-wheelReq>
+		<lgy-wheelReq :parameter.sync="parameter" :cuList.sync='cuList' :hideDialog="true"></lgy-wheelReq>
 	</div>
 </template>
 
@@ -131,7 +131,7 @@ function nodeCu(){
 			arr.forEach(r => {
 				_this.$refs['nodes'].toggleRowSelection(r, true);
 			});
-		})
+		});
 	});
 }
 </script>

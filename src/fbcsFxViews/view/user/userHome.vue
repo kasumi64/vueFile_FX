@@ -135,6 +135,7 @@ export default {
 					};
 					utils.post(params).then(res => {
 						utils.alert({txt: res.errinfo});
+						search();
 					});
 				}
 			});
@@ -161,7 +162,7 @@ export default {
 		this.id = this.name = '';
 		this.currSelect = null;
 		this.showDialog = false;
-//		this.list = [];
+		this.list = [];
 		this.search();
 	},
 	components: {
@@ -180,7 +181,7 @@ function search(){
 		type: 0
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errinfo);
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
@@ -202,7 +203,7 @@ function signalSearch(){
 		currentPage: _this.signalPage
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errinfo);
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		if(res.totalPage>1 && _this.signalPage > res.totalPage){
 			_this.signalPage = res.totalPage;
 			return signalSearch();

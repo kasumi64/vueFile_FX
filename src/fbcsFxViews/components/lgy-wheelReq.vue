@@ -26,6 +26,13 @@
 				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
+		<el-table :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border>
+			<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
+			<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
+			<el-table-column prop="errcode" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+			<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
+			<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
+		</el-table>
 	</div>
 </template>
 
@@ -66,7 +73,8 @@ function WheelReq(sv, self){
 		}
 		self.cuList = res.lists;
 		self.checkType = res.type;
-		if(!self.hide) self.showDialog = true;
+		if(!self.hideDialog) self.showDialog = true;
+		if(self.showTable) 
 		self.$emit('update:cuList', res.lists);
 		stop();
 	}
@@ -87,7 +95,11 @@ export default {
 	data() { return data; },
 	props: {
 		parameter: null, //轮询参数
-		hide: {
+		hideDialog: {
+			type: Boolean,
+			default: false
+		},
+		showTable: {
 			type: Boolean,
 			default: false
 		}

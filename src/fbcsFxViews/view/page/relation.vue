@@ -87,7 +87,7 @@ var _this, data = {
     reqsv: {uri:''},
     parameter: ''
 };
-var userid, allid, args;
+var userid, args;
 
 function del(row){
 	if(!(row instanceof Array)) row = [row];
@@ -148,26 +148,17 @@ export default {
 		idInput(val){
 			if(val=='') return this.idWords = [].concat(userid);
 			utils.keywords({id: val, type: 2}, arr => {
-				this.idWords = arr;
+				_this.idWords = arr;
 			});
 		},
 		nameInput(val){
 			if(val=='') return this.nameWords = [].concat(userid);
 			utils.keywords({id: val, type: 2}, arr => {
-				this.nameWords = arr;
+				_this.nameWords = arr;
 			});
 		},
 		add(){
 			this.oneWords = [].concat(userid);
-//			if(this.isPage){
-//				this.disabled = true;
-//				this.oneid = '';
-//				this.oneDisable = false;
-//			} else {
-//				this.disabled = false;
-//				this.oneDisable = true;
-//				this.oneid = args.userID;
-////			}
 			nextFrame();
 			this.sid = [];
 			this.showDialog = true;
@@ -197,17 +188,7 @@ export default {
 			utils.keywords({id: val, type: 1}, arr => {
 				this.oneWords = arr;
 			});
-			let arr = [].concat(allid);
-			let i, len = arr.length, obj;
-			for(i = 0; i < len; i++){
-				obj = arr[i];
-				if(val == obj.userID){
-					arr.splice(i, 1);
-					break;
-				}
-			}
-			_this.sid = [];
-			_this.idarr = arr;
+			copySig(val);
 		},
 		submit(){
 			if(!this.oneid) return utils.confirm({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
@@ -252,30 +233,50 @@ export default {
 	created(){
 		_this = this;
 		args = utils.getArgs('userInfo');
+		utils.once('fbcs_newUser', user => {
+			args = user;
+			init.call(_this);
+		});
 		this.page = 1;
 		this.id = this.name = ''
 		this.showDialog = false;
 		this.idWords = this.nameWords = this.oneWords = null;
 		this.list = [];
-		userid = allid = [];
+		userid = [];
 		this.showReview = false;
 		this.parameter = null;
 		
-		if(!this.isPage && args){
-			this.oneid = this.id = args.userID;
-			this.disabled = false;
-		}
-		this.search();
+		init.call(this);
+		
 		utils.keywords({type: 2}, arr => {
 			userid = [].concat(arr);
 			_this.idWords = _this.nameWords = _this.oneWords = arr;
+			if(!_this.isPage && args) copySig(args.userID);
 		});
-		utils.keywords({type: 2, size: 30000}, arr => {
-			allid = arr;
-		});
-	},
+	}
 };
 
+function init(){
+	if(!this.isPage && args){
+		this.oneid = this.id = args.userID;
+		this.disabled = false;
+		this.idarr = [].concat(userid);
+	}
+	this.search();
+}
+function copySig(val){
+	let arr = [].concat(userid);
+	let i, len = arr.length, obj;
+	for(i = 0; i < len; i++){
+		obj = arr[i];
+		if(val == obj.userID){
+			arr.splice(i, 1);
+			break;
+		}
+	}
+	_this.sid = [];
+	_this.idarr = arr;
+}
 function search(){
 	let params = {
 		url: 'userComm/query',
@@ -286,7 +287,7 @@ function search(){
 		currentPage: _this.page
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errinfo);
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

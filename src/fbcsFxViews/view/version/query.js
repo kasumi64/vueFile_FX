@@ -50,7 +50,7 @@ function detail1(row){
 		version: row.version
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!=0) return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.detailList = res.lists;
 		_this.showDialog = true;
 	});
@@ -67,7 +67,7 @@ function rollback(obj){
 		version: rollRow.version
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!=0) return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
 	});
 }
@@ -78,7 +78,7 @@ function bigVer(obj){
 		reviewer: obj.name
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!=0) return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		res.type = 1;
 		_this.parameter = res;
 	});
@@ -174,7 +174,7 @@ export default {
 			else tit += 'newVer';
 			this.checkTitle = this.$t(tit);
 			utils.post(params).then(function(res){
-				if(res.errcode!=0) return utils.alert({txt: res.errinfo});
+				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				for (let i = 0; i < res.lists.length; i++) {
 					let obj = res.lists[i], equal = obj.isEqual;
 					obj.equalMask = _this.$t('fbcsFile.versionQuery.equal'+equal);
@@ -211,7 +211,7 @@ function search(){
 	params.currentPage = _this.page;
 //	console.log(params);
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errinfo);
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
@@ -231,7 +231,7 @@ function search(){
 			}
 			obj.send = _this.$t('fbcsFile.versionQuery.operationType'+ obj.operationType);
 			obj.typeMask = _this.$t('fbcsFile.versionQuery.type'+ obj.type);
-			obj.ymd = moment(obj.operationTimestamp).format('YYYY-MM-DD hh:mm:ss');
+			obj.ymd = moment(obj.operationTimestamp).format('YYYY-MM-DD HH:mm:ss');
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

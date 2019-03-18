@@ -2,7 +2,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 
 var _this, info = {
-	userID: '', userName: '', userType: '', userPasswd:'111111', inZone: '',linkGroupName: '', speedCtrl: -1,
+	userID: '', userName: '', userType: '1', userPasswd:'111111', inZone: '',linkGroupName: '', speedCtrl: -1,
 	maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
 	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1,allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
 	maxPublishTopicDay: 7, maxSimultTaskCount: '',maxCltOneDayTaskCount: '', webUserFlag: '',
@@ -81,6 +81,7 @@ export default {
 					_this.jump = false;
 					_this.$emit('update:isAdd', 'ekey');
 					_this.$emit('update:tab', 'second');
+					utils.emit('fbcs_newUser', _this.info);
 				}
 			});
 		},
@@ -131,13 +132,13 @@ function getDict(){
 	language = 0;
 	params = { url, cmdID, language, type: 1 };
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return console.warn({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		_this.userType = res.lists;
 	});
 	
 	params= { url, cmdID, language, type: 2 };
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return console.warn({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		res.lists.unshift({name:'任意', id:''});
 		_this.inZone = res.lists;
 	});
@@ -147,7 +148,7 @@ function getDict(){
 		cmdID: '600093'
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return console.warn({txt: res.errinfo});
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		res.lists.unshift({groupID: '任意'});
 		_this.group = res.lists;
 	});

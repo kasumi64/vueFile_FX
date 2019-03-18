@@ -47,8 +47,8 @@ var data = {
 		{
 			folder: 'fileManage', label: '文件管理', icon:'el-icon-upload',
 			src1:require('../img/menu/fileManage.png'),
-			sub: [{router:'/fileManage/search', icon:'el-icon-search', label:'文件查询'},
-			{router:'/main/fxCfg/fileManage/upload', icon:'el-icon-upload2', label:'文件上传'},
+			sub: [{router:'/main/fxCfg/fileManage/search', icon:'el-icon-search', label:'文件查询'},
+			{router:'/main/fxCfg/fileManage/upload', icon:'el-icon-upload2', label:'文件下发'},
 			{router:'/main/fxCfg/fileManage/regain', icon:'el-icon-success', label:'对比恢复'},
 			{router:'/main/fxCfg/fileManage/blacklist', icon:'el-icon-bell', label:'CU黑名单'}]
 		},
@@ -82,8 +82,8 @@ export default {
 		},
 	},
 	created(){
-//		this.select('/main/fxCfg/version/query');
-		this.select('/main/fxCfg/userHome');
+		this.select('/main/fxCfg/fileManage/blacklist');
+//		this.select('/main/fxCfg/userHome');
 	}
 };
 </script>

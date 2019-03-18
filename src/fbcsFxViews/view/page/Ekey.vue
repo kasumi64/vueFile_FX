@@ -2,7 +2,7 @@
 	<div class="Ekey">
 		<div v-if="isPage" class="searchBar">
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
-			<lgy-candidateWords v-model="id" class="words" ></lgy-candidateWords>
+			<lgy-candidateWords v-model="id" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.searchBar.ekeyName')}}</label>
 			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
@@ -26,7 +26,7 @@
 							{{$t('fbcsFile.Ekey.userID')}}
 						</p>
 					</div><div class="right">
-						<lgy-candidateWords v-model="ekeyInfo.userID" :disabled="disabled"></lgy-candidateWords>
+						<lgy-candidateWords v-model="ekeyInfo.userID" :keywords="ekWords" @input="ekInput" :disabled="disabled"></lgy-candidateWords>
 					</div>
 				</li><li>
 					<div class="left">
@@ -70,7 +70,8 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 var _this, data = {
 	id: '',
 	name: '',
-	keywords: null,
+	idWords: null,
+	ekWords: null,
 	list: [
 		{userID: 'userID', userName: 'userName', ekeyName: 'ekeyName',validDate: 1535646546566, ekeyComment: 'ekeyComment'}
 	],
@@ -86,7 +87,7 @@ var _this, data = {
     reqsv: {uri:''},
     parameter: null,
     jump: false,
-}, args;
+}, userid, args, isAdd;
 
 function delEkey(row){
 	utils.confirm({
@@ -99,6 +100,7 @@ function delEkey(row){
 			
 			utils.post(params).then(function(res){
 				utils.alert({txt: res.errinfo});
+				search();
 			});
 		},
 		now: obj => {
@@ -120,9 +122,11 @@ function delNow(obj){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
+		search();
 	});
 }
 function showEditEkey(row){
+	isAdd = false;
 	_this.dialogTitle = _this.$t('fbcsFile.fnField.editEkey');
 	_this.disabled = true;
 	_this.ekeyInfo.userID = row.userID;
@@ -166,30 +170,37 @@ export default {
 		changePage(num){
 			search();
 		},
+		idInput(val){
+			if(val=='') return this.idWords = [].concat(userid);
+			utils.keywords({id: val, type: 2}, arr => {
+				_this.idWords = arr;
+			});
+		},
+		ekInput(val){
+			if(val=='') return this.ekWords = [].concat(userid);
+			utils.keywords({id: val, type: 2}, arr => {
+				_this.ekWords = arr;
+			});
+		},
 		showAddEkey(){
+			isAdd = true;
 			this.dialogTitle = this.$t('fbcsFile.fnField.addEkey');
 			for(let k in this.ekeyInfo){
 				this.ekeyInfo[k] = '';
 			}
-			nextFrame()
-//			if(this.isPage){
-//				this.disabled = false;
-//			} else {
-//				this.ekeyInfo.userID = args.userID;
-//				this.disabled = true;
-//			}
+			nextFrame();
 			this.showDialog = true;
 		},
 		submit(){
 			if(check()) return;
-			this.disabled ? edit() : add();
+			isAdd ? add() : edit();
 		},
 		now(){
 			if(check()) return;
-			if(this.disabled){ //editNow
-				this.reqsv = {uri: 'userEkey/modifyImmediately'};
-			} else { //addNow
+			if(isAdd){ //addNow
 				this.reqsv = {uri: 'userEkey/addImmediately'};
+			} else { //editNow
+				this.reqsv = {uri: 'userEkey/modifyImmediately'};
 			}
 			this.showReview = true;
 			this.showDialog = false;
@@ -210,14 +221,30 @@ export default {
 		_this = this;
 		this.jump = this.isNew;
 		args = utils.getArgs('userInfo');
+		utils.once('fbcs_newUser', user => {
+			args = user;
+			init.call(_this);
+		});
 		this.id = this.name = ''
 		this.keywords = null;
 		this.showDialog = false;
-		if(!this.isPage && args){
-			this.id = args.userID;
-		}
-		search();
+//		this.list = [];
+		userid = [];
+		
+		init.call(this);
+		
+		utils.keywords({type: 2}, arr => {
+			userid = [].concat(arr);
+			_this.idWords = _this.ekWords = arr;
+		});
 	}
+};
+
+function init(){
+	if(!this.isPage && args){
+		this.id = args.userID;
+	}
+	this.search();
 }
 function add(){
 	let params = Object.assign({}, _this.ekeyInfo);
@@ -227,11 +254,13 @@ function add(){
 	
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo});
-		if(res.errcode!='0') return
+		if(res.errcode!='0') return;
 		if(_this.jump){
 			_this.jump = false;
 			_this.$emit('update:tab', 'third');
 		}
+		search();
+		_this.showDialog = false;
 	});
 }
 function edit(){
@@ -242,6 +271,9 @@ function edit(){
 	
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return;
+		search();
+		_this.showDialog = false;
 	});
 }
 function addNow(obj){
@@ -254,6 +286,7 @@ function addNow(obj){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
+		search();
 	});
 }
 function editNow(obj){
@@ -266,6 +299,7 @@ function editNow(obj){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
+		search();
 	});
 }
 
@@ -292,7 +326,7 @@ function search(){
 		currentPage: _this.page
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errinfo);
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

@@ -29,7 +29,7 @@ export default {
 	data() { return data; },
 	methods:{},
 	created(){
-		this.isCollapse = true;
+//		this.isCollapse = true;
 //		this.$router.replace({path: '/main/fxCfg/userHome'});
 	},
 	mounted(){

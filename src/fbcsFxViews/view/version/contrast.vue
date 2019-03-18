@@ -119,7 +119,7 @@ function search(){
 		currentPage: _this.page
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errinfo);
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
@@ -131,6 +131,7 @@ function search(){
 }
 function changeType(val){
 	_this.list = [];
+	_this.total = 0;
 	switch (val){
 		case 1: case 2: 
 			_this.id1 = _this.$t('fbcsFile.versionContrast.temp');

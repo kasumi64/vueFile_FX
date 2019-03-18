@@ -102,5 +102,25 @@ var obj = {
 		type:'操作类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比', temp: '临时版本', online: '线上版本',
 		section: '段名', field: '字段名', detail: '详情'
 	},
+	files: {
+		search: {
+			version: '版本号', fileName: '客户端文件名', fileComment: '描述', size: '客户端文件大小', md5:'文件MD5' ,time: '发布时间', 
+			operater: '下发人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', 
+		},
+		upload: {
+			version: '版本号：', fileName: '客户端文件名：', fileComment: '描述：', dispense: '下发', res: '分发结果：'
+		},
+		regain: {
+			version: '版本号', fileName: '客户端文件名', fileComment: '描述', recoverType: '恢复操作类型', detail: '详情', 
+			cuLists: 'cuLists', cuName: 'cuName', compare: '对比', restore: '恢复'
+		},
+		blacklist: {
+			nodeName: '节点名', cuName: 'CU名', black: '白名单', white: '黑名单', cuList: '主机列表：',
+			blackBtn: '设置黑名单', cuType: '节点状态',
+		}
+	},
+	advanced: {
+		
+	}
 };
 module.exports = {fbcsFile: obj};
