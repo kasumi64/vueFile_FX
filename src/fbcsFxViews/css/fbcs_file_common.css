@@ -63,7 +63,7 @@
 #fbcs_file .tipsPanle{display: block;margin: 10% auto 0;width: 600px;background: #FFF;border-radius: 4px;}
 #fbcs_file .tipsPanle .title{border-bottom: 1px solid #EDEFF4;height: 50px;overflow: hidden;}
 #fbcs_file .tipsPanle .title b{font-size: 18px;line-height: 50px;margin-left: 20px;color: #656a73;}
-#fbcs_file .tipsPanle .message{text-align: center;}
+#fbcs_file .tipsPanle .message{text-align: center;word-wrap: break-word;white-space: pre-wrap;}
 #fbcs_file .tipsIcon{width: 40px;height: 40px;}
 #fbcs_file .tipsPanle .alert {font-size: 0;padding: 40px 0;}
 #fbcs_file .tipsPanle .alert > div{display: inline-block;vertical-align: top;max-height: 120px;}

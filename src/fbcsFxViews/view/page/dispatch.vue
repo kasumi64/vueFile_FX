@@ -47,10 +47,10 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 var _this, data = {
 	type: '1',
 	nodeList: [
-		{nodeName:'深圳', cuName:'CU-2'},
+//		{nodeName:'深圳', cuName:'CU-2'},
 	],
 	cuList: [
-		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok'},
+//		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok'},
 	],
 	showReview: false,
 	reqsv: {},
@@ -105,13 +105,19 @@ export default {
 		this.showReview = true;
 //		nodes = this.nodeList;
 		nodeCu();
+	},
+	watch: {
+		type(val){
+			nodeCu(val>3 ? 1 :0);
+		}
 	}
 };
 
-function nodeCu(){
+function nodeCu(type){
 	let params = {
 		url: 'batchDispatch/queryNodeCu',
-		cmdID: '600081'
+		cmdID: '600081',
+		type: type||0
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});

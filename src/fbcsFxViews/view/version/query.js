@@ -53,6 +53,7 @@ function detail1(row){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.detailList = res.lists;
 		_this.showDialog = true;
+		utils.tableSTop(_this, 'detailBox');
 	});
 }
 function detail2(row){
@@ -181,6 +182,7 @@ export default {
 				}
 				_this.checkList = res.lists;
 				_this.checkDialog = true;
+				utils.tableSTop(_this, 'zdBox');
 			});
 		},
 	},

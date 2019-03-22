@@ -44,9 +44,8 @@
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
 		
-		<el-dialog :visible.sync="checkDialog" :title="checkTitle" v-dialogDrag
+		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="checkTitle" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
-			
 			<div class="_dialog">
 				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
 					<el-table-column type="index" width="50"></el-table-column>
@@ -61,9 +60,8 @@
 			</div>
 		</el-dialog>
 		
-		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.versionDetail.title')" v-dialogDrag
+		<el-dialog ref="detailBox" :visible.sync="showDialog" :title="$t('fbcsFile.versionDetail.title')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
-			
 			<div class="_dialog">
 				<el-table :data="detailList" :row-class-name="rowClass" max-height="294" border>
 					<el-table-column type="index" width="50"></el-table-column>

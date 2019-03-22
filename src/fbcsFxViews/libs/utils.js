@@ -292,12 +292,24 @@ exp.keywords = function(obj, fn){
 		if(kit.isFn(fn)) fn(arr);
 	});
 };
+//设table的滚动条
+exp.tableSTop = function (self, ref, delay){
+	setTimeout(() => {
+		let o = self.$refs[ref];
+		if(o) o.$el.querySelector('.el-table__body-wrapper').scrollTop = 0;
+	}, delay||0);
+};
+
+exp.langCode = function (delay){
+	let lang = sessionStorage.getItem('language') || 'zh';
+	return (lang.indexOf('zh') < 0) ? 1 : 0;
+};
 
 exp.sleep = function (delay){
 	return new Promise((resolve, reject)=>{
 		setTimeout(resolve, delay||0);
 	});
-}
+};
 
 
 

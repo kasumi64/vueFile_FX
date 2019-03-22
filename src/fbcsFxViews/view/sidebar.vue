@@ -82,7 +82,7 @@ export default {
 		},
 	},
 	created(){
-		this.select('/main/fxCfg/fileManage/blacklist');
+		this.select('/main/fxCfg/audit');
 //		this.select('/main/fxCfg/userHome');
 	}
 };

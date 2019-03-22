@@ -4,7 +4,7 @@
 			<label class="label">{{$t('fbcsFile.audit.operator')}}：</label>
 			<input v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<label class="label">{{$t('fbcsFile.audit.operatorType')}}：</label>
-			<lgy-candidateWords v-model="info.operatorType" class="words"></lgy-candidateWords>
+			<lgy-candidateWords v-model="info.operatorType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>
 			<el-radio-group v-model="info.sequence">
 				<el-radio :label="0">{{$t('fbcsFile.audit.lately')}}</el-radio>
@@ -19,12 +19,12 @@
 				<el-radio :label="9">{{$t('fbcsFile.audit.begin')}}</el-radio>
 			</el-radio-group>
 			<!--<label class="label">{{$t('fbcsFile.audit.begin')}}</label>-->
-			<el-date-picker v-model="info.operatorBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
-				:picker-options="pickerBegin" :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
+			<el-date-picker v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
+				:picker-options="pickerBegin" value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
 			<label class="label">{{$t('fbcsFile.audit.end')}}</label>
-			<el-date-picker v-model="info.operatorEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
-				:picker-options="pickerEnd" :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
+			<el-date-picker v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
+				:picker-options="pickerEnd" value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
 			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
@@ -37,11 +37,11 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	idWords: null,
 	radio: 0,
 	info: {
-		operator: '', operatorType: '', sequence: 0 , 
-		operatorBeginTime: '', operatorEndTime:'', language: 'zh',
-		pageSize: 20, currentPage: 1
+		operator: '', operationType: '', sequence: 1 , 
+		operationBeginTime: '', operationEndTime:''
 	},
 	list: [
 		{operator: 'userID', reviewer: 'userName', operatorRole: 'ekeyName',operatorTime: 1535646546566, operatorType: 'ekeyComment'}
@@ -50,19 +50,20 @@ var _this, data = {
 	total: 1,
 	pickerBegin: {
 		disabledDate(time){
-			var boundary = new Date(_this.info.operatorEndTime);
+			var boundary = new Date(_this.info.operationEndTime);
 			boundary.setHours(23,59,59);
 			return time > boundary;
 		}
 	},
 	pickerEnd: {
 		disabledDate(time){
-			var boundary = new Date(_this.info.operatorBeginTime);
+			var boundary = new Date(_this.info.operationBeginTime);
 			boundary.setHours(0, 0, 0);
 			return time < boundary;
 		}
 	}
 };
+var keywords = [];
 
 export default {
 	data(){
@@ -87,21 +88,30 @@ export default {
 	},
 	methods:{
 		search(){
-			console.log(this.info)
+			this.page = 1;
+			search();
 		},
 		changePage(num){
-			console.log(num);
+			search();
 		},
+		idInput(val){
+			if(val=='') return this.idWords = [].concat(keywords);
+			let i, arr = [], len = keywords.length, obj;
+			for (i = 0; i < len; i++) {
+				obj = keywords[i];
+				if(obj.id.indexOf(val)>=0 || obj.name.indexOf(val)>=0) arr.push(obj);
+			}
+			this.idWords = arr;
+		}
 	},
 	created(){
 		_this = this;
 		let k, info = this.info;
-//		for (k in info) info[k] = '';
-		info.pageSize = 20;
-		info.language = 'zh'; 
+		for (k in info) info[k] = '';
 		info.sequence = 0;
-		this.page = 1;
 		this.radio = 2;
+		operatorType();
+		search();
 	},
 	watch: {
 		radio(cur){
@@ -109,11 +119,53 @@ export default {
 		}
 	}
 };
+
+function search(){
+	let params = Object.assign({}, _this.info);
+	params.url = 'operationRecording/query';
+	params.cmdID = '600101';
+	params.language = utils.langCode();
+	params.pageSize = 20;
+	params.currentPage = _this.page;
+	
+	utils.post(params).then(res => {
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.totalPage>1 && _this.page > res.totalPage){
+			_this.page = res.totalPage;
+			return search();
+		}
+		_this.list = res.lists;
+		_this.page = res.currentPage;
+		_this.total = res.totalSize;
+	});
+}
+
+function operatorType(){
+	let param = {
+		url: 'dict/query',
+		cmdID: '600000',
+		language: utils.langCode(),
+		type: 3
+	};
+	
+	utils.post(param).then(res => {
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		let i, arr = res.lists, len = arr.length, obj;
+		for (i = 0; i < len; i++) {
+			obj = arr[i];
+			obj.value = obj.id;
+			obj.lable = obj.name;
+		}
+		keywords = [].concat(arr);
+		_this.idWords = arr;
+	});
+}
+
 function getDay(val){
 	if(val==9) return;
 	let begin, today = new Date();
 	today.setHours(23,59,59);
-	_this.info.operatorEndTime = today.getTime();
+	_this.info.operationEndTime = today.getTime();
 	today.setHours(0,0,0);
 	switch (val){
 		case 4:
@@ -124,7 +176,7 @@ function getDay(val){
 			break;
 		default: break;
 	}
-	_this.info.operatorBeginTime = today.getTime();
+	_this.info.operationBeginTime = today.getTime();
 }
 </script>
 

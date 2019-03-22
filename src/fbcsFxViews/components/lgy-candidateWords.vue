@@ -78,7 +78,7 @@ export default {
 			t = setTimeout(function(){
 				let val = e.target.value;
 				self.$emit('input', val, e);
-				self.$refs.arrow.style.display = val ? 'block' : 'none';
+//				self.$refs.arrow.style.display = val ? 'block' : 'none';
 			}, 300);
 		},
 		changeHandle(e){
@@ -106,6 +106,9 @@ export default {
 	watch: {
 		disabled(val){
 			this.$refs.arrow.style.display = 'none';
+		},
+		value(val){
+			this.$refs.arrow.style.display = (!this.disabled && val) ? 'block' : 'none';
 		}
 	}
 };

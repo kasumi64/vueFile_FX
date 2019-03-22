@@ -65,7 +65,8 @@ export default {
 function nodeCu(){
 	let params = {
 		url: 'batchDispatch/queryNodeCu',
-		cmdID: '600081'
+		cmdID: '600081',
+		type: 0
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});

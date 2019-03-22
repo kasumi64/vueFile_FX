@@ -35,7 +35,7 @@
 							{{$t('fbcsFile.Ekey.ekeyName')}}
 						</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyName" />
+						<input v-model="ekeyInfo.ekeyName" :disabled="disName"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -65,7 +65,8 @@
 </template>
 
 <script>
-import utils from '@/fbcsFxViews/libs/utils.js';
+import utils  from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var _this, data = {
 	id: '',
@@ -83,6 +84,7 @@ var _this, data = {
 		userID: '', userName: '', validDate: '', ekeyComment: '', 
 	},
 	disabled: false,
+	disName: false,
 	showReview: false,
     reqsv: {uri:''},
     parameter: null,
@@ -114,8 +116,8 @@ function delEkey(row){
 function delNow(obj){
 //	console.log(obj);
 	let params = {}
-	params.url = 'userEkey/delete';
-	params.cmdID = '600034';
+	params.url = obj.uri;
+	params.cmdID = '600037';
 	params.ekeyName = obj.ekeyName;
 	params.reviewer = obj.name;
 	
@@ -128,7 +130,7 @@ function delNow(obj){
 function showEditEkey(row){
 	isAdd = false;
 	_this.dialogTitle = _this.$t('fbcsFile.fnField.editEkey');
-	_this.disabled = true;
+	_this.disabled = _this.disName = true;
 	_this.ekeyInfo.userID = row.userID;
 	_this.ekeyInfo.ekeyName = row.ekeyName;
 	_this.ekeyInfo.validDate = row.validDate;
@@ -142,7 +144,7 @@ export default {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			ekeyName: this.$t('fbcsFile.tableTitle.ekeyName'),
-			validDate: this.$t('fbcsFile.tableTitle.ekeyDate'),
+			ymd: this.$t('fbcsFile.tableTitle.ekeyDate'),
 			ekeyComment: this.$t('fbcsFile.tableTitle.ekeyInfo'),
 		};
 		data.defined = {
@@ -154,14 +156,14 @@ export default {
 		};
 		return data;
 	},
-	props: {
-		isPage: {
-			type: Boolean,
-			default: true
-		},
-		tab: '',
-		isNew: false
-	},
+//	props: {
+//		isPage: {
+//			type: Boolean,
+//			default: true
+//		},
+//		tab: '',
+//		isNew: false
+//	},
 	methods:{
 		search(){
 			this.page = 1;
@@ -184,10 +186,12 @@ export default {
 		},
 		showAddEkey(){
 			isAdd = true;
+			this.disName = false;
 			this.dialogTitle = this.$t('fbcsFile.fnField.addEkey');
 			for(let k in this.ekeyInfo){
 				this.ekeyInfo[k] = '';
 			}
+			this.ekWords = [].concat(userid);
 			nextFrame();
 			this.showDialog = true;
 		},
@@ -330,6 +334,16 @@ function search(){
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
+		}
+		let i, arr = res.lists, len = arr.length, obj;
+		for (i = 0; i < len; i++) {
+			obj = arr[i];
+			if(obj.validDate){
+				obj.validDate *= 1000;
+				obj.ymd = moment(obj.validDate).format('YYYY-MM-DD HH:mm:ss');
+			} else {
+				obj.validDate = obj.ymd = '';
+			}
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

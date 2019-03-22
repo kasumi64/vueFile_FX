@@ -24,9 +24,8 @@
 				</el-table>
 			</div>
 		</div>
-		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.suConfig.err')" v-dialogDrag
+		<el-dialog ref="diaTab" :visible.sync="showDialog" :title="$t('fbcsFile.suConfig.err')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
-			
 			<div class="_dialog">
 				<el-table :data="errList" :row-class-name="rowClass" max-height="294" border>
 					<el-table-column prop="section" :label="$t('fbcsFile.suConfig.section')"></el-table-column>
@@ -88,6 +87,7 @@ export default {
 				if(res.errcode == '3101') {
 					_this.errList = res.lists;
 					_this.showDialog = true;
+					utils.tableSTop(_this, 'diaTab');
 					return;
 				}
 				utils.alert({txt: res.errinfo});

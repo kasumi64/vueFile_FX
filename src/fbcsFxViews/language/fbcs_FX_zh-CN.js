@@ -8,7 +8,7 @@ var obj = {
 		placeholder: '输入关键字', not: '暂无数据', paging1: '已显示全部', paging2: '条数据',
 		reviewTitle: '复核操作', reviewName: '复核操作员：', reviewPwd: '复核员密码：',
 		isSubmit: '是否要立即下发！', reviewSame: '复核员不能是登陆用户!', reviewNull: '复核员或密码不能为空!',
-		
+		result: '下发结果',
 	},
 	searchBar: {
 		userID: '用户ID：', userName: '用户名称：', placeholder: '输入关键字', search: '查询',
@@ -67,7 +67,8 @@ var obj = {
 		err: '异常提示'
 	},
 	dispatch: {
-		options: [{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},{label: '用户密码信息表', value: '3'}],
+		options: [{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},
+			{label: '用户密码信息表', value: '3'}, {label: '互联网配置信息', value: '4'}],
 		nodeName:'节点名', cuName:'CU名称', errcode:'错误码', errinfo:'错误信息', type:'操作类型',
 		setFile:'配置文件：', hots1:'分发主机：', hots2:'主机列表', res:'分发结果：',
 		t1:'(系统动态配置文件为：userinfo.db,userekey.db,usercomm.db,mxdynamic.ini)',
@@ -93,7 +94,7 @@ var obj = {
 	},
 	versionDetail: {
 		title: '版本详情', type: '版本类型', fileName: '文件名' , cfgInfo: '文件内容',
-		fileSize: '文件大小', fileMd5: '文件Md5', fileTime: '文件时间',
+		fileSize: '文件大小', fileMd5: '文件Md5', fileTime: '中登时间',
 		ctplst: 'ctplst', zdrela: 'zdrela',
 	},
 	versionContrast: {
@@ -112,7 +113,7 @@ var obj = {
 		},
 		regain: {
 			version: '版本号', fileName: '客户端文件名', fileComment: '描述', recoverType: '恢复操作类型', detail: '详情', 
-			cuLists: 'cuLists', cuName: 'cuName', compare: '对比', restore: '恢复'
+			cuLists: 'CU名称', cuName: 'cuName', compare: '对比', restore: '恢复'
 		},
 		blacklist: {
 			nodeName: '节点名', cuName: 'CU名', black: '白名单', white: '黑名单', cuList: '主机列表：',
