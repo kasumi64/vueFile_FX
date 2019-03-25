@@ -1,5 +1,6 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
+import moment from 'moment';
 
 var _this, info = {
 	userID: '', userName: '', userType: '1', userPasswd:'111111', inZone: '',linkGroupName: '', speedCtrl: -1,
@@ -21,6 +22,7 @@ data = {
 	reqsv: {},
 	parameter: null,
 	jump: false,
+	buildTime: '',
 }, args;
 
 export default {
@@ -72,17 +74,24 @@ export default {
 			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
 			if(this.info.linkGroupName == '任意') params.linkGroupName = '';
 			
-			console.log(params);
+//			console.log('userinfo', params);
 			
 			utils.post(params).then(function(res){
-				utils.alert({txt: res.errinfo});
-				if(res.errcode!='0') return
+				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				if(_this.jump){
 					_this.jump = false;
 					_this.$emit('update:isAdd', 'ekey');
-					_this.$emit('update:tab', 'second');
-					utils.emit('fbcs_newUser', _this.info);
+					getUserInfo(_this.info);
+					utils.confirm({
+						txt: res.errinfo,
+						ok: () => {
+							_this.$emit('update:tab', 'second');
+						}
+					});
+				} else {
+					utils.alert({txt: res.errinfo, type: 1});
 				}
+				utils.emit('fbcs_newUser', _this.info);
 			});
 		},
 		now(){
@@ -110,7 +119,7 @@ export default {
 			if(this.info.linkGroupName == '任意') params.linkGroupName = '';
 			
 			utils.post(params).then(function(res){
-				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
 			});
 		}
@@ -188,10 +197,11 @@ function getUserInfo(user){
 		userID: user.userID
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		var obj = res.lists[0];
-		_this.info = obj;
+		_this.info = obj || {};
 		_this.info.beginSoftEncTime = obj.beginSoftEncTime * 1000;
 		_this.info.endSoftEncTime = obj.endSoftEncTime * 1000;
+		_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
 	});
 }

@@ -106,8 +106,8 @@ function del(row){
 		txt: _this.$t('fbcsFile.relation.sureSignal'),
 		ok: o => {
 			utils.post(params).then(res => {
-				utils.alert({txt: res.errinfo});
-				if(res.errcode!='0') return;
+				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+				utils.alert({txt: res.errinfo, type: 1});
 				search();
 			});
 		},
@@ -203,7 +203,7 @@ export default {
 			utils.post(params).then(res => {
 				this.search();
 				this.showDialog = false;
-				utils.alert({txt: res.errinfo});
+				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 			});
 		},
 		now(){

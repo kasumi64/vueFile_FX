@@ -50,7 +50,7 @@ function detail1(row){
 		version: row.version
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		_this.detailList = res.lists;
 		_this.showDialog = true;
 		utils.tableSTop(_this, 'detailBox');
@@ -68,7 +68,7 @@ function rollback(obj){
 		version: rollRow.version
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
 	});
 }
@@ -104,7 +104,7 @@ function zdCfg(obj){
 	};
 	
 	utils.post(params).then(function(res){
-		utils.alert({txt: res.errinfo});
+		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 	});
 }
 
@@ -175,7 +175,7 @@ export default {
 			else tit += 'newVer';
 			this.checkTitle = this.$t(tit);
 			utils.post(params).then(function(res){
-				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 				for (let i = 0; i < res.lists.length; i++) {
 					let obj = res.lists[i], equal = obj.isEqual;
 					obj.equalMask = _this.$t('fbcsFile.versionQuery.equal'+equal);
@@ -219,7 +219,7 @@ function search(){
 			return search();
 		}
 		let i, len = res.lists.length, obj;
-		for (let i = 0; i < len; i++) {
+		for (i = 0; i < len; i++) {
 			obj = res.lists[i]; 
 			switch (obj.type){
 				case 4: case 8: 

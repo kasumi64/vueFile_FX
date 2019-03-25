@@ -89,8 +89,6 @@ function search(){
 	let params = {
 		url: 'userClientFile/query',
 		cmdID: '600061',
-		pageSize: 20,
-		currentPage: _this.page
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);

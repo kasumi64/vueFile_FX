@@ -12,7 +12,7 @@
 				</svg>
 			</div>
 		</div>
-		<el-dialog ref="maskDialog" :visible.sync="showDialog" :title="fbcsFile.components.result" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+		<el-dialog ref="maskDialog" :visible.sync="showDialog" :title="$t('fbcsFile.components.result')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
@@ -65,7 +65,7 @@ function WheelReq(sv, self){
 	}
 	function response(res){
 		if(res.errcode!='0'||res.type==2) {
-			utils.alert({txt: res.errinfo});
+			utils.alert({txt: res.errinfo, type:0});
 			return stop();
 		}
 		if(res.lastQueryFlag != 0&&!timeout){

@@ -105,7 +105,7 @@ export default {
 			params.userPasswd = md5(this.passwd);
 			
 			utils.post(params).then(function(res){
-				utils.alert({txt: res.errinfo});
+				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 			});
 		},
 		now(){
@@ -121,7 +121,7 @@ export default {
 			params.reviewer = obj.name;
 			
 			utils.post(params).then(function(res){
-				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
 			});
 		}
@@ -179,7 +179,7 @@ function getPwdTime(){
 		userID: _this.info.userID
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		_this.info.expiredTimeFlag = res.userpasswdExpiredFlag;
 	});
 }

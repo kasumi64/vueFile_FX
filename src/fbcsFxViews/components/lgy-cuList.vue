@@ -91,7 +91,7 @@ export default {
 				lists: this.cuList
 			};
 			utils.post(params).then(function(res){
-				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+				if(res.errcode!='0') return utils.alert({txt: res.errinfo, type:0});
 				res.type = 0;
 				_this.parameter = res;
 			});
@@ -114,7 +114,7 @@ function nodeCu(){
 		cmdID: '600081'
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo, type:0});
 		nodes = [].concat(res.lists);
 		_this.cuList = res.lists;
 		var temp = {}, arr = [];

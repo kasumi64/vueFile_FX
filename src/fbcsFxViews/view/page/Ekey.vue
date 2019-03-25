@@ -101,7 +101,7 @@ function delEkey(row){
 			params.ekeyName = row.ekeyName;
 			
 			utils.post(params).then(function(res){
-				utils.alert({txt: res.errinfo});
+				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 				search();
 			});
 		},
@@ -156,14 +156,14 @@ export default {
 		};
 		return data;
 	},
-//	props: {
-//		isPage: {
-//			type: Boolean,
-//			default: true
-//		},
-//		tab: '',
-//		isNew: false
-//	},
+	props: {
+		isPage: {
+			type: Boolean,
+			default: true
+		},
+		tab: '',
+		isNew: false
+	},
 	methods:{
 		search(){
 			this.page = 1;
@@ -257,11 +257,18 @@ function add(){
 	params.validDate = _this.ekeyInfo.validDate / 1000;
 	
 	utils.post(params).then(function(res){
-		utils.alert({txt: res.errinfo});
-		if(res.errcode!='0') return;
+		
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		if(_this.jump){
 			_this.jump = false;
-			_this.$emit('update:tab', 'third');
+			utils.confirm({
+				txt: res.errinfo,
+				ok: () => {
+					_this.$emit('update:tab', 'third');
+				}
+			});
+		} else {
+			utils.alert({txt: res.errinfo, type:1});
 		}
 		search();
 		_this.showDialog = false;
@@ -274,8 +281,8 @@ function edit(){
 	params.validDate = _this.ekeyInfo.validDate / 1000;
 	
 	utils.post(params).then(function(res){
-		utils.alert({txt: res.errinfo});
-		if(res.errcode!='0') return;
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		utils.alert({txt: res.errinfo, type: 1});
 		search();
 		_this.showDialog = false;
 	});

@@ -35,6 +35,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var _this, data = {
 	idWords: null,
@@ -71,8 +72,8 @@ export default {
 			operator: this.$t('fbcsFile.audit.operator'),
 			reviewer: this.$t('fbcsFile.audit.reviewer'),
 			operatorRole: this.$t('fbcsFile.audit.operatorRole'),
-			operatorType: this.$t('fbcsFile.audit.operatorType'),
-			operatorTime: this.$t('fbcsFile.audit.operatorTime'),
+			operationType: this.$t('fbcsFile.audit.operatorType'),
+			ymd: this.$t('fbcsFile.audit.operatorTime'),
 			errorCode: this.$t('fbcsFile.audit.errorCode'),
 			errorInfo: this.$t('fbcsFile.audit.errorInfo'),
 			uuid: this.$t('fbcsFile.audit.uuid')
@@ -109,7 +110,7 @@ export default {
 		let k, info = this.info;
 		for (k in info) info[k] = '';
 		info.sequence = 0;
-		this.radio = 2;
+		getDay(this.radio = 2);
 		operatorType();
 		search();
 	},
@@ -133,6 +134,11 @@ function search(){
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
+		}
+		let i, len = res.lists.length, obj;
+		for (i = 0; i < len; i++) {
+			obj = res.lists[i];
+			obj.ymd = moment(obj.operationTime * 1000).format('YYYY-MM-DD HH:mm:ss');
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

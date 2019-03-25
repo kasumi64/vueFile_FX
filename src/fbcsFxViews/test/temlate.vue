@@ -30,7 +30,7 @@ function test(){
 		cmdID: '600094',
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo, type:0});
 		_this.list = res.lists;
 	});
 }

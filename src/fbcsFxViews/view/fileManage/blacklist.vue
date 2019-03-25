@@ -51,7 +51,7 @@ export default {
 				lists: this.cuList
 			};
 			utils.post(params).then(function(res){
-				utils.alert({txt: res.errinfo});
+				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 			});
 		},
 	},
@@ -69,8 +69,8 @@ function nodeCu(){
 		type: 0
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
-		let i, arr = res.list, len = arr.length, obj;
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo, type:0});
+		let i, arr = res.lists, len = arr.length, obj;
 		for (i = 0; i < len; i++) {
 			obj = arr[i];
 			let str = obj.blackFlag ? 'black' : 'white';

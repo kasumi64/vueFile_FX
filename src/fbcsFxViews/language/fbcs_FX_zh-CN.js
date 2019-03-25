@@ -40,8 +40,8 @@ var obj = {
 		online: '不在线报警：', encFlag: '加密方式：', beginTime: '软加密开始时间：', endTime: '软加密结束时间：', broadcast: '是否允许广播发送：',
 		connFlag: '允许连接标志：', switchMsg: '允许消息交换：', publishTopicCount: '发布主题个数上限：', subscribeTopicCount: '订阅主题个数上限：',
 		maxPublishTopicDay: '发布主题有效期天数：', maxSimultTaskCount: '单用户任务并发数：', maxCltOneDayTaskCount: '单用户最大发送文件个数：', 
-		webFlag:'单用户互联网标识', isModifyDefaultPasswd: '新加用户修改默认密码标识：', userPasswd: '系统密码：', expiredTimeFlag: '密码有效期标识：',
-		more: '展开更多设置', Kbit: '-1或0为不限速', indate: '密码有效期：',
+		webFlag:'单用户互联网标识：', isModifyDefaultPasswd: '新加用户修改默认密码标识：', userPasswd: '系统密码：', expiredTimeFlag: '密码有效期标识：',
+		more: '展开更多设置', Kbit: '-1或0为不限速', indate: '密码有效期：', buildTime: '创建时间：'
 	},
 	password: {
 		id: '用户ID：', pwd: '修改用户密码：', new: '新密码：', again: '确认密码：', indate: '有效期：',
@@ -121,7 +121,21 @@ var obj = {
 		}
 	},
 	advanced: {
-		
+		user: {
+			
+		},
+		Ekey: {
+			
+		},
+		signal: {
+			
+		},
+		information: {
+			
+		},
+		audit: {
+			
+		}
 	}
 };
 module.exports = {fbcsFile: obj};

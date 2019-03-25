@@ -70,7 +70,7 @@ function zdDetail(ver){
 		version: ver.version
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		_this.zdList = res.lists;
 		cfgInfo.ctplst = res.lists[0].cfgInfo;
 		cfgInfo.zdrela = res.lists[1].cfgInfo;

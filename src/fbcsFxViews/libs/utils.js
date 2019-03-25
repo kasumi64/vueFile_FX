@@ -104,6 +104,10 @@ function ReqHttp(){
 	this.post = function (params, fn, args, efn){
 		var url = params.url;
 		delete params.url;
+		
+//		console.log(params.cmdID, params);
+//		return Promise.resolve({errcode:'0',lists:[]});
+		
 		return axios.post(url, params).then(function(res){
 			return callback(res, fn, args);
 		}).catch(function (err) {
@@ -173,8 +177,8 @@ exp.addDrag = function(kel, tit, panl){ return new addDrag(kel, tit, panl); };
 //	confirm('文本'); //有确定和取消按钮
 //	prompt('文本','输入文本'); //有confirm()和输入框
 function TipsConfirm(){
-	var successIcon = require('@/fbcsFxViews/img/logo.png'),
-		failIcon = require('@/fbcsFxViews/img/logo.png');
+	var successIcon = require('@/fbcsFxViews/img/success.png'),
+		failIcon = require('@/fbcsFxViews/img/failure.png');
 	const dom = `<div class="maskLayer maskBlack">
 			<div class="tipsPanle">
 				<div class="title">

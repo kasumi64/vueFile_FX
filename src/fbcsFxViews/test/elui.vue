@@ -141,7 +141,8 @@ export default {
 				title:'标题alert',txt:'alert内容',
 				ok:e=>{
 //					alert('alert');
-				}
+				},
+				type:1
 			}, {now:'now',ok:'ok',cancel:'cancel'});
 		},
 		tableCK(row){

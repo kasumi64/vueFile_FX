@@ -177,6 +177,11 @@
 						</el-option>
 					</el-select>
 				</div>
+			</li><li v-if="isAdd!='add'">
+				<div class="label">{{$t('fbcsFile.userInfo.buildTime')}}</div>
+				<div class="right">
+					<input v-model="buildTime" disabled/>
+				</div>
 			</li>
 		</ul>
 		<ul class="btnBox">

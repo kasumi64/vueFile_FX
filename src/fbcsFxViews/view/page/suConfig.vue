@@ -90,7 +90,7 @@ export default {
 					utils.tableSTop(_this, 'diaTab');
 					return;
 				}
-				utils.alert({txt: res.errinfo});
+				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 			});
 		},
 		history(){
@@ -122,7 +122,7 @@ function getConfig(type){
 		type
 	}
 	utils.post(param).then(function(res){
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		_this.txtVal = res.cfgInfo;
 	});
 }
