@@ -162,7 +162,7 @@ export default {
 		this.id = this.name = '';
 		this.currSelect = null;
 		this.showDialog = false;
-//		this.list = [];
+		this.list = [];
 		this.search();
 	},
 	components: {
@@ -186,7 +186,7 @@ function search(){
 			_this.page = res.totalPage;
 			return search();
 		}
-//		_this.list = res.lists;
+		_this.list = res.lists;
 		_this.page = res.currentPage;
 		_this.total = res.totalSize;
 	});

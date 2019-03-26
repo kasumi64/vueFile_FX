@@ -4,7 +4,7 @@
 			<label class="label">{{$t('fbcsFile.audit.operator')}}：</label>
 			<input v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<label class="label">{{$t('fbcsFile.audit.operatorType')}}：</label>
-			<lgy-candidateWords v-model="info.operatorType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
+			<lgy-candidateWords v-model="info.operationType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>
 			<el-radio-group v-model="info.sequence">
 				<el-radio :label="0">{{$t('fbcsFile.audit.lately')}}</el-radio>
@@ -28,7 +28,7 @@
 			</el-date-picker>
 			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
 	</div>
 </template>
@@ -69,22 +69,15 @@ var keywords = [];
 export default {
 	data(){
 		data.title = {
+			ymd: this.$t('fbcsFile.audit.operatorTime'),
+			operationType: this.$t('fbcsFile.audit.operatorType'),
+			errInfo: this.$t('fbcsFile.audit.errorInfo'),
 			operator: this.$t('fbcsFile.audit.operator'),
 			reviewer: this.$t('fbcsFile.audit.reviewer'),
-			operatorRole: this.$t('fbcsFile.audit.operatorRole'),
-			operationType: this.$t('fbcsFile.audit.operatorType'),
-			ymd: this.$t('fbcsFile.audit.operatorTime'),
-			errorCode: this.$t('fbcsFile.audit.errorCode'),
-			errorInfo: this.$t('fbcsFile.audit.errorInfo'),
+			role: this.$t('fbcsFile.audit.operatorRole'),
+			errCode: this.$t('fbcsFile.audit.errorCode'),
 			uuid: this.$t('fbcsFile.audit.uuid')
 		};
-//		data.defined = {
-//			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
-//			items: [
-//				{src:require('@/fbcsFxViews/img/logo.png'), click: showEditEkey, tips: this.$t('fbcsFile.tableDefined.editEkey') },
-//				{src:require('@/fbcsFxViews/img/logo.png'), click: delEkey, tips: this.$t('fbcsFile.tableDefined.delEkey') },
-//			]
-//		};
 		return data;
 	},
 	methods:{
@@ -136,9 +129,17 @@ function search(){
 			return search();
 		}
 		let i, len = res.lists.length, obj;
+		let zh = {'1':'运维', '2':'客户', '3':'系统定时任务', '4':'cu主导任务'},
+			en = {'1':'operator', '2':'user', '3':'timer', '4':'cu'};
+		var dictRole = utils.langCode() == 0 ? zh : en;
 		for (i = 0; i < len; i++) {
 			obj = res.lists[i];
-			obj.ymd = moment(obj.operationTime * 1000).format('YYYY-MM-DD HH:mm:ss');
+			if(obj.operationTime){
+				obj.ymd = moment(obj.operationTime).format('YYYY-MM-DD HH:mm:ss');
+			} else {
+				obj.operationTime = obj.ymd = '';
+			}
+			obj.role = dictRole[obj.operatorRole] || '';
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

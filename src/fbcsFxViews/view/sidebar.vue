@@ -61,9 +61,9 @@ var data = {
 		{
 			folder: 'advanced', label: '高级搜索', icon:'el-icon-search',
 			src1:require('../img/menu/search_1.png'),
-			sub: [{router:'/advanced/user', icon:'el-icon-location', label:'用户'},
+			sub: [{router:'/main/fxCfg/advanced/user', icon:'el-icon-location', label:'用户'},
 			{router:'/main/fxCfg/advanced/Ekey', icon:'el-icon-menu', label:'Ekey'},
-			{router:'/main/fxCfg/advanced/relation', icon:'el-icon-message', label:'通信关系'},
+			{router:'/main/fxCfg/advanced/signal', icon:'el-icon-message', label:'通信关系'},
 			{router:'/main/fxCfg/advanced/information', icon:'el-icon-more', label:'扩展信息'},
 			{router:'/main/fxCfg/advanced/audit', icon:'el-icon-document', label:'稽核'}]
 		}
@@ -82,8 +82,8 @@ export default {
 		},
 	},
 	created(){
-//		this.select('/main/fxCfg/advanced/user');
-		this.select('/main/fxCfg/userHome');
+		this.select('/main/fxCfg/advanced/user');
+//		this.select('/main/fxCfg/userHome');
 	}
 };
 </script>

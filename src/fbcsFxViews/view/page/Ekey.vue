@@ -257,7 +257,6 @@ function add(){
 	params.validDate = _this.ekeyInfo.validDate / 1000;
 	
 	utils.post(params).then(function(res){
-		
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		if(_this.jump){
 			_this.jump = false;
@@ -342,12 +341,11 @@ function search(){
 			_this.page = res.totalPage;
 			return search();
 		}
-		let i, arr = res.lists, len = arr.length, obj;
+		let i, len = res.lists.length, obj;
 		for (i = 0; i < len; i++) {
-			obj = arr[i];
+			obj = res.lists[i];
 			if(obj.validDate){
-				obj.validDate *= 1000;
-				obj.ymd = moment(obj.validDate).format('YYYY-MM-DD HH:mm:ss');
+				obj.ymd = moment(obj.validDate * 1000).format('YYYY-MM-DD HH:mm:ss');
 			} else {
 				obj.validDate = obj.ymd = '';
 			}

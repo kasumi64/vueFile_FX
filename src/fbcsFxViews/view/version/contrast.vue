@@ -119,7 +119,7 @@ function search(){
 		currentPage: _this.page
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

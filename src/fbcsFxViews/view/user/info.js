@@ -70,8 +70,8 @@ export default {
 				delete params.userPasswd;
 			}
 			
-			params.beginSoftEncTime = this.info.beginSoftEncTime / 1000;
-			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
+			if(params.beginSoftEncTime) params.beginSoftEncTime = params.beginSoftEncTime / 1000;
+			if(params.endSoftEncTime) params.endSoftEncTime = params.endSoftEncTime / 1000;
 			if(this.info.linkGroupName == '任意') params.linkGroupName = '';
 			
 //			console.log('userinfo', params);
@@ -80,12 +80,16 @@ export default {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				if(_this.jump){
 					_this.jump = false;
-					_this.$emit('update:isAdd', 'ekey');
-					getUserInfo(_this.info);
 					utils.confirm({
 						txt: res.errinfo,
 						ok: () => {
+							getUserInfo(_this.info);
+							_this.$emit('update:isAdd', 'ekey');
 							_this.$emit('update:tab', 'second');
+						},
+						cancel: () => {
+							getUserInfo(_this.info);
+							_this.$emit('update:isAdd', 'ekey');
 						}
 					});
 				} else {
@@ -113,10 +117,10 @@ export default {
 				params.url = 'userinfo/modifyImmediately';
 				params.cmdID = '600007';
 			}
-			params.beginSoftEncTime = this.info.beginSoftEncTime / 1000;
-			params.endSoftEncTime = this.info.endSoftEncTime / 1000;
+			if(params.beginSoftEncTime) params.beginSoftEncTime = params.beginSoftEncTime / 1000;
+			if(params.endSoftEncTime) params.endSoftEncTime = params.endSoftEncTime / 1000;
 			params.reviewer = obj.name;
-			if(this.info.linkGroupName == '任意') params.linkGroupName = '';
+			if(params.linkGroupName == '任意') params.linkGroupName = '';
 			
 			utils.post(params).then(function(res){
 				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
@@ -181,6 +185,8 @@ function initDate(){
 	info.allowPublishTopicCount= 5, 
 	info.allowSubscribeTopicCount= 5,
 	info.maxPublishTopicDay= 7;
+	info.maxSimultTaskCount= 0,
+	info.maxCltOneDayTaskCount= 0;
 	info.webUserFlag = 1;
 	info.expiredTimeFlag = '1';
 	
@@ -200,8 +206,14 @@ function getUserInfo(user){
 		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		var obj = res.lists[0];
 		_this.info = obj || {};
+		if(obj.userConfigDate){
+			_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
+		} else {
+			_this.buildTime = '';
+		}
 		_this.info.beginSoftEncTime = obj.beginSoftEncTime * 1000;
 		_this.info.endSoftEncTime = obj.endSoftEncTime * 1000;
-		_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
+		if(!_this.info.beginSoftEncTime) _this.info.beginSoftEncTime = '';
+		if(!_this.info.endSoftEncTime) _this.info.endSoftEncTime = '';
 	});
 }

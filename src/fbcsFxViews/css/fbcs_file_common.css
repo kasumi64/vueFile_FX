@@ -7,7 +7,7 @@
 }
 #fbcs_file *{-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
-#fbcs_file .test{font-size: 16px;border: 1px solid silver;padding: 5px 10px;}
+#fbcs_file .test{font-size: 16px;border: 1px solid silver;padding: 5px 10px;margin: 10px;}
 #fbcs_file .hide{display: none !important;}
 #fbcs_file .show{display: block !important;}
 #fbcs_file input{font-size: 14px;color: #666;height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;vertical-align: middle; border-radius: 4px;}
@@ -55,7 +55,8 @@
 #fbcs_file .defBtn:active{box-shadow: 0px 0px 1px 0px #0DB9EB;}
 #fbcs_file button{-moz-user-select: none;-webkit-user-select: none;}
 #fbcs_file button:disabled{background: #F5F7FA;color: #C0C4CC;border: 1px solid #E4E7ED;cursor: not-allowed;pointer-events: none;}
-/* MaskLayer */
+
+/* MaskLayer 提示带按键的提示框*/
 #fbcs_file .maskLayer{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.5);z-index: 9;}
 #fbcs_file .loadPanle{font-size: 16px;color: #06BFF5;line-height: 30px;}
 
@@ -63,13 +64,13 @@
 #fbcs_file .tipsPanle{display: block;margin: 10% auto 0;width: 600px;background: #FFF;border-radius: 4px;}
 #fbcs_file .tipsPanle .title{border-bottom: 1px solid #EDEFF4;height: 50px;overflow: hidden;}
 #fbcs_file .tipsPanle .title b{font-size: 18px;line-height: 50px;margin-left: 20px;color: #656a73;}
-#fbcs_file .tipsPanle .message{text-align: center;word-wrap: break-word;white-space: pre-wrap;}
+#fbcs_file .tipsPanle .message{text-align: center;word-wrap: break-word;}
 #fbcs_file .tipsIcon{width: 40px;height: 40px;}
 #fbcs_file .tipsPanle .alert {font-size: 0;padding: 40px 0;}
 #fbcs_file .tipsPanle .alert > div{display: inline-block;vertical-align: top;max-height: 120px;}
 #fbcs_file .tipsPanle .alert .left{width: 110px;text-align: right;padding: 0 30px;}
-#fbcs_file .tipsPanle .alert .right{max-width: 488px;padding-right: 40px;font-size: 14px;color: #666;line-height: 24px;text-align: left;overflow: auto;}
-#fbcs_file .tipsPanle .confirm {font-size: 14px;color: #666;max-height: 200px;padding: 40px;overflow: auto;}
+#fbcs_file .tipsPanle .alert .right{max-width: 488px;padding-right: 40px;font-size: 14px;color: #666;line-height: 24px;text-align: left;overflow: auto;white-space: pre-wrap;}
+#fbcs_file .tipsPanle .confirm {font-size: 14px;color: #666;max-height: 200px;padding: 40px;overflow: auto;white-space: pre-wrap;}
 #fbcs_file .tipsPanle .footBtn{height: 50px;border-top: 1px solid #EDEFF4;text-align: right;padding-top: 10px;}/*#D7D8DA,*/
 #fbcs_file .tipsPanle .footBtn button{margin-right: 15px;}
 

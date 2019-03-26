@@ -233,7 +233,11 @@ function search(){
 			}
 			obj.send = _this.$t('fbcsFile.versionQuery.operationType'+ obj.operationType);
 			obj.typeMask = _this.$t('fbcsFile.versionQuery.type'+ obj.type);
-			obj.ymd = moment(obj.operationTimestamp).format('YYYY-MM-DD HH:mm:ss');
+			if(obj.operationTimestamp){
+				obj.ymd = moment(obj.operationTimestamp).format('YYYY-MM-DD HH:mm:ss');
+			} else {
+				obj.operationTimestamp = obj.ymd = '';
+			}
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

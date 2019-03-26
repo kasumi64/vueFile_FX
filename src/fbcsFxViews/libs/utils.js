@@ -285,7 +285,7 @@ exp.keywords = function(obj, fn){
 		currentPage: 1
 	};
 	return exp.post(params).then(res => {
-		if(res.errcode!='0') return console.info(res.errinfo);
+		if(res.errcode!='0') return console.info('600001', res.errinfo);
 		var i, arr = res.lists, len = arr.length, obj;
 		for(i = 0; i < len; i++){
 			obj = arr[i];
