@@ -18,7 +18,6 @@
 				<el-radio :label="6">{{$t('fbcsFile.audit.month')}}</el-radio>
 				<el-radio :label="9">{{$t('fbcsFile.audit.begin')}}</el-radio>
 			</el-radio-group>
-			<!--<label class="label">{{$t('fbcsFile.audit.begin')}}</label>-->
 			<el-date-picker v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
 				:picker-options="pickerBegin" value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
@@ -28,8 +27,22 @@
 			</el-date-picker>
 			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<lgy-table :list="list" :title="title" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
+		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+			<div class="_dialog">
+				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
+					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
+					<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
+					<el-table-column prop="errcode" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+					<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
+					<!--<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>-->
+				</el-table>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+			</div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -45,7 +58,7 @@ var _this, data = {
 		operationBeginTime: '', operationEndTime:''
 	},
 	list: [
-		{operator: 'userID', reviewer: 'userName', operatorRole: 'ekeyName',operatorTime: 1535646546566, operatorType: 'ekeyComment'}
+		{operator: 'userID', reviewer: 'userName', operationType: 'ekeyName',ymd: 1535646546566, errInfo: 'ekeyComment', uuid: 'uuid'}
 	],
 	page: 1,
 	total: 1,
@@ -62,9 +75,28 @@ var _this, data = {
 			boundary.setHours(0, 0, 0);
 			return time < boundary;
 		}
-	}
+	},
+	showDialog: false,
+	cuList: []
 };
 var keywords = [];
+
+function detail(row){
+	_this.cuList = [];
+	_this.showDialog = true;
+	let param = {
+		url: 'batchDispatch/queryBatchDispatchResponse',
+		cmdID: '600083', uuid: row.uuid,
+		type: 0, lastQueryFlag: 1
+	};
+	utils.post(param).then(res => {
+		if(res.errcode != '0') {
+			utils.alert({txt: res.errinfo});
+			return _this.showDialog = false;
+		}
+		_this.cuList = res.lists;
+	});
+}
 
 export default {
 	data(){
@@ -76,8 +108,14 @@ export default {
 			reviewer: this.$t('fbcsFile.audit.reviewer'),
 			role: this.$t('fbcsFile.audit.operatorRole'),
 			errCode: this.$t('fbcsFile.audit.errorCode'),
-			uuid: this.$t('fbcsFile.audit.uuid')
+//			uuid: this.$t('fbcsFile.audit.uuid')
 		};
+		data.defined = {
+			label: this.$t('fbcsFile.tableTitle.operation'), width: 112,
+			items: [
+				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail, tips: this.$t('fbcsFile.tableDefined.detail'), enable: 'uuidBtn'}
+			]
+		}
 		return data;
 	},
 	methods:{
@@ -103,6 +141,7 @@ export default {
 		let k, info = this.info;
 		for (k in info) info[k] = '';
 		info.sequence = 0;
+		this.showDialog = false;
 		getDay(this.radio = 2);
 		operatorType();
 		search();
@@ -140,6 +179,7 @@ function search(){
 				obj.operationTime = obj.ymd = '';
 			}
 			obj.role = dictRole[obj.operatorRole] || '';
+			obj.uuidBtn = obj.uuid ? true : false;
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;
@@ -160,7 +200,7 @@ function operatorType(){
 		let i, arr = res.lists, len = arr.length, obj;
 		for (i = 0; i < len; i++) {
 			obj = arr[i];
-			obj.value = obj.id;
+			obj.value = obj.name;
 			obj.lable = obj.name;
 		}
 		keywords = [].concat(arr);

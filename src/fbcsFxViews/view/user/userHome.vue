@@ -43,6 +43,37 @@
 		</el-dialog>
 		
 		<modifyPwd :show.sync="showPwd" :user="currSelect"></modifyPwd>
+		
+		<el-dialog :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+			<ul class="_dialog import">
+				<li>
+					<span class="txt w120">
+						<i class="red">*</i>
+						{{$t('fbcsFile.userHome.fileName')}}
+					</span>
+					<input v-model="fileName" class="fileName" />
+				</li><li>
+					<p class="importTips" v-html="$t('fbcsFile.userHome.importTips')"></p>
+				</li>
+			</ul>
+			<div slot="footer" class="_footBtn">
+				<button class="blueBtn" @click="save">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showInfo=false">{{$t('fbcsFile.tips.close')}}</button>
+			</div>
+		</el-dialog>
+		<el-dialog :visible.sync="importErr" :title="$t('fbcsFile.tips.title')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+			<div class="_dialog">
+				<el-table :data="errList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
+					<el-table-column prop="line" :label="$t('fbcsFile.userHome.line')"></el-table-column>
+					<el-table-column prop="userID" :label="$t('fbcsFile.tableTitle.userID')"></el-table-column>
+					<el-table-column prop="operatorName" :label="$t('fbcsFile.userHome.operatorName')"></el-table-column>
+					<el-table-column prop="errinfo" :label="$t('fbcsFile.userHome.errinfo')"></el-table-column>
+				</el-table>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="defBtn" @click="importErr=false">{{$t('fbcsFile.tips.close')}}</button>
+			</div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -64,7 +95,12 @@ var _this, data = {
 	signalList: [],
 	signalPage: 1,
 	signalTotal: 1,
+	
+	showInfo: false, infoTitle: '',
+	fileName: '', importErr: false,
+	errList: []
 };
+
 
 function editUser(row){
 	let obj = Object.assign({tab: 'first', type: 'edit'}, row);
@@ -145,10 +181,51 @@ export default {
 			this.showPwd = true;
 		},
 		importInformation(){
-			console.log('importInformation');
+			this.fileName = '';
+			this.infoTitle = this.$t('fbcsFile.fnField.importInformation');
+			this.showInfo = true;
+		},
+		save(){
+			if(!_this.fileName) return utils.confirm({
+				txt: _this.$t('fbcsFile.userHome.fileErr'),
+				btn: 1
+			});
+			
+			utils.confirm({
+				txt: _this.$t('fbcsFile.userHome.OPE'),
+				ok: () => {
+					let params = {
+						url: 'userinfoExt/operatorImport',
+						cmdID: '600026',
+						csvFileName: _this.fileName
+					};
+					
+					utils.post(params).then(res => {
+						if(res.lists){
+							_this.errList = res.lists;
+							_this.importErr = true;
+						} else {
+							utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+						}
+					});
+				}
+			});
+			this.showInfo = false;
 		},
 		importInBop(){
-			console.log('importInBop');
+			utils.confirm({
+				txt: _this.$t('fbcsFile.userHome.BOP'),
+				ok: () => {
+					let params = {
+						url: 'userinfoExt/operatorToBop',
+						cmdID: '600027'
+					};
+					
+					utils.post(params).then(res => {
+						utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+					});
+				}
+			});	
 		},
 		select(arr, row, table){
 			if(arr.length > 1){
@@ -218,4 +295,8 @@ function signalSearch(){
 <style scoped="scoped">
 	.userHome{min-width: 696px;padding-right: 20px;background: #FFF;}
 	#fbcs_file .signal{padding-bottom: 0;max-height: 320px;overflow: auto;width: 646px;}
+	.import{padding-right: 0 !important;}
+	.w120{vertical-align: middle;}
+	.fileName{width: 350px;}
+	.importTips{font-size: 14px;color: #999;line-height: 20px;margin-left: 122px;white-space: pre-line;}
 </style>

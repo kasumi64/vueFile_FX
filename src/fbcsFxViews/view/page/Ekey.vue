@@ -133,7 +133,7 @@ function showEditEkey(row){
 	_this.disabled = _this.disName = true;
 	_this.ekeyInfo.userID = row.userID;
 	_this.ekeyInfo.ekeyName = row.ekeyName;
-	_this.ekeyInfo.validDate = row.validDate;
+	_this.ekeyInfo.validDate = row.ymd;
 	_this.ekeyInfo.ekeyComment = row.ekeyComment;
 	_this.showDialog = true;
 }
@@ -245,7 +245,7 @@ export default {
 };
 
 function init(){
-	if(!this.isPage && args){
+	if(!this.isPage && args&&args.userID){
 		this.id = args.userID;
 	}
 	this.search();

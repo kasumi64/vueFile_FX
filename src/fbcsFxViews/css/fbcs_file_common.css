@@ -10,7 +10,7 @@
 #fbcs_file .test{font-size: 16px;border: 1px solid silver;padding: 5px 10px;margin: 10px;}
 #fbcs_file .hide{display: none !important;}
 #fbcs_file .show{display: block !important;}
-#fbcs_file input{font-size: 14px;color: #666;height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;vertical-align: middle; border-radius: 4px;}
+#fbcs_file input{font-size: 14px;color: #666;height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;vertical-align: middle; border-radius: 0;}
 #fbcs_file input:focus{border: 2px solid #32ccF9;}
 #fbcs_file ::-webkit-input-placeholder{color: #BBB;}
 #fbcs_file input:disabled{background: #F5F7FA;color: #C0C4CC;border: 1px solid #E4E7ED;cursor: not-allowed;}
@@ -101,6 +101,9 @@
 #fbcs_file ._dialog .left,#fbcs_file ._dialog .right{display: inline-block;width: 140px;vertical-align: top;}
 #fbcs_file ._dialog .left{text-align: right;}
 #fbcs_file ._dialog .txt{font-size: 14px;color: #666;line-height: 30px;}
+#fbcs_file a{text-decoration: none;}
+#fbcs_file ._dialog .a{font-size: 14px;color: #5C759D;line-height: 30px;}
+#fbcs_file ._dialog .rClick{font-size: 14px;color: #999;line-height: 30px;margin-left: 80px;}
 #fbcs_file .red{font-size: 14px;color: #F00;}
 #fbcs_file ._dialog .right{width: auto;}
 #fbcs_file ._footBtn{padding: 10px 0px;border-top: 1px solid #EDEEF0;text-align: right;}

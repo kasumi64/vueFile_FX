@@ -2,7 +2,7 @@ var obj = {
 	tips: {
 		ok: '确定', now: '立即下发', cancel: '取消', build: '创建', back:'返回',
 		modify: '修改', edit: '编辑', submit: '提交', contrast: '对比', close: '关闭',
-		date: '选择日期时间', title: '提示',
+		date: '选择日期时间', title: '提示', rightClick: '请在文件名上点击右键，选择“链接另存为...”菜单保存文件。',
 	},
 	components: {
 		placeholder: '输入关键字', not: '暂无数据', paging1: '已显示全部', paging2: '条数据',
@@ -24,15 +24,21 @@ var obj = {
 	tableTitle: {
 		userID: '用户ID', userName: '用户名称', operation: '操作',
 		ekeyName: 'Ekey名称', ekeyDate: 'Ekey有效期', ekeyInfo: 'Ekey描述',
+		userType: '用户类型', inZone: '所属地区', group: '所在分组', speed: '最大收发速度', encFlag: '加密方式', 
+		beginTime: '软加密开始时间', endTime: '软加密结束时间',
 	},
 	tableDefined: {
 		editUser: '修改基本信息', editEkey: '修改Ekey', addSignal: '创建通信关系', delEkey: '删除Ekey',
 		delUser: '删除用户', delSignal: '删除通信关系', back: '回退', detail: '详情',
+		editExt: '修改扩展信息', delExt: '删除扩展信息'
 	},
 	
 	userHome: {
 		info: '基本信息', ekey: 'Ekey', signal:'通信关系', information:'扩展信息', 
-		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！'
+		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！', fileName: '扩展信息文件名：',
+		importTips: '请将扩展信息文件放到服务器路径：/fbcs-server/static/import内；<br/>在输入框中填入扩展信息文件名。',
+		OPE: '是否导入运维扩展信息？', BOP: '是否导入BOP扩展信息？', line: '行数', operatorName: '联系人姓名', errinfo: '错误描述',
+		fileErr: '文件名不能为空！',
 	},
 	userInfo: {
 		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 
@@ -103,6 +109,7 @@ var obj = {
 		type:'操作类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比', temp: '临时版本', online: '线上版本',
 		section: '段名', field: '字段名', detail: '详情'
 	},
+	
 	files: {
 		search: {
 			version: '版本号', fileName: '客户端文件名', fileComment: '描述', size: '客户端文件大小', md5:'文件MD5' ,time: '发布时间', 
@@ -120,21 +127,27 @@ var obj = {
 			blackBtn: '设置黑名单', cuType: '节点状态',
 		}
 	},
+	
 	advanced: {
 		user: {
-			
+			userID: '用户ID：', userName: '用户名称：', userType: '用户类型：', inZone: '所属地区：', linkGroupName: '所在分组：',
+			soft: '软加密', hard: '硬加密', expcsv: '导出基础信息', fileName: '文件名：', 
 		},
 		Ekey: {
-			
+			ekeyName: 'Ekey名称：', expcsv: '导出Ekey',
 		},
 		signal: {
-			
+			expcsv: '导出通信关系',
 		},
 		information: {
-			
+			listType: [{label: '全部', val: 'all'},{label: '运维表', val: 'OPE'},{label: 'BOP表', val: 'BOP'}],
+			listName: '查询表：', company: '公司名称：', ssccManager: 'sscc客户经理：', department: '所在部门',
+			expcsv: '导出运维表', expBOP: '导出BOP表', resOPE: '运维表查询结果：', resBOP: 'BOP表查询结果：',
+			operatorName: '联系人姓名', mobileNum: '联系人手机号', email: '联系人邮箱', telNum: '联系人座机号', 
+			addOPE: '增加扩展信息', editOPE: '修改扩展信息', del: '是否要删除扩展信息？'
 		},
 		audit: {
-			
+			expcsv: '导出稽核',
 		}
 	}
 };

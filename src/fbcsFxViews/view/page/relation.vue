@@ -257,7 +257,7 @@ export default {
 };
 
 function init(){
-	if(!this.isPage && args){
+	if(!this.isPage && args&&args.userID){
 		this.oneid = this.id = args.userID;
 		this.disabled = false;
 		this.idarr = [].concat(userid);

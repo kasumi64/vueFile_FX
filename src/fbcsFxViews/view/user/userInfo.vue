@@ -15,7 +15,7 @@
 				<signal :isPage="false"></signal>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.information')" name="fourth" :disabled="type=='add'">
-				<p class="test">扩展信息开发中...</p>
+				<information></information>
 			</el-tab-pane>
 		</el-tabs>
 	</div>
@@ -65,6 +65,7 @@ export default {
 		user: resolve => require(['@/fbcsFxViews/view/user/info.vue'], resolve),
 		ekey: resolve => require(['@/fbcsFxViews/view/page/Ekey.vue'], resolve),
 		signal: resolve => require(['@/fbcsFxViews/view/page/relation.vue'], resolve),
+		information: resolve => require(['@/fbcsFxViews/view/user/information.vue'], resolve),
 	}
 }
 

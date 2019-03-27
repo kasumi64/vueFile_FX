@@ -105,8 +105,8 @@ function ReqHttp(){
 		var url = params.url;
 		delete params.url;
 		
-//		console.log(params.cmdID, params);
-//		return Promise.resolve({errcode:'0',lists:[]});
+		console.log(params.cmdID, params);
+		return Promise.resolve({errcode:'0',lists:[],errinfo: 'Success.'});
 		
 		return axios.post(url, params).then(function(res){
 			return callback(res, fn, args);

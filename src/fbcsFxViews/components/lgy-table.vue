@@ -1,7 +1,7 @@
 <template>
 	<div class="lgy-table">
 		<el-table ref="lgy-table" :data= "list" @row-click="rowClick" @current-change="currentChange" @sort-change="sortChange" :row-class-name="rowClass" 
-			@select="select" @selection-change="selectChange" @select-all="selectAll" highlight-current-row border>
+			@select="select" @selection-change="selectChange" @select-all="selectAll" :max-height="maxHeight" highlight-current-row border>
 			<el-table-column v-if="index" type="index" width="50" key></el-table-column>
 			<el-table-column v-if="selection" type="selection" width="40" key></el-table-column>
 			<el-table-column :sortable="isSort(k)" v-for="(val, k) in title" :prop="k" :label="val" :key="k"></el-table-column>
@@ -63,6 +63,10 @@ export default {
 		currentPage: {
 			type: Number,
 			default: 1
+		},
+		maxHeight: {
+			type: [String, Number],
+			default: 'none'
 		}
 	},
 	methods:{

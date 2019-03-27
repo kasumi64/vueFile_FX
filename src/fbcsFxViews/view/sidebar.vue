@@ -82,8 +82,7 @@ export default {
 		},
 	},
 	created(){
-		this.select('/main/fxCfg/advanced/user');
-//		this.select('/main/fxCfg/userHome');
+		this.select('/main/fxCfg/userHome');
 	}
 };
 </script>

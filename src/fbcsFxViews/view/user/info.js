@@ -134,7 +134,7 @@ export default {
 		args = utils.getArgs('userInfo');
 		initDate();
 		getDict();
-		if(this.isAdd!='add'&&args){
+		if(this.isAdd!='add'&&args&&args.userID){
 			getUserInfo(args);
 		}
 	}
@@ -187,7 +187,7 @@ function initDate(){
 	info.maxPublishTopicDay= 7;
 	info.maxSimultTaskCount= 0,
 	info.maxCltOneDayTaskCount= 0;
-	info.webUserFlag = 1;
+	info.webUserFlag = 0;
 	info.expiredTimeFlag = '1';
 	
 	_this.more = false;
@@ -205,7 +205,8 @@ function getUserInfo(user){
 	utils.post(params).then(function(res){
 		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		var obj = res.lists[0];
-		_this.info = obj || {};
+		if(!obj) return _this.info.userID = args.userID;
+		_this.info = obj;
 		if(obj.userConfigDate){
 			_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
 		} else {
