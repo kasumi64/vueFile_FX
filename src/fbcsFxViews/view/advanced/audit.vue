@@ -6,9 +6,9 @@
 			<label class="label">{{$t('fbcsFile.audit.operatorType')}}：</label>
 			<lgy-candidateWords v-model="info.operationType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<el-checkbox-group ref="linkage" v-model="linkage" class="linkage">
-				<el-checkbox label="Ekey">Ekey</el-checkbox>
-				<el-checkbox label="comm">通信关系</el-checkbox>
-				<el-checkbox label="exp">扩展信息</el-checkbox>
+				<el-checkbox label="ekeyFlag">Ekey</el-checkbox>
+				<el-checkbox label="commFlag">通信关系</el-checkbox>
+				<el-checkbox label="userextFlag">扩展信息</el-checkbox>
 			</el-checkbox-group>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>
 			<el-radio-group v-model="info.sequence">

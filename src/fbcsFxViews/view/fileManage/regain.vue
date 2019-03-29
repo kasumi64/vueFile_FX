@@ -5,7 +5,7 @@
 		</div>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" :size="90000">
 		</lgy-table>
-		<h2 class="h2">{{$t('fbcsFile.files.search.delRes')}}</h2>
+		<h2 class="h2">{{$t('fbcsFile.files.search.sendRes')}}</h2>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.files.regain.restore')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
@@ -32,10 +32,11 @@
 					<div class="left">
 						<p class="txt">CU：</p>
 					</div><div class="right">
-						<el-table ref="nodes" :data="mess.cu" :row-class-name="rowClass" max-height="294" highlight-current-row border
-							@selection-change="selectChange" style="width: 340px;">
+						<el-table ref="nodes" :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border
+							@selection-change="changeCU" style="width: 340px;">
 							<el-table-column type="selection" width="40" key></el-table-column>
 							<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
+							<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
 						</el-table>
 					</div>
 				</li>
@@ -56,7 +57,7 @@ var _this, data = {
 	page: 1,
 	total: 1,
 	list: [
-		{version: '001', fileName: 'userName', cuName: 'cuName',recoverType: '删除', fileComment: 'ekeyComment'}
+		{version: '001', fileName: 'userName', fileMd5: 'MD5',recoverType: '1', fileComment: 'ekeyComment', detail: 'CU-1,CU-2'}
 	],
 	showReview: false,
 	reqsv: {},
@@ -64,29 +65,40 @@ var _this, data = {
 	showDialog: false,
 	cutRow: {},
 	mess: {
-		fileName: 'df', detail: '', type: '', cu: []
-	}
+		fileName: 'df', detail: '', type: ''
+	},
+	cuList: [],
 };
+var nodes;
 
 function restore(row){
 	_this.cutRow = row;
 	let mess = _this.mess;
 	mess.fileName = row.fileName;
 	mess.detail = row.fileComment;
-	mess.type = row.recoverType;
-	mess.cu = row.cuLists;
+	mess.type = row.typeStr;
+	
+	nodes = [];
+	setTimeout(() => {
+		_this.cuList.forEach(r => {
+			if(row.detail.indexOf(r.cuName) >= 0){
+				nodes.push(r);
+				_this.$refs['nodes'].toggleRowSelection(r, true);
+			} else _this.$refs['nodes'].toggleRowSelection(r, false);
+		})
+	});
 	_this.showDialog = true;
 }
 
 export default {
 	data(){
 		data.title = {
-			version: this.$t('fbcsFile.files.regain.version'),
 			fileName: this.$t('fbcsFile.files.regain.fileName'),
+			version: this.$t('fbcsFile.files.regain.version'),
 			fileComment: this.$t('fbcsFile.files.regain.fileComment'),
-			recoverType: this.$t('fbcsFile.files.regain.recoverType'),
+			typeStr: this.$t('fbcsFile.files.regain.recoverType'),
 			detail: this.$t('fbcsFile.files.regain.detail'),
-			cuLists: this.$t('fbcsFile.files.regain.cuLists'),
+//			cuLists: this.$t('fbcsFile.files.regain.cuLists'),
 //			cuName: this.$t('fbcsFile.files.regain.cuName')
 		};
 		data.defined = {
@@ -109,6 +121,9 @@ export default {
 		changePage(num){
 			search();
 		},
+		changeCU(arr){
+			nodes = arr;
+		},
 		showCU(row){
 			row.uri = 'userClientFile/recover';
 			this.reqsv = row;
@@ -123,8 +138,8 @@ export default {
 				fileName: args.fileName,
 				fileMd5: args.fileMd5,
 				recoverType: args.recoverType,
-				count: args.cuLists.lenght,
-				lists: args.cuLists
+				count: nodes.length,
+				lists: nodes
 			};
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -136,25 +151,51 @@ export default {
 		_this = this;
 		this.total = 1;
 		this.showDialog = this.showReview = false;
-//		this.list = [];
-		this.search();
+		this.list = [];
+		this.parameter = null;
+		nodeCu();
 	}
 };
 
 function search(){
+	utils.loadShow();
 	let params = {
 		url: 'userClientFile/cuCompare',
 		cmdID: '600065',
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		res.lastQuery = 1;
+		res.loading = false;
+		_this.parameter = res;
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
 		}
+		let i, len = res.lists.length, obj;
+		var lable = {};
+		lable.str0 = _this.$t('fbcsFile.files.regain.typeStr0');
+		lable.str1 = _this.$t('fbcsFile.files.regain.typeStr1');
+		for (i = 0; i < len; i++) {
+			obj = res.lists[i];
+			obj.typeStr = lable['str'+obj.recoverType];
+		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;
 		_this.total = res.totalSize;
+		utils.loadClose();
+	});
+}
+
+function nodeCu(type){
+	let params = {
+		url: 'batchDispatch/queryNodeCu',
+		cmdID: '600081',
+		type: type||0
+	};
+	utils.post(params).then(function(res){
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		_this.cuList = res.lists;
 	});
 }
 

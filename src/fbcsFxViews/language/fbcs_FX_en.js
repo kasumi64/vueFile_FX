@@ -1,6 +1,6 @@
 var obj = {
 	tips: {
-		ok: '确定', now: '立即下发', cancel: '取消', build: '创建', back:'返回',
+		ok: '确定', now: '立即下发', cancel: '取消', build: '创建', back:'返回', refresh: '刷新',
 		modify: '修改', edit: '编辑', submit: '提交', contrast: '对比', close: '关闭',
 		date: '选择日期时间', title: '提示', rightClick: '请在文件名上点击右键，选择“链接另存为...”菜单保存文件。',
 	},
@@ -25,7 +25,7 @@ var obj = {
 		userID: '用户ID', userName: '用户名称', operation: '操作',
 		ekeyName: 'Ekey名称', ekeyDate: 'Ekey有效期', ekeyInfo: 'Ekey描述',
 		userType: '用户类型', inZone: '所属地区', group: '所在分组', speed: '最大收发速度', encFlag: '加密方式', 
-		beginTime: '软加密开始时间', endTime: '软加密结束时间'
+		beginTime: '软加密开始时间', endTime: '软加密结束时间',
 	},
 	tableDefined: {
 		editUser: '修改基本信息', editEkey: '修改Ekey', addSignal: '创建通信关系', delEkey: '删除Ekey',
@@ -35,7 +35,10 @@ var obj = {
 	
 	userHome: {
 		info: '基本信息', ekey: 'Ekey', signal:'通信关系', information:'扩展信息', 
-		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！'
+		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！', fileName: '扩展信息文件名：',
+		importTips: '请将扩展信息文件放到服务器路径：/fbcs-server/static/import内；<br/>在输入框中填入扩展信息文件名。',
+		OPE: '是否导入运维扩展信息？', BOP: '是否导入BOP扩展信息？', line: '行数', operatorName: '联系人姓名', errinfo: '错误描述',
+		fileErr: '文件名不能为空！',
 	},
 	userInfo: {
 		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 
@@ -110,17 +113,17 @@ var obj = {
 	files: {
 		search: {
 			version: '版本号', fileName: '客户端文件名', fileComment: '描述', size: '客户端文件大小', md5:'文件MD5' ,time: '发布时间', 
-			operater: '下发人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', 
+			operater: '下发人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', sendRes: '下发结果：'
 		},
 		upload: {
 			version: '版本号：', fileName: '客户端文件名：', fileComment: '描述：', dispense: '下发', res: '分发结果：'
 		},
 		regain: {
 			version: '版本号', fileName: '客户端文件名', fileComment: '描述', recoverType: '恢复操作类型', detail: '详情', 
-			cuLists: 'CU名称', cuName: 'cuName', compare: '对比', restore: '恢复'
+			cuLists: 'CU名称', cuName: 'cuName', compare: '对比', restore: '恢复', typeStr0: '下发', typeStr1: '删除'
 		},
 		blacklist: {
-			nodeName: '节点名', cuName: 'CU名', black: '白名单', white: '黑名单', cuList: '主机列表：',
+			nodeName: '节点名', cuName: 'CU名', white: '白名单', black: '黑名单', cuList: '主机列表：',
 			blackBtn: '设置黑名单', cuType: '节点状态',
 		}
 	},
@@ -138,7 +141,7 @@ var obj = {
 		},
 		information: {
 			listType: [{label: '全部', val: 'all'},{label: '运维表', val: 'OPE'},{label: 'BOP表', val: 'BOP'}],
-			listName: '查询表：', company: '公司名称：', ssccManager: 'sscc客户经理：', department: '所在部门',
+			listName: '查询表：', company: '公司名称', ssccManager: 'sscc客户经理', department: '所在部门',
 			expcsv: '导出运维表', expBOP: '导出BOP表', resOPE: '运维表查询结果：', resBOP: 'BOP表查询结果：',
 			operatorName: '联系人姓名', mobileNum: '联系人手机号', email: '联系人邮箱', telNum: '联系人座机号', 
 			addOPE: '增加扩展信息', editOPE: '修改扩展信息', del: '是否要删除扩展信息？'

@@ -63,6 +63,7 @@ var _this, data = {
 	showDialog: false,
 	fileHref: '#', fileName: ''
 };
+var userDict;
 
 
 export default {
@@ -99,6 +100,9 @@ export default {
 			param.type = 1;
 			param.language = utils.langCode();
 			
+			if(param.linkGroupName == '全部') param.linkGroupName = 'all';
+			else if(param.linkGroupName == '任意') param.linkGroupName = '';
+			
 			utils.post(param).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				_this.fileHref = res.filePath;
@@ -110,7 +114,6 @@ export default {
 		_this = this;
 		initDate();
 		getDict();
-		search();
 	}
 }
 
@@ -122,6 +125,9 @@ function search(){
 	param.currentPage = _this.page;
 	param.type = 0;
 	param.language = utils.langCode();
+	
+	if(param.linkGroupName == '全部') param.linkGroupName = 'all';
+	else if(param.linkGroupName == '任意') param.linkGroupName = '';
 	
 	utils.post(param).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
@@ -141,6 +147,7 @@ function search(){
 			if(obj.endSoftEncTime){
 				obj.ymdEnd = moment(obj.endSoftEncTime * 1000).format('YYYY-MM-DD HH:mm:ss');
 			} else obj.endSoftEncTime = obj.ymdEnd = '';
+			obj.userType = userDict[obj.userType];
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;
@@ -151,19 +158,26 @@ function search(){
 function initDate(){
 	let info = _this.info;
 	for (let k in info) info[k] = '';
-	info.userType = '1',
-	info.inZone = '',
-	info.linkGroupName = '任意',
+	info.userType = '',
+	info.inZone = 'all',
+	info.linkGroupName = '全部',
 	
 	_this.showDialog = false;
 }
 
 function getDict(){
 	var params, url = 'dict/query', cmdID = '600000',
-	language = 0;
+	language = utils.langCode();
 	params = { url, cmdID, language, type: 1 };
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		res.lists.unshift({name:'全部', id:''});
+		userDict = {};
+		for (var i = 0; i < res.lists.length; i++) {
+			var o = res.lists[i];
+			userDict[o.id] = o.name;
+		}
+		_this.search();
 		_this.userType = res.lists;
 	});
 	
@@ -171,6 +185,7 @@ function getDict(){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		res.lists.unshift({name:'任意', id:''});
+		res.lists.unshift({name:'全部', id:'all'});
 		_this.inZone = res.lists;
 	});
 	
@@ -181,6 +196,7 @@ function getDict(){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		res.lists.unshift({groupID: '任意'});
+		res.lists.unshift({groupID: '全部'});
 		_this.group = res.lists;
 	});
 }

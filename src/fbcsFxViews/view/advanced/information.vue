@@ -2,7 +2,7 @@
 	<div class="information">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.advanced.information.listName')}}</label>
-			<el-select v-model="listType" class="words">
+			<el-select v-model="listType" class="words w100">
 				<el-option v-for="item in listItem" :key="item.val" :label="item.label" :value="item.val">
 				</el-option>
 			</el-select>
@@ -11,17 +11,17 @@
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
 			<input v-model="info.userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<p class="jg"></p>
-			<label class="label">{{$t('fbcsFile.advanced.information.company')}}</label>
+			<label class="label">{{$t('fbcsFile.advanced.information.company')}}：</label>
 			<input v-model="info.opeartorCompany" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
-			<label class="label">{{$t('fbcsFile.advanced.information.ssccManager')}}</label>
-			<input v-model="info.SSCCManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<label class="label">{{$t('fbcsFile.advanced.information.ssccManager')}}：</label>
+			<input v-model="info.ssccManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="expcsv('OPE')">
+			<li @click="expcsv('OPE')" :class="{disabled: disabledOPE}">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.information.expcsv')}}</span>
-			</li><li @click="expcsv('BOP')">
+			</li><li @click="expcsv('BOP')" :class="{disabled: disabledBOP}">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.information.expBOP')}}</span>
 			</li>
@@ -53,7 +53,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
 	info: {
-		userID: '', userName: '', SSCCManager: '', opeartorCompany: '',
+		userID: '', userName: '', ssccManager: '', opeartorCompany: '',
 	},
 	listType: '', listItem: [],
 	idWords: null,
@@ -66,8 +66,8 @@ var _this, data = {
 	],
 	pageBOP: 1, totalBOP: 1,
 	showDialog: false,
-	fileHref: '#', fileName: '',
-	dialogTitle: '',
+	fileHref: '#', fileName: '', dialogTitle: '',
+	disabledPOE: false, disabledBOP: false,
 };
 var idAll = [];
 
@@ -88,7 +88,7 @@ export default {
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
 			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
-			SSCCManager: this.$t('fbcsFile.advanced.information.ssccManager'),
+			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
 			opeartorCompany: this.$t('fbcsFile.advanced.information.company'),
 			opeartorDepartment: this.$t('fbcsFile.advanced.information.department'),
 		};
@@ -114,10 +114,12 @@ export default {
 			this.fileName = '';
 			let param = Object.assign({}, this.info);
 			if(bop=='BOP'){
+				if(this.disabledBOP) return;
 				this.dialogTitle = this.$t('fbcsFile.advanced.information.expBOP');
 				param.url = 'userinfoExt/advancedSearch/userextBop';
 				param.cmdID = '600057';
 			} else {
+				if(this.disabledOPE) return;
 				this.dialogTitle = this.$t('fbcsFile.advanced.information.expcsv');
 				param.url = 'userinfoExt/advancedSearch/userextOperator';
 				param.cmdID = '600054';
@@ -139,11 +141,26 @@ export default {
 		for (let k in info) info[k] = '';
 		this.listType = 'all';
 		this.listOPE = this.listBOP = [];
+		this.disabledOPE = this.disabledBOP = false;
 		search();
 		utils.keywords({}, arr => {
 			idAll = [].concat(arr);
 			_this.idWords = arr;
 		});
+	},
+	watch: {
+		listType(val){
+			if(val == 'OPE'){
+				this.disabledOPE = false
+				this.disabledBOP = true;
+			}else if(val == 'BOP'){
+				this.disabledOPE = true
+				this.disabledBOP = false;
+			} else {
+				this.disabledOPE = false
+				this.disabledBOP = false;
+			}
+		}
 	}
 }
 
@@ -208,6 +225,7 @@ function searchBOP(){
 <style scoped="scoped">
 	.information{min-width: 860px;}
 	.jg{margin-bottom: 10px;}
+	.w100{width: 100px;}
 	.w80{width: 80px;text-align: right;}
 	.h2{font-size: 16px;color: #333;margin-bottom: 10px;}
 </style>

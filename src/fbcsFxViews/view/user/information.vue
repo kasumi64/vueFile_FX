@@ -14,7 +14,7 @@
 			<label class="label">{{$t('fbcsFile.advanced.information.company')}}</label>
 			<input v-model="info.opeartorCompany" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<label class="label">{{$t('fbcsFile.advanced.information.ssccManager')}}</label>
-			<input v-model="info.SSCCManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="info.ssccManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>-->
 		<ul class="fnField">
@@ -67,7 +67,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManager')}}：</p>
 					</div><div class="right">
-						<input v-model="info.SSCCManager" />
+						<input v-model="info.ssccManager" />
 					</div>
 				</li>
 			</ul>
@@ -85,7 +85,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 var _this, data = {
 	info: {
 		userID: '', operatorName: '', operatorMobileNum: '', operatorEmail: '',
-		operatorTelNum: '', SSCCManager: ''
+		operatorTelNum: '', ssccManager: ''
 	},
 	idWords: null,
 	listType: '', listItem: [],
@@ -138,7 +138,7 @@ export default {
 			operatorMobileNum: this.$t('fbcsFile.advanced.information.mobileNum'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
 			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
-			SSCCManager: this.$t('fbcsFile.advanced.information.ssccManager')
+			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager')
 		};
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
@@ -153,7 +153,7 @@ export default {
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
 			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
-			SSCCManager: this.$t('fbcsFile.advanced.information.ssccManager'),
+			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
 			opeartorCompany: this.$t('fbcsFile.advanced.information.company'),
 			opeartorDepartment: this.$t('fbcsFile.advanced.information.department')
 		};

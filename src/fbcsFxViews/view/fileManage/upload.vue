@@ -7,7 +7,7 @@
 					{{$t('fbcsFile.files.upload.version')}}
 				</div>
 				<div class="right">
-					<input v-model="fileName" maxlength="256"/>
+					<input v-model="version" maxlength="256"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -15,7 +15,7 @@
 					{{$t('fbcsFile.files.upload.fileName')}}
 				</div>
 				<div class="right">
-					<input v-model="version"  maxlength="256"/>
+					<input v-model="fileName"  maxlength="256"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -46,6 +46,9 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	version: '',
+	fileName: '',
+	fileComment: '',
 	showReview: false,
 	reqsv: {},
 	parameter: null,
@@ -83,6 +86,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.version = this.fileName =  this.fileComment = '';
 	}
 };
 

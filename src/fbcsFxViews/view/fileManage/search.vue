@@ -1,7 +1,7 @@
 <template>
 	<div class="search">
 		<div class="fnField">
-			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn" @click="search">{{$t('fbcsFile.tips.refresh')}}</button>
 		</div>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" :size="90000">
 		</lgy-table>
@@ -13,6 +13,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var _this, data = {
 	page: 1,
@@ -34,13 +35,13 @@ function del(row){
 export default {
 	data(){
 		data.title = {
-			version: this.$t('fbcsFile.files.search.version'),
 			fileName: this.$t('fbcsFile.files.search.fileName'),
+			version: this.$t('fbcsFile.files.search.version'),
 			fileComment: this.$t('fbcsFile.files.search.fileComment'),
 			fileSize: this.$t('fbcsFile.files.search.size'),
 			fileMd5: this.$t('fbcsFile.files.search.md5'),
-			dispatchTime: this.$t('fbcsFile.files.search.time'),
-			operater: this.$t('fbcsFile.files.search.operater'),
+			ymd: this.$t('fbcsFile.files.search.time'),
+			operator: this.$t('fbcsFile.files.search.operater'),
 			reviewer: this.$t('fbcsFile.files.search.reviewer')
 		};
 		data.defined = {
@@ -65,7 +66,7 @@ export default {
 		},
 		review(args){
 			let params = {
-				url: 'userClientFile/dispatch',
+				url: 'userClientFile/delete',
 				cmdID: '600063',
 				reviewer: args.name,
 				fileName: args.fileName,
@@ -95,6 +96,15 @@ function search(){
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
+		}
+		let i, len = res.lists.length, obj;
+		for (i = 0; i < len; i++) {
+			obj = res.lists[i];
+			if(obj.dispatchTime){
+				obj.ymd = moment(obj.dispatchTime).format('YYYY-MM-DD HH:mm:ss');
+			} else {
+				obj.dispatchTime = obj.ymd = '';
+			}
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

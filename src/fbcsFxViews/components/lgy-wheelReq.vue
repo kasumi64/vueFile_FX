@@ -29,7 +29,7 @@
 		<el-table :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 			<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 			<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-			<el-table-column prop="errcode" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+			<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
 			<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
 			<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
 		</el-table>
@@ -55,7 +55,7 @@ function WheelReq(sv, self){
 			url: 'batchDispatch/queryBatchDispatchResponse',
 			cmdID: '600083', uuid: sv.uuid,
 			type: sv.type || 0, //0-默认；1-特例：用户生成大版本，查询四个版本下发响应
-			lastQueryFlag: 0 //1最后一次，0不是
+			lastQueryFlag: sv.lastQuery || 0 //1最后一次，0不是
 		};
 		if(Date.now()-beginTime >= overTime){
 			param.lastQueryFlag = 1;
@@ -70,6 +70,11 @@ function WheelReq(sv, self){
 		}
 		if(res.lastQueryFlag != 0&&!timeout){
 			return setTimeout(req, 2000);
+		}
+		var obj, i;
+		for (i = 0; i < res.lists.length; i++){
+			obj = res.lists[i];
+			obj.errStr = obj.errcode == '0' ? 'success' : 'failed';
 		}
 		self.cuList = res.lists;
 		self.checkType = res.type;
@@ -87,7 +92,7 @@ function WheelReq(sv, self){
 	}
 	this.start = function(){
 		beginTime = Date.now();
-		self.loading = true;
+		if(sv.loading !== false) self.loading = true;
 		req();
 	}
 }
@@ -117,6 +122,7 @@ export default {
 		this.loading = false;
 		this.showDialog = false;
 		this.checkType = 0;
+		this.cuList = [];
 	},
 	watch: {
 		parameter(param){

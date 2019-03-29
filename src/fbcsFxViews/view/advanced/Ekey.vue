@@ -75,7 +75,7 @@ export default {
 			this.showDialog = true;
 			this.fileName = '';
 			let param = {};
-			param.url = 'advancedSearchSearch/userekey';
+			param.url = 'advancedSearch/userekey';
 			param.cmdID = '600052';
 			param.pageSize = _this.total;
 			param.currentPage = 1;
@@ -93,7 +93,7 @@ export default {
 	created(){
 		_this = this;
 		this.userID = this.ekeyName = '';
-		search();
+		this.search();
 		utils.keywords({}, arr => {
 			idAll = [].concat(arr);
 			_this.idWords = arr;
@@ -103,7 +103,7 @@ export default {
 
 function search(){
 	let param = {};
-	param.url = 'advancedSearchSearch/userekey';
+	param.url = 'advancedSearch/userekey';
 	param.cmdID = '600052';
 	param.pageSize = 20;
 	param.currentPage = _this.page;

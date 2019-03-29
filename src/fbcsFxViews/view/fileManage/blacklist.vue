@@ -52,12 +52,13 @@ export default {
 			};
 			utils.post(params).then(function(res){
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+				nodeCu();
 			});
 		},
 	},
 	created(){
 		_this = this;
-//		this.nodeList = this.cuList = [];
+		this.nodeList = this.cuList = [];
 		nodeCu();
 	}
 }
@@ -70,16 +71,20 @@ function nodeCu(){
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo, type:0});
+		var black = _this.$t('fbcsFile.files.blacklist.black'),
+			white = _this.$t('fbcsFile.files.blacklist.white'),
+			cuList = [];
 		let i, arr = res.lists, len = arr.length, obj;
 		for (i = 0; i < len; i++) {
 			obj = arr[i];
-			let str = obj.blackFlag ? 'black' : 'white';
-			obj.isblack = _this.$t('fbcsFile.dispatch.nodeName'+str);
-			if(obj.blackFlag) _this.cuList.push(obj);
+			if(obj.blackFlag == '1'){
+				obj.isblack = black;
+				cuList.push(obj);
+			} else obj.isblack = white;
 		}
 		_this.nodeList = res.lists;
 		setTimeout(function(){
-			_this.cuList.forEach(r => {
+			cuList.forEach(r => {
 				_this.$refs['nodes'].toggleRowSelection(r, true);
 			});
 		});

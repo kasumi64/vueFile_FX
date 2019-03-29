@@ -81,7 +81,7 @@ export default {
 			param.currentPage = 1;
 			param.type = 1;
 			param.userID = _this.userID;
-			param.ekeyName = _this.ekeyName;
+			param.userName = _this.ekeyName;
 			
 			utils.post(param).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -93,7 +93,7 @@ export default {
 	created(){
 		_this = this;
 		this.userID = this.ekeyName = '';
-		search();
+		this.search();
 		utils.keywords({}, arr => {
 			idAll = [].concat(arr);
 			_this.idWords = arr;
@@ -109,7 +109,7 @@ function search(){
 	param.currentPage = _this.page;
 	param.type = 0;
 	param.userID = _this.userID;
-	param.ekeyName = _this.ekeyName;
+	param.userName = _this.ekeyName;
 	
 	utils.post(param).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);

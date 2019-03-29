@@ -1,6 +1,6 @@
 <template>
 	<div class="sidebar" :class="{small:collapse}">
-		<el-menu class="menu" :default-active="active" :collapse.sync="collapse" @select="select" 
+		<el-menu class="menu" :default-active="active" :collapse.sync="collapse" @select="select" unique-opened 
 			active-text-color="#FFF" :collapse-transition="false">
 			
 			<el-menu-item v-for="obj in nav" :index="obj.router" key>
