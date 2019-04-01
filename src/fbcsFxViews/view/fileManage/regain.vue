@@ -85,7 +85,7 @@ function restore(row){
 				nodes.push(r);
 				_this.$refs['nodes'].toggleRowSelection(r, true);
 			} else _this.$refs['nodes'].toggleRowSelection(r, false);
-		})
+		});
 	});
 	_this.showDialog = true;
 }
@@ -164,6 +164,7 @@ function search(){
 		cmdID: '600065',
 	};
 	utils.post(params).then(function(res){
+		utils.loadClose();
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		res.lastQuery = 1;
 		res.loading = false;
@@ -183,7 +184,6 @@ function search(){
 		_this.list = res.lists;
 		_this.page = res.currentPage;
 		_this.total = res.totalSize;
-		utils.loadClose();
 	});
 }
 

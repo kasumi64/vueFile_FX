@@ -68,7 +68,7 @@ function WheelReq(sv, self){
 			utils.alert({txt: res.errinfo, type:0});
 			return stop();
 		}
-		if(res.lastQueryFlag != 0&&!timeout){
+		if(res.endQueryFlag==0 && !timeout){
 			return setTimeout(req, 2000);
 		}
 		var obj, i;

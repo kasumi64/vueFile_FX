@@ -2,20 +2,21 @@
 	<div class="upload">
 		<ul class="form">
 			<li>
+				<div class="label vt">
+					<i class="red">*</i>
+					{{$t('fbcsFile.files.upload.fileName')}}
+				</div>
+				<div class="right">
+					<input v-model="fileName"  maxlength="256"/>
+					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}fbcs-server/static/import/fxclient</p>
+				</div>
+			</li><li>
 				<div class="label">
 					<i class="red">*</i>
 					{{$t('fbcsFile.files.upload.version')}}
 				</div>
 				<div class="right">
 					<input v-model="version" maxlength="256"/>
-				</div>
-			</li><li>
-				<div class="label">
-					<i class="red">*</i>
-					{{$t('fbcsFile.files.upload.fileName')}}
-				</div>
-				<div class="right">
-					<input v-model="fileName"  maxlength="256"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -86,7 +87,7 @@ export default {
 	},
 	created(){
 		_this = this;
-		this.version = this.fileName =  this.fileComment = '';
+		this.version = this.fileName = this.fileComment = '';
 	}
 };
 
@@ -99,4 +100,6 @@ export default {
 .right{display: inline-block;margin-left: 10px;vertical-align: middle;width: 600px;margin-right: 20px;}
 .h2{ font-size: 14px; color: #666;  margin: 20px 0 10px;}
 input{width: 100%;}
+.vt{vertical-align: text-bottom;}
+.txt{display:block;color: #BBB;}
 </style>

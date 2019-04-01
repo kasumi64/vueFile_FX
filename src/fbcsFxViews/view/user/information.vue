@@ -105,7 +105,7 @@ var idAll = [], args, isAdd;
 
 function edit(row){
 	isAdd = 'edit';
-	_this.infoTitle = _this.$t('fbcsFile.advanced.information.addOPE');
+	_this.infoTitle = _this.$t('fbcsFile.advanced.information.editOPE');
 	let info = _this.info;
 	for (let k in info) info[k] = row[k] || '';
 	_this.showInfo = true;
@@ -177,7 +177,7 @@ export default {
 		},
 		addOPE(){
 			isAdd = 'add';
-			this.infoTitle = this.$t('fbcsFile.advanced.information.editOPE');
+			this.infoTitle = this.$t('fbcsFile.advanced.information.addOPE');
 			let info = this.info;
 			for (let k in info) info[k] = '';
 			info.userID = args.userID;

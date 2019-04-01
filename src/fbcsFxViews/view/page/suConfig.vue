@@ -15,7 +15,7 @@
 				<el-input v-model="txtVal" type="textarea" rows="14" :disabled="!enabled" resize="none">
 				</el-input>
 				<button class="blueBtn mt" @click="submit" :disabled="!enabled">{{$t('fbcsFile.tips.submit')}}</button>
-				<button class="blueBtn mt" @click="history">{{$t('fbcsFile.tips.contrast')}}</button>
+				<button class="blueBtn mt" @click="history" :disabled="!enabled">{{$t('fbcsFile.tips.contrast')}}</button>
 				<h2 class="h2">{{$t('fbcsFile.suConfig.h2')}}</h2>
 				<el-table :data="list" :row-class-name="rowClass" highlight-current-row border>
 					<el-table-column prop="section" :label="$t('fbcsFile.suConfig.section')"></el-table-column>
@@ -133,5 +133,5 @@ function getConfig(type){
 	.title *{vertical-align: middle;}
 	.content{margin-top: 20px;padding-left: 120px;max-width: 1020px;}
 	.mt{margin: 20px 20px 0 0;}
-	.h2{font-size: 14px;line-height: 30px;}
+	.h2{font-size: 14px;line-height: 30px;margin-top: 20px;}
 </style>

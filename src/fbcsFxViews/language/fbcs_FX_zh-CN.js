@@ -116,7 +116,8 @@ var obj = {
 			operater: '下发人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', sendRes: '下发结果：'
 		},
 		upload: {
-			version: '版本号：', fileName: '客户端文件名：', fileComment: '描述：', dispense: '下发', res: '分发结果：'
+			version: '版本号：', fileName: '客户端文件名：', fileComment: '描述：', dispense: '下发', res: '分发结果：',
+			path: '请将客户端文件放到服务器路径：'
 		},
 		regain: {
 			version: '版本号', fileName: '客户端文件名', fileComment: '描述', recoverType: '恢复操作类型', detail: '详情', 

@@ -78,9 +78,9 @@ function nodeCu(){
 		for (i = 0; i < len; i++) {
 			obj = arr[i];
 			if(obj.blackFlag == '1'){
-				obj.isblack = black;
+				obj.isBlack = black;
 				cuList.push(obj);
-			} else obj.isblack = white;
+			} else obj.isBlack = white;
 		}
 		_this.nodeList = res.lists;
 		setTimeout(function(){
