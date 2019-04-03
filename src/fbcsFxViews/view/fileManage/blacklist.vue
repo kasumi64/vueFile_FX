@@ -36,19 +36,29 @@ export default {
 			return '';
 		},
 		selectChange(arr){
-			this.cuList = arr;
+			this.cuList = {};
+			for (var i = 0; i < arr.length; i++) {
+				let cu = arr[i];
+				this.cuList[cu.k] = cu;
+			}
 		},
 		setBlack(){
 			this.reqsv = {uri: 'batchDispatch/dispatch'};
 			this.showReview = true;
 		},
 		review(args){
+			this.nodeList.forEach(r => {
+				let cu = this.culist[r.k];
+				if(cu&&cu.blackFlag == '1'){
+					r.blackFlag = '1';
+				} else r.blackFlag = '0';
+			});
 			let params = {
 				url: 'userClientFile/blackList',
 				cmdID: '600066',
 				reviewer: args.name,
-				count: this.cuList.length,
-				lists: this.cuList
+				count: this.nodeList.length,
+				lists: this.nodeList
 			};
 			utils.post(params).then(function(res){
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
@@ -77,6 +87,7 @@ function nodeCu(){
 		let i, arr = res.lists, len = arr.length, obj;
 		for (i = 0; i < len; i++) {
 			obj = arr[i];
+			obj.k = i;
 			if(obj.blackFlag == '1'){
 				obj.isBlack = black;
 				cuList.push(obj);

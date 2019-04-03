@@ -32,13 +32,24 @@ var obj = {
 		delUser: '删除用户', delSignal: '删除通信关系', back: '回退', detail: '详情',
 		editExt: '修改扩展信息', delExt: '删除扩展信息'
 	},
+	err: {
+		user: {
+			userID: '用户ID不能为空', userName: '用户名称不能为空', speedCtrl: '最大收发速度不能为空',
+			maxRelationUser: '最大关系数不能为空', userPasswd: '密码不能为空', day: '开始时间必需小于结束时间',
+			errPwd: '密码必须包含大小写字母、数字、特殊字符(@#_-)中的两项且大于8位',
+		},
+		files: {
+			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', fileFormat: '文件名只能输入字母、数字安、和(._-)',
+			verFormat: '版本号只能输入字母、数字安、和(._-)'
+		}
+	},
 	
 	userHome: {
 		info: '基本信息', ekey: 'Ekey', signal:'通信关系', information:'扩展信息', 
 		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！', fileName: '扩展信息文件名：',
 		importTips: '请将扩展信息文件放到服务器路径：/fbcs-server/static/import内；<br/>在输入框中填入扩展信息文件名。',
 		OPE: '是否导入运维扩展信息？', BOP: '是否导入BOP扩展信息？', line: '行数', operatorName: '联系人姓名', errinfo: '错误描述',
-		fileErr: '文件名不能为空！',
+		fileErr: '文件名不能为空！', 
 	},
 	userInfo: {
 		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 
@@ -116,7 +127,7 @@ var obj = {
 			operater: '下发人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', sendRes: '下发结果：'
 		},
 		upload: {
-			version: '版本号：', fileName: '客户端文件名：', fileComment: '描述：', dispense: '下发', res: '分发结果：',
+			version: '版本号：', fileName: '客户端文件名：', fileComment: '描述：', dispense: '下发', res: '下发结果：',
 			path: '请将客户端文件放到服务器路径：'
 		},
 		regain: {

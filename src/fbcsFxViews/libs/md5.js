@@ -280,5 +280,5 @@ function toUtf8(str) {
 //};
 
 export default str => {
-	return hex_md5(toUtf8(str));
+	return hex_md5(toUtf8(str||''));
 };

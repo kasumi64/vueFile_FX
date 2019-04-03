@@ -232,7 +232,7 @@ export default {
 		this.id = this.name = ''
 		this.keywords = null;
 		this.showDialog = false;
-//		this.list = [];
+		this.list = [];
 		userid = [];
 		
 		init.call(this);

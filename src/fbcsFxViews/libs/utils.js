@@ -105,9 +105,15 @@ function ReqHttp(){
 		var url = params.url;
 		delete params.url;
 		
-		/*console.log(params.cmdID, params);
-		return Promise.resolve({errcode:'0',lists:[],errinfo: 'Success.'});
-		*/
+		if('debug'){
+			console.log(params.cmdID, params);
+			let debugRes = {
+				status: 200,
+				data: {errcode:'0',lists:[],errinfo: 'Success.'}
+			};
+			return Promise.resolve(callback(debugRes, fn, args));
+		}
+		
 		return axios.post(url, params).then(function(res){
 			return callback(res, fn, args);
 		}).catch(function (err) {
@@ -247,6 +253,7 @@ function TipsConfirm(){
 		notifyArgs = {...args};
 		notify.title.html(opt.title||vue.$t('fbcsFile.tips.title'));
 		fbcs.appendChild(mask[0]);
+		notify.ok[0].focus();
 	}
 	function btnType(num){
 		if(num == 1){

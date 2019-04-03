@@ -9,10 +9,10 @@
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
 			<lgy-candidateWords v-model="info.userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
-			<input v-model="info.userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="info.userName":disabled="listType=='BOP'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.advanced.information.company')}}：</label>
-			<input v-model="info.opeartorCompany" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="info.opeartorCompany" :disabled="listType=='OPE'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<label class="label">{{$t('fbcsFile.advanced.information.ssccManager')}}：</label>
 			<input v-model="info.ssccManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>

@@ -33,12 +33,13 @@
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.getCfg')}}</span>
 			</li><li @click="checkVer(0)">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportTheme.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.checkZd')}}</span>
-			</li><li @click="checkVer(1)">
+			</li>
+			<!--<li @click="checkVer(1)">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.newVer')}}</span>
-			</li>
+			</li>-->
 		</ul>
 		
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >

@@ -67,14 +67,15 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 
-var _this, data = {
+var _this, defaultPwd, 
+data = {
 	info: {
 		userID: '', userPasswd: '', isModifyPasswdFlag: 1,
 		isModifyDefaultPasswd: 0, expiredTimeFlag: '1'
 	},
 	isEdit: true,
-	passwd: '111111',
-	again: '111111',
+	passwd: defaultPwd,
+	again: defaultPwd,
 	options: '',
 	showReview: false,
 	reqsv: {},
@@ -93,7 +94,7 @@ export default {
 		},
 		defPwd(val){
 			if(!val){ //默认
-				this.passwd = this.again = '111111';
+				this.passwd = this.again = defaultPwd;
 			}
 		},
 		submit(){
@@ -131,6 +132,8 @@ export default {
 		this.options = this.$t('fbcsFile.password.options');
 		this.showReview = false;
 		this.parameter = null;
+		defaultPwd = '111111';
+		getDefPwd();
 	},
 	watch: {
 		show(){
@@ -141,7 +144,7 @@ export default {
 				info.isModifyDefaultPasswd = 0;
 				info.expiredTimeFlag = '1';
 				this.isEdit = true;
-				this.passwd = this.again = '111111';
+				this.passwd = this.again = defaultPwd;
 				getPwdTime();
 				return
 			}
@@ -154,6 +157,7 @@ export default {
 function pass(){
 	let info = _this.info;
 	info.isModifyPasswdFlag = _this.isEdit ? 1 : 0;
+	
 	if(_this.isEdit){ //1-修改密码
 		if(info.isModifyDefaultPasswd){
 			let txt = '';
@@ -172,6 +176,7 @@ function pass(){
 	}
 	return true;
 }
+
 function getPwdTime(){
 	let params = {
 		url: 'userpasswd/queryExpiredFlag',
@@ -181,6 +186,17 @@ function getPwdTime(){
 	utils.post(params).then(function(res){
 		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		_this.info.expiredTimeFlag = res.userpasswdExpiredFlag;
+	});
+}
+
+function getDefPwd(){
+	let params = {
+		url: 'userpasswd/queryDefaultPasswd',
+		cmdID: '600012'
+	};
+	utils.post(params).then(function(res){
+		if(res.errcode != '0') return console.warn('600012', res.errinfo);
+		defaultPwd = res.defaultPasswd;
 	});
 }
 </script>

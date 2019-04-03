@@ -7,7 +7,7 @@
 					{{$t('fbcsFile.files.upload.fileName')}}
 				</div>
 				<div class="right">
-					<input v-model="fileName"  maxlength="256"/>
+					<input id="ddd" v-model="fileName" @input="input"  maxlength="64"/>
 					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}fbcs-server/static/import/fxclient</p>
 				</div>
 			</li><li>
@@ -16,15 +16,14 @@
 					{{$t('fbcsFile.files.upload.version')}}
 				</div>
 				<div class="right">
-					<input v-model="version" maxlength="256"/>
+					<input v-model="version" maxlength="64"/>
 				</div>
 			</li><li>
 				<div class="label">
-					<i class="red">*</i>
 					{{$t('fbcsFile.files.upload.fileComment')}}
 				</div>
 				<div class="right">
-					<input v-model="fileComment" maxlength="256"/>
+					<input v-model="fileComment" maxlength="128"/>
 				</div>
 			</li><li>
 				<div class="label">&nbsp;</div>
@@ -47,19 +46,13 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
-	version: '',
 	fileName: '',
+	version: '',
 	fileComment: '',
 	showReview: false,
 	reqsv: {},
 	parameter: null,
 };
-
-function del(row){
-	row.uri = 'userClientFile/dispatch';
-	_this.reqsv = row;
-	_this.showReview = true;
-}
 
 export default {
 	data(){
@@ -67,6 +60,8 @@ export default {
 	},
 	methods:{
 		dispense(){
+			if(!check.call(this)) return;
+			
 			this.reqsv = {uri: 'userClientFile/dispatch'};
 			this.showReview = true;
 		},
@@ -83,6 +78,15 @@ export default {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
 			});
+		},
+		input(e){
+			return;
+			let reg = /[^a-zA-Z0-9\._-]/g;
+			let str = e.target.value;
+			if( reg.test(str) ){
+				e.target.blur();
+				this.fileName = str.replace(reg, '');
+			}
 		}
 	},
 	created(){
@@ -90,6 +94,15 @@ export default {
 		this.version = this.fileName = this.fileComment = '';
 	}
 };
+
+function check(){
+	let files = this.fileName, vers =  this.version, reg = /[^a-zA-Z0-9\._-]/g;
+	if(files == '') return utils.alert({txt: this.$t('fbcsFile.err.files.fileNull')});
+	if(vers == '') return utils.alert({txt: this.$t('fbcsFile.err.files.verNull')});
+	if( reg.test(files) ) return utils.alert({txt: this.$t('fbcsFile.err.files.fileFormat')});
+	if( reg.test(vers) ) return utils.alert({txt: this.$t('fbcsFile.err.files.verFormat')});
+	return true;
+}
 
 </script>
 

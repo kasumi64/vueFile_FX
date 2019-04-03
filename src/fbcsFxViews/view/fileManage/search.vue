@@ -1,11 +1,35 @@
 <template>
 	<div class="search">
-		<div class="fnField">
-			<button class="blueBtn" @click="search">{{$t('fbcsFile.tips.refresh')}}</button>
-		</div>
+		<ul class="fnField">
+			<li @click="search">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
+				<span class="label">{{$t('fbcsFile.tips.refresh')}}</span>
+			</li><li @click="checkVer(1)">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportTheme.png"/>
+				<span class="label">{{$t('fbcsFile.fnField.newVer')}}</span>
+			</li>
+		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" :size="90000">
 		</lgy-table>
+		
 		<h2 class="h2">{{$t('fbcsFile.files.search.delRes')}}</h2>
+		
+		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="checkTitle" v-dialogDrag
+			:close-on-click-modal='false' :show-close="false">
+			<div class="_dialog">
+				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
+					<el-table-column type="index" width="50"></el-table-column>
+					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
+					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
+					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
+					<el-table-column prop="equalMask" :label="$t('fbcsFile.versionQuery.isEqual')"></el-table-column>
+				</el-table>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="defBtn" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+			</div>
+		</el-dialog>
+		
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 		<lgy-wheelReq :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
 	</div>
@@ -24,6 +48,9 @@ var _this, data = {
 	showReview: false,
 	reqsv: {},
 	parameter: null,
+	checkDialog: false,
+	checkTitle: '',
+	checkList: []
 };
 
 function del(row){
@@ -75,6 +102,27 @@ export default {
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
+			});
+		},
+		checkVer(type){
+			let params = {
+				url: 'version/compareMd5',
+				cmdID: '600079',
+				type,
+			}, tit = 'fbcsFile.fnField.';
+			
+			if(type==0) tit += 'checkZd';
+			else tit += 'newVer';
+			this.checkTitle = this.$t(tit);
+			utils.post(params).then(function(res){
+				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
+				for (let i = 0; i < res.lists.length; i++) {
+					let obj = res.lists[i], equal = obj.isEqual;
+					obj.equalMask = _this.$t('fbcsFile.versionQuery.equal'+equal);
+				}
+				_this.checkList = res.lists;
+				_this.checkDialog = true;
+				utils.tableSTop(_this, 'zdBox');
 			});
 		}
 	},

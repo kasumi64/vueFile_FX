@@ -2,14 +2,14 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 import moment from 'moment';
 
-var _this, info = {
-	userID: '', userName: '', userType: '1', userPasswd:'111111', inZone: '',linkGroupName: '', speedCtrl: -1,
+var _this, args, defaultPwd, 
+info = {
+	userID: '', userName: '', userType: '1', userPasswd: defaultPwd, inZone: '',linkGroupName: '', speedCtrl: -1,
 	maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
 	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1,allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
 	maxPublishTopicDay: 7, maxSimultTaskCount: '',maxCltOneDayTaskCount: '', webUserFlag: '',
 	isModifyDefaultPasswd: '', expiredTimeFlag: '',
-}, 
-data = {
+}, data = {
 	info,
 	pwd: 1,
 	more: true,
@@ -23,7 +23,7 @@ data = {
 	parameter: null,
 	jump: false,
 	buildTime: '',
-}, args;
+};
 
 export default {
 	data(){ return data;},
@@ -41,7 +41,7 @@ export default {
 		},
 		defPwd(val){
 			if(!val){ //默认
-				this.info.userPasswd = '111111';
+				this.info.userPasswd = defaultPwd;
 			}
 		},
 		pickerBegin: {
@@ -59,6 +59,7 @@ export default {
 			}
 		},
 		submit(){
+			if(!pass.call(this)) return;
 			let params = Object.assign({}, this.info);
 			if(this.isAdd == 'add'){
 				params.url = 'userinfo/add';
@@ -99,7 +100,7 @@ export default {
 			});
 		},
 		now(){
-//			if(!pass()) return;
+//			if(!pass.call(this)) return;
 			if(this.isAdd == 'add'){
 				this.reqsv = {uri: 'userinfo/addImmediately'};
 			} else {
@@ -134,10 +135,41 @@ export default {
 		args = utils.getArgs('userInfo');
 		initDate();
 		getDict();
+		getDefPwd();
 		if(this.isAdd!='add'&&args&&args.userID){
 			getUserInfo(args);
 		}
 	}
+}
+
+function pass(){
+	let must = ('userID,userName,speedCtrl,maxRelationUser').split(','),
+		info = this.info;
+	
+	for (var i = 0; i < must.length; i++) {
+		if(info[must[i]] == '') {
+			utils.alert({txt: this.$t('fbcsFile.err.user.'+must[i])});
+			return false;
+		}
+	}
+	
+	if(this.isAdd == 'add'&&info.isModifyDefaultPasswd==1){
+		let pwd = info.userPasswd;
+		if(pwd == '') {
+			utils.alert({txt: this.$t('fbcsFile.err.user.userPasswd')});
+			return false;
+		}
+	}
+	
+	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
+	if((begin || end)&&info.encFlag==1){
+		if(begin==''||end==''||begin >= end) {
+			utils.alert({txt: this.$t('fbcsFile.err.user.day')});
+			return false;
+		}
+	}
+	
+	return true;
 }
 
 function getDict(){
@@ -169,9 +201,10 @@ function getDict(){
 
 function initDate(){
 	let info = _this.info;
+	defaultPwd = '111111';
 	for (let k in info) info[k] = '';
 	info.isModifyDefaultPasswd = 0;
-	info.userPasswd = '111111';
+	info.userPasswd = defaultPwd;
 	info.userType = '1',
 	info.inZone = '',
 	info.linkGroupName = '任意',
@@ -196,6 +229,7 @@ function initDate(){
 	_this.showReview = false;
 	_this.parameter = null;
 }
+
 function getUserInfo(user){
 	let params = {
 		url: 'userinfo/query',
@@ -216,5 +250,16 @@ function getUserInfo(user){
 		_this.info.endSoftEncTime = obj.endSoftEncTime * 1000;
 		if(!_this.info.beginSoftEncTime) _this.info.beginSoftEncTime = '';
 		if(!_this.info.endSoftEncTime) _this.info.endSoftEncTime = '';
+	});
+}
+
+function getDefPwd(){
+	let params = {
+		url: 'userpasswd/queryDefaultPasswd',
+		cmdID: '600012'
+	};
+	utils.post(params).then(function(res){
+		if(res.errcode != '0') return console.warn('600012', res.errinfo);
+		defaultPwd = res.defaultPasswd;
 	});
 }
