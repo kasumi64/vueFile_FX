@@ -37,7 +37,6 @@ var _this, data = {
 	reviewTxt: '',
 	parameter: null,
 	checkDialog: false,
-	checkTitle: '',
 	checkList: []
 };
 var rollRow;
@@ -167,13 +166,8 @@ export default {
 		checkVer(type){
 			let params = {
 				url: 'version/compareMd5',
-				cmdID: '600079',
-				type,
-			}, tit = 'fbcsFile.fnField.';
-			
-			if(type==0) tit += 'checkZd';
-			else tit += 'newVer';
-			this.checkTitle = this.$t(tit);
+				cmdID: '600079'
+			};
 			utils.post(params).then(function(res){
 				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 				for (let i = 0; i < res.lists.length; i++) {

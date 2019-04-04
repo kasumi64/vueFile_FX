@@ -204,6 +204,7 @@
 </script>
 
 <style scoped="scoped">
+.info{min-width: 500px;}
 .form{white-space: nowrap;}
 .form li{margin-bottom: 10px;}
 .label{display: inline-block;width: 160px;font-size: 14px;color: #666;text-align: right;vertical-align: middle;}

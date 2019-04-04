@@ -49,7 +49,8 @@ var obj = {
 		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！', fileName: '扩展信息文件名：',
 		importTips: '请将扩展信息文件放到服务器路径：/fbcs-server/static/import内；<br/>在输入框中填入扩展信息文件名。',
 		OPE: '是否导入运维扩展信息？', BOP: '是否导入BOP扩展信息？', line: '行数', operatorName: '联系人姓名', errinfo: '错误描述',
-		fileErr: '文件名不能为空！', 
+		fileErr: '文件名不能为空！', pwd: '用户密码：',
+		lock: '是否锁定系统，系统锁定状态将禁用普通用户修改配置？', unlock: '是否解除系统锁定状态？',
 	},
 	userInfo: {
 		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 

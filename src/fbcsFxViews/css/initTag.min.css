@@ -6,14 +6,17 @@
 	/** Consolas, Monaco, monospace，*/ 
 	/*font-style: normal; font-weight: normal;font-family: "Microsoft YaHei", "HiraginoSansGB", "Helvetica", "Arial", "Consolas", "sans-serif", "宋体";
 }*/
-address,cite,dfn,i,em,s,u,b,small,ins caption,code,var,kbd,del,abbr,pre { display: inline-block; font-style: normal; }
+abbr,address,b,caption,cite,code,del,dfn,em,i,ins,kbd,pre,s,small,u,var { display: inline-block; font-style: normal; }
 ul,ol,li,dl,dt,dd {	list-style: none;}
+
 /*sup {vertical-align: text-top;}
 sub {vertical-align: text-bottom;}
 a{text-decoration: none; color: inherit;}
 a:hover,a:active, input,:focus { outline: none; cursor: pointer; }
-fieldset,img { border: none; -ms-interpolation-mode: bicubic; }
 table { border-collapse: collapse; border-spacing: 0; word-break: break-all; }*/
+
+fieldset,img { border: none; -ms-interpolation-mode: bicubic; }
+img{font-size: 0;line-height: 0;vertical-align: middle;}
 article,aside,details,figcaption, figure,footer,header,hgroup, menu,nav,section,summary, time,mark,audio,video { display: block; }
 button, input[type="button"], input[type="reset"], input[type="submit"] { border: none; cursor: pointer; -webkit-appearance: button; background: none; *overflow: visible; }	
 input[type="search"] {-webkit-appearance: textfield;}
@@ -22,7 +25,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {-webkit-appe
 input[type="number"] {-moz-appearance: textfield;}
 button::-moz-focus-inner, input::-moz-focus-outer { border: none; padding: 0; }
 :focus{outline: none;}
-span,i,em,a,b,input,button{display: inline-block;}
+a,b,button,em,i,input,span{display: inline-block;}
 h1,h2,h3,h4,h5,h6,button,input,select,textarea {font-weight: normal;}
 textarea {resize: none;}
 select { border: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; outline: 0; }

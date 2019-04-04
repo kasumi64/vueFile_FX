@@ -9,7 +9,7 @@
 <template>
 	<div class="lgy-review" :class="{show:show}">
 		<div ref='lgy-review' class="maskLayer">
-			<div class="tipsPanle">
+			<div ref='tipsPanle' class="tipsPanle">
 				<div class="title">
 					<b>{{$t('fbcsFile.components.reviewTitle')}}</b>
 				</div>
@@ -49,14 +49,10 @@ export default {
 		},
 		reqsv: {}, //复核参数
 		txt: '', //弹框文本
-//		useAlert: {
-//			type: Boolean,
-//			default: true
-//		}
 	},
 	methods:{
 		async reviewHandle(param){
-			if(this.name==utils.getArgs('accountInfo')) return utils.confirm({txt:this.$t('fbcsFile.components.reviewSame'), btn:1});
+			if(this.name==utils.getArgs('userName')) return utils.confirm({txt:this.$t('fbcsFile.components.reviewSame'), btn:1});
 			if(this.name==''||this.pwd=='') return utils.confirm({txt:this.$t('fbcsFile.components.reviewNull'), btn:1});
 			let args = {
 				url: 'auth/review',
@@ -73,28 +69,29 @@ export default {
 			let self = this;
 			param.name = self.name;
 			
-			/*if('debug'){
+			if('debug'){
 				this.cancel();
 				return self.$emit('submit', param);
-			}*/
+			}
 
 			let res = await utils.post(args);
 			if(!res) return;
 			if(res.errcode != '0') return utils.alert({txt:res.errinfo, type:0});
-			
-//			if(this.useAlert) {
-				utils.confirm({
-					ok: obj => { self.$emit('submit', obj); },
-					txt: self.txt || this.$t('fbcsFile.components.isSubmit')
-				}, {ok: param});
-//			} else {
-//				self.$emit('submit', param);
-//			}
+
+			utils.confirm({
+				ok: obj => { self.$emit('submit', obj); },
+				txt: self.txt || this.$t('fbcsFile.components.isSubmit')
+			}, {ok: param});
 			this.cancel();
 		},
 		cancel(e){
 			this.$emit('update:show', false);
 			this.name = this.pwd = '';
+			let el = this.$refs['tipsPanle'];
+			if(el){
+				el.style.top = '0';
+				el.style.left = '0';
+			}
 		}
 	},
 	created(){

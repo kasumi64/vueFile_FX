@@ -47,18 +47,17 @@ export default {
 			this.showReview = true;
 		},
 		review(args){
-			this.nodeList.forEach(r => {
-				let cu = this.culist[r.k];
-				if(cu&&cu.blackFlag == '1'){
-					r.blackFlag = '1';
-				} else r.blackFlag = '0';
+			var nodes = this.nodeList;
+			nodes.forEach(r => {
+				let cu = _this.cuList[r.k];
+				r.blackFlag = cu ? '1' : '0';
 			});
 			let params = {
 				url: 'userClientFile/blackList',
 				cmdID: '600066',
 				reviewer: args.name,
-				count: this.nodeList.length,
-				lists: this.nodeList
+				count: nodes.length,
+				lists: nodes
 			};
 			utils.post(params).then(function(res){
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});

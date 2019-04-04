@@ -101,13 +101,14 @@ var _this, data = {
 	showDialog: false, dialogTitle: '',
 	showInfo: false, infoTitle: '',
 };
-var idAll = [], args, isAdd;
+var idAll = [], args, isAdd, oldOperatorName;
 
 function edit(row){
 	isAdd = 'edit';
 	_this.infoTitle = _this.$t('fbcsFile.advanced.information.editOPE');
 	let info = _this.info;
 	for (let k in info) info[k] = row[k] || '';
+	oldOperatorName = row.operatorName;
 	_this.showInfo = true;
 }
 
@@ -123,6 +124,7 @@ function del(row){
 			};
 			utils.post(params).then(function(res){
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+				searchOPE();
 			});
 		}
 	});
@@ -151,8 +153,8 @@ export default {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
+			operatorTelNum: this.$t('fbcsFile.advanced.information.mobileNum'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
-			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
 			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
 			opeartorCompany: this.$t('fbcsFile.advanced.information.company'),
 			opeartorDepartment: this.$t('fbcsFile.advanced.information.department')
@@ -191,11 +193,13 @@ export default {
 			} else {
 				param.url = 'userinfoExt/modifyOperator';
 				param.cmdID = '600023';
+				param.oldOperatorName = oldOperatorName;
 			}
 			
 			utils.post(param).then(res => {
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 				_this.showInfo = false;
+				searchOPE();
 			});
 		}
 	},
@@ -216,7 +220,7 @@ export default {
 
 function init(){
 	this.listType = 'all';
-//	this.listOPE = this.listBOP = [];
+	this.listOPE = this.listBOP = [];
 	if(args&&args.userID) search('all');
 }
 
@@ -244,11 +248,11 @@ function searchOPE(){
 	
 	utils.post(param).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-		/*if(res.totalPage>1 && _this.pageOPE > res.totalPage){
+		if(res.totalPage>1 && _this.pageOPE > res.totalPage){
 			_this.pageOPE = res.totalPage;
 			return searchOPE();
-		}*/
-//		_this.listOPE = res.lists;
+		}
+		_this.listOPE = res.lists;
 		_this.pageOPE = res.currentPage;
 		_this.totalOPE = res.totalSize;
 	});
@@ -262,10 +266,10 @@ function searchBOP(){
 	
 	utils.post(param).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-		/*if(res.totalPage>1 && _this.pageBOP > res.totalPage){
+		if(res.totalPage>1 && _this.pageBOP > res.totalPage){
 			_this.pageBOP = res.totalPage;
-			return searchOPE();
-		}*/
+			return searchBOP();
+		}
 //		_this.listBOP = res.lists;
 		_this.pageBOP = res.currentPage;
 		_this.totalBOP = res.totalSize;
@@ -275,7 +279,7 @@ function searchBOP(){
 </script>
 
 <style scoped="scoped">
-	.information{min-width: 860px;}
+	.information{padding-right: 20px;}
 	.jg{margin-bottom: 10px;}
 	.w80{width: 80px;text-align: right;}
 	.h2{font-size: 16px;color: #333;margin-bottom: 10px;}

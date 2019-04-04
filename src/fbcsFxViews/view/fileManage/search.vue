@@ -14,7 +14,7 @@
 		
 		<h2 class="h2">{{$t('fbcsFile.files.search.delRes')}}</h2>
 		
-		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="checkTitle" v-dialogDrag
+		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="$t('fbcsFile.fnField.newVer')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
@@ -49,7 +49,6 @@ var _this, data = {
 	reqsv: {},
 	parameter: null,
 	checkDialog: false,
-	checkTitle: '',
 	checkList: []
 };
 
@@ -106,14 +105,9 @@ export default {
 		},
 		checkVer(type){
 			let params = {
-				url: 'version/compareMd5',
-				cmdID: '600079',
-				type,
-			}, tit = 'fbcsFile.fnField.';
-			
-			if(type==0) tit += 'checkZd';
-			else tit += 'newVer';
-			this.checkTitle = this.$t(tit);
+				url: 'userClientFile/compareMd5',
+				cmdID: '600067'
+			};
 			utils.post(params).then(function(res){
 				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 				for (let i = 0; i < res.lists.length; i++) {
@@ -129,7 +123,7 @@ export default {
 	created(){
 		_this = this;
 		this.total = 1;
-//		this.list = [];
+		this.list = [];
 		this.search();
 	}
 };

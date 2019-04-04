@@ -86,8 +86,8 @@ export default {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
+			operatorMobileNum: this.$t('fbcsFile.advanced.information.mobileNum'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
-			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
 			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
 			opeartorCompany: this.$t('fbcsFile.advanced.information.company'),
 			opeartorDepartment: this.$t('fbcsFile.advanced.information.department'),
@@ -116,12 +116,12 @@ export default {
 			if(bop=='BOP'){
 				if(this.disabledBOP) return;
 				this.dialogTitle = this.$t('fbcsFile.advanced.information.expBOP');
-				param.url = 'userinfoExt/advancedSearch/userextBop';
+				param.url = 'advancedSearch/userextBop';
 				param.cmdID = '600057';
 			} else {
 				if(this.disabledOPE) return;
 				this.dialogTitle = this.$t('fbcsFile.advanced.information.expcsv');
-				param.url = 'userinfoExt/advancedSearch/userextOperator';
+				param.url = 'advancedSearch/userinfoextOperator';
 				param.cmdID = '600054';
 			}
 			param.currentPage = 1;
@@ -182,7 +182,7 @@ function search(p){
 
 function searchOPE(){
 	let param = Object.assign({}, _this.info);
-	param.url = 'userinfoExt/advancedSearch/userextOperator';
+	param.url = 'advancedSearch/userextOperator';
 	param.cmdID = '600054';
 	param.pageSize = 20;
 	param.currentPage = _this.pageOPE;
@@ -202,7 +202,7 @@ function searchOPE(){
 
 function searchBOP(){
 	let param = Object.assign({}, _this.info);
-	param.url = 'userinfoExt/advancedSearch/userextBop';
+	param.url = 'advancedSearch/userextBop';
 	param.cmdID = '600057';
 	param.pageSize = 20;
 	param.currentPage = _this.pageBOP;
@@ -223,7 +223,7 @@ function searchBOP(){
 </script>
 
 <style scoped="scoped">
-	.information{min-width: 860px;}
+	.information{min-width: 800px;padding-right: 20px;}
 	.jg{margin-bottom: 10px;}
 	.w100{width: 100px;}
 	.w80{width: 80px;text-align: right;}
