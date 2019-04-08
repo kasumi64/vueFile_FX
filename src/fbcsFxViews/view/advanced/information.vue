@@ -118,19 +118,22 @@ export default {
 				this.dialogTitle = this.$t('fbcsFile.advanced.information.expBOP');
 				param.url = 'advancedSearch/userextBop';
 				param.cmdID = '600057';
+				param.pageSize = _this.totalBOP;
 			} else {
 				if(this.disabledOPE) return;
 				this.dialogTitle = this.$t('fbcsFile.advanced.information.expcsv');
 				param.url = 'advancedSearch/userinfoextOperator';
 				param.cmdID = '600054';
+				param.pageSize = _this.totalOPE;
 			}
 			param.currentPage = 1;
 			param.type = 1;
 			
 			utils.post(param).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
-				_this.fileHref = res.filePath;
-				_this.fileName = res.filePath.split('/').pop();
+				if(!res.errinfo) return;
+				_this.fileHref = res.errinfo;
+				_this.fileName = res.errinfo.split('/').pop();
 			});
 			this.showDialog = true;
 		},

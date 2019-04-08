@@ -85,8 +85,9 @@ export default {
 			
 			utils.post(param).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
-				_this.fileHref = res.filePath;
-				_this.fileName = res.filePath.split('/').pop();
+				if(!res.errinfo) return;
+				_this.fileHref = res.errinfo;
+				_this.fileName = res.errinfo.split('/').pop();
 			});
 		},
 	},

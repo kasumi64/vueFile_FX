@@ -170,9 +170,9 @@ export default {
 			params.url = 'advancedSearch/operationRecording';
 			params.cmdID = '600058';
 			params.language = utils.langCode();
-			params.pageSize = 20;
-			params.currentPage = _this.page;
-			params.type = 0;
+			params.pageSize = _this.total;
+			params.currentPage = 1;
+			params.type = 1;
 			params.commFlag = 0;
 			params.ekeyFlag = 0;
 			params.userextFlag = 0;
@@ -185,8 +185,9 @@ export default {
 			
 			utils.post(param).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
-				_this.fileHref = res.filePath;
-				_this.fileName = res.filePath.split('/').pop();
+				if(!res.errinfo) return;
+				_this.fileHref = res.errinfo;
+				_this.fileName = res.errinfo.split('/').pop();
 			});
 		},
 	},
