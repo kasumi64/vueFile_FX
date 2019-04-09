@@ -192,7 +192,7 @@ function search(p){
 
 function searchOPE(){
 	let param = Object.assign({}, _this.info);
-	param.url = 'advancedSearch/userextOperator';
+	param.url = 'advancedSearch/userinfoextOperator';
 	param.cmdID = '600054';
 	param.pageSize = _this.pageSize;
 	param.currentPage = _this.pageOPE;

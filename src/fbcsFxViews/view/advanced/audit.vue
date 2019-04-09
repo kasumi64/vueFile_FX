@@ -183,7 +183,7 @@ export default {
 				params[k] = links[k];
 			}
 			
-			utils.post(param).then(res => {
+			utils.post(params).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				if(!res.errinfo) return;
 				_this.fileHref = res.errinfo;
