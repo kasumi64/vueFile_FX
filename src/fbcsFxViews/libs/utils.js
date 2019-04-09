@@ -109,7 +109,7 @@ function ReqHttp(){
 			console.log(params.cmdID, params);
 			let debugRes = {
 				status: 200,
-				data: {errcode:'0',lists:[],errinfo: 'Success.'}
+				data: {errcode:'0',lists:[{userID: '01', userName: 'userName'}],errinfo: 'Success.'}
 			};
 			return Promise.resolve(callback(debugRes, fn, args));
 		}

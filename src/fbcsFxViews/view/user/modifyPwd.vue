@@ -95,7 +95,7 @@ export default {
 		defPwd(val){
 			if(!val){ //默认
 				this.passwd = this.again = defaultPwd;
-			}
+			} else this.passwd = this.again = '';
 		},
 		submit(){
 			if(!pass()) return;
@@ -197,6 +197,7 @@ function getDefPwd(){
 	utils.post(params).then(function(res){
 		if(res.errcode != '0') return console.warn('600012', res.errinfo);
 		defaultPwd = res.defaultPasswd;
+		_this.passwd = _this.again = defaultPwd;
 	});
 }
 </script>

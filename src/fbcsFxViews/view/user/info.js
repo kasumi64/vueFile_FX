@@ -42,7 +42,7 @@ export default {
 		defPwd(val){
 			if(!val){ //默认
 				this.info.userPasswd = defaultPwd;
-			}
+			} else this.info.userPasswd = '';
 		},
 		pickerBegin: {
 			disabledDate(time){
@@ -56,6 +56,28 @@ export default {
 				var boundary = new Date(_this.info.beginSoftEncTime);
 				boundary.setHours(0, 0, 0);
 				return time < boundary;
+			}
+		},
+		onlyNum_1(e){
+			let el = e.target, str = el.value, k = el.dataset.k;
+			let reg = /[^\d]/g, flag = false;
+			if(/^\-/.test(str)){
+				flag = true;
+				str = str.replace('-', '');
+			}
+			if(reg.test(str)){
+				utils.alert({txt: this.$t('fbcsFile.err.user.errNum')});
+				str = str.replace(reg, '');
+			}
+			if(flag)  str = '-' + str;
+			this.info[k] = str;
+		},
+		onlyNum(e){
+			let el = e.target, str = el.value, k = el.dataset.k;
+			let reg = /[^\d]/g;
+			if(reg.test(str)){
+				utils.alert({txt: this.$t('fbcsFile.err.user.errNum')});
+				this.info[k] = str.replace(reg, '');
 			}
 		},
 		submit(){
@@ -100,7 +122,7 @@ export default {
 			});
 		},
 		now(){
-//			if(!pass.call(this)) return;
+			if(!pass.call(this)) return;
 			if(this.isAdd == 'add'){
 				this.reqsv = {uri: 'userinfo/addImmediately'};
 			} else {
@@ -147,7 +169,7 @@ function pass(){
 		info = this.info;
 	
 	for (var i = 0; i < must.length; i++) {
-		if(info[must[i]] == '') {
+		if(!info[must[i]]) {
 			utils.alert({txt: this.$t('fbcsFile.err.user.'+must[i])});
 			return false;
 		}
@@ -156,16 +178,29 @@ function pass(){
 	if(this.isAdd == 'add'&&info.isModifyDefaultPasswd==1){
 		let pwd = info.userPasswd;
 		if(pwd == '') {
-			utils.alert({txt: this.$t('fbcsFile.err.user.userPasswd')});
-			return false;
+			return utils.alert({txt: this.$t('fbcsFile.err.user.userPasswd')});
+		} else if (pwd.length < 8){
+			return utils.alert({txt: this.$t('fbcsFile.err.user.pwdRule')});
+		} else if(/^\s|\s$/.test(pwd)){
+			return utils.alert({txt: this.$t('fbcsFile.err.user.blank')});
+		}  else if(pwd.indexOf(info.userID)>-1||pwd.indexOf(info.userName)>-1){
+			return utils.alert({txt: this.$t('fbcsFile.err.user.noidName')});
+		} else {
+			let i, num = 0,
+				reg = [/[a-z]/,/[A-Z]/,/[0-9]/,/[ @#_\-\*]/];
+			for (i = 0; i < reg.length; i++) {
+				if(reg[i].test(pwd)) num++;
+			}
+			if(num < 2){
+				return utils.alert({txt: this.$t('fbcsFile.err.user.pwdRule')});
+			}
 		}
 	}
 	
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
 	if((begin || end)&&info.encFlag==1){
 		if(begin==''||end==''||begin >= end) {
-			utils.alert({txt: this.$t('fbcsFile.err.user.day')});
-			return false;
+			return utils.alert({txt: this.$t('fbcsFile.err.user.day')});
 		}
 	}
 	
@@ -260,6 +295,6 @@ function getDefPwd(){
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode != '0') return console.warn('600012', res.errinfo);
-		defaultPwd = res.defaultPasswd;
+		_this.info.userPasswd = defaultPwd = res.defaultPasswd;
 	});
 }

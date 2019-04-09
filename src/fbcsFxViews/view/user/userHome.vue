@@ -171,6 +171,7 @@ export default {
 					};
 					utils.post(params).then(res => {
 						utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+						if(res.errcode != '0') return;
 						search();
 					});
 				}
@@ -239,7 +240,7 @@ export default {
 		this.id = this.name = '';
 		this.currSelect = null;
 		this.showDialog = false;
-//		this.list = [];
+		this.list = [];
 		this.search();
 	},
 	components: {
@@ -263,7 +264,7 @@ function search(){
 			_this.page = res.totalPage;
 			return search();
 		}
-//		_this.list = res.lists;
+		_this.list = res.lists;
 		_this.page = res.currentPage;
 		_this.total = res.totalSize;
 	});

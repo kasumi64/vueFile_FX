@@ -156,8 +156,8 @@ export default {
 			operatorTelNum: this.$t('fbcsFile.advanced.information.mobileNum'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
 			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
-			opeartorCompany: this.$t('fbcsFile.advanced.information.company'),
-			opeartorDepartment: this.$t('fbcsFile.advanced.information.department')
+			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
+			operatorDepartment: this.$t('fbcsFile.advanced.information.department')
 		};
 		return data;
 	},
@@ -248,13 +248,13 @@ function searchOPE(){
 	
 	utils.post(param).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-		if(res.totalPage>1 && _this.pageOPE > res.totalPage){
-			_this.pageOPE = res.totalPage;
+		if(res.count>1 && _this.pageOPE > res.count){
+			_this.pageOPE = res.count;
 			return searchOPE();
 		}
 		_this.listOPE = res.lists;
 		_this.pageOPE = res.currentPage;
-		_this.totalOPE = res.totalSize;
+		_this.totalOPE = res.count;
 	});
 }
 
@@ -266,13 +266,13 @@ function searchBOP(){
 	
 	utils.post(param).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-		if(res.totalPage>1 && _this.pageBOP > res.totalPage){
-			_this.pageBOP = res.totalPage;
+		if(res.count>1 && _this.pageBOP > res.count){
+			_this.pageBOP = res.count;
 			return searchBOP();
 		}
-//		_this.listBOP = res.lists;
+		_this.listBOP = res.lists;
 		_this.pageBOP = res.currentPage;
-		_this.totalBOP = res.totalSize;
+		_this.totalBOP = res.count;
 	});
 }
 

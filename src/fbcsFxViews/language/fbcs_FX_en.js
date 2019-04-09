@@ -36,7 +36,9 @@ var obj = {
 		user: {
 			userID: '用户ID不能为空', userName: '用户名称不能为空', speedCtrl: '最大收发速度不能为空',
 			maxRelationUser: '最大关系数不能为空', userPasswd: '密码不能为空', day: '开始时间必需小于结束时间',
-			errPwd: '密码必须包含大小写字母、数字、特殊字符(@#_-)中的两项且大于8位',
+			pwdRule: '密码必须包含大小写字母、数字、特殊字符(@#_-)中的两项且大于8位', unlike: '两次输入的密码不一致',
+			blank: '密码的前后不可以是空白字符', npwd: '新密码不能为空', noidName: '密码不能包含用户ID、用户名称',
+			errNum: '只能输入纯数字'
 		},
 		files: {
 			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', fileFormat: '文件名只能输入字母、数字安、和(._-)',

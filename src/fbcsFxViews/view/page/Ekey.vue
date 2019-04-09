@@ -102,6 +102,7 @@ function delEkey(row){
 			
 			utils.post(params).then(function(res){
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+				if(res.errcode != '0') return;
 				search();
 			});
 		},

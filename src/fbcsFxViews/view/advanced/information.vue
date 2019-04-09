@@ -21,16 +21,17 @@
 			<li @click="expcsv('OPE')" :class="{disabled: disabledOPE}">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.information.expcsv')}}</span>
-			</li><li @click="expcsv('BOP')" :class="{disabled: disabledBOP}">
+			</li>
+			<!--<li @click="expcsv('BOP')" :class="{disabled: disabledBOP}">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.information.expBOP')}}</span>
-			</li>
+			</li>-->
 		</ul>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p>
-		<lgy-table :list="listOPE" :title="titleOPE" :total="totalOPE" :currentPage.sync="pageOPE" @changePage="changeOPE" :maxHeight="416">
+		<lgy-table :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage.sync="pageOPE" @changePage="changeOPE" :maxHeight="416">
 		</lgy-table>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resBOP')}}</p>
-		<lgy-table :list="listBOP" :title="titleBOP" :total="totalBOP" :currentPage.sync="pageBOP" @changePage="changeBOP" :maxHeight="416">
+		<lgy-table :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage.sync="pageBOP" @changePage="changeBOP" :maxHeight="416">
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
@@ -68,6 +69,7 @@ var _this, data = {
 	showDialog: false,
 	fileHref: '#', fileName: '', dialogTitle: '',
 	disabledPOE: false, disabledBOP: false,
+	pageSize: 10
 };
 var idAll = [];
 
@@ -89,13 +91,22 @@ export default {
 			operatorMobileNum: this.$t('fbcsFile.advanced.information.mobileNum'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
 			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
-			opeartorCompany: this.$t('fbcsFile.advanced.information.company'),
-			opeartorDepartment: this.$t('fbcsFile.advanced.information.department'),
+			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
+			operatorDepartment: this.$t('fbcsFile.advanced.information.department'),
 		};
 		return data;
 	},
 	methods:{
 		search(){
+			let type = _this.listType;
+			if(type=='OPE'){
+				_this.pageOPE = 1;
+			} else if(type == 'BOP'){
+				_this.pageBOP = 1;
+			} else {
+				_this.pageOPE = 1;
+				_this.pageBOP = 1;
+			}
 			search();
 		},
 		changeOPE(num){
@@ -145,7 +156,7 @@ export default {
 		this.listType = 'all';
 		this.listOPE = this.listBOP = [];
 		this.disabledOPE = this.disabledBOP = false;
-		search();
+		this.search();
 		utils.keywords({}, arr => {
 			idAll = [].concat(arr);
 			_this.idWords = arr;
@@ -170,15 +181,11 @@ export default {
 function search(p){
 	let type = p || _this.listType;
 	if(type=='OPE'){
-		_this.pageOPE = 1;
 		searchOPE();
 	} else if(type == 'BOP'){
-		_this.pageBOP = 1;
 		searchBOP();
 	} else {
-		_this.pageOPE = 1;
 		searchOPE();
-		_this.pageBOP = 1;
 		searchBOP();
 	}
 }
@@ -187,7 +194,7 @@ function searchOPE(){
 	let param = Object.assign({}, _this.info);
 	param.url = 'advancedSearch/userextOperator';
 	param.cmdID = '600054';
-	param.pageSize = 20;
+	param.pageSize = _this.pageSize;
 	param.currentPage = _this.pageOPE;
 	param.type = 0;
 	
@@ -207,7 +214,7 @@ function searchBOP(){
 	let param = Object.assign({}, _this.info);
 	param.url = 'advancedSearch/userextBop';
 	param.cmdID = '600057';
-	param.pageSize = 20;
+	param.pageSize = _this.pageSize;
 	param.currentPage = _this.pageBOP;
 	param.type = 0;
 	
