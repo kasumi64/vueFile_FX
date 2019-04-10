@@ -19,11 +19,11 @@
 				<el-radio :label="9">{{$t('fbcsFile.audit.begin')}}</el-radio>
 			</el-radio-group>
 			<el-date-picker v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
-				:picker-options="pickerBegin" value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
+				 value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
 			<label class="label">{{$t('fbcsFile.audit.end')}}</label>
 			<el-date-picker v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
-				:picker-options="pickerEnd" value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
+				 value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
 			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
@@ -160,6 +160,13 @@ function search(){
 	params.language = utils.langCode();
 	params.pageSize = 20;
 	params.currentPage = _this.page;
+	
+	let begin = params.operationBeginTime, end = params.operationEndTime;
+	if(begin || end){
+		if(begin==''||end==''||begin >= end) {
+			return utils.alert({txt: _this.$t('fbcsFile.err.user.day')});
+		}
+	}
 	
 	utils.post(params).then(res => {
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);

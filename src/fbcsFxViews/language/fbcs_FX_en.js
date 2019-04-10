@@ -33,6 +33,10 @@ var obj = {
 		editExt: '修改扩展信息', delExt: '删除扩展信息'
 	},
 	err: {
+		lock: {
+			lock: '是否锁定系统，系统锁定状态将禁用普通用户修改配置？', unlock: '是否解除系统锁定状态？',
+			lockTxt: '提示：当前系统运维锁定状态，已禁止用户修改配置。'
+		},
 		user: {
 			userID: '用户ID不能为空', userName: '用户名称不能为空', speedCtrl: '最大收发速度不能为空',
 			maxRelationUser: '最大关系数不能为空', userPasswd: '密码不能为空', day: '开始时间必需小于结束时间',
@@ -40,9 +44,12 @@ var obj = {
 			blank: '密码的前后不可以是空白字符', npwd: '新密码不能为空', noidName: '密码不能包含用户ID、用户名称',
 			errNum: '只能输入纯数字'
 		},
+		info: {
+			operatorMobileNum: '仅能输入数字,“|”', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
+			operatorTelNum: '仅能输入数字,“-”,“+”,和“;”', emailFormat: '邮箱格式不对',
+		},
 		files: {
-			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', fileFormat: '文件名只能输入字母、数字安、和(._-)',
-			verFormat: '版本号只能输入字母、数字安、和(._-)'
+			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', format: '仅能输入英文，数字,“-”,“_”和“.”'
 		}
 	},
 	
@@ -52,7 +59,6 @@ var obj = {
 		importTips: '请将扩展信息文件放到服务器路径：/fbcs-server/static/import内；<br/>在输入框中填入扩展信息文件名。',
 		OPE: '是否导入运维扩展信息？', BOP: '是否导入BOP扩展信息？', line: '行数', operatorName: '联系人姓名', errinfo: '错误描述',
 		fileErr: '文件名不能为空！', pwd: '用户密码：',
-		lock: '是否锁定系统，系统锁定状态将禁用普通用户修改配置？', unlock: '是否解除系统锁定状态？',
 	},
 	userInfo: {
 		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 
@@ -159,7 +165,8 @@ var obj = {
 			listName: '查询表：', company: '公司名称', ssccManager: 'sscc客户经理', department: '所在部门',
 			expcsv: '导出运维表', expBOP: '导出BOP表', resOPE: '运维表查询结果：', resBOP: 'BOP表查询结果：',
 			operatorName: '联系人姓名', mobileNum: '联系人手机号', email: '联系人邮箱', telNum: '联系人座机号', 
-			addOPE: '增加扩展信息', editOPE: '修改扩展信息', del: '是否要删除扩展信息？'
+			addOPE: '增加扩展信息', editOPE: '修改扩展信息', del: '是否要删除扩展信息？',
+			nameNull: '联系人姓名不能为空', mobileNull: '联系人手机号不能为空'
 		},
 		audit: {
 			expcsv: '导出稽核',

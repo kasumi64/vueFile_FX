@@ -16,11 +16,11 @@
 			</el-radio-group>
 			<!--<label class="label">{{$t('fbcsFile.audit.begin')}}</label>-->
 			<el-date-picker v-model="info.beginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
-				:picker-options="pickerBegin" :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
+				:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
 			<label class="label">{{$t('fbcsFile.audit.end')}}</label>
 			<el-date-picker v-model="info.endTime" class="picker words" type="datetime" :clearable="false" :editable="false"
-				:picker-options="pickerEnd" :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
+				:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
 			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>

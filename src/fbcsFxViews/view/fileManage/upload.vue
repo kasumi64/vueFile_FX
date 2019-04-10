@@ -7,7 +7,7 @@
 					{{$t('fbcsFile.files.upload.fileName')}}
 				</div>
 				<div class="right">
-					<input id="ddd" v-model="fileName" @input="input"  maxlength="64"/>
+					<input id="ddd" v-model="fileName" @input="filter($event)" data-k="fileName" maxlength="64"/>
 					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}fbcs-server/static/import/fxclient</p>
 				</div>
 			</li><li>
@@ -16,7 +16,7 @@
 					{{$t('fbcsFile.files.upload.version')}}
 				</div>
 				<div class="right">
-					<input v-model="version" maxlength="64"/>
+					<input v-model="version" @input="filter($event)" data-k="version" maxlength="64"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -79,13 +79,12 @@ export default {
 				_this.parameter = res;
 			});
 		},
-		input(e){
-			return;
-			let reg = /[^a-zA-Z0-9\._-]/g;
-			let str = e.target.value;
-			if( reg.test(str) ){
-				e.target.blur();
-				this.fileName = str.replace(reg, '');
+		filter(e){
+			let el = e.target, str = el.value, k = el.dataset.k,
+				reg = /[^\w-]/g;
+			if(reg.test(str)){
+				utils.alert({txt: this.$t('fbcsFile.err.files.format')});
+				this[k] = str.replace(reg, '');
 			}
 		}
 	},

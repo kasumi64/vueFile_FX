@@ -206,6 +206,14 @@ function search(){
 	params.cmdID = '600071';
 	params.currentPage = _this.page;
 //	console.log(params);
+
+	let begin = params.beginTime, end = params.endTime;
+	if(begin || end){
+		if(begin==''||end==''||begin >= end) {
+			return utils.alert({txt: _this.$t('fbcsFile.err.user.day')});
+		}
+	}
+	
 	utils.post(params).then(res => {
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		if(res.totalPage>1 && _this.page > res.totalPage){

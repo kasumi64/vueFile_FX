@@ -12,11 +12,11 @@
 		</div>
 		<!--<div class="cw">-->
 			<sidebar :collapse.sync="isCollapse"></sidebar>
-			<div class="homeView" :class="{big:isCollapse}">
+			<div ref="home" class="homeView" :class="{big:isCollapse}">
 				<!--<div class="router">-->
-					<div class=""></div>
 					<router-view></router-view>
 				<!--</div>-->
+				<div ref="lockTxt" class="lockTxt">{{$t('fbcsFile.err.lock.lockTxt')}}</div>
 			</div>
 		<!--</div>-->
 		<el-dialog :visible.sync="showReview" :title="$t('fbcsFile.tips.title')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
@@ -66,10 +66,10 @@ export default {
 			let args = {
 				url: 'auth/review',
 				cmdID: '600122',
-				reviewer: this.name,
+				reviewer: this.userName,
 				password: md5(this.pwd),
 				language: utils.getArgs('lang') || 'zh',
-				uri:  '/fedp/fx/lock/' + uri
+				uri:  '/fdep/fx/lock/' + uri
 			};
 			
 			let res = await utils.post(args);
@@ -77,7 +77,7 @@ export default {
 			if(res.errcode != '0') return utils.alert({txt:res.errinfo, type:0});
 
 			utils.confirm({
-				txt: this.$t('fbcsFile.components.isSubmit'),
+				txt: this.$t('fbcsFile.err.lock.'+(uri == 'lock' ? 'lock' : 'unlock')),
 				ok: () => {
 					(uri == 'lock') ? lockFn() : unlockFn();
 				}
@@ -126,9 +126,14 @@ function checkLock(){
 		if(res.operationLockStatus == '1'){
 			lock.show();
 			unlock.hide();
+			let ref = _this.$refs;
+			ref.home.style['padding-top'] = '60px';
+			ref.lockTxt.style['display'] = 'block';
 		} else {
 			lock.hide();
 			unlock.show();
+			ref.home.style['padding-top'] = '20px';
+			ref.lockTxt.style['display'] = 'none';
 		}
 	});
 }
@@ -136,13 +141,17 @@ function checkLock(){
 function lockFn(uri){
 	let params = {
 		url: 'lock/lock',
-		cmdID: '600112'
+		cmdID: '600112',
+		
 	};
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 		if(res.errcode != '0') return;
 		lock.show();
 		unlock.hide();
+		let ref = _this.$refs;
+		ref.home.style['padding-top'] = '60px';
+		ref.lockTxt.style['display'] = 'block';
 	});
 }
 
@@ -156,6 +165,9 @@ function unlockFn(uri){
 		if(res.errcode != '0') return;
 		lock.hide();
 		unlock.show();
+		let ref = _this.$refs;
+		ref.home.style['padding-top'] = '20px';
+		ref.lockTxt.style['display'] = 'none';
 	});
 }
 </script>
@@ -175,5 +187,8 @@ function unlockFn(uri){
 	.fbcs_lockBox{position: absolute;top: 8px;right: 10px;padding: 10px;line-height: 0;}
 	.fbcs_lockBox:hover{background: #407BDD;border-radius: 5px;}
 	.fbcs_lockBox img{display: none;width: 14px;height: 16px;cursor: pointer;}
-	._dialog{}
+	.lockTxt{
+		position: absolute;display: none;top: 0;left: 0;width: 100%;padding-left: 20px;
+		font-size: 14px;font-weight: bold;color: #FF7A7D;line-height: 44px;height: 44px;border-bottom: 1px solid #EBEFF4;
+	}
 </style>

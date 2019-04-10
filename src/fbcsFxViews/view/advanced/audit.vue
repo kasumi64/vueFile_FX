@@ -25,11 +25,11 @@
 			</el-radio-group>
 			<!--<label class="label">{{$t('fbcsFile.audit.begin')}}</label>-->
 			<el-date-picker v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
-				:picker-options="pickerBegin" value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
+				value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
 			<label class="label">{{$t('fbcsFile.audit.end')}}</label>
 			<el-date-picker v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
-				:picker-options="pickerEnd" value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
+				value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
 			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
@@ -233,6 +233,13 @@ function search(){
 	params.commFlag = 0;
 	params.ekeyFlag = 0;
 	params.userextFlag = 0;
+	
+	let begin = params.operationBeginTime, end = params.operationEndTime;
+	if(begin || end){
+		if(begin==''||end==''||begin >= end) {
+			return utils.alert({txt: _this.$t('fbcsFile.err.user.day')});
+		}
+	}
 	
 	let j, links = {ekeyFlag: 1, commFlag: 1, userextFlag: 1};
 	for (j = 0; j < _this.linkage.length; j++) {

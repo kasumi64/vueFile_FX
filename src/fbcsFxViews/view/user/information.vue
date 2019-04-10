@@ -41,33 +41,39 @@
 					</div>
 				</li><li>
 					<div class="left">
-						<p class="txt">{{$t('fbcsFile.advanced.information.operatorName')}}：</p>
+						<p class="txt">
+							<i class="red">*</i>
+							{{$t('fbcsFile.advanced.information.operatorName')}}：
+						</p>
 					</div><div class="right">
-						<input v-model="info.operatorName" />
+						<input v-model="info.operatorName" maxlength="50"/>
 					</div>
 				</li><li>
 					<div class="left">
-						<p class="txt">{{$t('fbcsFile.advanced.information.mobileNum')}}：</p>
+						<p class="txt">
+							<i class="red">*</i>
+							{{$t('fbcsFile.advanced.information.mobileNum')}}：
+						</p>
 					</div><div class="right">
-						<input v-model="info.operatorMobileNum" />
+						<input v-model="info.operatorMobileNum" @input="filter($event)" data-reg="[^\d\|]" data-k="operatorMobileNum" maxlength="512"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.email')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorEmail" />
+						<input v-model="info.operatorEmail" @input="filter($event)" data-reg="[^\w_\-@\.]" data-k="operatorEmail" maxlength="50"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.telNum')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorTelNum" />
+						<input v-model="info.operatorTelNum" @input="filter($event)" data-reg="[^\d\-\+;]" data-k="operatorTelNum" maxlength="512"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManager')}}：</p>
 					</div><div class="right">
-						<input v-model="info.ssccManager" />
+						<input v-model="info.ssccManager" maxlength="50"/>
 					</div>
 				</li>
 			</ul>
@@ -185,8 +191,24 @@ export default {
 			info.userID = args.userID;
 			_this.showInfo = true;
 		},
+		filter(e){
+			let el = e.target, str = el.value, k = el.dataset.k,
+				reg = new RegExp(el.dataset.reg, 'g');
+			if(reg.test(str)){
+				utils.alert({txt: this.$t('fbcsFile.err.info.' + k)});
+				this.info[k] = str.replace(reg, '');
+			}
+		},
 		save(){
 			let param = Object.assign({}, this.info);
+			if(!param.operatorName) return utils.alert({txt: this.$t('fbcsFile.advanced.information.nameNull')});
+			if(!param.operatorMobileNum) return utils.alert({txt: this.$t('fbcsFile.advanced.information.mobileNull')});
+			let email = param.operatorEmail;
+			if(email){
+				if( !(/^[\w-]+(\.[\w-]+)*@[\w]+(\.[\w-]+)+$/g.test(email)) )
+					return utils.alert({txt: this.$t('fbcsFile.err.info.emailFormat')});
+			}
+			
 			if(isAdd == 'add'){
 				param.url = 'userinfoExt/addOperator';
 				param.cmdID = '600021';
