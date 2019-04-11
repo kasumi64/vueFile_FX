@@ -145,8 +145,8 @@ export default {
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
 			operatorMobileNum: this.$t('fbcsFile.advanced.information.mobileNum'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
-			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
-			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager')
+			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
+			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum')
 		};
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
@@ -201,8 +201,8 @@ export default {
 		},
 		save(){
 			let param = Object.assign({}, this.info);
-			if(!param.operatorName) return utils.alert({txt: this.$t('fbcsFile.advanced.information.nameNull')});
-			if(!param.operatorMobileNum) return utils.alert({txt: this.$t('fbcsFile.advanced.information.mobileNull')});
+			if(utils.isSpace(param.operatorName)) return utils.alert({txt: this.$t('fbcsFile.advanced.information.nameNull')});
+			if(utils.isSpace(param.operatorMobileNum)) return utils.alert({txt: this.$t('fbcsFile.advanced.information.mobileNull')});
 			let email = param.operatorEmail;
 			if(email){
 				if( !(/^[\w-]+(\.[\w-]+)*@[\w]+(\.[\w-]+)+$/g.test(email)) )

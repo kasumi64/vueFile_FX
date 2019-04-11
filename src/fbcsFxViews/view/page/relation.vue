@@ -191,7 +191,7 @@ export default {
 			copySig(val);
 		},
 		submit(){
-			if(!this.oneid) return utils.confirm({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
+			if(utils.isSpace(this.oneid)) return utils.confirm({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
 			if(!this.sid.length) return utils.confirm({txt:this.$t('fbcsFile.relation.errid2'),btn:1});
 			let params = {
 				url: 'userComm/add',
@@ -207,7 +207,7 @@ export default {
 			});
 		},
 		now(){
-			if(!this.oneid) return utils.confirm({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
+			if(utils.isSpace(this.oneid)) return utils.confirm({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
 			if(this.sid.length==0) return utils.confirm({txt:this.$t('fbcsFile.relation.errid2'),btn:1});
 			if(this.sid.length>1) return utils.confirm({txt:this.$t('fbcsFile.relation.errid3'),btn:1});
 			this.reqsv = {uri: 'userComm/addImmediately'};
@@ -315,10 +315,10 @@ function nextFrame(){
 </script>
 
 <style scoped="scoped">
-	
 	.relation{min-width: 696px;padding-right: 20px;background: #FFF;}
 	#fbcs_file .mf{margin-left: 10px;min-width: 60px}
 	.selm{width: 300px;}
+	#fbcs_file ._dialog .left{width: 140px;}
 </style>
 <style>
 	#fbcs_file .relation input:disabled{border: none;}

@@ -322,11 +322,17 @@ exp.sleep = function (delay){
 	});
 };
 
+exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str == ''); };
 
-
-
-
+Object.addProto(exp, 'getFxAuth', {
+	get(){
+		if('debug') return true;
+		
+		let authority = sessionStorage.getItem('authoritys') || '';
+		return (/Auth_Fx_Config_Opt/i).test(authority);
+	}
+});
 
 
 export default exp;
-//(c) Copyright 2019 LGY. All Rights Reserved. 
+//(c) Copyright 2019.04 LGY. All Rights Reserved. 

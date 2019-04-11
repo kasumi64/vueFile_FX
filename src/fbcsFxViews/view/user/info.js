@@ -169,10 +169,15 @@ function pass(){
 		info = this.info;
 	
 	for (var i = 0; i < must.length; i++) {
-		if(!info[must[i]]) {
-			utils.alert({txt: this.$t('fbcsFile.err.user.'+must[i])});
+		let k = must[i], str = info[k];
+		if(utils.isSpace(str)) {
+			utils.alert({txt: this.$t('fbcsFile.err.user.'+k)});
 			return false;
 		}
+	}
+	
+	if(/[^\w-]/.test(info.userID)){
+		return utils.alert({txt: this.$t('fbcsFile.err.user.idformat')});
 	}
 	
 	if(this.isAdd == 'add'&&info.isModifyDefaultPasswd==1){
@@ -195,6 +200,11 @@ function pass(){
 				return utils.alert({txt: this.$t('fbcsFile.err.user.pwdRule')});
 			}
 		}
+	}
+	
+	let speed = parseInt(info.speedCtrl);
+	if(!(speed>-2&&speed<=999999999999999999)){
+		return utils.alert({txt: this.$t('fbcsFile.err.user.speed')});
 	}
 	
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
@@ -275,16 +285,18 @@ function getUserInfo(user){
 		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		var obj = res.lists[0];
 		if(!obj) return _this.info.userID = args.userID;
-		_this.info = obj;
+		
 		if(obj.userConfigDate){
 			_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
-		} else {
-			_this.buildTime = '';
-		}
-		_this.info.beginSoftEncTime = obj.beginSoftEncTime * 1000;
-		_this.info.endSoftEncTime = obj.endSoftEncTime * 1000;
-		if(!_this.info.beginSoftEncTime) _this.info.beginSoftEncTime = '';
-		if(!_this.info.endSoftEncTime) _this.info.endSoftEncTime = '';
+		} else  _this.buildTime = '';
+		
+		obj.beginSoftEncTime = obj.beginSoftEncTime * 1000;
+		obj.endSoftEncTime = obj.endSoftEncTime * 1000;
+		if(!obj.beginSoftEncTime) obj.beginSoftEncTime = '';
+		if(!obj.endSoftEncTime) obj.endSoftEncTime = '';
+		obj.isModifyDefaultPasswd = 0;
+		obj.expiredTimeFlag = '1';
+		_this.info = obj;
 	});
 }
 

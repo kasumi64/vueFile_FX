@@ -6,16 +6,16 @@
 		</header>
 		<el-tabs v-model="tab" type="card" @tab-click="tabClick">
 			<el-tab-pane :label="$t('fbcsFile.userHome.info')" name="first">
-				<user v-if="tab=='first'" :isAdd.sync="type" :tab.sync='tab' :isNew="isNew"></user>
+				<user :isAdd.sync="type" :tab.sync='tab' :isNew="isNew"></user>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.ekey')" name="second" :disabled="type=='add'">
-				<ekey v-if="tab=='second'" :isPage="false" :tab.sync='tab' :isNew="isNew"></ekey>
+				<ekey :isPage="false" :tab.sync='tab' :isNew="isNew"></ekey>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.signal')" name="third" :disabled="type=='add'">
-				<signal v-if="tab=='third'" :isPage="false"></signal>
+				<signal :isPage="false"></signal>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.information')" name="fourth" :disabled="type=='add'">
-				<information v-if="tab=='fourth'"></information>
+				<information></information>
 			</el-tab-pane>
 		</el-tabs>
 	</div>

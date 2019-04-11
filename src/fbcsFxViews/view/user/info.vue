@@ -15,14 +15,14 @@
 					{{$t('fbcsFile.userInfo.name')}}
 				</div>
 				<div class="right">
-					<input v-model="info.userName"  maxlength="128"/>
+					<input v-model="info.userName"  maxlength="64"/>
 				</div>
 			</li><li v-if="isAdd=='add'">
 				<div class="label" style="vertical-align: top;">
 					<i class="red">*</i>
 					{{$t('fbcsFile.userInfo.pwd')}}
 				</div>
-				<div class="right">
+				<div class="right"><!--密码-->
 					<el-radio-group v-model="info.isModifyDefaultPasswd" @change="defPwd" class="radio">
 						<el-radio :label="0">{{$t('fbcsFile.userInfo.def')}}</el-radio>
 						<el-radio :label="1">{{$t('fbcsFile.userInfo.hm')}}</el-radio>
@@ -59,7 +59,7 @@
 					{{$t('fbcsFile.userInfo.speed')}}
 				</div>
 				<div class="right">
-					<input v-model="info.speedCtrl" data-k="speedCtrl" @input="onlyNum_1($event)"/>
+					<input v-model="info.speedCtrl" data-k="speedCtrl" @input="onlyNum_1($event)" maxlength="18"/>
 					<span class="small">Kbit/s({{$t('fbcsFile.userInfo.Kbit')}})</span>
 					<!--
 						oninput="if(value.length>5)value=value.slice(0,5)"
@@ -76,7 +76,7 @@
 				</div>
 			</li><li>
 				<div class="label" style="vertical-align: top;">{{$t('fbcsFile.userInfo.encFlag')}}</div>
-				<div class="right">
+				<div class="right"><!--加密方式-->
 					<el-radio-group v-model="info.encFlag" class="radio">
 						<el-radio :label="1">{{$t('fbcsFile.userInfo.hard')}}</el-radio>
 						<el-radio :label="2">{{$t('fbcsFile.userInfo.soft')}}</el-radio>

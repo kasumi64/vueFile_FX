@@ -81,7 +81,7 @@ export default {
 		},
 		filter(e){
 			let el = e.target, str = el.value, k = el.dataset.k,
-				reg = /[^\w-]/g;
+				reg = /[^\w- \.]/g;
 			if(reg.test(str)){
 				utils.alert({txt: this.$t('fbcsFile.err.files.format')});
 				this[k] = str.replace(reg, '');
@@ -95,11 +95,11 @@ export default {
 };
 
 function check(){
-	let files = this.fileName, vers =  this.version, reg = /[^a-zA-Z0-9\._-]/g;
-	if(files == '') return utils.alert({txt: this.$t('fbcsFile.err.files.fileNull')});
-	if(vers == '') return utils.alert({txt: this.$t('fbcsFile.err.files.verNull')});
-	if( reg.test(files) ) return utils.alert({txt: this.$t('fbcsFile.err.files.fileFormat')});
-	if( reg.test(vers) ) return utils.alert({txt: this.$t('fbcsFile.err.files.verFormat')});
+	let files = this.fileName, vers =  this.version, reg = /[^a-zA-Z0-9 \._-]/g;
+	if(utils.isSpace(files)) return utils.alert({txt: this.$t('fbcsFile.err.files.fileNull')});
+	if(utils.isSpace(vers)) return utils.alert({txt: this.$t('fbcsFile.err.files.verNull')});
+	if( reg.test(files) ) return utils.alert({txt: this.$t('fbcsFile.err.files.format')});
+	if( reg.test(vers) ) return utils.alert({txt: this.$t('fbcsFile.err.files.format')});
 	return true;
 }
 

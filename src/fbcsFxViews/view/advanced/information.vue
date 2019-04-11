@@ -82,7 +82,8 @@ export default {
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
 			operatorMobileNum: this.$t('fbcsFile.advanced.information.mobileNum'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
-			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
+			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
+			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum')
 		};
 		data.titleBOP = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),

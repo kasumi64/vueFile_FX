@@ -187,7 +187,7 @@ export default {
 			this.showInfo = true;
 		},
 		save(){
-			if(!_this.fileName) return utils.confirm({
+			if(utils.isSpace(this.fileName)) return utils.confirm({
 				txt: _this.$t('fbcsFile.userHome.fileErr'),
 				btn: 1
 			});

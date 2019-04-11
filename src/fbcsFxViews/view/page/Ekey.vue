@@ -316,11 +316,11 @@ function editNow(obj){
 
 function check(){
 	let info = _this.ekeyInfo;
-	if(!info.userID) {
+	if(utils.isSpace(info.userID)) {
 		utils.confirm({txt: _this.$t('fbcsFile.Ekey.errID'), btn: 1});
 		return true;
 	}
-	if(!info.ekeyName) {
+	if(utils.isSpace(info.ekeyName)) {
 		utils.confirm({txt: _this.$t('fbcsFile.Ekey.errName'), btn: 1});
 		return true;
 	}

@@ -39,6 +39,7 @@
 				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
+		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 	</div>
 </template>
 
@@ -55,6 +56,9 @@ var _this, data = {
 	],
 	showDialog: false,
 	errList: [],
+	showReview: false,
+	reqsv: {},
+	reviewTxt: ''
 };
 
 
@@ -77,9 +81,14 @@ export default {
 			return '';
 		},
 		submit(){
+			this.reqsv = {uri: 'cuConfig/modify'};
+			this.showReview = true;
+		},
+		review(args){
 			let params = {
 				url: 'cuConfig/modify',
 				cmdID: '600092',
+				reviewer: args.name,
 				type: (this.active == 'first') ? 0 : 1,
 				cfgInfo: this.txtVal
 			};
@@ -112,6 +121,8 @@ export default {
 		this.list = [];
 		this.active = 'first';
 		this.enable = false;
+		this.showReview = false;
+		this.reviewTxt = this.$t('fbcsFile.suConfig.sub');
 		getConfig(0);
 	}
 };

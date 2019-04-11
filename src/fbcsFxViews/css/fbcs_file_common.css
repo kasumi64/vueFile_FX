@@ -101,7 +101,7 @@
 #fbcs_file ._dialog li{margin-bottom: 10px;}
 #fbcs_file ._dialog li:last-child{margin-bottom: 0;}
 #fbcs_file ._dialog .left *,#fbcs_file ._dialog .right *{vertical-align: middle;}
-#fbcs_file ._dialog .left,#fbcs_file ._dialog .right{display: inline-block;width: 140px;vertical-align: top;}
+#fbcs_file ._dialog .left,#fbcs_file ._dialog .right{display: inline-block;width: 200px;vertical-align: top;}
 #fbcs_file ._dialog .left{text-align: right;}
 #fbcs_file ._dialog .txt{font-size: 14px;color: #666;line-height: 30px;}
 #fbcs_file a{text-decoration: none;}

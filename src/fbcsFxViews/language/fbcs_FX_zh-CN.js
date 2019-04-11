@@ -42,7 +42,8 @@ var obj = {
 			maxRelationUser: '最大关系数不能为空', userPasswd: '密码不能为空', day: '开始时间必需小于结束时间',
 			pwdRule: '密码必须包含大小写字母、数字、特殊字符(@#_-)中的两项且大于8位', unlike: '两次输入的密码不一致',
 			blank: '密码的前后不可以是空白字符', npwd: '新密码不能为空', noidName: '密码不能包含用户ID、用户名称',
-			errNum: '只能输入纯数字'
+			errNum: '只能输入纯数字', idformat: '用户ID仅能输入英文，数字,“-”和“_”',
+			speed: '最大收发速度范围在-1到999999999999999999'
 		},
 		info: {
 			operatorMobileNum: '仅能输入数字,“|”', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
@@ -90,7 +91,7 @@ var obj = {
 		first: '全局静态配置', second: '全局动态配置', 'static': '静态配置文件：', dynamic: '动态配置文件：',
 		only: '只读', edit: '编辑', h2: '对比内容：' , section:'段名', type:'操作类型', detail:'详情',
 		field:'字段名' , oldValue:'原数据' , modifyValue:'修改数据' , range:'合理范围' , 
-		err: '异常提示'
+		err: '异常提示', sub: '是否确定提交？'
 	},
 	dispatch: {
 		options: [{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},

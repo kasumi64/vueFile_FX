@@ -69,10 +69,10 @@ export default {
 			let self = this;
 			param.name = self.name;
 			
-			if('debug'){
+			/*if('debug'){
 				this.cancel();
 				return self.$emit('submit', param);
-			}
+			}*/
 
 			let res = await utils.post(args);
 			if(!res) return;
