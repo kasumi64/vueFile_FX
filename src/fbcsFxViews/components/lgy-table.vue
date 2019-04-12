@@ -4,7 +4,7 @@
 			@select="select" @selection-change="selectChange" @select-all="selectAll" :max-height="maxHeight" highlight-current-row border>
 			<el-table-column v-if="index" type="index" width="50" key></el-table-column>
 			<el-table-column v-if="selection" type="selection" width="40" key></el-table-column>
-			<el-table-column :sortable="isSort(k)" v-for="(val, k) in title" :prop="k" :label="val" :key="k"></el-table-column>
+			<el-table-column :sortable="isSort(k)" v-for="(val, k) in title" :prop="k" :label="val" :key="k" :width="getWidth(k)"></el-table-column>
 			<el-table-column v-if="defined" :label="defined.label" :width="defined.width">
 				<div class="custom" slot-scope="scope">
 					<div class="operate" v-for="(obj, k) in defined.items" :title="obj.tips" :key="k" 
@@ -45,7 +45,11 @@ export default {
 //			label:'操作', width: "80px",
 //			items: [{src:require('@/fbcsFxViews/img/logo.png'), click:function(r,s){console.log(r,s)}, tips: '修改' },]
 //		}
-		sortable: { //与list的字段相同
+		width: { //宽，与list的字段相同
+			type: Object,
+			default: {}
+		},
+		sortable: { //排序，与list的字段相同
 			type: Object,
 			default: {}
 		},
@@ -81,6 +85,9 @@ export default {
 			this.currRow = currentRow;
 			this.$emit('update:currentRow', currentRow);
 			this.$emit('currentRow', currentRow, oldCurrentRow);
+		},
+		getWidth(k){
+			return this.width[k];
 		},
 		isSort(k){
 			return this.sortable[k]?'custom':false

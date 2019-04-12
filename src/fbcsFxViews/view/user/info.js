@@ -166,30 +166,30 @@ export default {
 
 function pass(){
 	let must = ('userID,userName,speedCtrl,maxRelationUser').split(','),
-		info = this.info;
+		info = this.info, err = 'fbcsFile.err.user.';
 	
 	for (var i = 0; i < must.length; i++) {
 		let k = must[i], str = info[k];
 		if(utils.isSpace(str)) {
-			utils.alert({txt: this.$t('fbcsFile.err.user.'+k)});
+			utils.alert({txt: this.$t(err + k)});
 			return false;
 		}
 	}
 	
 	if(/[^\w-]/.test(info.userID)){
-		return utils.alert({txt: this.$t('fbcsFile.err.user.idformat')});
+		return utils.alert({txt: this.$t(err + 'idformat')});
 	}
 	
 	if(this.isAdd == 'add'&&info.isModifyDefaultPasswd==1){
 		let pwd = info.userPasswd;
 		if(pwd == '') {
-			return utils.alert({txt: this.$t('fbcsFile.err.user.userPasswd')});
+			return utils.alert({txt: this.$t(err + 'userPasswd')});
 		} else if (pwd.length < 8){
-			return utils.alert({txt: this.$t('fbcsFile.err.user.pwdRule')});
+			return utils.alert({txt: this.$t(err + 'pwdRule')});
 		} else if(/^\s|\s$/.test(pwd)){
-			return utils.alert({txt: this.$t('fbcsFile.err.user.blank')});
+			return utils.alert({txt: this.$t(err + 'blank')});
 		}  else if(pwd.indexOf(info.userID)>-1||pwd.indexOf(info.userName)>-1){
-			return utils.alert({txt: this.$t('fbcsFile.err.user.noidName')});
+			return utils.alert({txt: this.$t(err + 'noidName')});
 		} else {
 			let i, num = 0,
 				reg = [/[a-z]/,/[A-Z]/,/[0-9]/,/[ @#_\-\*]/];
@@ -197,24 +197,30 @@ function pass(){
 				if(reg[i].test(pwd)) num++;
 			}
 			if(num < 2){
-				return utils.alert({txt: this.$t('fbcsFile.err.user.pwdRule')});
+				return utils.alert({txt: this.$t(err + 'pwdRule')});
 			}
 		}
 	}
 	
 	let speed = parseInt(info.speedCtrl),
-		maxUser = parseInt(info.maxRelationUser);
-	if(!(speed>-2&&speed<=999999999999999999)){
-		return utils.alert({txt: this.$t('fbcsFile.err.user.speed')});
-	}
-	if(!(maxUser>-1&&maxUser<=1000)){
-		return utils.alert({txt: this.$t('fbcsFile.err.user.maxUser')});
+		maxUser = parseInt(info.maxRelationUser),
+		maxTask = parseInt(info.maxSimultTaskCount),
+		oneTask = parseInt(info.maxCltOneDayTaskCount);
+		
+	if(!(speed>=-1&&speed<=999999999999999999)){
+		return utils.alert({txt: this.$t(err + 'speed')});
+	} else if (!(maxUser>=0&&maxUser<=1000)){
+		return utils.alert({txt: this.$t(err + 'maxUser')});
+	}else if (maxTask < 1){
+		return utils.alert({txt: this.$t(err + 'maxTask')});
+	}else if (oneTask < 0){
+		return utils.alert({txt: this.$t(err + 'oneTask')});
 	}
 	
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
 	if((begin || end)&&info.encFlag==1){
 		if(begin==''||end==''||begin >= end) {
-			return utils.alert({txt: this.$t('fbcsFile.err.user.day')});
+			return utils.alert({txt: this.$t(err + 'day')});
 		}
 	}
 	
@@ -268,7 +274,7 @@ function initDate(){
 	info.allowPublishTopicCount= 5, 
 	info.allowSubscribeTopicCount= 5,
 	info.maxPublishTopicDay= 7;
-	info.maxSimultTaskCount= 0,
+	info.maxSimultTaskCount= 1,
 	info.maxCltOneDayTaskCount= 0;
 	info.webUserFlag = 0;
 	info.expiredTimeFlag = '1';
