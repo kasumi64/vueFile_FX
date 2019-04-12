@@ -202,9 +202,13 @@ function pass(){
 		}
 	}
 	
-	let speed = parseInt(info.speedCtrl);
+	let speed = parseInt(info.speedCtrl),
+		maxUser = parseInt(info.maxRelationUser);
 	if(!(speed>-2&&speed<=999999999999999999)){
 		return utils.alert({txt: this.$t('fbcsFile.err.user.speed')});
+	}
+	if(!(maxUser>-1&&maxUser<=1000)){
+		return utils.alert({txt: this.$t('fbcsFile.err.user.maxUser')});
 	}
 	
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
@@ -224,6 +228,7 @@ function getDict(){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		_this.userType = res.lists;
+		_this.info.userType = res.lists[0].id;
 	});
 	
 	params= { url, cmdID, language, type: 2 };

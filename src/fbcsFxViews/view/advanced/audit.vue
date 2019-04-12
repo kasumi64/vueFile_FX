@@ -46,7 +46,7 @@
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-					<el-table-column prop="errcode" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
 					<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
 					<!--<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>-->
 				</el-table>
@@ -122,7 +122,12 @@ function detail(row){
 			utils.alert({txt: res.errinfo});
 			return _this.showDialog = false;
 		}
-		_this.cuList = res.lists;
+		var obj, i, arr = res.lists||[];
+		for (i = 0; i < arr.length; i++){
+			obj = arr[i];
+			obj.errStr = obj.errcode == '0' ? 'success' : 'failed';
+		}
+		_this.cuList = arr;
 	});
 }
 

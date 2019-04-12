@@ -17,7 +17,7 @@
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-					<el-table-column prop="errcode" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
 					<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
 					<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
 				</el-table>
@@ -71,18 +71,18 @@ function WheelReq(sv, self){
 		if(res.endQueryFlag==0 && !timeout){
 			return setTimeout(req, 2000);
 		}
-		var obj, i;
-		for (i = 0; i < res.lists.length; i++){
-			obj = res.lists[i];
+		var obj, i, arr = res.lists||[];
+		for (i = 0; i < arr.length; i++){
+			obj = arr[i];
 			obj.errStr = obj.errcode == '0' ? 'success' : 'failed';
 		}
-		self.cuList = res.lists;
+		self.cuList = arr;
 		self.checkType = res.type;
 		if(!self.hideDialog) {
 			self.showDialog = true;
 			utils.tableSTop(self, 'detailBox');
 		}
-		self.$emit('update:cuList', res.lists);
+		self.$emit('update:cuList', arr);
 		stop();
 	}
 	function stop(){

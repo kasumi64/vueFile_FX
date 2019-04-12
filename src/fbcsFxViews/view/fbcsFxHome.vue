@@ -54,7 +54,7 @@ var _this, data = {
 	pwd: '',
 	uri: '',
 };
-var unlock, lock;
+var unlock, lock, lockTime = 0;
 
 //require('../img/logo.png');
 export default {
@@ -109,10 +109,13 @@ export default {
 			_this.uri = 'unlock';
 			_this.showReview = true;
 		});
-//		setInterval(checkLock, 5000);
+		checkLock();
 	},
 	components: {
 		sidebar: resolve => require(['@/fbcsFxViews/view/sidebar.vue'], resolve),
+	},
+	beforeDestroy(){
+		clearTimeout(lockTime);
 	}
 };
 
@@ -123,10 +126,10 @@ function checkLock(){
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode != '0') return console.warn(res.errcode, res.errinfo);
+		let ref = _this.$refs;
 		if(res.operationLockStatus == '1'){
 			lock.show();
 			unlock.hide();
-			let ref = _this.$refs;
 			ref.home.style['padding-top'] = '60px';
 			ref.lockTxt.style['display'] = 'block';
 		} else {
@@ -135,6 +138,7 @@ function checkLock(){
 			ref.home.style['padding-top'] = '20px';
 			ref.lockTxt.style['display'] = 'none';
 		}
+//		lockTime = setTimeout(checkLock, 5000);
 	});
 }
 
