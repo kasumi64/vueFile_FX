@@ -36,6 +36,18 @@
 				</div>
 			</li>
 		</ul>
+		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.userHome.signal')" v-dialogDrag width="646px"
+			:close-on-click-modal='false' :show-close="false">
+			<div class="_dialog signal">
+				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
+					@changePage="signalChange" >
+				</lgy-table>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="blueBtn" @click="send">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showPwdinfo=false">{{$t('fbcsFile.tips.cancel')}}</button>
+			</div>
+		</el-dialog>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='submit' :txt='reviewTxt'></lgy-review>
 		<lgy-wheelReq :parameter.sync="parameter" :cuList.sync='cuList' :hideDialog="true"></lgy-wheelReq>
 	</div>
@@ -54,14 +66,25 @@ var _this, data = {
 	],
 	showReview: false,
 	reqsv: {},
+	reviewTxt: '',
 	parameter: null,
 	
+	showPwdinfo: false,
+	signalList: [],
+	signalPage: 1,
+	signalTotal: 1
 };
 var nodes, dict;
 
 export default {
 	data(){
 		data.options = this.$t('fbcsFile.dispatch.options');
+		data.signalTitle = {
+			userID1: this.$t('fbcsFile.tableTitle.userID'),
+			userName1: this.$t('fbcsFile.tableTitle.userName'),
+			userID2: this.$t('fbcsFile.tableTitle.userID'),
+			userName2: this.$t('fbcsFile.tableTitle.userName')
+		};
 		return data;
 	},
 	methods:{
@@ -78,6 +101,11 @@ export default {
 			this.cuList = temp;
 		},
 		review(){
+			if(this.type == '3'){
+				this.signalPage = 1;
+				signalSearch();
+				return this.showPwdinfo = true;
+			}
 			this.reqsv = {uri: 'batchDispatch/dispatch'};
 			this.showReview = true;
 		},
@@ -95,14 +123,19 @@ export default {
 				res.type = 0;
 				_this.parameter = res;
 			});
+		},
+		signalChange(){
+			signalChange();
+		},
+		send(){
+			
 		}
-		
 	},
 	created(){
 		_this = this;
 		this.type = '1';
 		this.nodeList = this.cuList = [];
-		this.showReview = true;
+		this.showReview = this.showPwdinfo = false;
 //		nodes = this.nodeList;
 		nodeCu();
 	},
@@ -140,6 +173,29 @@ function nodeCu(type){
 		});
 	});
 }
+
+function signalSearch(){
+	_this.signalList = [];
+	var user = _this.currSelect;
+	let params = {
+		url: 'userComm/query',
+		cmdID: '600041',
+//		userID1: user.userID,
+//		userID2: '',
+//		pageSize: 20,
+//		currentPage: _this.signalPage
+	};
+	utils.post(params).then(res => {
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.totalPage>1 && _this.signalPage > res.totalPage){
+			_this.signalPage = res.totalPage;
+			return signalSearch();
+		}
+		_this.signalList = res.lists;
+		_this.signalPage = res.currentPage;
+		_this.signalTotal = res.totalSize;
+	});
+}
 </script>
 
 <style scoped="scoped">
@@ -153,4 +209,5 @@ function nodeCu(type){
 	.ti{width: auto;color: #999;text-align: left;margin-left: 10px;}
 	.txt{width: auto;text-align: left;}
 	.mt{margin-top: 30px;}
+	#fbcs_file .signal{width: auto;}
 </style>

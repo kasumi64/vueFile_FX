@@ -34,18 +34,12 @@ var _this, data = {
 
 export default {
 	data(){ return data;},
-	props: {
-		tab: {
-			type: String,
-			default: 'first'
-		},
-	},
 	methods:{
 		back(){
 			this.$router.push({path: '/main/fxCfg/userHome'});
 		},
 		tabClick(tabs, e){
-//			let tab = tabs.name;
+			this.tab = tabs.name;
 		}
 	},
 	created(){

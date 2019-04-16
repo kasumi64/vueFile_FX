@@ -123,6 +123,7 @@ export default {
 		this.showDialog = false;
 		this.checkType = 0;
 		this.cuList = [];
+		this.parameter = null;
 	},
 	watch: {
 		parameter(param){

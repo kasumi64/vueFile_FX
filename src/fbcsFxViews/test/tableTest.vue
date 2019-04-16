@@ -1,7 +1,7 @@
 <template>
 	<div class="myTable">
 		<lgy-list :index="true" :list="list" :title="title" :defined="defined" @row-click="rowClick" @currentRow="currentRow" 
-			:sortable="sortable" @sortChange="sortChange" :size="10" :total="60" :currentPage.sync="page1" @changePage="changePage1" >
+			:sortables="sortable" @sortChange="sortChange" :size="10" :total="60" :currentPage.sync="page1" @changePage="changePage1" >
 		</lgy-list>
 		<lgy-list :selection="true" @selectChange="selectChange" :defined="defined" :list="list2" :title="title" :size="30" :total="30" 
 			:currentPage.sync="page2" @changePage="changePage2">

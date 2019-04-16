@@ -8,8 +8,7 @@
 			<div class="title">
 				<span class="red">*</span>
 				<span class="">{{tabName}}</span>
-				<el-switch :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" 
-					v-model="enabled" @change="switchChange"></el-switch>
+				<el-switch :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" v-model="enabled"></el-switch>
 			</div>
 			<div class="content">
 				<el-input v-model="txtVal" type="textarea" rows="14" :disabled="!enabled" resize="none">

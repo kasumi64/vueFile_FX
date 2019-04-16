@@ -25,7 +25,8 @@ var _this, data = {
 	],
 	cuList: [],
 	showReview: false,
-	reqsv: {}
+	reqsv: {},
+	reviewTxt: ''
 };
 
 export default {

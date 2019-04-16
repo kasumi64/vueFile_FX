@@ -8,8 +8,8 @@ import i18n from '@/fbcsFxViews/language/lang.js';
 
 
 Vue.config.productionTip = false;
-Vue.config.silent = true;
-Vue.config.debug = false;
+//Vue.config.silent = true;
+//Vue.config.debug = false;
 
 
 /* eslint-disable no-new */

@@ -51,6 +51,7 @@ var _this, data = {
 	fileComment: '',
 	showReview: false,
 	reqsv: {},
+	reviewTxt: '',
 	parameter: null,
 };
 

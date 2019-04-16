@@ -79,6 +79,7 @@ data = {
 	options: '',
 	showReview: false,
 	reqsv: {},
+	reviewTxt: '',
 	parameter: null,
 };
 

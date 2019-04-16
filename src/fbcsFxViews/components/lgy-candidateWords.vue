@@ -26,7 +26,6 @@
 <script>
 var _this, t, data = {
 	list: [],
-	placeholder: 'placeholder'
 };
 export default {
 	name: 'lgy-candidateWords',
@@ -44,7 +43,10 @@ export default {
 			type: String,
 			default: ''
 		},
-		disabled: false,
+		disabled: {
+			type: Boolean,
+			default: false
+		},
 		fetch: Function,
 		scrollEnd: Function
 	},
@@ -101,7 +103,7 @@ export default {
 		_this = this;
 		this.$emit('input', '');
 		let p = this.placeholder;
-		if(!p) this.placeholder = this.$t('fbcsFile.components.placeholder');
+		if(!p) this.$emit('update:placeholder', this.$t('fbcsFile.components.placeholder'));
 	},
 	watch: {
 		disabled(val){

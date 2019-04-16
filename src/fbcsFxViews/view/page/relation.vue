@@ -85,6 +85,7 @@ var _this, data = {
     disabled: true,
     showReview: false,
     reqsv: {uri:''},
+    reviewTxt: '',
     parameter: ''
 };
 var userid, args;

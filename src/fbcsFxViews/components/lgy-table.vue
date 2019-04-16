@@ -26,7 +26,9 @@
 <script>
 
 var _this, data = {
-	currRow: ''
+	currRow: '',
+	widths: {},
+	sortables: {}
 };
 
 
@@ -36,26 +38,33 @@ export default {
 	props: {
 		index: false,
 		selection: false,
-		list: [],
-		title: {}, //与list的字段相同
+		list: {
+			type: Array,
+			default: []
+		},
+		title: { //与list的字段相同
+			type: Object,
+			default: {}
+		},
 		defined: {
 			type: Object,
 			default: null
-		},//{ defined 的结构
-//			label:'操作', width: "80px",
-//			items: [{src:require('@/fbcsFxViews/img/logo.png'), click:function(r,s){console.log(r,s)}, tips: '修改' },]
-//		}
+		},
+		//{ defined 的结构
+		//	label:'操作', width: "80px",
+		//	items: [{src:require('@/fbcsFxViews/img/logo.png'), click:function(r,s){console.log(r,s)}, tips: '修改' },]
+		//}
 		width: { //宽，与list的字段相同
 			type: Object,
-			default: {}
+			default: null
 		},
 		sortable: { //排序，与list的字段相同
-			type: Object,
-			default: {}
+			type: [Object, Boolean, String],
+			default: false
 		},
-		currentRow: null,
-		currentSelect: null,
-		selectList: [],
+//		currentRow: null,
+//		currentSelect: null,
+//		selectList: [],
 		size: {
 			type: Number,
 			default: 20
@@ -87,10 +96,10 @@ export default {
 			this.$emit('currentRow', currentRow, oldCurrentRow);
 		},
 		getWidth(k){
-			return this.width[k];
+			return this.widths[k];
 		},
 		isSort(k){
-			return this.sortable[k]?'custom':false
+			return this.sortables[k]?'custom':false;
 		},
 		sortChange({column, prop, order}){
 			this.$emit('sortChange', column, prop, order);
@@ -119,6 +128,8 @@ export default {
 	},
 	created(){
 		_this = this;
+		if(this.width instanceof Object) this.widths = this.width;
+		if(this.sortable instanceof Object) this.sortables = this.sortable;
 	},
 	watch: {}
 };
@@ -129,8 +140,8 @@ export default {
 	.custom{line-height: 0;white-space: nowrap;-moz-user-select: none;-webkit-user-select: none;}
 	.operate{display: inline-block;margin-right: 10px;cursor: pointer;vertical-align: middle;}
 	.icon{width: 20px;height: 20px;}
-	/*<lgy-list :index="true" :selection="true" :list="list" :title="title" :defined="custom" @row-click="rowClick" @currentRow="currentRow" 
-		:sortable="sortable" @sortChange="sortChange" :size="10" :total="60" :currentPage.sync="page1" @changePage="changePage1" >
+	/*<lgy-list :index="true" :selection="true" :list="list" :title="title" :widths="width" :defined="custom" @row-click="rowClick" @currentRow="currentRow" 
+		:sortables="sortable" @sortChange="sortChange" :size="10" :total="60" :currentPage.sync="page1" @changePage="changePage1" >
 	</lgy-list>*/
 </style>
 <style>

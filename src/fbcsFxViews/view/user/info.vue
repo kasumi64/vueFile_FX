@@ -86,15 +86,17 @@
 				<div class="label">{{$t('fbcsFile.userInfo.beginTime')}}</div>
 				<div class="right">
 					<el-date-picker v-model="info.beginSoftEncTime" class="picker" type="datetime" :clearable="false" :editable="false"
-						:picker-options="pickerBegin" :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00">
+						 :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00">
 					</el-date-picker>
+					<!--:picker-options="pickerBegin"-->
 				</div>
 			</li><li v-if="info.encFlag==1">
 				<div class="label">{{$t('fbcsFile.userInfo.endTime')}}</div>
 				<div class="right">
 					<el-date-picker v-model="info.endSoftEncTime" class="picker" type="datetime" :clearable="false" :editable="false"
-						:picker-options="pickerBegin" :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00">
+						 :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00">
 					</el-date-picker>
+					<!--:picker-options="pickerEnd"-->
 				</div>
 			</li>
 		</ul>

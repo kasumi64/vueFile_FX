@@ -47,8 +47,14 @@ export default {
 			type: Boolean,
 			default: false
 		},
-		reqsv: {}, //复核参数
-		txt: '', //弹框文本
+		reqsv: { //复核参数
+			type: [Object, Function],
+			default: {}
+		},
+		txt: { //弹框文本
+			type: String,
+			default: ''
+		},
 	},
 	methods:{
 		async reviewHandle(param){

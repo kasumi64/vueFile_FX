@@ -61,6 +61,7 @@ var _this, data = {
 	],
 	showReview: false,
 	reqsv: {},
+	reviewTxt: '',
 	parameter: null,
 	showDialog: false,
 	cutRow: {},

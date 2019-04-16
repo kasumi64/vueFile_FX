@@ -87,6 +87,7 @@ var _this, data = {
 	disName: false,
 	showReview: false,
     reqsv: {uri:''},
+    reviewTxt: '',
     parameter: null,
     jump: false,
 }, userid, args, isAdd;
@@ -131,12 +132,14 @@ function delNow(obj){
 function showEditEkey(row){
 	isAdd = false;
 	_this.dialogTitle = _this.$t('fbcsFile.fnField.editEkey');
-	_this.disabled = _this.disName = true;
-	_this.ekeyInfo.userID = row.userID;
-	_this.ekeyInfo.ekeyName = row.ekeyName;
-	_this.ekeyInfo.validDate = row.ymd;
-	_this.ekeyInfo.ekeyComment = row.ekeyComment;
 	_this.showDialog = true;
+	setTimeout(() => {
+		_this.disabled = _this.disName = true;
+		_this.ekeyInfo.userID = row.userID;
+		_this.ekeyInfo.ekeyName = row.ekeyName;
+		_this.ekeyInfo.validDate = row.ymd;
+		_this.ekeyInfo.ekeyComment = row.ekeyComment;
+	});
 }
 
 export default {

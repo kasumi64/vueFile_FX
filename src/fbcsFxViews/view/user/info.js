@@ -20,9 +20,24 @@ info = {
 	indate: '',
 	showReview: false,
 	reqsv: {},
+	reviewTxt: '',
 	parameter: null,
 	jump: false,
 	buildTime: '',
+	pickerBegin: {
+		disabledDate(time){
+			var boundary = new Date(_this.info.endSoftEncTime);
+			boundary.setHours(23,59,59);
+			return time > boundary;
+		}
+	},
+	pickerEnd: {
+		disabledDate(time){
+			var boundary = new Date(_this.info.beginSoftEncTime);
+			boundary.setHours(0, 0, 0);
+			return time < boundary;
+		}
+	},
 };
 
 export default {
@@ -44,20 +59,7 @@ export default {
 				this.info.userPasswd = defaultPwd;
 			} else this.info.userPasswd = '';
 		},
-		pickerBegin: {
-			disabledDate(time){
-				var boundary = new Date(_this.info.endSoftEncTime);
-				boundary.setHours(23,59,59);
-				return time > boundary;
-			}
-		},
-		pickerEnd: {
-			disabledDate(time){
-				var boundary = new Date(_this.info.beginSoftEncTime);
-				boundary.setHours(0, 0, 0);
-				return time < boundary;
-			}
-		},
+		
 		onlyNum_1(e){
 			let el = e.target, str = el.value, k = el.dataset.k;
 			let reg = /[^\d]/g, flag = false;

@@ -3,20 +3,20 @@
 		<el-menu class="menu" :default-active="active" :collapse.sync="collapse" @select="select" unique-opened 
 			active-text-color="#FFF" :collapse-transition="false">
 			
-			<el-menu-item v-for="obj in nav" :index="obj.router" key>
+			<el-menu-item v-for="obj in nav" :index="obj.router" :key="obj.router">
 				<!--<i :class="obj.icon"></i>-->
 				<img class="icon def" :src="obj.src1"/>
 				<img class="icon active" :src="obj.src2"/>
 				<b :class="{hide:collapse}">{{obj.label}}</b>
 			</el-menu-item>
 			
-			<el-submenu v-for="val in subNav" :index="val.folder" key>
+			<el-submenu v-for="val in subNav" :index="val.folder" :key="val.folder">
 				<div slot="title">
 					<!--<i :class="val.icon"></i>-->
 					<img class="icon" :src="val.src1"/>
 					<b :class="{hide:collapse}">{{val.label}}</b>
 				</div>
-				<el-menu-item v-for="o in val.sub"  :index="o.router" key>
+				<el-menu-item v-for="o in val.sub"  :index="o.router" :key="o.router">
 					<i :class="o.icon"></i>
 					{{o.label}}
 				</el-menu-item>

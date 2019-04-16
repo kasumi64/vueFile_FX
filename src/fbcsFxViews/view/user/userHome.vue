@@ -138,6 +138,10 @@ export default {
 		return data;
 	},
 	methods:{
+		rowClass({row, rowIndex}){
+			if(rowIndex%2 != 0) return 'tableBG';
+			return '';
+		},
 		search(){
 			this.page = 1;
 			search();

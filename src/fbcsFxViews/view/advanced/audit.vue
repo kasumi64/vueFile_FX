@@ -39,7 +39,7 @@
 				<span class="label">{{$t('fbcsFile.advanced.audit.expcsv')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :defined="defined" :width="width" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :widths="width" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
@@ -150,6 +150,10 @@ export default {
 		return data;
 	},
 	methods:{
+		rowClass({row, rowIndex}){
+			if(rowIndex%2 != 0) return 'tableBG';
+			return '';
+		},
 		search(){
 			this.page = 1;
 			search();
