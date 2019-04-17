@@ -72,7 +72,7 @@
 					{{$t('fbcsFile.userInfo.maxUser')}}
 				</div>
 				<div class="right">
-					<input v-model="info.maxRelationUser" data-k="maxRelationUser" @input="onlyNum($event)" maxlength="4"/>
+					<input v-model="info.maxRelationUser" data-k="maxRelationUser" @input="onlyNum($event)" maxlength="18"/>
 				</div>
 			</li><li>
 				<div class="label" style="vertical-align: top;">{{$t('fbcsFile.userInfo.encFlag')}}</div>
@@ -141,27 +141,27 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.publishTopicCount')}}</div>
 				<div class="right">
-					<input v-model="info.allowPublishTopicCount" data-k="allowPublishTopicCount" @input="onlyNum($event)" maxlength="4"/>
+					<input v-model="info.allowPublishTopicCount" data-k="allowPublishTopicCount" @input="onlyNum($event)" maxlength="9"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.subscribeTopicCount')}}</div>
 				<div class="right">
-					<input v-model="info.allowSubscribeTopicCount" data-k="allowSubscribeTopicCount" @input="onlyNum($event)" maxlength="4"/>
+					<input v-model="info.allowSubscribeTopicCount" data-k="allowSubscribeTopicCount" @input="onlyNum($event)" maxlength="9"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxPublishTopicDay')}}</div>
 				<div class="right">
-					<input v-model="info.maxPublishTopicDay" data-k="maxPublishTopicDay" @input="onlyNum($event)" maxlength="4"/>
+					<input v-model="info.maxPublishTopicDay" data-k="maxPublishTopicDay" @input="onlyNum($event)" maxlength="9"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxSimultTaskCount')}}</div>
 				<div class="right">
-					<input v-model="info.maxSimultTaskCount" data-k="maxSimultTaskCount" @input="onlyNum($event)"/>
+					<input v-model="info.maxSimultTaskCount" data-k="maxSimultTaskCount" @input="onlyNum($event)" maxlength="9"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxCltOneDayTaskCount')}}</div>
 				<div class="right">
-					<input v-model="info.maxCltOneDayTaskCount" data-k="maxCltOneDayTaskCount" @input="onlyNum($event)"/>
+					<input v-model="info.maxCltOneDayTaskCount" data-k="maxCltOneDayTaskCount" @input="onlyNum($event)" maxlength="9"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.webFlag')}}</div>

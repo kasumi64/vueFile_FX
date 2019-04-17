@@ -3,6 +3,7 @@ var obj = {
 		ok: '确定', now: '立即下发', cancel: '取消', build: '创建', back:'返回', refresh: '刷新',
 		modify: '修改', edit: '编辑', submit: '提交', contrast: '对比', close: '关闭',
 		date: '选择日期时间', title: '提示', rightClick: '请在文件名上点击右键，选择“链接另存为...”菜单保存文件。',
+		webUser: '此次修改影响到互联网节点，请手动下发互联网节点配置信息'
 	},
 	components: {
 		placeholder: '输入关键字', not: '暂无数据', paging1: '已显示全部', paging2: '条数据',
@@ -100,7 +101,8 @@ var obj = {
 		nodeName:'节点名', cuName:'CU名称', errcode:'错误码', errinfo:'错误信息', type:'操作类型',
 		setFile:'配置文件：', hots1:'分发主机：', hots2:'主机列表', res:'分发结果：',
 		t1:'(系统动态配置文件为：userinfo.db,userekey.db,usercomm.db,mxdynamic.ini)',
-		t2:'(系统静态配置文件为：mxstatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)'
+		t2:'(系统静态配置文件为：mxstatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)',
+		section: '段名', field: '用户ID', notype: '不一致类型', detail: '详情'
 	},
 	audit: {
 		operator:'操作员', reviewer:'审核员', operatorRole:'操作员角色', operatorType:'操作类型',

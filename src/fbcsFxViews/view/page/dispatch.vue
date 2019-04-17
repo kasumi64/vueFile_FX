@@ -30,13 +30,14 @@
 					<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 						<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-						<el-table-column prop="errcode" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+						<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
 						<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
 					</el-table>
 				</div>
 			</li>
 		</ul>
-		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.userHome.signal')" v-dialogDrag width="646px"
+		
+		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag width="646px"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog signal">
 				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
@@ -48,6 +49,7 @@
 				<button class="defBtn" @click="showPwdinfo=false">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
+		
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='submit' :txt='reviewTxt'></lgy-review>
 		<lgy-wheelReq :parameter.sync="parameter" :cuList.sync='cuList' :hideDialog="true"></lgy-wheelReq>
 	</div>
@@ -59,10 +61,10 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 var _this, data = {
 	type: '1',
 	nodeList: [
-//		{nodeName:'深圳', cuName:'CU-2'},
+		{nodeName:'深圳', cuName:'CU-2'},
 	],
 	cuList: [
-//		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok'},
+		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok'},
 	],
 	showReview: false,
 	reqsv: {},
@@ -74,16 +76,16 @@ var _this, data = {
 	signalPage: 1,
 	signalTotal: 1
 };
-var nodes, dict;
+var nodes, dict, isPatch;
 
 export default {
 	data(){
 		data.options = this.$t('fbcsFile.dispatch.options');
 		data.signalTitle = {
-			userID1: this.$t('fbcsFile.tableTitle.userID'),
-			userName1: this.$t('fbcsFile.tableTitle.userName'),
-			userID2: this.$t('fbcsFile.tableTitle.userID'),
-			userName2: this.$t('fbcsFile.tableTitle.userName')
+			section: this.$t('fbcsFile.dispatch.section'),
+			field: this.$t('fbcsFile.dispatch.field'),
+			type: this.$t('fbcsFile.dispatch.notype'),
+			detail: this.$t('fbcsFile.dispatch.detail')
 		};
 		return data;
 	},
@@ -102,8 +104,9 @@ export default {
 		},
 		review(){
 			if(this.type == '3'){
+				isPatch = true;
 				this.signalPage = 1;
-				signalSearch();
+				signalSearch();  //类型为用户密码表时用，3，7
 				return this.showPwdinfo = true;
 			}
 			this.reqsv = {uri: 'batchDispatch/dispatch'};
@@ -128,7 +131,9 @@ export default {
 			signalChange();
 		},
 		send(){
-			
+			this.reqsv = {uri: 'batchDispatch/dispatch'};
+			this.showReview = true;
+			this.showPwdinfo = false;
 		}
 	},
 	created(){
@@ -136,11 +141,13 @@ export default {
 		this.type = '1';
 		this.nodeList = this.cuList = [];
 		this.showReview = this.showPwdinfo = false;
+		isPatch = false;
 //		nodes = this.nodeList;
 		nodeCu();
 	},
 	watch: {
 		type(val){
+			isPatch = false;
 			nodeCu(val>3 ? 1 :0);
 		}
 	}
@@ -155,7 +162,7 @@ function nodeCu(type){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		nodes = [].concat(res.lists);
-		_this.cuList = res.lists;
+		_this.cuList = isPatch ? getCU(res.lists) : res.lists;
 		var temp = {}, arr = [];
 		dict = {};
 		for (let i = 0; i < nodes.length; i++) {
@@ -174,16 +181,22 @@ function nodeCu(type){
 	});
 }
 
+function getCU(cu){
+	var obj, i, arr = cu||[];
+	for (i = 0; i < arr.length; i++){
+		obj = arr[i];
+		obj.errStr = obj.errcode == '0' ? 'success' : 'failed';
+	}
+	return arr;
+}
+
 function signalSearch(){
-	_this.signalList = [];
-	var user = _this.currSelect;
 	let params = {
-		url: 'userComm/query',
-		cmdID: '600041',
-//		userID1: user.userID,
-//		userID2: '',
-//		pageSize: 20,
-//		currentPage: _this.signalPage
+		url: 'userpasswd/comparePasswdInfo',
+		cmdID: '600012',
+		version: '',
+		pageSize: 20,
+		currentPage: _this.signalPage
 	};
 	utils.post(params).then(res => {
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);

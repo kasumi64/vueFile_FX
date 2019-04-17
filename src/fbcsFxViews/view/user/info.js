@@ -103,10 +103,14 @@ export default {
 			
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+				let mess = `<p>${res.errinfo}</p>`;
+				if(res.webUserFlag == 1){ //网络用户
+					mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+				}
 				if(_this.jump){
 					_this.jump = false;
 					utils.confirm({
-						txt: res.errinfo,
+						txt: mess,
 						ok: () => {
 							getUserInfo(_this.info);
 							_this.$emit('update:isAdd', 'ekey');
@@ -118,7 +122,7 @@ export default {
 						}
 					});
 				} else {
-					utils.alert({txt: res.errinfo, type: 1});
+					utils.alert({txt: mess, type: 1});
 				}
 				utils.emit('fbcs_newUser', _this.info);
 			});
@@ -149,6 +153,16 @@ export default {
 			
 			utils.post(params).then(function(res){
 				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
+				if(res.webUserFlag == 1){ //网络用户
+					let mess = `<p>${res.errinfo}</p>`;
+					mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+					utils.alert({
+						txt: mess,
+						ok: () => { _this.parameter = res; },
+						type: 1
+					});
+					return;
+				}
 				_this.parameter = res;
 			});
 		}
@@ -208,16 +222,17 @@ function pass(){
 		maxUser = parseInt(info.maxRelationUser),
 		maxTask = parseInt(info.maxSimultTaskCount),
 		oneTask = parseInt(info.maxCltOneDayTaskCount);
-		
+	
 	if(!(speed>=-1&&speed<=999999999999999999)){
 		return utils.alert({txt: this.$t(err + 'speed')});
-	} else if (!(maxUser>=0&&maxUser<=1000)){
-		return utils.alert({txt: this.$t(err + 'maxUser')});
-	}else if (maxTask < 1){
+	} else if (maxTask < 1){
 		return utils.alert({txt: this.$t(err + 'maxTask')});
+	}
+	/*else  if (!(maxUser>=0&&maxUser<=1000)){
+		return utils.alert({txt: this.$t(err + 'maxUser')});
 	}else if (oneTask < 0){
 		return utils.alert({txt: this.$t(err + 'oneTask')});
-	}
+	}*/
 	
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
 	if((begin || end)&&info.encFlag==1){
@@ -267,7 +282,7 @@ function initDate(){
 	info.inZone = '',
 	info.linkGroupName = '任意',
 	info.speedCtrl = -1,
-	info.maxRelationUser = 10,
+	info.maxRelationUser = 1000,
 	info.encFlag = 1,
 	info.notOnlineAlarm=0,
 	info.allowBroadcast= 0, 

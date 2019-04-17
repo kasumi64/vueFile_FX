@@ -227,7 +227,11 @@ export default {
 					};
 					
 					utils.post(params).then(res => {
-						utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+						let mess = `<p>${res.errinfo}</p>`;
+						if(res.webUserFlag == 1){ //网络用户
+							mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+						}
+						utils.alert({txt: mess, type: res.errcode!='0'?0:1});
 					});
 				}
 			});	

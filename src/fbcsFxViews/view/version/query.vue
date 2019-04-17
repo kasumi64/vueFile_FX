@@ -77,6 +77,19 @@
 			</div>
 		</el-dialog>
 		
+		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag width="646px"
+			:close-on-click-modal='false' :show-close="false">
+			<div class="_dialog signal">
+				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
+					@changePage="signalChange" >
+				</lgy-table>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="blueBtn" @click="send">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showPwdinfo=false">{{$t('fbcsFile.tips.cancel')}}</button>
+			</div>
+		</el-dialog>
+		
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='submit' :txt='reviewTxt'></lgy-review>
 		<lgy-wheelReq :parameter="parameter"></lgy-wheelReq>
 	</div>

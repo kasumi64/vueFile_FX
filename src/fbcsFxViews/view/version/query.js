@@ -37,7 +37,12 @@ var _this, data = {
 	reviewTxt: '',
 	parameter: null,
 	checkDialog: false,
-	checkList: []
+	checkList: [],
+	
+	showPwdinfo: false,
+	signalList: [],
+	signalPage: 1,
+	signalTotal: 1
 };
 var rollRow;
 
@@ -85,6 +90,13 @@ function bigVer(obj){
 }
 function fnback(row, scope){
 	rollRow = row;
+	row.type = 3;
+	row.version = 'ABC'
+	if(row.type==3||row.type==7){
+		_this.signalPage = 1;
+		signalSearch(); //类型为用户密码表时用，3，7
+		return _this.showPwdinfo = true;
+	}
 	let uri = 'version/rollback',
 	txt = _this.$t('fbcsFile.versionQuery.rollback');
 	review(uri, txt);
@@ -127,6 +139,12 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail1, tips: this.$t('fbcsFile.tableDefined.detail'), enable: 'fileSize'},
 				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.tableDefined.detail'),enable: 'zdCfg'},
 			]
+		};
+		data.signalTitle = {
+			section: this.$t('fbcsFile.dispatch.section'),
+			field: this.$t('fbcsFile.dispatch.field'),
+			type: this.$t('fbcsFile.dispatch.notype'),
+			detail: this.$t('fbcsFile.dispatch.detail')
 		};
 		return data;
 	},
@@ -179,6 +197,15 @@ export default {
 				utils.tableSTop(_this, 'zdBox');
 			});
 		},
+		signalChange(){
+			signalChange();
+		},
+		send(){
+			let uri = 'version/rollback',
+			txt = _this.$t('fbcsFile.versionQuery.rollback');
+			review(uri, txt);
+			this.showPwdinfo = false;
+		}
 	},
 	created(){
 		_this = this;
@@ -187,7 +214,8 @@ export default {
 		info.type = '0';
 		info.pageSize = 20; 
 		this.page = 1;
-		this.checkDialog = this.showDialog = false;;
+		this.checkDialog = this.showDialog = false;
+		this.showPwdinfo = false;
 		this.radio = 4;
 		this.list = [];
 		getDay(4);
@@ -263,4 +291,24 @@ function getDay(val){
 		default: break;
 	}
 	_this.info.beginTime = today.getTime();
+}
+ //类型为用户密码表时用，3，7
+function signalSearch(){
+	let params = {
+		url: 'userpasswd/comparePasswdInfo',
+		cmdID: '600012',
+		version: rollRow.version,
+		pageSize: 20,
+		currentPage: _this.signalPage
+	};
+	utils.post(params).then(res => {
+		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.totalPage>1 && _this.signalPage > res.totalPage){
+			_this.signalPage = res.totalPage;
+			return signalSearch();
+		}
+		_this.signalList = res.lists;
+		_this.signalPage = res.currentPage;
+		_this.signalTotal = res.totalSize;
+	});
 }

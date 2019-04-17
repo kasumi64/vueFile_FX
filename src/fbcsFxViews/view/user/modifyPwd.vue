@@ -107,7 +107,12 @@ export default {
 			params.userPasswd = md5(this.passwd);
 			
 			utils.post(params).then(function(res){
-				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+				let mess = `<p>${res.errinfo}</p>`;
+				if(res.webUserFlag == 1){ //网络用户
+					mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+				}
+				utils.alert({txt: mess, type: res.errcode!='0'?0:1});
+				_this.$emit('update:show', false);
 			});
 		},
 		now(){
@@ -124,6 +129,17 @@ export default {
 			
 			utils.post(params).then(function(res){
 				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
+				_this.$emit('update:show', false);
+				if(res.webUserFlag == 1){ //网络用户
+					let mess = `<p>${res.errinfo}</p>`;
+					mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+					utils.alert({
+						txt: mess,
+						ok: () => { _this.parameter = res; },
+						type: 1
+					});
+					return;
+				}
 				_this.parameter = res;
 			});
 		}
