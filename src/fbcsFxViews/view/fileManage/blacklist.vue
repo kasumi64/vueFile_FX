@@ -10,7 +10,7 @@
 				<el-table-column prop="cuName" :label="$t('fbcsFile.files.blacklist.cuName')"></el-table-column>
 				<el-table-column prop="isBlack" :label="$t('fbcsFile.files.blacklist.cuType')"></el-table-column>
 			</el-table>
-			<button @click="setBlack" class="blueBtn mt">{{$t('fbcsFile.files.blacklist.blackBtn')}}</button>
+			<button v-if="fxAuth" @click="setBlack" class="blueBtn mt">{{$t('fbcsFile.files.blacklist.blackBtn')}}</button>
 		</div>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 	</div>
@@ -20,6 +20,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	fxAuth: true,
 	nodeList: [
 		{nodeName:'shenzhen', cuName:'cu-2', isBlack:'白名单'}, {nodeName:'beijing', cuName:'cu-1', isBlack:'白名单'}
 	],
@@ -68,6 +69,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		this.nodeList = this.cuList = [];
 		nodeCu();
 	}

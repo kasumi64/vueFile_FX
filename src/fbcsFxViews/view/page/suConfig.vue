@@ -8,15 +8,15 @@
 			<div class="title">
 				<span class="red">*</span>
 				<span class="">{{tabName}}</span>
-				<el-switch :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" v-model="enabled"></el-switch>
+				<el-switch v-if="fxAuth" :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" v-model="enabled"></el-switch>
 			</div>
 			<div class="content">
 				<el-input v-model="txtVal" type="textarea" rows="14" :disabled="!enabled" resize="none">
 				</el-input>
-				<button class="blueBtn mt" @click="submit" :disabled="!enabled">{{$t('fbcsFile.tips.submit')}}</button>
-				<button class="blueBtn mt" @click="history" :disabled="!enabled">{{$t('fbcsFile.tips.contrast')}}</button>
-				<h2 class="h2">{{$t('fbcsFile.suConfig.h2')}}</h2>
-				<el-table :data="list" :row-class-name="rowClass" highlight-current-row border>
+				<button v-if="fxAuth" class="blueBtn mt" @click="submit" :disabled="!enabled">{{$t('fbcsFile.tips.submit')}}</button>
+				<button v-if="fxAuth" class="blueBtn mt" @click="history" :disabled="!enabled">{{$t('fbcsFile.tips.contrast')}}</button>
+				<h2 class="h2" v-if="fxAuth">{{$t('fbcsFile.suConfig.h2')}}</h2>
+				<el-table v-if="fxAuth" :data="list" :row-class-name="rowClass" highlight-current-row border>
 					<el-table-column prop="section" :label="$t('fbcsFile.suConfig.section')"></el-table-column>
 					<el-table-column prop="type" :label="$t('fbcsFile.suConfig.type')"></el-table-column>
 					<el-table-column prop="detail" :label="$t('fbcsFile.suConfig.detail')"></el-table-column>
@@ -46,6 +46,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	fxAuth: true,
 	active: 'first',
 	enabled: false,
 	tabName: '',
@@ -116,6 +117,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		this.tabName = this.$t('fbcsFile.suConfig.static');
 		this.list = [];
 		this.active = 'first';

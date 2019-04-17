@@ -28,9 +28,9 @@
 			</li><li>
 				<div class="label">&nbsp;</div>
 				<div class="right">
-					<button class="blueBtn" @click="dispense">{{$t('fbcsFile.files.upload.dispense')}}</button>
+					<button v-if="fxAuth" class="blueBtn" @click="dispense">{{$t('fbcsFile.files.upload.dispense')}}</button>
 				</div>
-			</li><li>
+			</li><li v-if="fxAuth">
 				<div class="label">&nbsp;</div>
 				<div class="right">
 					<h2 class="h2">{{$t('fbcsFile.files.upload.res')}}</h2>
@@ -46,6 +46,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	fxAuth: true,
 	fileName: '',
 	version: '',
 	fileComment: '',
@@ -91,6 +92,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		this.version = this.fileName = this.fileComment = '';
 	}
 };

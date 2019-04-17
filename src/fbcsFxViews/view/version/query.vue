@@ -26,10 +26,10 @@
 		</div>
 		
 		<ul class="fnField">
-			<li @click="bigVer">
+			<li @click="bigVer" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.bigVer')}}</span>
-			</li><li @click="getCfg">
+			</li><li @click="getCfg" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.getCfg')}}</span>
 			</li><li @click="checkVer(0)">

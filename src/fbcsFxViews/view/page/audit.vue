@@ -155,6 +155,7 @@ export default {
 		for (k in info) info[k] = '';
 		info.sequence = 0;
 		this.showDialog = false;
+		this.list = [];
 		getDay(this.radio = 2);
 		operatorType();
 		search();

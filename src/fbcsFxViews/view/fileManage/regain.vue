@@ -108,6 +108,7 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/restore.png'), click: restore, tips: this.$t('fbcsFile.files.regain.restore') },
 			]
 		};
+		if(!utils.getFxAuth) data.defined.items = [];
 		return data;
 	},
 	methods:{

@@ -10,6 +10,7 @@ info = {
 	maxPublishTopicDay: 7, maxSimultTaskCount: '',maxCltOneDayTaskCount: '', webUserFlag: '',
 	isModifyDefaultPasswd: '', expiredTimeFlag: '',
 }, data = {
+	fxAuth: true,
 	info,
 	pwd: 1,
 	more: true,
@@ -169,6 +170,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		this.jump = this.isNew;
 		args = utils.getArgs('userInfo');
 		initDate();

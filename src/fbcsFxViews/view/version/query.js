@@ -2,6 +2,7 @@ import utils  from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
 var _this, data = {
+	fxAuth: true,
 	radio: 0,
 	info: {
 		type: '', beginTime: '', endTime:'', 
@@ -140,6 +141,12 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.tableDefined.detail'),enable: 'zdCfg'},
 			]
 		};
+		if(!utils.getFxAuth) {
+			data.defined.items = [
+				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail1, tips: this.$t('fbcsFile.tableDefined.detail'), enable: 'fileSize'},
+				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.tableDefined.detail'),enable: 'zdCfg'},
+			];
+		}
 		data.signalTitle = {
 			section: this.$t('fbcsFile.dispatch.section'),
 			field: this.$t('fbcsFile.dispatch.field'),
@@ -209,6 +216,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		let k, info = this.info;
 		for (k in info) info[k] = '';
 		info.type = '0';

@@ -190,8 +190,8 @@
 			<li>
 				<div class="label">&nbsp;</div>
 				<div class="right">
-					<button @click="now" class="blueBtn">{{$t('fbcsFile.tips.now')}}</button>
-					<button @click="submit" class="blueBtn">{{$t('fbcsFile.tips.ok')}}</button>
+					<button v-if="fxAuth" @click="now" class="blueBtn">{{$t('fbcsFile.tips.now')}}</button>
+					<button v-if="fxAuth" @click="submit" class="blueBtn">{{$t('fbcsFile.tips.ok')}}</button>
 					<button @click="back" class="defBtn">{{$t('fbcsFile.tips.back')}}</button>
 				</div>
 			</li>

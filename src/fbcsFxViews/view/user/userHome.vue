@@ -7,7 +7,7 @@
 			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<ul class="fnField">
+		<ul class="fnField" v-if="fxAuth">
 			<li @click="addUser">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addUser')}}</span>
@@ -81,6 +81,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	fxAuth: true,
 	id: '',
 	name: '',
 	showPwd: false,
@@ -245,6 +246,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		this.id = this.name = '';
 		this.currSelect = null;
 		this.showDialog = false;

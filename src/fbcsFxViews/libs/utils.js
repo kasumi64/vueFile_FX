@@ -63,6 +63,7 @@ function ReqHttp(){
 	
 	var axios = Axios.create();
 	axios.defaults.baseURL = window.fbcs_fxIP + '/fdep/fx/';
+//	axios.defaults.baseURL = 'http://10.10.27.161:8088/fdep/fx/';
 	
 	// 添加请求拦截器
 	axios.interceptors.request.use(function(config){
@@ -326,7 +327,7 @@ exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str == ''); };
 
 Object.addProto(exp, 'getFxAuth', {
 	get(){
-		if('debug') return true;
+		if('debug') return false;
 		
 		let authority = sessionStorage.getItem('authoritys') || '';
 		return (/Auth_Fx_Config_Opt/i).test(authority);

@@ -21,7 +21,7 @@
 						<el-table-column type="selection" width="40" key></el-table-column>
 						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					</el-table>
-					<button @click="review" class="blueBtn mt">{{$t('fbcsFile.tips.submit')}}</button>
+					<button v-if="fxAuth" @click="review" class="blueBtn mt">{{$t('fbcsFile.tips.submit')}}</button>
 				</div>
 			</li><li class="mb">
 				<label class="label">&nbsp;</label>
@@ -59,6 +59,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	fxAuth: true,
 	type: '1',
 	nodeList: [
 		{nodeName:'深圳', cuName:'CU-2'},
@@ -138,6 +139,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		this.type = '1';
 		this.nodeList = this.cuList = [];
 		this.showReview = this.showPwdinfo = false;

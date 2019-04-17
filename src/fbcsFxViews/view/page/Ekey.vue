@@ -7,7 +7,7 @@
 			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<ul class="fnField">
+		<ul class="fnField" v-if="fxAuth">
 			<li @click="showAddEkey">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addEkey')}}</span>
@@ -69,6 +69,7 @@ import utils  from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
 var _this, data = {
+	fxAuth: true,
 	id: '',
 	name: '',
 	idWords: null,
@@ -158,6 +159,7 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: delEkey, tips: this.$t('fbcsFile.tableDefined.delEkey') },
 			]
 		};
+		if(!utils.getFxAuth) data.defined.items = [];
 		return data;
 	},
 	props: {
@@ -227,6 +229,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		this.jump = this.isNew;
 		args = utils.getArgs('userInfo');
 		utils.once('fbcs_newUser', user => {

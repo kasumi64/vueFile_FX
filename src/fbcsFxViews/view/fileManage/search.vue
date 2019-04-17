@@ -77,6 +77,7 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.files.search.del') },
 			]
 		};
+		if(!utils.getFxAuth) data.defined.items = [];
 		return data;
 	},
 	methods:{

@@ -8,7 +8,7 @@
 			<lgy-candidateWords v-model="name" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<ul class="fnField">
+		<ul class="fnField" v-if="fxAuth">
 			<li @click="add">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addSignal.png"/>
 				<span class="label">{{$t('fbcsFile.relation.addSignal')}}</span>
@@ -63,6 +63,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	fxAuth: true,
 	id: '',
 	name: '',
 	idWords: null,
@@ -130,6 +131,7 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delSignal') }
 			]
 		};
+		if(!utils.getFxAuth) data.defined.items = [];
 		return data;
 	},
 	props: {
@@ -233,6 +235,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		args = utils.getArgs('userInfo');
 		utils.once('fbcs_newUser', user => {
 			args = user;
