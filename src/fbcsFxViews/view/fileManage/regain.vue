@@ -9,7 +9,7 @@
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.files.regain.restore')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
-			<ul class="_dialog">
+			<ul class="_dialog" style="white-space: nowrap;">
 				<li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.files.regain.fileName')}}：</p>
@@ -205,4 +205,7 @@ function nodeCu(type){
 
 <style scoped="scoped">
 	.h2{ font-size: 14px; color: #666;  margin-bottom: 10px;}
+	._dialog li {white-space: nowrap;}
+	._dialog .right .txt {white-space: normal;display: block;width: 350px;}
+	#fbcs_file ._dialog li .left{width: 140px;}
 </style>

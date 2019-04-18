@@ -66,7 +66,7 @@ export default {
 				reviewer: this.name,
 				password: md5(this.pwd),
 				language: utils.getArgs('lang') || 'zh'
-			}, uri = '/fedp/fx/';
+			}, uri = '/fdep/fx/';
 			if(kit.isFn(param)) param = param();
 			if(!kit.isObject(param)) param = {uri:param}
 			for (let k in param) { args[k] = param[k] };

@@ -64,12 +64,16 @@ function WheelReq(sv, self){
 		utils.post(param, response).catch(stop);
 	}
 	function response(res){
-		if(res.errcode!='0'||res.type==2) {
+		if(res.errcode != '0') {
 			utils.alert({txt: res.errinfo, type:0});
 			return stop();
 		}
 		if(res.endQueryFlag==0 && !timeout){
 			return setTimeout(req, 2000);
+		}
+		if(res.type==2) { //1.生成大版本, 2.获取中登配置
+			utils.alert({txt: res.errinfo, type:1});
+			return stop();
 		}
 		var obj, i, arr = res.lists||[];
 		for (i = 0; i < arr.length; i++){
@@ -127,6 +131,7 @@ export default {
 	},
 	watch: {
 		parameter(param){
+			console.log(param)
 			if(!param) return;
 			let w = new WheelReq(param, this);
 			w.start();

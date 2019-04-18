@@ -110,7 +110,10 @@ function ReqHttp(){
 			console.log(params.cmdID, params);
 			let debugRes = {
 				status: 200,
-				data: {errcode:'0',lists:[{userID: '01', userName: 'userName'}],errinfo: 'Success.'}
+				data: {errcode:'0', lists:[
+				{userID: '01', userName: 'userName',userID1: '006', nodeName: '深圳', cuName: 'CU-1',
+				operationTime: 1555553114000, operationType: 3, type: 4, fileName: 'ABC'}
+				], errinfo: 'Success.'}
 			};
 			return Promise.resolve(callback(debugRes, fn, args));
 		}
@@ -327,7 +330,7 @@ exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str == ''); };
 
 Object.addProto(exp, 'getFxAuth', {
 	get(){
-		if('debug') return false;
+		if('debug') return true;
 		
 		let authority = sessionStorage.getItem('authoritys') || '';
 		return (/Auth_Fx_Config_Opt/i).test(authority);

@@ -10,7 +10,7 @@
 				<span class="">{{tabName}}</span>
 				<el-switch v-if="fxAuth" :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" v-model="enabled"></el-switch>
 			</div>
-			<div class="content">
+			<div class="textarea">
 				<el-input v-model="txtVal" type="textarea" rows="14" :disabled="!enabled" resize="none">
 				</el-input>
 				<button v-if="fxAuth" class="blueBtn mt" @click="submit" :disabled="!enabled">{{$t('fbcsFile.tips.submit')}}</button>
@@ -143,7 +143,7 @@ function getConfig(type){
 <style scoped="scoped">
 	.title{font-size: 14px;color: #303133;margin-right: 10px;line-height: 24px;}
 	.title *{vertical-align: middle;}
-	.content{margin-top: 20px;padding-left: 120px;max-width: 1020px;}
+	.textarea{margin-top: 20px;padding-left: 120px;max-width: 1020px;}
 	.mt{margin: 20px 20px 0 0;}
 	.h2{font-size: 14px;line-height: 30px;margin-top: 20px;}
 </style>

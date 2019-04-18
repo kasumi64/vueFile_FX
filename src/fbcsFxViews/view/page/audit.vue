@@ -27,7 +27,7 @@
 			</el-date-picker>
 			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<lgy-table :list="list" :title="title" :defined="defined" :widths="width" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :defined="defined" :width="width" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">

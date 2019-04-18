@@ -116,7 +116,10 @@ function zdCfg(obj){
 	};
 	
 	utils.post(params).then(function(res){
-		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+//		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		res.type = 2;
+		_this.parameter = res;
 	});
 }
 
@@ -148,7 +151,7 @@ export default {
 			];
 		}
 		data.signalTitle = {
-			section: this.$t('fbcsFile.dispatch.section'),
+//			section: this.$t('fbcsFile.dispatch.section'),
 			field: this.$t('fbcsFile.dispatch.field'),
 			type: this.$t('fbcsFile.dispatch.notype'),
 			detail: this.$t('fbcsFile.dispatch.detail')
@@ -168,6 +171,7 @@ export default {
 			search();
 		},
 		submit(obj){
+			console.log(obj.uri)
 			switch (obj.uri){
 				case "version/rollback": 
 					rollback(obj); break;
@@ -226,6 +230,7 @@ export default {
 		this.showPwdinfo = false;
 		this.radio = 4;
 		this.list = [];
+		this.parameter = null;
 		getDay(4);
 		this.search();
 	},

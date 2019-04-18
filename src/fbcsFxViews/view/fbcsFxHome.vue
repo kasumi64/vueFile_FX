@@ -177,11 +177,11 @@ function unlockFn(uri){
 </script>
 
 <style scoped="scoped">
-	.home{height: 100%;}
+	.home{height: 100%;background: #FFF;}
 	.cw{height: calc(100% - 50px);}
 	.nav{height: 50px;background: #409eff;color: #FFF;line-height: 50px;z-index: 2;}
 	.homeView{height: calc(100% - 50px);margin-left: 226px;overflow: auto;border: 20px solid #Edf0f5;border-right: none;
-		padding: 20px 0 20px 20px;transition: margin 0.3s;}
+		transition: margin 0.3s;/*padding: 20px 0 20px 20px;*/padding: 20px;}
 	.big{margin-left: 64px;}
 	/*.router{background: #fff;min-height: 100%;}*/
 	#fbcs_file .fs{margin-left: 10px;}

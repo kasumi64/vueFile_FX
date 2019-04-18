@@ -16,7 +16,7 @@
 		</el-table>
 		<div class="paging">
 			<el-pagination v-if="total>size" layout="prev, pager, next, jumper, total" :page-size="size" :total="total"
-				@current-change="changePage" :current-page.sync="currentPage">
+				@current-change="changePage" :current-page.sync="page">
 			</el-pagination>
 			<div v-if="total<=size&&list.length>0" class="onePage">{{$t('fbcsFile.components.paging1')}}{{total}}{{$t('fbcsFile.components.paging2')}}</div>
 		</div>
@@ -28,7 +28,8 @@
 var _this, data = {
 	currRow: '',
 	widths: {},
-	sortables: {}
+	sortables: {},
+	page: 1
 };
 
 
@@ -128,8 +129,11 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.page = this.currentPage;
 		if(this.width instanceof Object) this.widths = this.width;
+		else this.widths = {};
 		if(this.sortable instanceof Object) this.sortables = this.sortable;
+		else this.sortables = {};
 	},
 	watch: {}
 };

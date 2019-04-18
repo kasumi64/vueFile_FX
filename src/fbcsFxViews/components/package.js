@@ -3,8 +3,8 @@ import ElementUI from 'element-ui';
 import '@/fbcsFxViews/css/initTag.min.css';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/fbcsFxViews/css/fbcs_file_common.css';
-import axios from 'axios';
 import kit from '@/fbcsFxViews/libs/kit.min.js';
+//import axios from 'axios';
 import '@/fbcsFxViews/libs/Directives.js';
 
 

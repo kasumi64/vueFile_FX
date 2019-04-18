@@ -39,7 +39,7 @@
 				<span class="label">{{$t('fbcsFile.advanced.audit.expcsv')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :widths="width" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :width="width" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">

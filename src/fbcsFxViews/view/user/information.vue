@@ -17,7 +17,7 @@
 			<input v-model="info.ssccManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
 			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>-->
-		<ul class="fnField">
+		<ul class="fnField" v-if="fxAuth">
 			<li @click="addOPE">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addTheme.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.information.addOPE')}}</span>
@@ -89,6 +89,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	fxAuth: true,
 	info: {
 		userID: '', operatorName: '', operatorMobileNum: '', operatorEmail: '',
 		operatorTelNum: '', ssccManager: ''
@@ -155,6 +156,7 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delExt') },
 			]
 		};
+		if(!utils.getFxAuth) data.defined.items = [];
 		data.titleBOP = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
@@ -227,6 +229,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.fxAuth = utils.getFxAuth;
 		args = utils.getArgs('userInfo');
 		utils.once('fbcs_newUser', user => {
 			args = user;

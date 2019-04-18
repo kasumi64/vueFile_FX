@@ -18,7 +18,7 @@
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
-					<el-table-column type="index" width="50"></el-table-column>
+					<el-table-column type="index" width="50" label=" "></el-table-column>
 					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
 					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>

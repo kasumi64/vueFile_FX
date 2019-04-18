@@ -6,7 +6,7 @@
 		</header>
 		
 		<el-table class="table" :data="zdList" :row-class-name="rowClass" max-height="294" border>
-			<el-table-column type="index" width="50"></el-table-column>
+			<el-table-column type="index" width="50" label=" "></el-table-column>
 			<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 			<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
 			<el-table-column prop="fileSize" :label="$t('fbcsFile.versionDetail.fileSize')"></el-table-column>

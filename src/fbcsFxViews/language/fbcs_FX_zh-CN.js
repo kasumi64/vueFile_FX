@@ -98,10 +98,11 @@ var obj = {
 	dispatch: {
 		options: [{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},
 			{label: '用户密码信息表', value: '3'}, {label: '互联网配置信息', value: '4'}],
-		nodeName:'节点名', cuName:'CU名称', errcode:'错误码', errinfo:'错误信息', type:'操作类型',
+		nodeName:'节点名', cuName:'CU名称', errcode:'结果', errinfo:'错误信息', type:'操作类型',
 		setFile:'配置文件：', hots1:'分发主机：', hots2:'主机列表', res:'分发结果：',
-		t1:'(系统动态配置文件为：userinfo.db,userekey.db,usercomm.db,mxdynamic.ini)',
-		t2:'(系统静态配置文件为：mxstatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)',
+		t1:'(系统动态配置文件为：userinfo.db,userekey.db,usercomm.db,FxDynamic.ini,userinfoext.db)',
+		t2:'(系统静态配置文件为：FxStatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)',
+		t4:'(互联网配置信息文件为：userinfo.db,userinfoext.db,userpasswd.db)',
 		section: '段名', field: '用户ID', notype: '不一致类型', detail: '详情'
 	},
 	audit: {

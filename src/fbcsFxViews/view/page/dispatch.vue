@@ -11,6 +11,7 @@
 					<span class="label ti" v-if="type==1">{{$t('fbcsFile.dispatch.t1')}}</span>
 					<span class="label ti" v-if="type==2">{{$t('fbcsFile.dispatch.t2')}}</span>
 					<span class="label ti" v-if="type==3">{{$t('fbcsFile.dispatch.t3')}}</span>
+					<span class="label ti" v-if="type==4">{{$t('fbcsFile.dispatch.t4')}}</span>
 				</div>
 			</li><li class="mb">
 				<label class="label">{{$t('fbcsFile.dispatch.hots1')}}</label>
@@ -83,7 +84,7 @@ export default {
 	data(){
 		data.options = this.$t('fbcsFile.dispatch.options');
 		data.signalTitle = {
-			section: this.$t('fbcsFile.dispatch.section'),
+//			section: this.$t('fbcsFile.dispatch.section'),
 			field: this.$t('fbcsFile.dispatch.field'),
 			type: this.$t('fbcsFile.dispatch.notype'),
 			detail: this.$t('fbcsFile.dispatch.detail')
