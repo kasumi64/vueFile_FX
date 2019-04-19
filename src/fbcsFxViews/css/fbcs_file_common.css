@@ -92,12 +92,12 @@
 
 /*对话框*/
 #fbcs_file .el-dialog{width: 600px;}
-#fbcs_file .el-dialog__header{padding: 13px 20px;}
+#fbcs_file .el-dialog__header{padding: 13px 20px !important;}
 #fbcs_file .el-dialog__title{color: #666;}
-#fbcs_file .el-dialog__body{padding: 0;}
-#fbcs_file .el-dialog__footer{padding: 0;}
+#fbcs_file .el-dialog__body{padding: 0 !important;border: none;min-height: auto;}
+#fbcs_file .el-dialog__footer{padding: 0 !important;}
 
-#fbcs_file ._dialog{font-size: 0;padding: 40px;width: 600px;min-height:200px;border-top: 1px solid #EDEEF0;}
+#fbcs_file ._dialog{font-size: 0;padding: 40px;min-height:200px;border-top: 1px solid #EDEEF0;}
 #fbcs_file ._dialog li{margin-bottom: 10px;}
 #fbcs_file ._dialog li:last-child{margin-bottom: 0;}
 #fbcs_file ._dialog .left *,#fbcs_file ._dialog .right *{vertical-align: middle;}

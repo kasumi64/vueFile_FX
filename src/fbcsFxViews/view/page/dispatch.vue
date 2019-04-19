@@ -38,11 +38,11 @@
 			</li>
 		</ul>
 		
-		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag width="646px"
+		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag width="800px"
 			:close-on-click-modal='false' :show-close="false">
-			<div class="_dialog signal">
+			<div class="_dialog">
 				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
-					@changePage="signalChange" >
+					@changePage="signalChange" max-height="394" :width="width">
 				</lgy-table>
 			</div>
 			<div slot="footer" class="_footBtn">
@@ -89,6 +89,10 @@ export default {
 			type: this.$t('fbcsFile.dispatch.notype'),
 			detail: this.$t('fbcsFile.dispatch.detail')
 		};
+		data.width = {
+			type: 100,
+			detail: 450
+		};
 		return data;
 	},
 	methods:{
@@ -105,6 +109,7 @@ export default {
 			this.cuList = temp;
 		},
 		review(){
+			if(this.cuList.length == 0) return utils.alert({txt: this.$t('fbcsFile.dispatch.noNode')});
 			if(this.type == '3'){
 				isPatch = true;
 				this.signalPage = 1;
@@ -146,6 +151,7 @@ export default {
 		this.showReview = this.showPwdinfo = false;
 		isPatch = false;
 //		nodes = this.nodeList;
+		dict = {};
 		nodeCu();
 	},
 	watch: {
@@ -165,7 +171,7 @@ function nodeCu(type){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		nodes = [].concat(res.lists);
-		_this.cuList = isPatch ? getCU(res.lists) : res.lists;
+//		_this.cuList = isPatch ? getCU(res.lists) : res.lists;
 		var temp = {}, arr = [];
 		dict = {};
 		for (let i = 0; i < nodes.length; i++) {
@@ -225,5 +231,4 @@ function signalSearch(){
 	.ti{width: auto;color: #999;text-align: left;margin-left: 10px;}
 	.txt{width: auto;text-align: left;}
 	.mt{margin-top: 30px;}
-	#fbcs_file .signal{width: auto;}
 </style>

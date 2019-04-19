@@ -8,7 +8,7 @@
 				</div>
 				<div class="right">
 					<input id="ddd" v-model="fileName" @input="filter($event)" data-k="fileName" maxlength="64"/>
-					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}fbcs-server/static/import/fxclient</p>
+					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}fbcs-server/static/import/clientfile</p>
 				</div>
 			</li><li>
 				<div class="label">

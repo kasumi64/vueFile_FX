@@ -100,10 +100,10 @@ var obj = {
 			{label: '用户密码信息表', value: '3'}, {label: '互联网配置信息', value: '4'}],
 		nodeName:'节点名', cuName:'CU名称', errcode:'结果', errinfo:'错误信息', type:'操作类型',
 		setFile:'配置文件：', hots1:'分发主机：', hots2:'主机列表', res:'分发结果：',
-		t1:'(系统动态配置文件为：userinfo.db,userekey.db,usercomm.db,FxDynamic.ini,userinfoext.db)',
+		t1:'(系统动态配置文件为：FxDynamic.ini,userinfo.db,userekey.db,usercomm.db,userinfoext.db)',
 		t2:'(系统静态配置文件为：FxStatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)',
 		t4:'(互联网配置信息文件为：userinfo.db,userinfoext.db,userpasswd.db)',
-		section: '段名', field: '用户ID', notype: '不一致类型', detail: '详情'
+		section: '段名', field: '用户ID', notype: '不一致类型', detail: '详情', noNode: '节点名不能为空'
 	},
 	audit: {
 		operator:'操作员', reviewer:'审核员', operatorRole:'操作员角色', operatorType:'操作类型',
@@ -137,7 +137,7 @@ var obj = {
 	
 	files: {
 		search: {
-			version: '版本号', fileName: '客户端文件名', fileComment: '描述', size: '客户端文件大小', md5:'文件MD5' ,time: '发布时间', 
+			version: '版本号', fileName: '文件名', fileComment: '描述', size: '文件大小', md5:'文件MD5' ,time: '发布时间', 
 			operater: '下发人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', sendRes: '下发结果：'
 		},
 		upload: {

@@ -30,9 +30,7 @@ var _this, data = {
 		}
 	},
 	showDialog: false,
-	detailList: [
-		{},
-	],
+	detailList: [],
 	showReview: false,
 	reqsv: {},
 	reviewTxt: '',
@@ -91,8 +89,6 @@ function bigVer(obj){
 }
 function fnback(row, scope){
 	rollRow = row;
-	row.type = 3;
-	row.version = 'ABC'
 	if(row.type==3||row.type==7){
 		_this.signalPage = 1;
 		signalSearch(); //类型为用户密码表时用，3，7
@@ -156,6 +152,10 @@ export default {
 			type: this.$t('fbcsFile.dispatch.notype'),
 			detail: this.$t('fbcsFile.dispatch.detail')
 		};
+		data.width = {
+			type: 100,
+			detail: 450
+		};
 		return data;
 	},
 	methods:{
@@ -171,7 +171,6 @@ export default {
 			search();
 		},
 		submit(obj){
-			console.log(obj.uri)
 			switch (obj.uri){
 				case "version/rollback": 
 					rollback(obj); break;

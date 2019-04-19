@@ -77,11 +77,11 @@
 			</div>
 		</el-dialog>
 		
-		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag width="646px"
+		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag  width="800px"
 			:close-on-click-modal='false' :show-close="false">
-			<div class="_dialog signal">
+			<div class="_dialog">
 				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
-					@changePage="signalChange" >
+					@changePage="signalChange"  max-height="394" :width="width">
 				</lgy-table>
 			</div>
 			<div slot="footer" class="_footBtn">

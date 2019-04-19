@@ -131,7 +131,6 @@ export default {
 	},
 	watch: {
 		parameter(param){
-			console.log(param)
 			if(!param) return;
 			let w = new WheelReq(param, this);
 			w.start();

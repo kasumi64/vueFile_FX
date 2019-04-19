@@ -1,7 +1,7 @@
 <template>
 	<div ref='fbcs_file' id="fbcs_file" class="home">
 		<input type="text" class="autocompleteOFF" autocomplete="on" />
-		<div class="nav" id="nav">
+		<!--<div class="nav" id="nav">
 			<div class="logoBox">
 				<img class="logo" src="../img/FDEP.png" />
 			</div>
@@ -10,9 +10,9 @@
 				<img id="fbcsMX_lock" src="@/fbcsFxViews/img/lock.png" />
 				<img id="fbcsMX_unlock" src="@/fbcsFxViews/img/unlock.png" />
 			</div>
-		</div>
+		</div>-->
 		<!--<div class="cw">-->
-			<sidebar :collapse.sync="isCollapse"></sidebar>
+			<!--<sidebar :collapse.sync="isCollapse"></sidebar>-->
 			<div ref="home" class="homeView" :class="{big:isCollapse}">
 				<!--<div class="router">-->
 					<router-view></router-view>
@@ -139,7 +139,7 @@ function checkLock(){
 			ref.home.style['padding-top'] = '20px';
 			ref.lockTxt.style['display'] = 'none';
 		}
-//		lockTime = setTimeout(checkLock, 5000);
+		lockTime = setTimeout(checkLock, 5000);
 	});
 }
 
@@ -181,7 +181,7 @@ function unlockFn(uri){
 	.home{height: 100%;background: #FFF;}
 	.cw{height: calc(100% - 50px);}
 	.nav{height: 50px;background: #409eff;color: #FFF;line-height: 50px;z-index: 2;}
-	.homeView{height: calc(100% - 50px);margin-left: 226px;overflow: auto;border: 20px solid #Edf0f5;border-right: none;
+	.homeView{height: 100%;margin-left: 0;overflow: auto;border: 0px solid #Edf0f5;border-right: none;
 		transition: margin 0.3s;/*padding: 20px 0 20px 20px;*/padding: 20px;}
 	.big{margin-left: 64px;}
 	/*.router{background: #fff;min-height: 100%;}*/
