@@ -208,7 +208,7 @@ export default {
 			});
 		},
 		signalChange(){
-			signalChange();
+			signalSearch();
 		},
 		send(){
 			let uri = 'version/rollback',

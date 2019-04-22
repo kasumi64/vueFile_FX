@@ -16,10 +16,10 @@
 				<ul class="reviewLayer">
 					<li>
 						<span class="label">{{$t('fbcsFile.components.reviewName')}}</span>
-						<input v-model="name" class="input" />
+						<input v-model="name" class="input" autocomplete="off"/>
 					</li><li>
 						<span class="label">{{$t('fbcsFile.components.reviewPwd')}}</span>
-						<input v-model="pwd" class="input" type="password"/>
+						<input v-model="pwd" class="input" type="password" autocomplete="off"/>
 					</li>
 				</ul>
 				<div class="footBtn">

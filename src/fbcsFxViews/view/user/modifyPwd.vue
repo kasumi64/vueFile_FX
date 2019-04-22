@@ -6,7 +6,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.password.id')}}</p>
 					</div><div class="right">
-						<input v-model="info.userID" disabled />
+						<input v-model="info.userID" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -30,7 +30,7 @@
 							{{$t('fbcsFile.password.new')}}
 						</p>
 					</div><div class="right">
-						<input v-model="passwd" :disabled="info.isModifyDefaultPasswd==0" maxlength="18"/>
+						<input v-model="passwd" :disabled="info.isModifyDefaultPasswd==0" maxlength="18" autocomplete="off"/>
 					</div>
 				</li><li v-if="isEdit">
 					<div class="left">
@@ -39,7 +39,7 @@
 							{{$t('fbcsFile.password.again')}}
 						</p>
 					</div><div class="right">
-						<input v-model="again" :disabled="info.isModifyDefaultPasswd==0" maxlength="18"/>
+						<input v-model="again" :disabled="info.isModifyDefaultPasswd==0" maxlength="18" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -109,7 +109,7 @@ export default {
 			utils.post(params).then(function(res){
 				let mess = `<p>${res.errinfo}</p>`;
 				if(res.webUserFlag == 1){ //网络用户
-					mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
 				}
 				utils.alert({txt: mess, type: res.errcode!='0'?0:1});
 				_this.$emit('update:show', false);
@@ -132,7 +132,7 @@ export default {
 				_this.$emit('update:show', false);
 				if(res.webUserFlag == 1){ //网络用户
 					let mess = `<p>${res.errinfo}</p>`;
-					mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
 					utils.alert({
 						txt: mess,
 						ok: () => { _this.parameter = res; },

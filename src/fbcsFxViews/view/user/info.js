@@ -106,7 +106,7 @@ export default {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				let mess = `<p>${res.errinfo}</p>`;
 				if(res.webUserFlag == 1){ //网络用户
-					mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
 				}
 				if(_this.jump){
 					_this.jump = false;
@@ -156,7 +156,7 @@ export default {
 				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 				if(res.webUserFlag == 1){ //网络用户
 					let mess = `<p>${res.errinfo}</p>`;
-					mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
 					utils.alert({
 						txt: mess,
 						ok: () => { _this.parameter = res; },

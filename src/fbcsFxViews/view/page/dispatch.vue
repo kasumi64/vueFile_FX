@@ -78,7 +78,7 @@ var _this, data = {
 	signalPage: 1,
 	signalTotal: 1
 };
-var nodes, dict, isPatch;
+var nodes, dict, isPatch, first;
 
 export default {
 	data(){
@@ -135,7 +135,7 @@ export default {
 			});
 		},
 		signalChange(){
-			signalChange();
+			signalSearch();
 		},
 		send(){
 			this.reqsv = {uri: 'batchDispatch/dispatch'};
@@ -151,13 +151,14 @@ export default {
 		this.showReview = this.showPwdinfo = false;
 		isPatch = false;
 //		nodes = this.nodeList;
-		dict = {};
+		first = true;
 		nodeCu();
 	},
 	watch: {
 		type(val){
 			isPatch = false;
-			nodeCu(val>3 ? 1 :0);
+			if(!first) nodeCu(val>3 ? 1 :0);
+			first = false;
 		}
 	}
 };

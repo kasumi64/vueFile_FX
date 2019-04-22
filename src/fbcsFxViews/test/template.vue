@@ -5,7 +5,7 @@
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
 			<lgy-candidateWords v-model="userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.searchBar.ekeyName')}}</label>
-			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">

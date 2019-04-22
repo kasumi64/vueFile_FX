@@ -2,7 +2,7 @@
 	<div class="audit">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.audit.operator')}}：</label>
-			<input v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.audit.operatorType')}}：</label>
 			<lgy-candidateWords v-model="info.operationType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>

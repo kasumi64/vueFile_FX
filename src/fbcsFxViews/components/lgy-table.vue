@@ -135,7 +135,11 @@ export default {
 		if(this.sortable instanceof Object) this.sortables = this.sortable;
 		else this.sortables = {};
 	},
-	watch: {}
+	watch: {
+		currentPage(num){
+			this.page = num;
+		}
+	}
 };
 
 </script>

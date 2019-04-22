@@ -2,9 +2,9 @@
 	<div class="userHome">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
-			<input v-model="id" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="id" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.searchBar.userName')}}</label>
-			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField" v-if="fxAuth">
@@ -51,7 +51,7 @@
 						<i class="red">*</i>
 						{{$t('fbcsFile.userHome.fileName')}}
 					</span>
-					<input v-model="fileName" class="fileName" />
+					<input v-model="fileName" class="fileName" autocomplete="off"/>
 				</li><li>
 					<p class="importTips" v-html="$t('fbcsFile.userHome.importTips')"></p>
 				</li>
@@ -230,7 +230,7 @@ export default {
 					utils.post(params).then(res => {
 						let mess = `<p>${res.errinfo}</p>`;
 						if(res.webUserFlag == 1){ //网络用户
-							mess += `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>`;
+							mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
 						}
 						utils.alert({txt: mess, type: res.errcode!='0'?0:1});
 					});

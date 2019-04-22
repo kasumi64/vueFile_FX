@@ -4,7 +4,7 @@
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
 			<lgy-candidateWords v-model="id" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.searchBar.ekeyName')}}</label>
-			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField" v-if="fxAuth">
@@ -35,7 +35,7 @@
 							{{$t('fbcsFile.Ekey.ekeyName')}}
 						</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyName" :disabled="disName" maxlength="64"/>
+						<input v-model="ekeyInfo.ekeyName" :disabled="disName" maxlength="64" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -49,7 +49,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyInfo')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyComment" maxlength="256"/>
+						<input v-model="ekeyInfo.ekeyComment" maxlength="256" autocomplete="off"/>
 					</div>
 				</li>
 			</ul>

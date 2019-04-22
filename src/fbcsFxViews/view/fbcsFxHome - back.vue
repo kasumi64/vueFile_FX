@@ -26,13 +26,13 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.userInfo.name')}}</p>
 					</div><div class="right">
-						<input v-model="userName" disabled/>
+						<input v-model="userName" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.userHome.pwd')}}</p>
 					</div><div class="right">
-						<input v-model="pwd" type="password"/>
+						<input v-model="pwd" type="password" autocomplete="off"/>
 					</div>
 				</li>
 			</ul>
@@ -196,5 +196,5 @@ function unlockFn(uri){
 		position: absolute;display: none;top: 0;left: 0;width: 100%;padding-left: 20px;
 		font-size: 14px;font-weight: bold;color: #FF7A7D;line-height: 44px;height: 44px;border-bottom: 1px solid #EBEFF4;
 	}
-	.autocompleteOFF{position: fixed;top: -100px;left: 0;opacity: 0;pointer-events: none;}
+	.autocompleteOFF{position: fixed;top: -100px;left: 0;opacity: 0;pointer-events: none;z-index: -1;}
 </style>

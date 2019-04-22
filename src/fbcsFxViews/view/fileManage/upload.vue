@@ -7,7 +7,7 @@
 					{{$t('fbcsFile.files.upload.fileName')}}
 				</div>
 				<div class="right">
-					<input id="ddd" v-model="fileName" @input="filter($event)" data-k="fileName" maxlength="64"/>
+					<input id="ddd" v-model="fileName" @input="filter($event)" data-k="fileName" maxlength="64" autocomplete="off"/>
 					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}fbcs-server/static/import/clientfile</p>
 				</div>
 			</li><li>
@@ -16,14 +16,14 @@
 					{{$t('fbcsFile.files.upload.version')}}
 				</div>
 				<div class="right">
-					<input v-model="version" @input="filter($event)" data-k="version" maxlength="64"/>
+					<input v-model="version" @input="filter($event)" data-k="version" maxlength="64" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">
 					{{$t('fbcsFile.files.upload.fileComment')}}
 				</div>
 				<div class="right">
-					<input v-model="fileComment" maxlength="128"/>
+					<input v-model="fileComment" maxlength="128" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">&nbsp;</div>

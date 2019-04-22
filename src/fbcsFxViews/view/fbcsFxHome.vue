@@ -1,6 +1,6 @@
 <template>
 	<div ref='fbcs_file' id="fbcs_file" class="home">
-		<input type="text" class="autocompleteOFF" autocomplete="on" />
+		<input type="text" class="autocompleteOFF" autocomplete="on"/>
 		<div class="nav" id="nav">
 			<div class="logoBox">
 				<img class="logo" src="../img/FDEP.png" />
@@ -26,13 +26,13 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.userInfo.name')}}</p>
 					</div><div class="right">
-						<input v-model="userName" disabled/>
+						<input v-model="userName" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.userHome.pwd')}}</p>
 					</div><div class="right">
-						<input v-model="pwd" type="password"/>
+						<input v-model="pwd" type="password" autocomplete="off"/>
 					</div>
 				</li>
 			</ul>

@@ -14,7 +14,7 @@
 <template>
 	<div id="lgy-candidateWords">
 		<input :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" 
-			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle"/>
+			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle" autocomplete="off"/>
 		<i ref='arrow' @click='close' class="el-icon-circle-close arrow"></i>
 		<ul ref='inTip' class="inTip" @scroll="scrollHandle">
 			<li v-for="o in keywords" @mousedown="clickHandle(o, $event)">{{o.lable}}</li>

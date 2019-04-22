@@ -2,9 +2,9 @@
 	<div class="advancedUser">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
-			<input v-model="info.userID" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="info.userID" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
-			<input v-model="info.userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" />
+			<input v-model="info.userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.advanced.user.userType')}}</label>
 			<el-select v-model="info.userType" class="words">

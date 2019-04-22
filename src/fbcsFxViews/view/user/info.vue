@@ -7,7 +7,7 @@
 					{{$t('fbcsFile.userInfo.id')}}
 				</div>
 				<div class="right">
-					<input v-model="info.userID" :disabled="isAdd!='add'" maxlength="32"/>
+					<input v-model="info.userID" :disabled="isAdd!='add'" maxlength="32" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -15,7 +15,7 @@
 					{{$t('fbcsFile.userInfo.name')}}
 				</div>
 				<div class="right">
-					<input v-model="info.userName"  maxlength="64"/>
+					<input v-model="info.userName"  maxlength="64" autocomplete="off"/>
 				</div>
 			</li><li v-if="isAdd=='add'">
 				<div class="label" style="vertical-align: top;">
@@ -27,7 +27,7 @@
 						<el-radio :label="0">{{$t('fbcsFile.userInfo.def')}}</el-radio>
 						<el-radio :label="1">{{$t('fbcsFile.userInfo.hm')}}</el-radio>
 					</el-radio-group>
-					<input v-model="info.userPasswd" :disabled="!info.isModifyDefaultPasswd" maxlength="18"/>
+					<input v-model="info.userPasswd" :disabled="!info.isModifyDefaultPasswd" maxlength="18" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.type')}}</div>
@@ -59,7 +59,7 @@
 					{{$t('fbcsFile.userInfo.speed')}}
 				</div>
 				<div class="right">
-					<input v-model="info.speedCtrl" data-k="speedCtrl" @input="onlyNum_1($event)" maxlength="18"/>
+					<input v-model="info.speedCtrl" data-k="speedCtrl" @input="onlyNum_1($event)" maxlength="18" autocomplete="off"/>
 					<span class="small">Kbit/s({{$t('fbcsFile.userInfo.Kbit')}})</span>
 					<!--
 						oninput="if(value.length>5)value=value.slice(0,5)"
@@ -72,7 +72,7 @@
 					{{$t('fbcsFile.userInfo.maxUser')}}
 				</div>
 				<div class="right">
-					<input v-model="info.maxRelationUser" data-k="maxRelationUser" @input="onlyNum($event)" maxlength="18"/>
+					<input v-model="info.maxRelationUser" data-k="maxRelationUser" @input="onlyNum($event)" maxlength="18" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label" style="vertical-align: top;">{{$t('fbcsFile.userInfo.encFlag')}}</div>
@@ -141,27 +141,27 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.publishTopicCount')}}</div>
 				<div class="right">
-					<input v-model="info.allowPublishTopicCount" data-k="allowPublishTopicCount" @input="onlyNum($event)" maxlength="9"/>
+					<input v-model="info.allowPublishTopicCount" data-k="allowPublishTopicCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.subscribeTopicCount')}}</div>
 				<div class="right">
-					<input v-model="info.allowSubscribeTopicCount" data-k="allowSubscribeTopicCount" @input="onlyNum($event)" maxlength="9"/>
+					<input v-model="info.allowSubscribeTopicCount" data-k="allowSubscribeTopicCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxPublishTopicDay')}}</div>
 				<div class="right">
-					<input v-model="info.maxPublishTopicDay" data-k="maxPublishTopicDay" @input="onlyNum($event)" maxlength="9"/>
+					<input v-model="info.maxPublishTopicDay" data-k="maxPublishTopicDay" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxSimultTaskCount')}}</div>
 				<div class="right">
-					<input v-model="info.maxSimultTaskCount" data-k="maxSimultTaskCount" @input="onlyNum($event)" maxlength="9"/>
+					<input v-model="info.maxSimultTaskCount" data-k="maxSimultTaskCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxCltOneDayTaskCount')}}</div>
 				<div class="right">
-					<input v-model="info.maxCltOneDayTaskCount" data-k="maxCltOneDayTaskCount" @input="onlyNum($event)" maxlength="9"/>
+					<input v-model="info.maxCltOneDayTaskCount" data-k="maxCltOneDayTaskCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.webFlag')}}</div>
@@ -182,7 +182,7 @@
 			</li><li v-if="isAdd!='add'">
 				<div class="label">{{$t('fbcsFile.userInfo.buildTime')}}</div>
 				<div class="right">
-					<input v-model="buildTime" disabled/>
+					<input v-model="buildTime" disabled autocomplete="off"/>
 				</div>
 			</li>
 		</ul>
