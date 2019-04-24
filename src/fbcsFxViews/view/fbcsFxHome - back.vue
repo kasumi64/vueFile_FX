@@ -196,5 +196,4 @@ function unlockFn(uri){
 		position: absolute;display: none;top: 0;left: 0;width: 100%;padding-left: 20px;
 		font-size: 14px;font-weight: bold;color: #FF7A7D;line-height: 44px;height: 44px;border-bottom: 1px solid #EBEFF4;
 	}
-	.autocompleteOFF{position: fixed;top: -100px;left: 0;opacity: 0;pointer-events: none;z-index: -1;}
 </style>
