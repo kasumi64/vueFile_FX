@@ -100,7 +100,7 @@
 </script>
 
 <style scoped="scoped">
-	.versionQuery{min-width: 990px;}
+	.versionQuery{min-width: 1084px;}
 	.sel{width: 160px;}
 	.jg{margin-top: 10px;}
 	.el-radio+.el-radio{margin-left: 10px;}

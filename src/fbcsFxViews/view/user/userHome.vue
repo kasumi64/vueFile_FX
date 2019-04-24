@@ -7,22 +7,28 @@
 			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<ul class="fnField" v-if="fxAuth">
-			<li @click="addUser">
+		<ul class="fnField">
+			<li @click="addUser" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addUser')}}</span>
-			</li><li @click="showSignal">
+			</li><li @click="showSignal" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.delUser')}}</span>
-			</li><li @click="editPwd">
+			</li><li @click="editPwd" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.editPwd')}}</span>
-			</li><li @click="importInformation">
+			</li><li @click="importInformation" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/importBasicInformation.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.importInformation')}}</span>
-			</li><li @click="importInBop">
+			</li><li @click="importInBop" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/importExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.importInBop')}}</span>
+			</li><li @click="advanced">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<span class="label">{{$t('fbcsFile.searchBar.advUser')}}</span>
+			</li><li @click="advExp">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<span class="label">{{$t('fbcsFile.searchBar.advExp')}}</span>
 			</li>
 		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :selection='true' 
@@ -142,6 +148,12 @@ export default {
 		rowClass({row, rowIndex}){
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
+		},
+		advanced(){
+			this.$router.push({path: '/main/fxCfg/advanced/user'});
+		},
+		advExp(){
+			this.$router.push({path: '/main/fxCfg/advanced/information'});
 		},
 		search(){
 			this.page = 1;
@@ -304,7 +316,7 @@ function signalSearch(){
 </script>
 
 <style scoped="scoped">
-	.userHome{min-width: 696px;padding-right: 20px;background: #FFF;}
+	.userHome{min-width: 1040px;background: #FFF;}
 	#fbcs_file .signal{padding-bottom: 0;max-height: 320px;overflow: auto;width: 646px;}
 	.import{padding-right: 0 !important;}
 	.w120{vertical-align: middle;}

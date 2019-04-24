@@ -222,15 +222,19 @@ export default {
 		this.fxAuth = utils.getFxAuth;
 		let k, info = this.info;
 		for (k in info) info[k] = '';
-		info.type = '0';
-		info.pageSize = 20; 
-		this.page = 1;
+		info.pageSize = 20;
 		this.checkDialog = this.showDialog = false;
 		this.showPwdinfo = false;
-		this.radio = 4;
 		this.list = [];
 		this.parameter = null;
-		getDay(4);
+		let cache = utils.getArgs('fxcache');
+		if(cache) setSearch(cache);
+		else {
+			info.type = '0';
+			this.page = 1;
+			this.radio = 4;
+			getDay(4);
+		}
 		this.search();
 	},
 	watch: {
@@ -239,7 +243,14 @@ export default {
 		}
 	}
 };
-
+function setSearch(obj){
+	let info = _this.info;
+	info.type = obj.type;
+	info.beginTime = obj.beginTime;
+	info.endTime = obj.endTime;
+	_this.page = obj.page;
+	_this.radio = obj.radio;
+}
 function search(){
 	let params = Object.assign({}, _this.info);
 	params.url = 'version/queryLists';
@@ -285,6 +296,11 @@ function search(){
 		_this.page = res.currentPage;
 		_this.total = res.totalSize;
 	});
+	
+	let obj = Object.assign({}, _this.info);
+	obj.page = _this.page;
+	obj.radio = _this.radio;
+	utils.setArgs('fxcache', obj);
 }
 
 function getDay(val){

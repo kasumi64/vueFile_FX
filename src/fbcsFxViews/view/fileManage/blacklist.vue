@@ -1,5 +1,9 @@
 <template>
 	<div class="blacklist">
+		<header class="backHead">
+			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<b class="h1">{{this.$t('fbcsFile.files.blacklist.title')}}</b>
+		</header>
 		<div class="left">
 			<p class="label">{{$t('fbcsFile.files.blacklist.cuList')}}</p>
 		</div><div class="right">
@@ -33,6 +37,9 @@ var _this, data = {
 export default {
 	data(){ return data;},
 	methods:{
+		back(){
+			this.$router.push({path: '/main/fxCfg/fileManage/regain'});
+		},
 		rowClass({row, rowIndex}){
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
@@ -106,7 +113,7 @@ function nodeCu(){
 </script>
 
 <style scoped="scoped">
-.blacklist{white-space: nowrap;}
+.blacklist{min-width: 640px;white-space: nowrap;}
 .left{display: inline-block;vertical-align: top;width: 120px;text-align: right;padding-right: 10px;}
 .label{font-size: 16px;color: #666;}
 .right{display: inline-block;vertical-align: top;width: 500px;margin-right: 20px;}

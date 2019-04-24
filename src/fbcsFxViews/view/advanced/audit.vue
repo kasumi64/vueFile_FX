@@ -1,5 +1,9 @@
 <template>
 	<div class="advancedAudit">
+		<header class="backHead">
+			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<b class="h1">{{this.$t('fbcsFile.advanced.audit.title')}}</b>
+		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.audit.operator')}}：</label>
 			<input v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
@@ -31,7 +35,7 @@
 			<el-date-picker v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
 				value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
-			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
 			<li @click="expcsv">
@@ -150,6 +154,9 @@ export default {
 		return data;
 	},
 	methods:{
+		back(){
+			this.$router.push({path: '/main/fxCfg/audit'});
+		},
 		rowClass({row, rowIndex}){
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
@@ -321,11 +328,10 @@ function getDay(val){
 </script>
 
 <style scoped="scoped">
-.advancedAudit{min-width: 1074px;padding-right: 40px;}
+.advancedAudit{min-width: 1082px;}
 .jg{margin-top: 10px;}
 .el-radio+.el-radio{margin-left: 10px;}
 .ml{margin-left: 10px;}
-.mr{margin-right: 20px;}
 .linkage{display: none;margin-right: 35px;margin-left: -20px;}
 .linkage .el-checkbox+.el-checkbox{margin-left: 10px;}
 .w80{width: 80px;text-align: right;}

@@ -1,5 +1,9 @@
 <template>
 	<div class="information">
+		<header class="backHead">
+			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<b class="h1">{{this.$t('fbcsFile.advanced.information.title')}}</b>
+		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.advanced.information.listName')}}</label>
 			<el-select v-model="listType" class="words w100">
@@ -98,6 +102,9 @@ export default {
 		return data;
 	},
 	methods:{
+		back(){
+			this.$router.push({path: '/main/fxCfg/userHome'});
+		},
 		search(){
 			let type = _this.listType;
 			if(type=='OPE'){
@@ -234,7 +241,7 @@ function searchBOP(){
 </script>
 
 <style scoped="scoped">
-	.information{min-width: 800px;padding-right: 20px;}
+	.information{min-width: 800px;}
 	.jg{margin-bottom: 10px;}
 	.w100{width: 100px;}
 	.w80{width: 80px;text-align: right;}

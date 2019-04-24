@@ -1,8 +1,17 @@
 <template>
 	<div class="regain">
-		<div class="fnField">
+		<!--<div class="fnField">
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.files.regain.compare')}}</button>
-		</div>
+		</div>-->
+		<ul class="fnField">
+			<li @click="search">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<span class="label">{{$t('fbcsFile.files.regain.compare')}}</span>
+			</li><li @click="advanced">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<span class="label">{{$t('fbcsFile.fnField.blacklist')}}</span>
+			</li>
+		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" :size="90000">
 		</lgy-table>
 		<h2 class="h2">{{$t('fbcsFile.files.search.sendRes')}}</h2>
@@ -115,6 +124,9 @@ export default {
 		rowClass({row, rowIndex}){
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
+		},
+		advanced(){
+			this.$router.push({path: '/main/fxCfg/fileManage/blacklist'});
 		},
 		search(){
 			this.page = 1;

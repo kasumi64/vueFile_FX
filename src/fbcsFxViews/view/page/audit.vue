@@ -27,6 +27,12 @@
 			</el-date-picker>
 			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
+		<ul class="fnField">
+			<li @click="advanced">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
+			</li>
+		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :width="width" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
@@ -132,6 +138,9 @@ export default {
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
 		},
+		advanced(){
+			this.$router.push({path: '/main/fxCfg/advanced/audit'});
+		},
 		search(){
 			this.page = 1;
 			search();
@@ -144,7 +153,7 @@ export default {
 			let i, arr = [], len = keywords.length, obj;
 			for (i = 0; i < len; i++) {
 				obj = keywords[i];
-				if(obj.id.indexOf(val)>=0 || obj.name.indexOf(val)>=0) arr.push(obj);
+				if(obj.id&&obj.id.indexOf(val)>=0 || obj.name&&obj.name.indexOf(val)>=0) arr.push(obj);
 			}
 			this.idWords = arr;
 		}
@@ -249,7 +258,7 @@ function getDay(val){
 </script>
 
 <style scoped="scoped">
-.audit{min-width: 990px;}
+.audit{min-width: 1080px;}
 .jg{margin-top: 10px;}
 .el-radio+.el-radio{margin-left: 10px;}
 .ml{margin-left: 10px;}

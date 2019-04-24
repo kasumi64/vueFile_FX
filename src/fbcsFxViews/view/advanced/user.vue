@@ -1,5 +1,9 @@
 <template>
 	<div class="advancedUser">
+		<header class="backHead">
+			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<b class="h1">{{this.$t('fbcsFile.advanced.user.title')}}</b>
+		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
 			<input v-model="info.userID" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
@@ -21,7 +25,7 @@
 				<el-option v-for="item in group" :key="item.groupID" :label="item.groupID" :value="item.groupID">
 				</el-option>
 			</el-select>
-			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
 			<li @click="expcsv">
@@ -82,6 +86,9 @@ export default {
 		return data;
 	},
 	methods:{
+		back(){
+			this.$router.push({path: '/main/fxCfg/userHome'});
+		},
 		search(){
 			this.page = 1;
 			search();

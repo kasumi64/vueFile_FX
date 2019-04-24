@@ -18,6 +18,7 @@
 				<h2 class="h2" v-if="fxAuth">{{$t('fbcsFile.suConfig.h2')}}</h2>
 				<el-table v-if="fxAuth" :data="list" :row-class-name="rowClass" highlight-current-row border>
 					<el-table-column prop="section" :label="$t('fbcsFile.suConfig.section')"></el-table-column>
+					<el-table-column prop="field" :label="$t('fbcsFile.suConfig.field')"></el-table-column>
 					<el-table-column prop="type" :label="$t('fbcsFile.suConfig.type')"></el-table-column>
 					<el-table-column prop="detail" :label="$t('fbcsFile.suConfig.detail')"></el-table-column>
 				</el-table>

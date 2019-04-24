@@ -158,7 +158,7 @@ export default {
 .lgy-table .paging{padding: 20px 0;text-align: left;}
 .lgy-table .paging .el-pagination,.lgy-table .paging .total{display: inline-block;vertical-align: middle;}
 .lgy-table .paging .btn-next,.lgy-table .paging .btn-prev,.lgy-table .paging .more,
-.lgy-table .paging .number{margin: 0;padding: 0;color: #7388A7;border: 1px solid #D7D8DA;border-width: 1px 1px 1px 0;font-weight: 500;}
+.lgy-table .paging .number{margin: 0 !important;padding: 0;color: #7388A7;border: 1px solid #D7D8DA;border-width: 1px 1px 1px 0;font-weight: 500;}
 .lgy-table .paging .btn-prev{border-width: 1px;}
 .lgy-table .paging .number.active{box-shadow: 0 2px 4px 0 rgba(0,0,0,.2) inset;}
 .lgy-table .paging .el-pagination__total{margin-left: 24px;color: #999;}

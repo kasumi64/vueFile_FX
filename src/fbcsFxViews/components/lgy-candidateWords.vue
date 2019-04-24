@@ -13,6 +13,7 @@
 </style>
 <template>
 	<div id="lgy-candidateWords">
+		<input type="text" class="autocompleteOFF" autocomplete="on"/>
 		<input :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" 
 			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle" autocomplete="off"/>
 		<i ref='arrow' @click='close' class="el-icon-circle-close arrow"></i>

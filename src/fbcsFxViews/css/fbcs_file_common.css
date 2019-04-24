@@ -11,6 +11,8 @@
 #fbcs_file .test{font-size: 16px;border: 1px solid silver;padding: 5px 10px;margin: 10px;}
 #fbcs_file .hide{display: none !important;}
 #fbcs_file .show{display: block !important;}
+#fbcs_file .autocompleteOFF{position: fixed;top: -100px;left: 0;opacity: 0;pointer-events: none;}
+#fbcs_file .mr20{margin-right: 20px;}
 #fbcs_file input{font-size: 14px;color: #666;height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;vertical-align: middle; border-radius: 0;}
 #fbcs_file input:focus{border: 2px solid #32ccF9;}
 #fbcs_file ::-webkit-input-placeholder{color: #BBB;}
@@ -35,7 +37,7 @@
 #fbcs_file .tableBG{background: #E5EAF0;}
 #fbcs_file .el-table__body tr.current-row>td{background: #CFE0F3;}
 #fbcs_file .el-table td{padding: 10px 0;}
-#fbcs_file .el-table .cell{line-height: 20px;}
+#fbcs_file .el-table .cell{line-height: 20px;white-space: pre-wrap;}
 #fbcs_file .el-table--enable-row-hover .el-table__body tr:hover>td { background: inherit; }
 #fbcs_file .el-table--enable-row-hover .el-table__body tr.current-row:hover>td { background: #CFE0F3; }
 /*elment-ui 日期*/
@@ -56,6 +58,7 @@
 #fbcs_file .defBtn:active{box-shadow: 0px 0px 1px 0px #0DB9EB;}
 #fbcs_file button{-moz-user-select: none;-webkit-user-select: none;}
 #fbcs_file button:disabled{background: #F5F7FA;color: #C0C4CC;border: 1px solid #E4E7ED;cursor: not-allowed;pointer-events: none;}
+#fbcs_file .advanced{margin-left: 35px;}
 
 /* MaskLayer 提示带按键的提示框*/
 #fbcs_file .maskLayer{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.5);z-index: 9;}

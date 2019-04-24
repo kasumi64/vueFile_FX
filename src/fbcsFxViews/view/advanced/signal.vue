@@ -1,5 +1,9 @@
 <template>
 	<div class="advancedEkey">
+		<header class="backHead">
+			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<b class="h1">{{this.$t('fbcsFile.advanced.signal.title')}}</b>
+		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
 			<lgy-candidateWords v-model="userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
@@ -58,6 +62,9 @@ export default {
 		return data;
 	},
 	methods:{
+		back(){
+			this.$router.push({path: '/main/fxCfg/relation'});
+		},
 		search(){
 			this.page = 1;
 			search();

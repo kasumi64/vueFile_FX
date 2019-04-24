@@ -8,6 +8,7 @@
 
 <template>
 	<div class="lgy-review" :class="{show:show}">
+		<input type="text" class="autocompleteOFF" autocomplete="on"/>
 		<div ref='lgy-review' class="maskLayer">
 			<div ref='tipsPanle' class="tipsPanle">
 				<div class="title">
@@ -60,17 +61,17 @@ export default {
 		async reviewHandle(param){
 			if(this.name==utils.getArgs('userName')) return utils.confirm({txt:this.$t('fbcsFile.components.reviewSame'), btn:1});
 			if(this.name==''||this.pwd=='') return utils.confirm({txt:this.$t('fbcsFile.components.reviewNull'), btn:1});
-			let args = {
-				url: 'auth/review',
-				cmdID: '600122',
-				reviewer: this.name,
-				password: md5(this.pwd),
-				language: utils.getArgs('lang') || 'zh'
-			}, uri = '/fdep/fx/';
 			if(kit.isFn(param)) param = param();
-			if(!kit.isObject(param)) param = {uri:param}
-			for (let k in param) { args[k] = param[k] };
+			if(!kit.isObject(param)) param = {uri:param};
+			
+			let args = Object.assign({}, param), uri = '/fbcs_fx/fx/';
+			args.url = 'auth/review';
+			args.cmdID = '600122';
+			args.reviewer = this.name;
+			args.password = md5(this.pwd);
+			args.language = utils.getArgs('lang') || 'zh';
 			args.uri = uri + (args.uri||'');
+			
 //			console.log('dispatch:',args.uri);
 			let self = this;
 			param.name = self.name;

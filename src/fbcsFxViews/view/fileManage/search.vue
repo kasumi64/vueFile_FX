@@ -7,6 +7,9 @@
 			</li><li @click="checkVer(1)">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportTheme.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.newVer')}}</span>
+			</li><li @click="advanced">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<span class="label">{{$t('fbcsFile.fnField.upload')}}</span>
 			</li>
 		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" :size="90000">
@@ -84,6 +87,9 @@ export default {
 		rowClass({row, rowIndex}){
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
+		},
+		advanced(){
+			this.$router.push({path: '/main/fxCfg/fileManage/upload'});
 		},
 		search(){
 			this.page = 1;

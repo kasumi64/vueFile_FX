@@ -70,7 +70,7 @@ export default {
 				reviewer: this.userName,
 				password: md5(this.pwd),
 				language: utils.getArgs('lang') || 'zh',
-				uri:  '/fdep/fx/lock/' + uri
+				uri:  '/fbcs_fx/fx/lock/' + uri
 			};
 			
 			let res = await utils.post(args);

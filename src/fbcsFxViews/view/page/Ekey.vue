@@ -7,10 +7,13 @@
 			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<ul class="fnField" v-if="fxAuth">
-			<li @click="showAddEkey">
+		<ul class="fnField">
+			<li @click="showAddEkey" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addEkey')}}</span>
+			</li><li @click="advanced">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
@@ -171,6 +174,9 @@ export default {
 		isNew: false
 	},
 	methods:{
+		advanced(){
+			this.$router.push({path: '/main/fxCfg/advanced/Ekey'});
+		},
 		search(){
 			this.page = 1;
 			search();

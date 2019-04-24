@@ -62,8 +62,9 @@ kit.extend(exp, loading);
 function ReqHttp(){
 	
 	var axios = Axios.create();
-	axios.defaults.baseURL = window.fbcs_fxIP + '/fdep/fx/';
-//	axios.defaults.baseURL = 'http://10.10.27.161:8088/fdep/fx/';
+	axios.defaults.baseURL = window.fbcs_fxIP + '/fbcs_fx/fx/';
+//	axios.defaults.baseURL = 'http://10.10.27.161:8088/fbcs_fx/fx/';
+//	axios.defaults.baseURL = '/fbcs_fx/fx/';
 	
 	// 添加请求拦截器
 	axios.interceptors.request.use(function(config){
@@ -112,7 +113,7 @@ function ReqHttp(){
 				status: 200,
 				data: {errcode:'0', lists:[
 				{userID: '01', userName: 'userName',userID1: '006', nodeName: '深圳', cuName: 'CU-1',
-				operationTime: 1555553114000, operationType: 3, type: 4, fileName: 'ABC'}
+				operationTime: 1555553114000, operationType: 3, type: 4, fileName: 'ABC', reviewer: 'reviewer'}
 				], errinfo: 'Success.'}
 			};
 			return Promise.resolve(callback(debugRes, fn, args));

@@ -1,11 +1,15 @@
 <template>
 	<div class="advancedEkey">
+		<header class="backHead">
+			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<b class="h1">{{this.$t('fbcsFile.advanced.Ekey.title')}}</b>
+		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
 			<lgy-candidateWords v-model="userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.Ekey.ekeyName')}}</label>
 			<input v-model="ekeyName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
-			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
 			<li @click="expcsv">
@@ -58,6 +62,9 @@ export default {
 		return data;
 	},
 	methods:{
+		back(){
+			this.$router.push({path: '/main/fxCfg/Ekey'});
+		},
 		search(){
 			this.page = 1;
 			search();

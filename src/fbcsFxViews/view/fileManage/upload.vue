@@ -1,5 +1,9 @@
 <template>
 	<div class="upload">
+		<header class="backHead">
+			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<b class="h1">{{this.$t('fbcsFile.files.upload.title')}}</b>
+		</header>
 		<ul class="form">
 			<li>
 				<div class="label vt">
@@ -8,7 +12,7 @@
 				</div>
 				<div class="right">
 					<input id="ddd" v-model="fileName" @input="filter($event)" data-k="fileName" maxlength="64" autocomplete="off"/>
-					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}fbcs-server/static/import/clientfile</p>
+					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}</p>
 				</div>
 			</li><li>
 				<div class="label">
@@ -61,6 +65,9 @@ export default {
 		return data;
 	},
 	methods:{
+		back(){
+			this.$router.push({path: '/main/fxCfg/fileManage/search'});
+		},
 		dispense(){
 			if(!check.call(this)) return;
 			
@@ -109,6 +116,7 @@ function check(){
 </script>
 
 <style scoped="scoped">
+.upload{min-width: 790px;}
 .form{white-space: nowrap;}
 .form li{margin-bottom: 10px;}
 .label{display: inline-block;width: 160px;font-size: 14px;color: #666;text-align: right;vertical-align: middle;}

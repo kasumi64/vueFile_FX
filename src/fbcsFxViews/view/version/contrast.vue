@@ -11,7 +11,7 @@
 			<lgy-candidateWords v-model="id1" :keywords="ver1" :disabled="disabled" @input="input1" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.versionContrast.ver2')}}</label>
 			<lgy-candidateWords v-model="id2" :keywords="ver2" :disabled="disabled" @input="input2" class="words"></lgy-candidateWords>
-			<button class="blueBtn" @click="search">{{$t('fbcsFile.versionContrast.btn')}}</button>
+			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.versionContrast.btn')}}</button>
 		</div>
 		<lgy-table :list="list" :title="title1" class="hide" :class="{show:disabled}" :total="total" :currentPage.sync="page" @changePage="changePage" >
 		</lgy-table>
@@ -150,5 +150,6 @@ function changeType(val){
 </script>
 
 <style scoped="scoped">
+	.contrast{min-width: 703px;}
 	.jg{height: 10px;}
 </style>

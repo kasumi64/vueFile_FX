@@ -12,15 +12,16 @@ var obj = {
 		result: '下发结果',
 	},
 	searchBar: {
-		userID: '用户ID：', userName: '用户名称：', placeholder: '输入关键字', search: '查询',
+		userID: '用户ID：', userName: '用户名称：', placeholder: '', search: '查询',
 		ekeyName: 'Ekey名称：', addSignal: '创建通信关系', businessType: '业务类型',
-		
+		advanced: '高级搜索', advUser: '用户高级搜索', advExp: '扩展信息高级搜索'
 	},
 	fnField: {
 		addUser: '创建用户', delUser: '删除用户', editPwd: '修改密码', importInformation: '导入运维扩展信息', importInBop: '导入BOP扩展信息',
 		addEkey: '创建Ekey', editEkey: '修改Ekey', exportEkey: '批量导出Ekey',
 		addSignal: '创建通信关系', delSignal: '删除通信关系', exportSignal: '批量导出通信关系',
 		bigVer: '生成大版本', getCfg: '获取中登配置', checkZd: '比对中枢配置最新版本', newVer: '比对客户端文件最新版本',
+		upload: '文件下发', blacklist: 'CU黑名单'
 	},
 	tableTitle: {
 		userID: '用户ID', userName: '用户名称', operation: '操作',
@@ -59,7 +60,7 @@ var obj = {
 	userHome: {
 		info: '基本信息', ekey: 'Ekey', signal:'通信关系', information:'扩展信息', 
 		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！', fileName: '扩展信息文件名：',
-		importTips: '请将扩展信息文件放到服务器路径：/fbcs-server/static/import内；<br/>在输入框中填入扩展信息文件名。',
+		importTips: '请将扩展信息文件放到服务器路径：static/import；<br/>在输入框中填入扩展信息文件名。',
 		OPE: '是否导入运维扩展信息？', BOP: '是否导入BOP扩展信息？', line: '行数', operatorName: '联系人姓名', errinfo: '错误描述',
 		fileErr: '文件名不能为空！', pwd: '用户密码：',
 	},
@@ -98,7 +99,7 @@ var obj = {
 	dispatch: {
 		options: [{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},
 			{label: '用户密码信息表', value: '3'}, {label: '互联网配置信息', value: '4'}],
-		nodeName:'节点名', cuName:'CU名称', errcode:'结果', errinfo:'错误信息', type:'操作类型',
+		nodeName:'节点名', cuName:'服务名', errcode:'结果', errinfo:'错误信息', type:'操作类型',
 		setFile:'配置文件：', hots1:'分发主机：', hots2:'主机列表', res:'分发结果：',
 		t1:'(系统动态配置文件为：FxDynamic.ini,userinfo.db,userekey.db,usercomm.db,userinfoext.db)',
 		t2:'(系统静态配置文件为：FxStatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)',
@@ -142,28 +143,28 @@ var obj = {
 		},
 		upload: {
 			version: '版本号：', fileName: '客户端文件名：', fileComment: '描述：', dispense: '下发', res: '下发结果：',
-			path: '请将客户端文件放到服务器路径：'
+			path: '请将文件放在业务配置系统服务器路径：static/import/clientfile', title: '文件下发'
 		},
 		regain: {
 			version: '版本号', fileName: '客户端文件名', fileComment: '描述', recoverType: '恢复操作类型', detail: '详情', 
-			cuLists: 'CU名称', cuName: 'cuName', compare: '对比', restore: '恢复', typeStr0: '下发', typeStr1: '删除'
+			cuLists: '服务名', cuName: 'cuName', compare: '对比', restore: '恢复', typeStr0: '下发', typeStr1: '删除'
 		},
 		blacklist: {
 			nodeName: '节点名', cuName: 'CU名', white: '白名单', black: '黑名单', cuList: '主机列表：',
-			blackBtn: '设置黑名单', cuType: '节点状态',
+			blackBtn: '设置黑名单', cuType: '节点状态', title: 'CU黑名单'
 		}
 	},
 	
 	advanced: {
 		user: {
 			userID: '用户ID：', userName: '用户名称：', userType: '用户类型：', inZone: '所属地区：', linkGroupName: '所在分组：',
-			soft: '软加密', hard: '硬加密', expcsv: '导出基础信息', fileName: '文件名：', 
+			soft: '软加密', hard: '硬加密', expcsv: '导出基础信息', fileName: '文件名：', title: '用户高级搜索'
 		},
 		Ekey: {
-			ekeyName: 'Ekey名称：', expcsv: '导出Ekey',
+			ekeyName: 'Ekey名称：', expcsv: '导出Ekey', title: 'Ekey高级搜索'
 		},
 		signal: {
-			expcsv: '导出通信关系',
+			expcsv: '导出通信关系', title: '通信关系高级搜索'
 		},
 		information: {
 			listType: [{label: '全部', val: 'all'},{label: '运维表', val: 'OPE'},{label: 'BOP表', val: 'BOP'}],
@@ -171,10 +172,11 @@ var obj = {
 			expcsv: '导出运维表', expBOP: '导出BOP表', resOPE: '运维表查询结果：', resBOP: 'BOP表查询结果：',
 			operatorName: '联系人姓名', mobileNum: '联系人手机号', email: '联系人邮箱', telNum: '联系人座机号', 
 			addOPE: '增加扩展信息', editOPE: '修改扩展信息', del: '是否要删除扩展信息？',
-			nameNull: '联系人姓名不能为空', mobileNull: '联系人手机号不能为空'
+			nameNull: '联系人姓名不能为空', mobileNull: '联系人手机号不能为空',
+			title: '扩展信息高级搜索'
 		},
 		audit: {
-			expcsv: '导出稽核',
+			expcsv: '导出稽核', title: '稽核高级搜索'
 		}
 	}
 };

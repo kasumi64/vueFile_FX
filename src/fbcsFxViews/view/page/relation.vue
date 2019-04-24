@@ -8,13 +8,16 @@
 			<lgy-candidateWords v-model="name" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
-		<ul class="fnField" v-if="fxAuth">
-			<li @click="add">
+		<ul class="fnField">
+			<li @click="add" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addSignal.png"/>
 				<span class="label">{{$t('fbcsFile.relation.addSignal')}}</span>
-			</li><li @click="dels">
+			</li><li @click="dels" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delSignal.png"/>
 				<span class="label">{{$t('fbcsFile.relation.delSignal')}}</span>
+			</li><li @click="advanced">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :selection="true" :currentPage.sync="page"
@@ -141,6 +144,9 @@ export default {
 		}
 	},
 	methods:{
+		advanced(){
+			this.$router.push({path: '/main/fxCfg/advanced/signal'});
+		},
 		search(){
 			this.page = 1;
 			search();
