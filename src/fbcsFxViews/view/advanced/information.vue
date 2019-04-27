@@ -207,7 +207,12 @@ function searchOPE(){
 	param.type = 0;
 	
 	utils.post(param).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.listOPE = [];
+			_this.pageOPE = 1;
+			_this.totalOPE = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.pageOPE > res.totalPage){
 			_this.pageOPE = res.totalPage;
 			return searchOPE();
@@ -227,7 +232,12 @@ function searchBOP(){
 	param.type = 0;
 	
 	utils.post(param).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.listBOP = [];
+			_this.pageBOP = 1;
+			_this.totalBOP = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.pageBOP > res.totalPage){
 			_this.pageBOP = res.totalPage;
 			return searchOPE();

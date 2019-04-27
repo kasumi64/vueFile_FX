@@ -133,7 +133,7 @@ var obj = {
 		options: [{label: '全局动态配置', value: 1},{label: '全局静态配置', value: 2},{label: '用户密码信息表', value: 3},
 			{label: '中登CTPLST', value: 4},{label: '中登ZDRela', value: 5}],
 		type:'操作类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比', temp: '临时版本', online: '线上版本',
-		section: '段名', field: '字段名', detail: '详情'
+		section: '段名', field: '字段名', detail: '详情', res: '对比结果没有变化'
 	},
 	
 	files: {

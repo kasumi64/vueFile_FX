@@ -180,7 +180,12 @@ function search(){
 	};
 	utils.post(params).then(function(res){
 		utils.loadClose();
-		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+		if(res.errcode!='0') { //清缓存历史
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return utils.alert({txt: res.errinfo});
+		}
 		res.lastQuery = 1;
 		res.loading = false;
 		_this.parameter = res;

@@ -31,7 +31,7 @@
 		<lgy-table :list="listBOP" :title="titleBOP" :total="totalBOP" :currentPage.sync="pageBOP" @changePage="changeBOP" 
 			:maxHeight="416" :size='90000'>
 		</lgy-table>
-		<el-dialog :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+		<el-dialog :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false" width="670px">
 			<ul class="_dialog">
 				<li>
 					<div class="left">
@@ -56,18 +56,21 @@
 						</p>
 					</div><div class="right">
 						<input v-model="info.operatorMobileNum" @input="filter($event)" data-reg="[^\d\|]" data-k="operatorMobileNum" maxlength="512" autocomplete="off"/>
+						<span class="txt">{{$t('fbcsFile.err.info.operatorMobileNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.email')}}：</p>
 					</div><div class="right">
 						<input v-model="info.operatorEmail" @input="filter($event)" data-reg="[^\w_\-@\.]" data-k="operatorEmail" maxlength="50" autocomplete="off"/>
+						<span class="txt">{{$t('fbcsFile.err.info.operatorEmail')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.telNum')}}：</p>
 					</div><div class="right">
 						<input v-model="info.operatorTelNum" @input="filter($event)" data-reg="[^\d\-\+;]" data-k="operatorTelNum" maxlength="512" autocomplete="off"/>
+						<span class="txt">{{$t('fbcsFile.err.info.operatorTelNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
@@ -272,7 +275,12 @@ function searchOPE(){
 	param.userID = args.userID;
 	
 	utils.post(param).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.listOPE = [];
+			_this.pageOPE = 1;
+			_this.totalOPE = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.count>1 && _this.pageOPE > res.count){
 			_this.pageOPE = res.count;
 			return searchOPE();
@@ -290,7 +298,12 @@ function searchBOP(){
 	param.userID = args.userID;
 	
 	utils.post(param).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.listBOP = [];
+			_this.pageBOP = 1;
+			_this.totalBOP = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.count>1 && _this.pageBOP > res.count){
 			_this.pageBOP = res.count;
 			return searchBOP();
@@ -308,4 +321,7 @@ function searchBOP(){
 	.jg{margin-bottom: 10px;}
 	.w80{width: 80px;text-align: right;}
 	.h2{font-size: 16px;color: #333;margin-bottom: 10px;}
+	#fbcs_file ._dialog .left{width: 140px;}
+	#fbcs_file ._dialog .right .txt{margin-left: 10px;font-size: 12px;color: #999;}
+	li{white-space: nowrap;}
 </style>

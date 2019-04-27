@@ -187,7 +187,11 @@ export default {
 						userID: user.userID
 					};
 					utils.post(params).then(res => {
-						utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+						let mess = `<p>${res.errinfo}</p>`;
+						if(res.webUserFlag == 1){ //网络用户
+							mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
+						}
+						utils.alert({txt: mess, type: res.errcode!='0'?0:1});
 						if(res.errcode != '0') return;
 						search();
 					});
@@ -281,7 +285,12 @@ function search(){
 		type: 0
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
@@ -303,7 +312,12 @@ function signalSearch(){
 		currentPage: _this.signalPage
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.signalList = [];
+			_this.signalPage = 1;
+			_this.signalTotal = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.signalPage > res.totalPage){
 			_this.signalPage = res.totalPage;
 			return signalSearch();

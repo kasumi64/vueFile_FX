@@ -1,9 +1,10 @@
 <template>
 	<!--relation通信关系-->
 	<div class="relation">
-		<div v-if="isPage" class="searchBar">
+		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
-			<lgy-candidateWords v-model="id" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
+			<input v-if="!isPage" v-model="id" class="words" disabled="true"/>
+			<lgy-candidateWords v-if="isPage" v-model="id" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
 			<lgy-candidateWords v-model="name" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
@@ -15,7 +16,7 @@
 			</li><li @click="dels" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delSignal.png"/>
 				<span class="label">{{$t('fbcsFile.relation.delSignal')}}</span>
-			</li><li @click="advanced">
+			</li><li @click="advanced" v-if="isPage">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
@@ -43,7 +44,7 @@
 							{{$t('fbcsFile.relation.userID2')}}
 						</p>
 					</div><div class="right">
-						<el-select class="selm" v-model="sid" :disabled="disabled" multiple filterable>
+						<el-select class="selm" v-model="sid" :disabled="disabled" multiple filterable remote :remote-method="filter">
 							<el-option v-for="item in idarr" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
@@ -156,13 +157,13 @@ export default {
 		},
 		idInput(val){
 			if(val=='') return this.idWords = [].concat(userid);
-			utils.keywords({id: val, type: 2}, arr => {
+			utils.keywords({id: val, type: 1}, arr => {
 				_this.idWords = arr;
 			});
 		},
 		nameInput(val){
 			if(val=='') return this.nameWords = [].concat(userid);
-			utils.keywords({id: val, type: 2}, arr => {
+			utils.keywords({id: val, type: 1}, arr => {
 				_this.nameWords = arr;
 			});
 		},
@@ -194,10 +195,18 @@ export default {
 				this.clear();
 				return this.oneWords = [].concat(userid);
 			}
-			utils.keywords({id: val, type: 1}, arr => {
+			utils.keywords({id: val, type: 2}, arr => {
 				this.oneWords = arr;
 			});
 			copySig(val);
+		},
+		filter(val){
+			if(val=='') {
+				return this.idarr = filterSig(this.oneid, [].concat(userid));
+			}
+			utils.keywords({id: val, type: 2}, arr => {
+				this.idarr = filterSig(this.oneid, arr);
+			});
 		},
 		submit(){
 			if(utils.isSpace(this.oneid)) return utils.confirm({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
@@ -275,7 +284,10 @@ function init(){
 	this.search();
 }
 function copySig(val){
-	let arr = [].concat(userid);
+	_this.sid = [];
+	_this.idarr = filterSig(val, [].concat(userid));
+}
+function filterSig(val, arr){
 	let i, len = arr.length, obj;
 	for(i = 0; i < len; i++){
 		obj = arr[i];
@@ -284,8 +296,7 @@ function copySig(val){
 			break;
 		}
 	}
-	_this.sid = [];
-	_this.idarr = arr;
+	return arr;
 }
 function search(){
 	let params = {
@@ -297,7 +308,12 @@ function search(){
 		currentPage: _this.page
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

@@ -209,7 +209,12 @@ function signalSearch(){
 		currentPage: _this.signalPage
 	};
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.signalList = [];
+			_this.signalPage = 1;
+			_this.signalTotal = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.signalPage > res.totalPage){
 			_this.signalPage = res.totalPage;
 			return signalSearch();

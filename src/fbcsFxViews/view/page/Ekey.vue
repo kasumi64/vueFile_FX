@@ -11,7 +11,7 @@
 			<li @click="showAddEkey" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addEkey')}}</span>
-			</li><li @click="advanced">
+			</li><li @click="advanced" v-if="isPage">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
@@ -45,7 +45,7 @@
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyDate')}}</p>
 					</div><div class="right">
 						<el-date-picker v-model="ekeyInfo.validDate" class="picker" type="datetime" :clearable="false" :editable="false"
-							:placeholder="$t('fbcsFile.tips.date')" default-time="23:59:59" >
+							:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" >
 						</el-date-picker>
 					</div>
 				</li><li>
@@ -141,8 +141,9 @@ function showEditEkey(row){
 		_this.disabled = _this.disName = true;
 		_this.ekeyInfo.userID = row.userID;
 		_this.ekeyInfo.ekeyName = row.ekeyName;
-		_this.ekeyInfo.validDate = row.ymd;
 		_this.ekeyInfo.ekeyComment = row.ekeyComment;
+		let t = row.validDate;
+		_this.ekeyInfo.validDate = t ? t*1000 : '';
 	});
 }
 
@@ -186,7 +187,7 @@ export default {
 		},
 		idInput(val){
 			if(val=='') return this.idWords = [].concat(userid);
-			utils.keywords({id: val, type: 2}, arr => {
+			utils.keywords({id: val, type: 1}, arr => {
 				_this.idWords = arr;
 			});
 		},
@@ -349,7 +350,12 @@ function search(){
 		currentPage: _this.page
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

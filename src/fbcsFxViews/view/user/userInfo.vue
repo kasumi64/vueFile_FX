@@ -46,7 +46,7 @@ export default {
 		_this = this;
 		args = utils.getArgs('userInfo') || {tab: 'first', type: 'add'};
 		this.tab = args.tab;
-		this.type = args.type;
+		this.type = args.type.toString();
 		if(args.type == 'add'){
 			this.title = this.$t('fbcsFile.userHome.addUser');
 			this.isNew = true;

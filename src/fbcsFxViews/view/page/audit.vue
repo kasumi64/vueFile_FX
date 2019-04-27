@@ -192,7 +192,12 @@ function search(){
 	}
 	
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
@@ -258,7 +263,7 @@ function getDay(val){
 </script>
 
 <style scoped="scoped">
-.audit{min-width: 1080px;}
+.audit{min-width: 994px;}
 .jg{margin-top: 10px;}
 .el-radio+.el-radio{margin-left: 10px;}
 .ml{margin-left: 10px;}

@@ -15,13 +15,13 @@
 				<el-checkbox label="userextFlag">扩展信息</el-checkbox>
 			</el-checkbox-group>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>
-			<el-radio-group v-model="info.sequence">
+			<el-radio-group v-model="info.sequence" class="mr20">
 				<el-radio :label="0">{{$t('fbcsFile.audit.lately')}}</el-radio>
 				<el-radio :label="1">{{$t('fbcsFile.audit.early')}}</el-radio>
 			</el-radio-group>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.audit.times')}}</label>
-			<el-radio-group v-model="radio" class="">
+			<el-radio-group v-model="radio">
 				<el-radio :label="2">{{$t('fbcsFile.audit.today')}}</el-radio>
 				<el-radio :label="4">{{$t('fbcsFile.audit.week')}}</el-radio>
 				<el-radio :label="6">{{$t('fbcsFile.audit.month')}}</el-radio>
@@ -211,7 +211,7 @@ export default {
 		for (k in info) info[k] = '';
 		info.sequence = 0;
 		this.showDialog = this.showDialog2 =false;
-		this.linkage = [];
+		this.linkage = this.list = [];
 		getDay(this.radio = 2);
 		operatorType();
 		search();
@@ -262,7 +262,12 @@ function search(){
 	}
 	
 	utils.post(params).then(res => {
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
@@ -328,7 +333,7 @@ function getDay(val){
 </script>
 
 <style scoped="scoped">
-.advancedAudit{min-width: 1082px;}
+.advancedAudit{min-width: 1050px;}
 .jg{margin-top: 10px;}
 .el-radio+.el-radio{margin-left: 10px;}
 .ml{margin-left: 10px;}

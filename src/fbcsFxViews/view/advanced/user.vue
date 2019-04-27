@@ -120,6 +120,7 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.list = [];
 		initDate();
 		getDict();
 	}
@@ -138,7 +139,12 @@ function search(){
 	else if(param.linkGroupName == '任意') param.linkGroupName = '';
 	
 	utils.post(param).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();

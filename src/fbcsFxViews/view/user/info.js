@@ -326,6 +326,7 @@ function getUserInfo(user){
 		if(!obj.endSoftEncTime) obj.endSoftEncTime = '';
 		obj.isModifyDefaultPasswd = 0;
 		obj.expiredTimeFlag = '1';
+		if(obj.linkGroupName=='') obj.linkGroupName = '任意';
 		_this.info = obj;
 	});
 }

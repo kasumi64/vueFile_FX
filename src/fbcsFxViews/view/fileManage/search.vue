@@ -109,6 +109,7 @@ export default {
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
+				search();
 			});
 		},
 		checkVer(type){
@@ -142,7 +143,12 @@ function search(){
 		cmdID: '600061',
 	};
 	utils.post(params).then(function(res){
-		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode!='0') { //清缓存历史
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 		if(res.totalPage>1 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
