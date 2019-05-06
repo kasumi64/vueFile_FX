@@ -213,7 +213,7 @@ function searchOPE(){
 			_this.totalOPE = 0;
 			return console.warn(res.errcode, res.errinfo);
 		}
-		if(res.totalPage>1 && _this.pageOPE > res.totalPage){
+		if(res.totalPage>0 && _this.pageOPE > res.totalPage){
 			_this.pageOPE = res.totalPage;
 			return searchOPE();
 		}
@@ -238,7 +238,7 @@ function searchBOP(){
 			_this.totalBOP = 0;
 			return console.warn(res.errcode, res.errinfo);
 		}
-		if(res.totalPage>1 && _this.pageBOP > res.totalPage){
+		if(res.totalPage>0 && _this.pageBOP > res.totalPage){
 			_this.pageBOP = res.totalPage;
 			return searchOPE();
 		}

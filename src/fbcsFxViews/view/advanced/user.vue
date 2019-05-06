@@ -145,7 +145,7 @@ function search(){
 			_this.total = 0;
 			return console.warn(res.errcode, res.errinfo);
 		}
-		if(res.totalPage>1 && _this.page > res.totalPage){
+		if(res.totalPage>0 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
 		}

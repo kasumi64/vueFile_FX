@@ -221,7 +221,7 @@ export default {
 			utils.post(params).then(res => {
 				this.search();
 				this.showDialog = false;
-				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+				utils.alert({txt: res.errinfo, type: (res.errcode=='0'||res.errcode=='1')?1:0});
 			});
 		},
 		now(){
@@ -314,7 +314,7 @@ function search(){
 			_this.total = 0;
 			return console.warn(res.errcode, res.errinfo);
 		}
-		if(res.totalPage>1 && _this.page > res.totalPage){
+		if(res.totalPage>0 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
 		}
@@ -347,6 +347,6 @@ function nextFrame(){
 	#fbcs_file ._dialog .left{width: 140px;}
 </style>
 <style>
-	#fbcs_file .relation input:disabled{border: none;}
+	#fbcs_file .relation input:disabled{border: none;z-index: 1;}
 	#fbcs_file .relation .el-table__header .el-checkbox{display: inline-block;}
 </style>

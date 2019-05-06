@@ -49,11 +49,12 @@ var obj = {
 			oneTask: '单用户最大发送文件个数要大于 0',
 		},
 		info: {
-			operatorMobileNum: '仅能输入数字,“|”', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
-			operatorTelNum: '仅能输入数字,“-”,“+”,和“;”', emailFormat: '邮箱格式不对',
+			operatorMobileNum: '仅能输入数字、“|”，用“|”做分隔符', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
+			operatorTelNum: '仅能输入数字,“-”,“+”,和“;”', emailFormat: '邮箱格式不对', tell: '手机号不能以“|”结尾'
 		},
 		files: {
-			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', format: '仅能输入英文，数字,“-”,“_”和“.”'
+			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', format: '仅能输入英文，数字,“-”,“_”和“.”',
+			formatFile: '文件名仅能输入英文，数字,“-”,“_”和“.”', formatVer: '版本号仅能输入英文，数字,“-”,“_”和“.”'
 		}
 	},
 	
@@ -126,7 +127,7 @@ var obj = {
 	},
 	versionDetail: {
 		title: '版本详情', type: '版本类型', fileName: '文件名' , cfgInfo: '文件内容',
-		fileSize: '文件大小', fileMd5: '文件Md5', fileTime: '中登时间',
+		fileSize: '文件大小(bytes)', fileMd5: '文件Md5', fileTime: '中登时间',
 		ctplst: 'ctplst', zdrela: 'zdrela',
 	},
 	versionContrast: {
@@ -138,7 +139,7 @@ var obj = {
 	
 	files: {
 		search: {
-			version: '版本号', fileName: '文件名', fileComment: '描述', size: '文件大小', md5:'文件MD5' ,time: '发布时间', 
+			version: '版本号', fileName: '文件名', fileComment: '描述', size: '文件大小(bytes)', md5:'文件MD5' ,time: '发布时间', 
 			operater: '下发人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', sendRes: '下发结果：'
 		},
 		upload: {

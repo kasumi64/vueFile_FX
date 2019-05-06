@@ -112,17 +112,29 @@ var _this, data = {
 function editUser(row){
 	let obj = Object.assign({tab: 'first', type: 'edit'}, row);
 	utils.setArgs('userInfo', obj);
+	setCache();
 	_this.$router.push({path: '/main/fxCfg/userInfo'});
 }
 function editEkey(row){
 	let obj = Object.assign({tab: 'second', type: 'ekey'}, row);
 	utils.setArgs('userInfo', obj);
+	setCache();
 	_this.$router.push({path: '/main/fxCfg/userInfo'});
 }
 function addRelation(row){
 	let obj = Object.assign({tab: 'third', type: 'signal'}, row);
 	utils.setArgs('userInfo', obj);
+	setCache();
 	_this.$router.push({path: '/main/fxCfg/userInfo'});
+}
+
+function setCache(){
+	let obj = {
+		id: _this.id,
+		name: _this.name,
+		page: _this.page
+	};
+	utils.setArgs('fxcache', obj);
 }
 
 export default {
@@ -164,6 +176,7 @@ export default {
 		},
 		addUser(){
 			utils.setArgs('userInfo', {tab: 'first', type: 'add'});
+			setCache();
 			this.$router.push({path: '/main/fxCfg/userInfo'});
 		},
 		showSignal(){
@@ -263,11 +276,19 @@ export default {
 	created(){
 		_this = this;
 		this.fxAuth = utils.getFxAuth;
-		this.id = this.name = '';
 		this.currSelect = null;
 		this.showDialog = false;
 		this.list = [];
-		this.search();
+		var cache = utils.getArgs('fxcache');
+		if(cache){
+			this.id = cache.id;
+			this.name = cache.name;
+			this.page = cache.page;
+		} else {
+			this.id = this.name = '';
+			this.page = 1;
+		}
+		search();
 	},
 	components: {
 		ekey: resolve => require(['@/fbcsFxViews/view/page/Ekey.vue'], resolve),
@@ -291,7 +312,7 @@ function search(){
 			_this.total = 0;
 			return console.warn(res.errcode, res.errinfo);
 		}
-		if(res.totalPage>1 && _this.page > res.totalPage){
+		if(res.totalPage>0 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
 		}
@@ -318,7 +339,7 @@ function signalSearch(){
 			_this.signalTotal = 0;
 			return console.warn(res.errcode, res.errinfo);
 		}
-		if(res.totalPage>1 && _this.signalPage > res.totalPage){
+		if(res.totalPage>0 && _this.signalPage > res.totalPage){
 			_this.signalPage = res.totalPage;
 			return signalSearch();
 		}

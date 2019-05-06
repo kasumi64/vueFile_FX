@@ -101,6 +101,7 @@ export default {
 					return;
 				}
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+				_this.enabled = false;
 			});
 		},
 		history(){

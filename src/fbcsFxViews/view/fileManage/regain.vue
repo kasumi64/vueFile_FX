@@ -189,7 +189,7 @@ function search(){
 		res.lastQuery = 1;
 		res.loading = false;
 		_this.parameter = res;
-		if(res.totalPage>1 && _this.page > res.totalPage){
+		if(res.totalPage>0 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
 		}

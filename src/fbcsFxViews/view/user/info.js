@@ -97,7 +97,9 @@ export default {
 			}
 			
 			if(params.beginSoftEncTime) params.beginSoftEncTime = params.beginSoftEncTime / 1000;
+			else params.beginSoftEncTime = 0;
 			if(params.endSoftEncTime) params.endSoftEncTime = params.endSoftEncTime / 1000;
+			else params.endSoftEncTime = 0;
 			if(this.info.linkGroupName == '任意') params.linkGroupName = '';
 			
 //			console.log('userinfo', params);
@@ -148,7 +150,9 @@ export default {
 				params.cmdID = '600007';
 			}
 			if(params.beginSoftEncTime) params.beginSoftEncTime = params.beginSoftEncTime / 1000;
+			else params.beginSoftEncTime = 0;
 			if(params.endSoftEncTime) params.endSoftEncTime = params.endSoftEncTime / 1000;
+			else params.endSoftEncTime = 0;
 			params.reviewer = obj.name;
 			if(params.linkGroupName == '任意') params.linkGroupName = '';
 			

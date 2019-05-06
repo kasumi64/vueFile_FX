@@ -208,6 +208,10 @@ export default {
 			let param = Object.assign({}, this.info);
 			if(utils.isSpace(param.operatorName)) return utils.alert({txt: this.$t('fbcsFile.advanced.information.nameNull')});
 			if(utils.isSpace(param.operatorMobileNum)) return utils.alert({txt: this.$t('fbcsFile.advanced.information.mobileNull')});
+			let tell = param.operatorMobileNum;
+			if(/\|$/.test(tell)){
+				return utils.alert({txt: this.$t('fbcsFile.err.info.tell')});
+			}
 			let email = param.operatorEmail;
 			if(email){
 				if( !(/^[\w-]+(\.[\w-]+)*@[\w]+(\.[\w-]+)+$/g.test(email)) )

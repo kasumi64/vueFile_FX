@@ -117,7 +117,9 @@ export default {
 				url: 'userClientFile/compareMd5',
 				cmdID: '600067'
 			};
+			utils.loadShow();
 			utils.post(params).then(function(res){
+				utils.loadClose();
 				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 				for (let i = 0; i < res.lists.length; i++) {
 					let obj = res.lists[i], equal = obj.isEqual;
@@ -149,7 +151,7 @@ function search(){
 			_this.total = 0;
 			return console.warn(res.errcode, res.errinfo);
 		}
-		if(res.totalPage>1 && _this.page > res.totalPage){
+		if(res.totalPage>0 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
 		}
