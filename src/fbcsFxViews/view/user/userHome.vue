@@ -190,7 +190,7 @@ export default {
 			signalSearch();
 		},
 		delUser(){
-			var user = this.currSelect;
+			var user = this.currSelect, that = this;
 			utils.confirm({
 				txt: this.$t('fbcsFile.userHome.del'), 
 				ok: () => {
@@ -206,6 +206,7 @@ export default {
 						}
 						utils.alert({txt: mess, type: res.errcode!='0'?0:1});
 						if(res.errcode != '0') return;
+						that.currSelect = null;
 						search();
 					});
 				}

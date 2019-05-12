@@ -101,8 +101,9 @@ export default {
 					return;
 				}
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
-				_this.enabled = false;
+				if(res.errcode == '0') _this.enabled = false;
 			});
+			this.list = [];
 		},
 		history(){
 			let params = {
@@ -123,7 +124,7 @@ export default {
 		this.tabName = this.$t('fbcsFile.suConfig.static');
 		this.list = [];
 		this.active = 'first';
-		this.enable = false;
+		this.enabled = false;
 		this.showReview = false;
 		this.reviewTxt = this.$t('fbcsFile.suConfig.sub');
 		getConfig(0);

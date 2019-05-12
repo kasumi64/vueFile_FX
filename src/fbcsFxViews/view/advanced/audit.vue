@@ -214,7 +214,7 @@ export default {
 		this.linkage = this.list = [];
 		getDay(this.radio = 2);
 		operatorType();
-		search();
+		this.search();
 	},
 	watch: {
 		radio(cur){

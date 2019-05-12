@@ -38,7 +38,7 @@
 							{{$t('fbcsFile.Ekey.ekeyName')}}
 						</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyName" :disabled="disName" maxlength="64" autocomplete="off"/>
+						<input v-model="ekeyInfo.ekeyName" :disabled="disName" maxlength="63" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -52,7 +52,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyInfo')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyComment" maxlength="256" autocomplete="off"/>
+						<input v-model="ekeyInfo.ekeyComment" maxlength="255" autocomplete="off"/>
 					</div>
 				</li>
 			</ul>

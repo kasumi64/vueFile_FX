@@ -61,7 +61,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
 	fxAuth: true,
-	type: '1',
+	type: 1,
 	nodeList: [
 		{nodeName:'深圳', cuName:'CU-2'},
 	],
@@ -146,7 +146,7 @@ export default {
 	created(){
 		_this = this;
 		this.fxAuth = utils.getFxAuth;
-		this.type = '1';
+		this.type = 1;
 		this.nodeList = this.cuList = [];
 		this.showReview = this.showPwdinfo = false;
 		isPatch = false;
@@ -158,12 +158,12 @@ export default {
 		type(val){
 			isPatch = false;
 			if(!first) nodeCu(val>3 ? 1 :0);
-			first = false;
 		}
 	}
 };
 
 function nodeCu(type){
+	first = false;
 	let params = {
 		url: 'batchDispatch/queryNodeCu',
 		cmdID: '600081',

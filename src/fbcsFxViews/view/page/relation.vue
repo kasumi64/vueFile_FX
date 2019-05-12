@@ -179,6 +179,8 @@ export default {
 				this.oneid = '';
 			}
 			this.sid = [];
+			this.oneWords = [].concat(userid);
+			this.idarr = filterSig(this.oneid, [].concat(userid));
 		},
 		selectChange(arr){
 			this.selected = arr;
@@ -202,8 +204,10 @@ export default {
 		},
 		filter(val){
 			if(val=='') {
-				return this.idarr = filterSig(this.oneid, [].concat(userid));
+//				this.idarr = filterSig(this.oneid, [].concat(userid));
+				return;
 			}
+			
 			utils.keywords({id: val, type: 2}, arr => {
 				this.idarr = filterSig(this.oneid, arr);
 			});
@@ -245,6 +249,7 @@ export default {
 			utils.post(params).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
+				search();
 			});
 		}
 	},

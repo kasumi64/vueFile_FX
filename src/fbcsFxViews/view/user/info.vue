@@ -7,7 +7,7 @@
 					{{$t('fbcsFile.userInfo.id')}}
 				</div>
 				<div class="right">
-					<input v-model="info.userID" :disabled="isAdd!='add'" maxlength="32" autocomplete="off"/>
+					<input v-model="info.userID" :disabled="isAdd!='add'" maxlength="31" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -15,7 +15,7 @@
 					{{$t('fbcsFile.userInfo.name')}}
 				</div>
 				<div class="right">
-					<input v-model="info.userName"  maxlength="64" autocomplete="off"/>
+					<input v-model="info.userName"  maxlength="63" autocomplete="off"/>
 				</div>
 			</li><li v-if="isAdd=='add'">
 				<div class="label" style="vertical-align: top;">
@@ -139,19 +139,19 @@
 					</el-select>
 				</div>
 			</li><li>
-				<div class="label">{{$t('fbcsFile.userInfo.publishTopicCount')}}</div>
+				<div class="label">{{$t('fbcsFile.userInfo.allowPublishTopicCount')}}</div>
 				<div class="right">
-					<input v-model="info.allowPublishTopicCount" data-k="allowPublishTopicCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
+					<input v-model="info.allowPublishTopicCount" data-k="allowPublishTopicCount" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
 				</div>
 			</li><li>
-				<div class="label">{{$t('fbcsFile.userInfo.subscribeTopicCount')}}</div>
+				<div class="label">{{$t('fbcsFile.userInfo.allowSubscribeTopicCount')}}</div>
 				<div class="right">
-					<input v-model="info.allowSubscribeTopicCount" data-k="allowSubscribeTopicCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
+					<input v-model="info.allowSubscribeTopicCount" data-k="allowSubscribeTopicCount" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxPublishTopicDay')}}</div>
 				<div class="right">
-					<input v-model="info.maxPublishTopicDay" data-k="maxPublishTopicDay" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
+					<input v-model="info.maxPublishTopicDay" data-k="maxPublishTopicDay" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxSimultTaskCount')}}</div>
@@ -197,7 +197,7 @@
 			</li>
 		</ul>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq :parameter.sync="parameter"></lgy-wheelReq>
+		<lgy-wheelReq :parameter.sync="parameter" @finish="finish"></lgy-wheelReq>
 	</div>
 </template>
 

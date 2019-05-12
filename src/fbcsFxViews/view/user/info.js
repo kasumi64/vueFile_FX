@@ -6,8 +6,8 @@ var _this, args, defaultPwd,
 info = {
 	userID: '', userName: '', userType: '1', userPasswd: defaultPwd, inZone: '',linkGroupName: '', speedCtrl: -1,
 	maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
-	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1,allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
-	maxPublishTopicDay: 7, maxSimultTaskCount: '',maxCltOneDayTaskCount: '', webUserFlag: '',
+	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1, allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
+	maxPublishTopicDay: 7, maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000, webUserFlag: '',
 	isModifyDefaultPasswd: '', expiredTimeFlag: '',
 }, data = {
 	fxAuth: true,
@@ -85,7 +85,8 @@ export default {
 		},
 		submit(){
 			if(!pass.call(this)) return;
-			let params = Object.assign({}, this.info);
+			var dom = defval.call(this);
+			var params = Object.assign({}, this.info);
 			if(this.isAdd == 'add'){
 				params.url = 'userinfo/add';
 				params.cmdID = '600003';
@@ -104,7 +105,7 @@ export default {
 			
 //			console.log('userinfo', params);
 			
-			utils.post(params).then(function(res){
+			function req(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				let mess = `<p>${res.errinfo}</p>`;
 				if(res.webUserFlag == 1){ //网络用户
@@ -128,16 +129,36 @@ export default {
 					utils.alert({txt: mess, type: 1});
 				}
 				utils.emit('fbcs_newUser', _this.info);
-			});
+			}
+			
+			if(dom){
+				utils.confirm({
+					txt: dom,
+					ok: () => {
+						utils.post(params).then(req);
+					},
+					btn: 1
+				});
+			} else utils.post(params).then(req);
 		},
 		now(){
 			if(!pass.call(this)) return;
+			var dom = defval.call(this);
 			if(this.isAdd == 'add'){
 				this.reqsv = {uri: 'userinfo/addImmediately'};
 			} else {
 				this.reqsv = {uri: 'userinfo/modifyImmediately'};
 			}
-			this.showReview = true;
+			
+			if(dom){
+				utils.confirm({
+					txt: dom,
+					ok: () => {
+						_this.showReview = true;
+					},
+					btn: 1
+				});
+			} else this.showReview = true;
 		},
 		review(obj){
 			let params = Object.assign({},this.info);
@@ -170,6 +191,15 @@ export default {
 				}
 				_this.parameter = res;
 			});
+		},
+		finish(){
+			if(this.jump){
+				this.jump = false;
+				utils.emit('fbcs_newUser', this.info);
+				getUserInfo(this.info);
+				_this.$emit('update:isAdd', 'ekey');
+				_this.$emit('update:tab', 'second');
+			}
 		}
 	},
 	created(){
@@ -208,13 +238,15 @@ function pass(){
 			return utils.alert({txt: this.$t(err + 'userPasswd')});
 		} else if (pwd.length < 8){
 			return utils.alert({txt: this.$t(err + 'pwdRule')});
-		} else if(/^\s|\s$/.test(pwd)){
+		} else if(/\s/.test(pwd)){ //(^\s|\s$)
 			return utils.alert({txt: this.$t(err + 'blank')});
-		}  else if(pwd.indexOf(info.userID)>-1||pwd.indexOf(info.userName)>-1){
+		} else if(pwd.indexOf(info.userID)>-1||pwd.indexOf(info.userName)>-1){
 			return utils.alert({txt: this.$t(err + 'noidName')});
+		} else if(/[^\w@#_\-\*]/.test(pwd)){
+			return utils.alert({txt: this.$t(err + 'special')});
 		} else {
 			let i, num = 0,
-				reg = [/[a-z]/,/[A-Z]/,/[0-9]/,/[ @#_\-\*]/];
+				reg = [/[a-z]/,/[A-Z]/,/[0-9]/,/[@#_\-\*]/];
 			for (i = 0; i < reg.length; i++) {
 				if(reg[i].test(pwd)) num++;
 			}
@@ -234,7 +266,7 @@ function pass(){
 	} else if (maxTask < 1){
 		return utils.alert({txt: this.$t(err + 'maxTask')});
 	}
-	/*else  if (!(maxUser>=0&&maxUser<=1000)){
+	/*else if (!(maxUser>=0&&maxUser<=1000)){
 		return utils.alert({txt: this.$t(err + 'maxUser')});
 	}else if (oneTask < 0){
 		return utils.alert({txt: this.$t(err + 'oneTask')});
@@ -243,11 +275,26 @@ function pass(){
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
 	if((begin || end)&&info.encFlag==1){
 		if(begin==''||end==''||begin >= end) {
-			return utils.alert({txt: this.$t(err + 'day')});
+			return utils.alert({txt: this.$t(err + 'softDay')});
 		}
 	}
 	
 	return true;
+}
+
+function defval(){
+	var def = {allowPublishTopicCount: 5, allowSubscribeTopicCount: 5, maxPublishTopicDay: 7,
+		maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000};
+	var flag, info = this.info, dom = this.$t('fbcsFile.userInfo.errNum');
+	for(var k in def){
+		if(!info[k]){
+			flag = true;
+			info[k] = def[k];
+			dom += this.$t('fbcsFile.userInfo.'+k)+def[k]+'\n';
+		}
+	}
+	if(flag) return dom;
+	return false;
 }
 
 function getDict(){
@@ -280,7 +327,7 @@ function getDict(){
 
 function initDate(){
 	let info = _this.info;
-	defaultPwd = '111111';
+	defaultPwd = '';
 	for (let k in info) info[k] = '';
 	info.isModifyDefaultPasswd = 0;
 	info.userPasswd = defaultPwd;
@@ -297,8 +344,8 @@ function initDate(){
 	info.allowPublishTopicCount= 5, 
 	info.allowSubscribeTopicCount= 5,
 	info.maxPublishTopicDay= 7;
-	info.maxSimultTaskCount= 1,
-	info.maxCltOneDayTaskCount= 0;
+	info.maxSimultTaskCount= 30,
+	info.maxCltOneDayTaskCount= 500000;
 	info.webUserFlag = 0;
 	info.expiredTimeFlag = '1';
 	

@@ -111,12 +111,14 @@ function ReqHttp(){
 			console.log(params.cmdID, params);
 			let debugRes = {
 				status: 200,
-				data: {errcode:'0', lists:[
-				{userID: '01', userName: 'userName',userID1: '006', nodeName: '深圳', cuName: 'CU-1',
+				data: {errcode:'0', lists:[], errinfo: 'Success.'}
+			}, arr = [];
+			for (var i = 0; i < 10; i++) {
+				arr.push({userID: '01'+i, userName: 'userName'+i,userID1: '006', nodeName: '深圳'+i, cuName: 'CU-1',
 				operationTime: 1555553114000, operationType: 3, type: 4, fileName: 'ABC', reviewer: 'reviewer',
-				linkGroupName: '', inZone: '', webUserFlag: 1}
-				], errinfo: 'Success.'}
-			};
+				linkGroupName: '', inZone: '', webUserFlag: 1});
+			}
+			debugRes.data.lists = arr;
 			return Promise.resolve(callback(debugRes, fn, args));
 		}
 		
@@ -138,6 +140,16 @@ function ReqHttp(){
 	function callback(res, fn, args){
 		if(res.status != 200) return console.warn(res);
 		var data = res.data;
+		//session失效，返回登陆
+		if(data.errcode == '2102') {
+			exp.alert({
+				txt: data.errinfo,
+				ok: () => {
+					window.location.href = '/#/login';
+				}
+			});
+			return;
+		}
 		if(kit.isFn(fn)) fn(data, args);
 		return data;
 	}
@@ -328,7 +340,7 @@ exp.sleep = function (delay){
 	});
 };
 
-exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str == ''); };
+exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str == ''||str == null); };
 
 Object.addProto(exp, 'getFxAuth', {
 	get(){
@@ -341,4 +353,4 @@ Object.addProto(exp, 'getFxAuth', {
 
 
 export default exp;
-//(c) Copyright 2019.04 LGY. All Rights Reserved. 
+//(c) Copyright 2019.05 LGY. All Rights Reserved. 

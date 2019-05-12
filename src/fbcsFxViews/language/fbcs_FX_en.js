@@ -32,7 +32,7 @@ var obj = {
 	tableDefined: {
 		editUser: '修改基本信息', editEkey: '修改Ekey', addSignal: '创建通信关系', delEkey: '删除Ekey',
 		delUser: '删除用户', delSignal: '删除通信关系', back: '回退', detail: '详情',
-		editExt: '修改扩展信息', delExt: '删除扩展信息'
+		editExt: '修改扩展信息', delExt: '删除扩展信息', verback: '版本回滚'
 	},
 	err: {
 		lock: {
@@ -43,10 +43,11 @@ var obj = {
 			userID: '用户ID不能为空', userName: '用户名称不能为空', speedCtrl: '最大收发速度不能为空',
 			maxRelationUser: '最大关系数不能为空', userPasswd: '密码不能为空', day: '开始时间必需小于结束时间',
 			pwdRule: '密码必须包含大小写字母、数字、特殊字符(@#_-)中的两项且大于8位', unlike: '两次输入的密码不一致',
-			blank: '密码的前后不可以是空白字符', npwd: '新密码不能为空', noidName: '密码不能包含用户ID、用户名称',
+			blank: '密码不能包含空格', npwd: '新密码不能为空', noidName: '密码不能包含用户ID、用户名称',
 			errNum: '只能输入纯数字', idformat: '用户ID仅能输入英文，数字,“-”和“_”', maxUser: '最大关系数范围在0到1000',
-			speed: '最大收发速度范围在-1到999999999999999999', maxTask: '单用户任务并发数要大于 1',
-			oneTask: '单用户最大发送文件个数要大于 0',
+			speed: '最大收发速度范围在-1到999999999999999999之间', maxTask: '单用户任务并发数要大于 0',
+			oneTask: '单用户最大发送文件个数要大于 0', softDay: '软加密开始时间必需小于软加密结束时间',
+			special: '不能包含(@#_-)以外的特殊字符'
 		},
 		info: {
 			operatorMobileNum: '仅能输入数字、“|”，用“|”做分隔符', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
@@ -69,10 +70,10 @@ var obj = {
 		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 
 		group: '所在组：', speed: '最大收发速度：', maxUser: '最大关系数：', hard: '硬加密', soft: '软加密',
 		online: '不在线报警：', encFlag: '加密方式：', beginTime: '软加密开始时间：', endTime: '软加密结束时间：', broadcast: '是否允许广播发送：',
-		connFlag: '允许连接标志：', switchMsg: '允许消息交换：', publishTopicCount: '发布主题个数上限：', subscribeTopicCount: '订阅主题个数上限：',
+		connFlag: '允许连接标志：', switchMsg: '允许消息交换：', allowPublishTopicCount: '发布主题个数上限：', allowSubscribeTopicCount: '订阅主题个数上限：',
 		maxPublishTopicDay: '发布主题有效期天数：', maxSimultTaskCount: '单用户任务并发数：', maxCltOneDayTaskCount: '单用户最大发送文件个数：', 
 		webFlag:'单用户互联网标识：', isModifyDefaultPasswd: '新加用户修改默认密码标识：', userPasswd: '系统密码：', expiredTimeFlag: '密码有效期标识：',
-		more: '展开更多设置', Kbit: '-1或0为不限速', indate: '密码有效期：', buildTime: '创建时间：'
+		more: '展开更多设置', Kbit: '-1或0为不限速', indate: '密码有效期：', buildTime: '创建时间：', errNum: '以下数据将设置成默认值：\n'
 	},
 	password: {
 		id: '用户ID：', pwd: '修改用户密码：', new: '新密码：', again: '确认密码：', indate: '有效期：',
@@ -98,8 +99,8 @@ var obj = {
 		err: '异常提示', sub: '是否确定提交？'
 	},
 	dispatch: {
-		options: [{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},
-			{label: '用户密码信息表', value: '3'}, {label: '互联网配置信息', value: '4'}],
+		options: [{label: '系统动态配置', value: 1},{label: '系统静态配置', value: 2},
+			{label: '用户密码信息表', value: 3}, {label: '互联网配置信息', value: 4}],
 		nodeName:'节点名', cuName:'服务名', errcode:'结果', errinfo:'错误信息', type:'操作类型',
 		setFile:'配置文件：', hots1:'分发主机：', hots2:'主机列表', res:'分发结果：',
 		t1:'(系统动态配置文件为：FxDynamic.ini,userinfo.db,userekey.db,usercomm.db,userinfoext.db)',
@@ -117,8 +118,8 @@ var obj = {
 	versionQuery: {
 		options: [{label: '全部', value: '0'},{label: '系统动态配置', value: '1'},{label: '系统静态配置', value: '2'},
 			{label: '用户密码信息表', value: '3'},{label: '中登配置', value: '4'},{label: '回滚', value: '5'}],
-		type:'版本类型', version:'版本号', versionPath:'版本路径', operationTime: '下发时间', 
-		operator: '下发人员', reviewer: '审核人员', operationType:'下发类型', checkVer: '比对最新版本MD5',
+		type:'版本类型', version:'版本号', versionPath:'版本路径', operationTime: '操作时间', 
+		operator: '操作人员', reviewer: '审核人员', operationType:'下发类型', checkVer: '比对最新版本MD5',
 		rollback: '您确定要回退到此版本？', bigVer: '您确定要生成大版本？', ZdCfg: '是否获取中登配置？',
 		equal0: '一致', equal1: '不一致', equal2: '文件不存在', operationType1: '全量下发' , operationType2: '增量下发',
 		operationType3: 'cu上传' , type1: '系统动态配置', type2: '系统静态配置', type3: '用户密码信息表', type4: '中登配置',
@@ -140,7 +141,7 @@ var obj = {
 	files: {
 		search: {
 			version: '版本号', fileName: '文件名', fileComment: '描述', size: '文件大小(bytes)', md5:'文件MD5' ,time: '发布时间', 
-			operater: '下发人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', sendRes: '下发结果：'
+			operater: '操作人员', reviewer: '审核人员', del: '删除', delRes: '删除结果：', sendRes: '下发结果：'
 		},
 		upload: {
 			version: '版本号：', fileName: '客户端文件名：', fileComment: '描述：', dispense: '下发', res: '下发结果：',

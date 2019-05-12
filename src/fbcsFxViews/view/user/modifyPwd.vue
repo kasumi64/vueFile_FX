@@ -99,7 +99,7 @@ export default {
 			} else this.passwd = this.again = '';
 		},
 		submit(){
-			if(!pass()) return;
+			if(!pass.call(this)) return;
 			
 			let params = Object.assign({}, this.info);
 			params.url = 'userpasswd/modify';
@@ -116,7 +116,7 @@ export default {
 			});
 		},
 		now(){
-			if(!pass()) return;
+			if(!pass.call(this)) return;
 			this.reqsv = {uri: 'userpasswd/modifyImmediately'};
 			this.showReview = true;
 		},
@@ -149,7 +149,7 @@ export default {
 		this.options = this.$t('fbcsFile.password.options');
 		this.showReview = false;
 		this.parameter = null;
-		defaultPwd = '111111';
+		defaultPwd = '';
 		getDefPwd();
 	},
 	watch: {
@@ -177,14 +177,32 @@ function pass(){
 	
 	if(_this.isEdit){ //1-修改密码
 		if(info.isModifyDefaultPasswd){
-			let txt = '';
+			let txt = '', pwd = _this.passwd, err = 'fbcsFile.err.user.';
 			if(!_this.passwd){
 				txt = _this.$t('fbcsFile.password.pwdErr');
 			}else if(!_this.again){
 				txt = _this.$t('fbcsFile.password.againErr');
 			}else if(_this.passwd!=_this.again){
 				txt = _this.$t('fbcsFile.password.same');
+			} else if (pwd.length < 8){
+				txt = this.$t(err + 'pwdRule');
+			} else if(/\s/.test(pwd)){ //(^\s|\s$)
+				txt = this.$t(err + 'blank');
+			} else if(pwd.indexOf(info.userID)>-1||pwd.indexOf(this.user.userName)>-1){
+				txt = this.$t(err + 'noidName');
+			} else if(/[^\w@#_\-\*]/.test(pwd)){
+				txt = this.$t(err + 'special');
+			} else {
+				let i, num = 0,
+					reg = [/[a-z]/,/[A-Z]/,/[0-9]/,/[@#_\-\*]/];
+				for (i = 0; i < reg.length; i++) {
+					if(reg[i].test(pwd)) num++;
+				}
+				if(num < 2){
+					txt = this.$t(err + 'pwdRule');
+				}
 			}
+			
 			if(txt){
 				utils.confirm({txt, btn: 1});
 				return false;

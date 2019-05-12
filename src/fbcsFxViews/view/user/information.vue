@@ -46,7 +46,7 @@
 							{{$t('fbcsFile.advanced.information.operatorName')}}：
 						</p>
 					</div><div class="right">
-						<input v-model="info.operatorName" maxlength="50" autocomplete="off"/>
+						<input v-model="info.operatorName" maxlength="49" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -55,28 +55,28 @@
 							{{$t('fbcsFile.advanced.information.mobileNum')}}：
 						</p>
 					</div><div class="right">
-						<input v-model="info.operatorMobileNum" @input="filter($event)" data-reg="[^\d\|]" data-k="operatorMobileNum" maxlength="512" autocomplete="off"/>
+						<input v-model="info.operatorMobileNum" @input="filter($event)" data-reg="[^\d\|]" data-k="operatorMobileNum" maxlength="511" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorMobileNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.email')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorEmail" @input="filter($event)" data-reg="[^\w_\-@\.]" data-k="operatorEmail" maxlength="50" autocomplete="off"/>
+						<input v-model="info.operatorEmail" @input="filter($event)" data-reg="[^\w_\-@\.]" data-k="operatorEmail" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorEmail')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.telNum')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorTelNum" @input="filter($event)" data-reg="[^\d\-\+;]" data-k="operatorTelNum" maxlength="512" autocomplete="off"/>
+						<input v-model="info.operatorTelNum" @input="filter($event)" data-reg="[^\d\-\+;]" data-k="operatorTelNum" maxlength="511" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorTelNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManager')}}：</p>
 					</div><div class="right">
-						<input v-model="info.ssccManager" maxlength="50" autocomplete="off"/>
+						<input v-model="info.ssccManager" maxlength="49" autocomplete="off"/>
 					</div>
 				</li>
 			</ul>

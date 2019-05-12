@@ -87,12 +87,13 @@ function WheelReq(sv, self){
 			utils.tableSTop(self, 'detailBox');
 		}
 		self.$emit('update:cuList', arr);
-		stop();
+		stop(arr);
 	}
-	function stop(){
+	function stop(arr){
 		self.loading = false;
 		timeout = false;
 		self.$emit('update:parameter', null);
+		self.$emit('finish', arr);
 	}
 	this.start = function(){
 		beginTime = Date.now();

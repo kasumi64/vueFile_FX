@@ -135,22 +135,22 @@ export default {
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 112,
 			items: [
-				{src:require('@/fbcsFxViews/img/table/restore.png'), click: fnback, tips: this.$t('fbcsFile.tableDefined.back')},
-				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail1, tips: this.$t('fbcsFile.tableDefined.detail'), enable: 'fileSize'},
-				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.tableDefined.detail'),enable: 'zdCfg'},
+				{src:require('@/fbcsFxViews/img/table/restore.png'), click: fnback, tips: this.$t('fbcsFile.tableDefined.verback')},
+				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail1, tips: this.$t('fbcsFile.versionDetail.title'), enable: 'fileSize'},
+				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.versionDetail.title'),enable: 'zdCfg'},
 			]
 		};
 		if(!utils.getFxAuth) {
 			data.defined.items = [
-				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail1, tips: this.$t('fbcsFile.tableDefined.detail'), enable: 'fileSize'},
-				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.tableDefined.detail'),enable: 'zdCfg'},
+				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail1, tips: this.$t('fbcsFile.versionDetail.title'), enable: 'fileSize'},
+				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.versionDetail.title'),enable: 'zdCfg'},
 			];
 		}
 		data.signalTitle = {
 //			section: this.$t('fbcsFile.dispatch.section'),
 			field: this.$t('fbcsFile.dispatch.field'),
 			type: this.$t('fbcsFile.dispatch.notype'),
-			detail: this.$t('fbcsFile.dispatch.detail')
+			detail: this.$t('fbcsFile.versionDetail.title')
 		};
 		data.width = {
 			type: 100,
