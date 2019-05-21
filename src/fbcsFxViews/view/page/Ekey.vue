@@ -12,7 +12,7 @@
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addEkey')}}</span>
 			</li><li @click="advanced" v-if="isPage">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchEkey.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>
@@ -333,8 +333,17 @@ function check(){
 		utils.confirm({txt: _this.$t('fbcsFile.Ekey.errID'), btn: 1});
 		return true;
 	}
+	
 	if(utils.isSpace(info.ekeyName)) {
 		utils.confirm({txt: _this.$t('fbcsFile.Ekey.errName'), btn: 1});
+		return true;
+	} else if(/[\%]/.test(info.ekeyName)){
+		utils.confirm({txt: _this.$t('fbcsFile.Ekey.ekeyNameFormat'), btn: 1});
+		return true;
+	}
+	
+	if(/[\%]/.test(info.ekeyComment)){
+		utils.confirm({txt: _this.$t('fbcsFile.Ekey.ekeyCommentFormat'), btn: 1});
 		return true;
 	}
 	return false;

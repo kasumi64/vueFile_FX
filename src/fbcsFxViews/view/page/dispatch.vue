@@ -163,13 +163,13 @@ export default {
 };
 
 function nodeCu(type){
-	first = false;
 	let params = {
 		url: 'batchDispatch/queryNodeCu',
 		cmdID: '600081',
 		type: type||0
 	};
 	utils.post(params).then(function(res){
+		first = false;
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		nodes = [].concat(res.lists);
 //		_this.cuList = isPatch ? getCU(res.lists) : res.lists;
@@ -184,7 +184,7 @@ function nodeCu(type){
 		for (let k in temp)  arr.push(temp[k]);
 		_this.nodeList = arr;
 		setTimeout(function(){
-			arr.forEach(r => {
+			_this.nodeList.forEach(r => {
 				_this.$refs['nodes'].toggleRowSelection(r, true);
 			});
 		});

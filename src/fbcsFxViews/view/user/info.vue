@@ -72,7 +72,7 @@
 					{{$t('fbcsFile.userInfo.maxUser')}}
 				</div>
 				<div class="right">
-					<input v-model="info.maxRelationUser" data-k="maxRelationUser" @input="onlyNum($event)" maxlength="18" autocomplete="off"/>
+					<input v-model="info.maxRelationUser" data-k="maxRelationUser" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label" style="vertical-align: top;">{{$t('fbcsFile.userInfo.encFlag')}}</div>

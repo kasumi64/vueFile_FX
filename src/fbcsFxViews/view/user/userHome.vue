@@ -24,10 +24,10 @@
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/importExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.importInBop')}}</span>
 			</li><li @click="advanced">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchUser.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advUser')}}</span>
 			</li><li @click="advExp">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchInformation.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advExp')}}</span>
 			</li>
 		</ul>
@@ -176,7 +176,8 @@ export default {
 		},
 		addUser(){
 			utils.setArgs('userInfo', {tab: 'first', type: 'add'});
-			setCache();
+//			 setCache();
+			utils.setArgs('fxcache', null);
 			this.$router.push({path: '/main/fxCfg/userInfo'});
 		},
 		showSignal(){

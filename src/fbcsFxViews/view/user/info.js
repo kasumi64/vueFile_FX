@@ -3,15 +3,15 @@ import md5 from '@/fbcsFxViews/libs/md5.js';
 import moment from 'moment';
 
 var _this, args, defaultPwd, 
-info = {
-	userID: '', userName: '', userType: '1', userPasswd: defaultPwd, inZone: '',linkGroupName: '', speedCtrl: -1,
+_info = {
+	userID: '', userName: '', userType: '1', userPasswd: '', inZone: '',linkGroupName: '', speedCtrl: -1,
 	maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
 	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1, allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
 	maxPublishTopicDay: 7, maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000, webUserFlag: '',
 	isModifyDefaultPasswd: '', expiredTimeFlag: '',
 }, data = {
 	fxAuth: true,
-	info,
+	info: _info,
 	pwd: 1,
 	more: true,
 	blo: [{label: '是', value: 1},{label: '否', value: 0}],
@@ -60,7 +60,6 @@ export default {
 				this.info.userPasswd = defaultPwd;
 			} else this.info.userPasswd = '';
 		},
-		
 		onlyNum_1(e){
 			let el = e.target, str = el.value, k = el.dataset.k;
 			let reg = /[^\d]/g, flag = false;
@@ -230,6 +229,8 @@ function pass(){
 	
 	if(/[^\w-]/.test(info.userID)){
 		return utils.alert({txt: this.$t(err + 'idformat')});
+	} else if(/[\%]/.test(info.userName)){
+		return utils.alert({txt: this.$t(err + 'nameformat')});
 	}
 	
 	if(this.isAdd == 'add'&&info.isModifyDefaultPasswd==1){
@@ -266,7 +267,7 @@ function pass(){
 	} else if (maxTask < 1){
 		return utils.alert({txt: this.$t(err + 'maxTask')});
 	}
-	/*else if (!(maxUser>=0&&maxUser<=1000)){
+	/*else if (!(maxUser>=0&&maxUser<=99999999)){
 		return utils.alert({txt: this.$t(err + 'maxUser')});
 	}else if (oneTask < 0){
 		return utils.alert({txt: this.$t(err + 'oneTask')});
@@ -377,6 +378,7 @@ function getUserInfo(user){
 		if(!obj.endSoftEncTime) obj.endSoftEncTime = '';
 		obj.isModifyDefaultPasswd = 0;
 		obj.expiredTimeFlag = '1';
+		obj.userPasswd = '';
 		if(obj.linkGroupName=='') obj.linkGroupName = '任意';
 		_this.info = obj;
 	});

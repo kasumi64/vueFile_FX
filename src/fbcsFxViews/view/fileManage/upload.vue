@@ -11,7 +11,7 @@
 					{{$t('fbcsFile.files.upload.fileName')}}
 				</div>
 				<div class="right">
-					<input id="ddd" v-model="fileName" @input="filter($event)" data-k="fileName" maxlength="64" autocomplete="off"/>
+					<input id="ddd" v-model="fileName" data-k="fileName" maxlength="64" autocomplete="off"/>
 					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}</p>
 				</div>
 			</li><li>
@@ -108,8 +108,9 @@ function check(){
 	let files = this.fileName, vers =  this.version, reg = /[^a-zA-Z0-9\._-]/g;
 	if(utils.isSpace(files)) return utils.alert({txt: this.$t('fbcsFile.err.files.fileNull')});
 	if(utils.isSpace(vers)) return utils.alert({txt: this.$t('fbcsFile.err.files.verNull')});
-	if( reg.test(files) ) return utils.alert({txt: this.$t('fbcsFile.err.files.formatFile')});
+	if( /[\%]/.test(files) ) return utils.alert({txt: this.$t('fbcsFile.err.files.formatFile')});
 	if( reg.test(vers) ) return utils.alert({txt: this.$t('fbcsFile.err.files.formatVer')});
+	if( /[\%]/.test(this.fileComment) ) return utils.alert({txt: this.$t('fbcsFile.err.files.fileComment')});
 	return true;
 }
 

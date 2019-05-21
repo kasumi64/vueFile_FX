@@ -29,7 +29,7 @@
 		</div>
 		<ul class="fnField">
 			<li @click="advanced">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchAudit.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>

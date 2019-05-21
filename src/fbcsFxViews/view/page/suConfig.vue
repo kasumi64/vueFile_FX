@@ -11,7 +11,7 @@
 				<el-switch v-if="fxAuth" :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" v-model="enabled"></el-switch>
 			</div>
 			<div class="textarea">
-				<el-input v-model="txtVal" type="textarea" rows="14" :disabled="!enabled" resize="none">
+				<el-input v-model="txtVal" @input="filter($event)" type="textarea" rows="14" :disabled="!enabled" resize="none">
 				</el-input>
 				<button v-if="fxAuth" class="blueBtn mt" @click="submit" :disabled="!enabled">{{$t('fbcsFile.tips.submit')}}</button>
 				<button v-if="fxAuth" class="blueBtn mt" @click="history" :disabled="!enabled">{{$t('fbcsFile.tips.contrast')}}</button>
@@ -81,7 +81,19 @@ export default {
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
 		},
+		filter(str){
+			let reg = /[\%]/g, self = this;
+			if(reg.test(str)){
+				utils.alert({txt: this.$t('fbcsFile.suConfig.txtErr')});
+				setTimeout(() => {
+					self.txtVal = str.replace(reg, '');
+				});
+			}
+		},
 		submit(){
+			if(/[\%]/.test(this.txtVal)){
+				return utils.alert({txt: this.$t('fbcsFile.suConfig.txtErr')});
+			}
 			this.reqsv = {uri: 'cuConfig/modify'};
 			this.showReview = true;
 		},
@@ -106,6 +118,9 @@ export default {
 			this.list = [];
 		},
 		history(){
+			if(/[\%]/.test(this.txtVal)){
+				return utils.alert({txt: this.$t('fbcsFile.suConfig.txtErr')});
+			}
 			let params = {
 				url: 'cuConfig/webModifyCompare',
 				cmdID: '600094',

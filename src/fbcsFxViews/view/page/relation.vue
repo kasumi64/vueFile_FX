@@ -17,7 +17,7 @@
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delSignal.png"/>
 				<span class="label">{{$t('fbcsFile.relation.delSignal')}}</span>
 			</li><li @click="advanced" v-if="isPage">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchSignal.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>
@@ -339,6 +339,7 @@ function nextFrame(){
 			_this.disabled = false;
 			_this.oneDisable = true;
 			_this.oneid = args.userID;
+			_this.idarr = filterSig(args.userID, [].concat(userid));
 		}
 	}, 0);
 }

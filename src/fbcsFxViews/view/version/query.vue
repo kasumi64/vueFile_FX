@@ -27,13 +27,13 @@
 		
 		<ul class="fnField">
 			<li @click="bigVer" v-if="fxAuth">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addUser.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/bigVer.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.bigVer')}}</span>
 			</li><li @click="getCfg" v-if="fxAuth">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delUser.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/getzdConfig.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.getCfg')}}</span>
 			</li><li @click="checkVer(0)">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportTheme.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/zdConfig.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.checkZd')}}</span>
 			</li>
 			<!--<li @click="checkVer(1)">

@@ -111,7 +111,7 @@ function ReqHttp(){
 			console.log(params.cmdID, params);
 			let debugRes = {
 				status: 200,
-				data: {errcode:'0', lists:[], errinfo: 'Success.'}
+				data: {errcode:'0', lists:[], errinfo: 'Success.', defaultPasswd: 'ABCDEFG'}
 			}, arr = [];
 			for (var i = 0; i < 10; i++) {
 				arr.push({userID: '01'+i, userName: 'userName'+i,userID1: '006', nodeName: '深圳'+i, cuName: 'CU-1',
@@ -341,6 +341,10 @@ exp.sleep = function (delay){
 };
 
 exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str == ''||str == null); };
+
+exp.clearCache = function (){
+	exp.setArgs('fxcache', null);
+};
 
 Object.addProto(exp, 'getFxAuth', {
 	get(){

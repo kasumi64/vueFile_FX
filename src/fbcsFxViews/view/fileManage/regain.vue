@@ -5,10 +5,10 @@
 		</div>-->
 		<ul class="fnField">
 			<li @click="search">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/fileVer.png"/>
 				<span class="label">{{$t('fbcsFile.files.regain.compare')}}</span>
 			</li><li @click="advanced">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/CUblacklist.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.blacklist')}}</span>
 			</li>
 		</ul>
@@ -202,8 +202,8 @@ function search(){
 			obj.typeStr = lable['str'+obj.recoverType];
 		}
 		_this.list = res.lists;
-		_this.page = res.currentPage;
-		_this.total = res.totalSize;
+		_this.page = res.currentPage || 1;
+		_this.total = res.count;
 	});
 }
 

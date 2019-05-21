@@ -2,13 +2,13 @@
 	<div class="search">
 		<ul class="fnField">
 			<li @click="search">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/refresh.png"/>
 				<span class="label">{{$t('fbcsFile.tips.refresh')}}</span>
 			</li><li @click="checkVer(1)">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportTheme.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/fileVer.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.newVer')}}</span>
 			</li><li @click="advanced">
-				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/upload.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.upload')}}</span>
 			</li>
 		</ul>
@@ -165,8 +165,8 @@ function search(){
 			}
 		}
 		_this.list = res.lists;
-		_this.page = res.currentPage;
-		_this.total = res.totalSize;
+		_this.page = res.currentPage || 1;
+		_this.total = res.count;
 	});
 }
 
