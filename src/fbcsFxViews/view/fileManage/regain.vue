@@ -12,7 +12,7 @@
 				<span class="label">{{$t('fbcsFile.fnField.blacklist')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" :size="90000">
+		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage="page" @changePage="changePage" :size="90000">
 		</lgy-table>
 		<h2 class="h2">{{$t('fbcsFile.files.search.sendRes')}}</h2>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
@@ -133,6 +133,7 @@ export default {
 			search();
 		},
 		changePage(num){
+			this.page = num;
 			search();
 		},
 		changeCU(arr){

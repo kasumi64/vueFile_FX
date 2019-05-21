@@ -168,6 +168,7 @@ export default {
 			search();
 		},
 		changePage(num){
+			this.page = num;
 			search();
 		},
 		submit(obj){
@@ -207,7 +208,8 @@ export default {
 				utils.tableSTop(_this, 'zdBox');
 			});
 		},
-		signalChange(){
+		signalChange(num){
+			this.signalPage = num;
 			signalSearch();
 		},
 		send(){

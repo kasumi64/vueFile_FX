@@ -32,13 +32,13 @@
 			</li>
 		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :selection='true' 
-			@select="select" @changePage="changePage" :currentSelect.sync="currSelect" :currentPage.sync="page">
+			@select="select" @changePage="changePage" :currentSelect.sync="currSelect" :currentPage="page">
 		</lgy-table>
 		
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.userHome.signal')" v-dialogDrag width="646px"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog signal">
-				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
+				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage="signalPage" 
 					@changePage="signalChange" >
 				</lgy-table>
 			</div>
@@ -172,11 +172,12 @@ export default {
 			search();
 		},
 		changePage(num){
+			this.page = num;
 			search();
 		},
 		addUser(){
 			utils.setArgs('userInfo', {tab: 'first', type: 'add'});
-//			 setCache();
+//			setCache();
 			utils.setArgs('fxcache', null);
 			this.$router.push({path: '/main/fxCfg/userInfo'});
 		},
@@ -187,7 +188,8 @@ export default {
 			signalSearch();
 			this.showDialog = true;
 		},
-		signalChange(){
+		signalChange(num){
+			this.signalPage = num;
 			signalSearch();
 		},
 		delUser(){

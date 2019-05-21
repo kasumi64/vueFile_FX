@@ -16,7 +16,7 @@
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table ref="table" :list="list" :title="title" :defined="defined" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
 		
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag
@@ -180,9 +180,12 @@ export default {
 		},
 		search(){
 			this.page = 1;
+			if(this.$refs.table != void 0)
+				this.$refs.table.page = 1;
 			search();
 		},
 		changePage(num){
+			this.page = num;
 			search();
 		},
 		idInput(val){

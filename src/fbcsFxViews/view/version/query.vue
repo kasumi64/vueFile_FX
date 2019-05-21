@@ -42,7 +42,7 @@
 			</li>-->
 		</ul>
 		
-		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
 		
 		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="$t('fbcsFile.fnField.checkZd')" v-dialogDrag
@@ -80,7 +80,7 @@
 		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag  width="800px"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
+				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage="signalPage" 
 					@changePage="signalChange"  max-height="394" :width="width">
 				</lgy-table>
 			</div>

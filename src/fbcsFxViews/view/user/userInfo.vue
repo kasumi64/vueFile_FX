@@ -9,10 +9,10 @@
 				<user :isAdd.sync="type" :tab.sync='tab' :isNew="isNew"></user>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.ekey')" name="second" :disabled="type=='add'">
-				<ekey :isPage="false" :tab.sync='tab' :isNew="isNew"></ekey>
+				<ekey ref="ekey" :isPage="false" :tab.sync='tab' :isNew="isNew"></ekey>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.signal')" name="third" :disabled="type=='add'">
-				<signal :isPage="false"></signal>
+				<signal ref="signal" :isPage="false"></signal>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.information')" name="fourth" :disabled="type=='add'">
 				<information></information>
@@ -39,7 +39,17 @@ export default {
 			this.$router.push({path: '/main/fxCfg/userHome'});
 		},
 		tabClick(tabs, e){
-			this.tab = tabs.name;
+			switch (tabs.name){
+				case 'second':
+					next(this.$refs.ekey.search);
+					break;
+				case 'third':
+					next(this.$refs.signal.search);
+					break;
+			}
+			function next(fn){
+				setTimeout(() => { fn(); });
+			};
 		}
 	},
 	created(){
@@ -63,16 +73,6 @@ export default {
 	}
 }
 
-function test(){
-	let params = {
-		url: 'cuConfig/queryWebModify',
-		cmdID: '600094',
-	};
-	utils.post(params).then(function(res){
-		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
-		_this.list = res.lists;
-	});
-}
 </script>
 
 <style scoped="scoped">

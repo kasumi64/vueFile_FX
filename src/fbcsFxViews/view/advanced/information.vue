@@ -32,10 +32,10 @@
 			</li>-->
 		</ul>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p>
-		<lgy-table :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage.sync="pageOPE" @changePage="changeOPE" :maxHeight="416">
+		<lgy-table :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage="pageOPE" @changePage="changeOPE" :maxHeight="416">
 		</lgy-table>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resBOP')}}</p>
-		<lgy-table :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage.sync="pageBOP" @changePage="changeBOP" :maxHeight="416">
+		<lgy-table :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" :maxHeight="416">
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
@@ -118,9 +118,11 @@ export default {
 			search();
 		},
 		changeOPE(num){
+			this.pageOPE = num;
 			search('OPE');
 		},
 		changeBOP(num){
+			this.pageBOP = num;
 			search('BOP');
 		},
 		idInput(val){

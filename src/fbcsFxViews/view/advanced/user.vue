@@ -33,7 +33,7 @@
 				<span class="label">{{$t('fbcsFile.advanced.user.expcsv')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.advanced.user.expcsv')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
@@ -94,6 +94,7 @@ export default {
 			search();
 		},
 		changePage(num){
+			this.page = num;
 			search();
 		},
 		expcsv(){

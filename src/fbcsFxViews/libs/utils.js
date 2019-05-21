@@ -107,7 +107,7 @@ function ReqHttp(){
 		var url = params.url;
 		delete params.url;
 		
-		if('debug'){
+		/* if('debug'){
 			console.log(params.cmdID, params);
 			let debugRes = {
 				status: 200,
@@ -120,7 +120,7 @@ function ReqHttp(){
 			}
 			debugRes.data.lists = arr;
 			return Promise.resolve(callback(debugRes, fn, args));
-		}
+		} */
 		
 		return axios.post(url, params).then(function(res){
 			return callback(res, fn, args);
@@ -342,9 +342,10 @@ exp.sleep = function (delay){
 
 exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str == ''||str == null); };
 
-exp.clearCache = function (){
+exp.clearCache = function(){
 	exp.setArgs('fxcache', null);
 };
+
 
 Object.addProto(exp, 'getFxAuth', {
 	get(){

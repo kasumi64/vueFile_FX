@@ -41,7 +41,7 @@
 		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag width="800px"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage.sync="signalPage" 
+				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage="signalPage" 
 					@changePage="signalChange" max-height="394" :width="width">
 				</lgy-table>
 			</div>
@@ -134,7 +134,8 @@ export default {
 				_this.parameter = res;
 			});
 		},
-		signalChange(){
+		signalChange(num){
+			this.signalPage = num;
 			signalSearch();
 		},
 		send(){

@@ -13,9 +13,9 @@
 			<lgy-candidateWords v-model="id2" :keywords="ver2" :disabled="disabled" @input="input2" class="words"></lgy-candidateWords>
 			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.versionContrast.btn')}}</button>
 		</div>
-		<lgy-table :list="list" :title="title1" class="hide" :class="{show:disabled}" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title1" class="hide" :class="{show:disabled}" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
-		<lgy-table :list="list" :title="title2" class="hide" :class="{show:!disabled}" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title2" class="hide" :class="{show:!disabled}" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
 	</div>
 </template>
@@ -57,6 +57,7 @@ export default {
 			search();
 		},
 		changePage(num){
+			this.page = num;
 			search();
 		},
 		input1(val){

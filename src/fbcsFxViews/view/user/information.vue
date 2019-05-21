@@ -24,11 +24,11 @@
 			</li>
 		</ul>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p>
-		<lgy-table :list="listOPE" :title="titleOPE" :total="totalOPE" :defined="defined" :currentPage.sync="pageOPE" @changePage="changeOPE" 
+		<lgy-table :list="listOPE" :title="titleOPE" :total="totalOPE" :defined="defined" :currentPage="pageOPE" @changePage="changeOPE" 
 			:maxHeight="416" :size='90000'>
 		</lgy-table>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resBOP')}}</p>
-		<lgy-table :list="listBOP" :title="titleBOP" :total="totalBOP" :currentPage.sync="pageBOP" @changePage="changeBOP" 
+		<lgy-table :list="listBOP" :title="titleBOP" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" 
 			:maxHeight="416" :size='90000'>
 		</lgy-table>
 		<el-dialog :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false" width="670px">
@@ -179,9 +179,11 @@ export default {
 			search();
 		},
 		changeOPE(num){
+			this.pageOPE = num;
 			search('OPE');
 		},
 		changeBOP(num){
+			this.pageBOP = num;
 			search('BOP');
 		},
 		idInput(val){

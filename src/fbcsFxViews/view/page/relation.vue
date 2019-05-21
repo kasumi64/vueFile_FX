@@ -21,7 +21,7 @@
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :selection="true" :currentPage.sync="page"
+		<lgy-table ref="table" :list="list" :title="title" :defined="defined" :total="total" :selection="true" :currentPage="page"
 			@selectChange="selectChange" @changePage="changePage" >
 		</lgy-table>
 		
@@ -150,9 +150,12 @@ export default {
 		},
 		search(){
 			this.page = 1;
+			if(this.$refs.table != void 0)
+				this.$refs.table.page = 1;
 			search();
 		},
 		changePage(num){
+			this.page = num;
 			search();
 		},
 		idInput(val){

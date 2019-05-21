@@ -14,7 +14,7 @@
 				<span class="label">{{$t('fbcsFile.fnField.addEkey')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage.sync="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
 	</div>
 </template>
@@ -64,6 +64,7 @@ export default {
 			search();
 		},
 		changePage(num){
+			this.page = num;
 			search();
 		},
 		idInput(val){
