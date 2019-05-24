@@ -140,7 +140,7 @@ export default {
 			nodes = arr;
 		},
 		showCU(row){
-			if(nodes.length == 0) return utils.alert({txt: this.$t('fbcsFile.dispatch.noNode')});
+			if(nodes.length == 0) return utils.weakTips({txt: this.$t('fbcsFile.dispatch.noNode')});
 			row.uri = 'userClientFile/recover';
 			this.reqsv = row;
 			this.showReview = true;

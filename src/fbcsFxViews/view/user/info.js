@@ -68,8 +68,9 @@ export default {
 				str = str.replace('-', '');
 			}
 			if(reg.test(str)){
-				utils.alert({txt: this.$t('fbcsFile.err.user.errNum')});
+				// utils.alert({txt: this.$t('fbcsFile.err.user.errNum')});
 				str = str.replace(reg, '');
+				utils.weakTips(this.$t('fbcsFile.err.user.errNum'), 1);
 			}
 			if(flag)  str = '-' + str;
 			this.info[k] = str;
@@ -78,8 +79,9 @@ export default {
 			let el = e.target, str = el.value, k = el.dataset.k;
 			let reg = /[^\d]/g;
 			if(reg.test(str)){
-				utils.alert({txt: this.$t('fbcsFile.err.user.errNum')});
+				// utils.alert({txt: this.$t('fbcsFile.err.user.errNum')});
 				this.info[k] = str.replace(reg, '');
+				utils.weakTips(this.$t('fbcsFile.err.user.errNum'), 1);
 			}
 		},
 		submit(){
@@ -176,8 +178,12 @@ export default {
 			params.reviewer = obj.name;
 			if(params.linkGroupName == '任意') params.linkGroupName = '';
 			
+//			utils.loadShow();
 			utils.post(params).then(function(res){
-				if(res.errcode != '0') return utils.alert({txt: res.errinfo});
+				if(res.errcode != '0') {
+//					utils.loadClose();
+					return utils.alert({txt: res.errinfo});
+				}
 				if(res.webUserFlag == 1){ //网络用户
 					let mess = `<p>${res.errinfo}</p>`;
 					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
@@ -222,29 +228,31 @@ function pass(){
 	for (var i = 0; i < must.length; i++) {
 		let k = must[i], str = info[k];
 		if(utils.isSpace(str)) {
-			utils.alert({txt: this.$t(err + k)});
+			utils.weakTips({txt: this.$t(err + k)});
 			return false;
 		}
 	}
 	
 	if(/[^\w-]/.test(info.userID)){
-		return utils.alert({txt: this.$t(err + 'idformat')});
+		utils.weakTips({txt: this.$t(err + 'idformat')});
+		return false;
 	} else if(/[\%]/.test(info.userName)){
-		return utils.alert({txt: this.$t(err + 'nameformat')});
+		utils.weakTips({txt: this.$t(err + 'nameformat')});
+		return false;
 	}
 	
 	if(this.isAdd == 'add'&&info.isModifyDefaultPasswd==1){
-		let pwd = info.userPasswd;
+		let txt = false, pwd = info.userPasswd;
 		if(pwd == '') {
-			return utils.alert({txt: this.$t(err + 'userPasswd')});
+			txt = this.$t(err + 'userPasswd');
 		} else if (pwd.length < 8){
-			return utils.alert({txt: this.$t(err + 'pwdRule')});
+			txt = this.$t(err + 'pwdRule');
 		} else if(/\s/.test(pwd)){ //(^\s|\s$)
-			return utils.alert({txt: this.$t(err + 'blank')});
+			txt = this.$t(err + 'blank');
 		} else if(pwd.indexOf(info.userID)>-1||pwd.indexOf(info.userName)>-1){
-			return utils.alert({txt: this.$t(err + 'noidName')});
+			txt = this.$t(err + 'noidName');
 		} else if(/[^\w@#_\-\*]/.test(pwd)){
-			return utils.alert({txt: this.$t(err + 'special')});
+			txt = this.$t(err + 'special');
 		} else {
 			let i, num = 0,
 				reg = [/[a-z]/,/[A-Z]/,/[0-9]/,/[@#_\-\*]/];
@@ -252,8 +260,13 @@ function pass(){
 				if(reg[i].test(pwd)) num++;
 			}
 			if(num < 2){
-				return utils.alert({txt: this.$t(err + 'pwdRule')});
+				txt = his.$t(err + 'pwdRule');
 			}
+		}
+		
+		if(txt){
+			utils.weakTips(txt);
+			return false;
 		}
 	}
 	
@@ -263,20 +276,25 @@ function pass(){
 		oneTask = parseInt(info.maxCltOneDayTaskCount);
 	
 	if(!(speed>=-1&&speed<=999999999999999999)){
-		return utils.alert({txt: this.$t(err + 'speed')});
+		utils.weakTips({txt: this.$t(err + 'speed')});
+		return false;
 	} else if (maxTask < 1){
-		return utils.alert({txt: this.$t(err + 'maxTask')});
+		utils.weakTips({txt: this.$t(err + 'maxTask')});
+		return false;
 	}
 	/*else if (!(maxUser>=0&&maxUser<=99999999)){
-		return utils.alert({txt: this.$t(err + 'maxUser')});
+		utils.weakTips({txt: this.$t(err + 'maxUser')});
+		return false;
 	}else if (oneTask < 0){
-		return utils.alert({txt: this.$t(err + 'oneTask')});
+		utils.weakTips({txt: this.$t(err + 'oneTask')});
+		return false;
 	}*/
 	
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
 	if((begin || end)&&info.encFlag==1){
 		if(begin==''||end==''||begin >= end) {
-			return utils.alert({txt: this.$t(err + 'softDay')});
+			utils.weakTips({txt: this.$t(err + 'softDay')});
+			return false;
 		}
 	}
 	

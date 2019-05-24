@@ -225,7 +225,7 @@ export default {
 			this.showInfo = true;
 		},
 		save(){
-			if(utils.isSpace(this.fileName)) return utils.confirm({
+			if(utils.isSpace(this.fileName)) return utils.weakTips({
 				txt: _this.$t('fbcsFile.userHome.fileErr'),
 				btn: 1
 			});

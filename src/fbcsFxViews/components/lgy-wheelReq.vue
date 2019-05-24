@@ -1,6 +1,10 @@
 <style scoped="scoped">
-.lgy-wheelReq .warp{display: none;}
-.lgy-wheelReq .result{padding: 40px;}
+	.lgy-wheelReq{z-index: 90000;}
+	.lgy-wheelReq .warp{display: none;}
+	.lgy-wheelReq .result{padding: 40px;}
+</style>
+<style>
+	#fbcs_file .lgy-wheelReq .el-dialog{width: 70%;}
 </style>
 
 <template>
@@ -90,10 +94,10 @@ function WheelReq(sv, self){
 		stop(arr);
 	}
 	function stop(arr){
-		self.loading = false;
 		timeout = false;
 		self.$emit('update:parameter', null);
 		self.$emit('finish', arr);
+		self.loading = false;
 	}
 	this.start = function(){
 		beginTime = Date.now();
@@ -132,9 +136,10 @@ export default {
 	},
 	watch: {
 		parameter(param){
-			if(!param) return;
+			if(!param) return utils.loadClose();
 			let w = new WheelReq(param, this);
 			w.start();
+			utils.loadClose();
 		}
 	}
 };

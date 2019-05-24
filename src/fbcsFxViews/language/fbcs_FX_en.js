@@ -52,7 +52,7 @@ var obj = {
 		info: {
 			operatorMobileNum: '仅能输入数字、“|”，用“|”做分隔符', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
 			operatorTelNum: '仅能输入数字,“-”,“+”,和“;”', emailFormat: '邮箱格式不对', tell: '手机号不能以“|”结尾',
-			operatorName: '输入字符不能包含%', ssccManager: '输入字符不能包含%'
+			operatorName: '不能包含%，前后不能是空格', ssccManager: '不能包含%，前后不能是空格'
 		},
 		files: {
 			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', format: '仅能输入英文，数字,“-”,“_”和“.”',

@@ -20,7 +20,7 @@
 					{{$t('fbcsFile.files.upload.version')}}
 				</div>
 				<div class="right">
-					<input v-model="version" @input="filter($event)" data-k="version" maxlength="64" autocomplete="off"/>
+					<input v-model="version" data-k="version" maxlength="64" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -105,12 +105,18 @@ export default {
 };
 
 function check(){
-	let files = this.fileName, vers =  this.version, reg = /[^a-zA-Z0-9\._-]/g;
-	if(utils.isSpace(files)) return utils.alert({txt: this.$t('fbcsFile.err.files.fileNull')});
-	if(utils.isSpace(vers)) return utils.alert({txt: this.$t('fbcsFile.err.files.verNull')});
-	if( /[\%]/.test(files) ) return utils.alert({txt: this.$t('fbcsFile.err.files.formatFile')});
-	if( reg.test(vers) ) return utils.alert({txt: this.$t('fbcsFile.err.files.formatVer')});
-	if( /[\%]/.test(this.fileComment) ) return utils.alert({txt: this.$t('fbcsFile.err.files.fileComment')});
+	let files = this.fileName, vers =  this.version, reg = /[^a-zA-Z0-9\._-]/g,
+		txt = false;
+	if(utils.isSpace(files)) txt = this.$t('fbcsFile.err.files.fileNull');
+	else if(utils.isSpace(vers))  txt = this.$t('fbcsFile.err.files.verNull');
+	else if( /[\%]/.test(files) )  txt = this.$t('fbcsFile.err.files.formatFile');
+	else if( reg.test(vers) )  txt = this.$t('fbcsFile.err.files.formatVer');
+	else if( /[\%]/.test(this.fileComment) ) txt = this.$t('fbcsFile.err.files.fileComment');
+	
+	if(txt){
+		utils.weakTips(txt);
+		return false;
+	}
 	return true;
 }
 

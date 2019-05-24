@@ -177,7 +177,7 @@ function pass(){
 	
 	if(_this.isEdit){ //1-修改密码
 		if(info.isModifyDefaultPasswd){
-			let txt = '', pwd = _this.passwd, err = 'fbcsFile.err.user.';
+			let txt = false, pwd = _this.passwd, err = 'fbcsFile.err.user.';
 			if(!_this.passwd){
 				txt = _this.$t('fbcsFile.password.pwdErr');
 			}else if(!_this.again){
@@ -204,7 +204,7 @@ function pass(){
 			}
 			
 			if(txt){
-				utils.confirm({txt, btn: 1});
+				utils.weakTips(txt);
 				return false;
 			}
 		}

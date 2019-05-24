@@ -216,8 +216,8 @@ export default {
 			});
 		},
 		submit(){
-			if(utils.isSpace(this.oneid)) return utils.confirm({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
-			if(!this.sid.length) return utils.confirm({txt:this.$t('fbcsFile.relation.errid2'),btn:1});
+			if(utils.isSpace(this.oneid)) return utils.weakTips({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
+			if(!this.sid.length) return utils.weakTips({txt:this.$t('fbcsFile.relation.errid2'),btn:1});
 			let params = {
 				url: 'userComm/add',
 				cmdID: '600042',
@@ -232,9 +232,9 @@ export default {
 			});
 		},
 		now(){
-			if(utils.isSpace(this.oneid)) return utils.confirm({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
-			if(this.sid.length==0) return utils.confirm({txt:this.$t('fbcsFile.relation.errid2'),btn:1});
-			if(this.sid.length>1) return utils.confirm({txt:this.$t('fbcsFile.relation.errid3'),btn:1});
+			if(utils.isSpace(this.oneid)) return utils.weakTips({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
+			if(this.sid.length==0) return utils.weakTips({txt:this.$t('fbcsFile.relation.errid2'),btn:1});
+			if(this.sid.length>1) return utils.weakTips({txt:this.$t('fbcsFile.relation.errid3'),btn:1});
 			this.reqsv = {uri: 'userComm/addImmediately'};
 			this.showReview = true;
 			this.showDialog = false;

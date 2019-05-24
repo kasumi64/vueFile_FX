@@ -84,10 +84,11 @@ export default {
 		filter(str){
 			let reg = /[\%]/g, self = this;
 			if(reg.test(str)){
-				utils.alert({txt: this.$t('fbcsFile.suConfig.txtErr')});
+				// utils.alert({txt: this.$t('fbcsFile.suConfig.txtErr')});
 				setTimeout(() => {
 					self.txtVal = str.replace(reg, '');
 				});
+				utils.weakTips(this.$t('fbcsFile.suConfig.txtErr'), 1);
 			}
 		},
 		submit(){

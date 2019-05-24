@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Axios from 'axios';
 import kit	 from '@/fbcsFxViews/libs/kit.min.js';
 import i18n from '@/fbcsFxViews/language/lang.js';
+import { Message } from 'element-ui';
 
 const exp = {}, argsVar = {}, vue = new Vue({i18n});
 var fbcs;
@@ -107,7 +108,7 @@ function ReqHttp(){
 		var url = params.url;
 		delete params.url;
 		
-		/* if('debug'){
+		if('debug'){
 			console.log(params.cmdID, params);
 			let debugRes = {
 				status: 200,
@@ -120,7 +121,7 @@ function ReqHttp(){
 			}
 			debugRes.data.lists = arr;
 			return Promise.resolve(callback(debugRes, fn, args));
-		} */
+		}
 		
 		return axios.post(url, params).then(function(res){
 			return callback(res, fn, args);
@@ -162,13 +163,17 @@ function ReqHttp(){
 
 kit.extend(exp, new ReqHttp());
 
-function addDrag(kel, tit, panl){
-	if(!(kel instanceof kit.constructor))
-		kel = kit(kel);
+function addDrag(kel, tit, panl, foot){
+	if(!(kel instanceof kit.constructor)) kel = kit(kel);
 	var title = kel.find(tit), panle = kel.find(panl),
-		first, xy = {};
+		footer = kel.find(foot), first, xy = {};
 	
 	title.css({
+		cursor: 'move',
+		'-webkit-user-select': 'none',
+		'user-select': 'none'
+	}).down(down);
+	footer.css({
 		cursor: 'move',
 		'-webkit-user-select': 'none',
 		'user-select': 'none'
@@ -191,12 +196,41 @@ function addDrag(kel, tit, panl){
 	this.enable = function(bool){
 		if(bool == false){
 			title.css({cursor: ''}).down();
-		} else title.css({cursor: 'move'}).down(down);
+			footer.css({cursor: ''}).down();
+		} else {
+			title.css({cursor: 'move'}).down(down);
+			footer.css({cursor: 'move'}).down(down);
+		}
 	}
 	kel = null;
 }
 
-exp.addDrag = function(kel, tit, panl){ return new addDrag(kel, tit, panl); };
+exp.addDrag = function(kel, tit, panl, foot){ return new addDrag(kel, tit, panl, foot); };
+
+//弱提示
+exp.weakTips = function(txt, type, delay){
+	if(typeof(txt)==="object"){ //兼容alert
+		let obj = txt;
+		txt = obj.txt;
+		type = obj.type;
+		delay = obj.delay;
+	}
+	if(txt==''||txt==null) return;
+	Message.closeAll();
+	let theme = ('success/warning/info/error').split('/');
+	theme = theme[type] || 'warning';
+	delay = parseInt(delay) || 5000
+	if(delay < 0) delay = 0;
+	let options = {
+		message: txt, type,
+		dangerouslyUseHTMLString: true,
+		duration: delay,
+		showClose: true
+	}
+	return Message[theme](options);
+};
+//关闭弱提示
+exp.closeTips = function(){ Message.closeAll() };
 
 //	confirm('文本'); //有确定和取消按钮
 //	prompt('文本','输入文本'); //有confirm()和输入框
@@ -223,7 +257,7 @@ function TipsConfirm(){
 			</div>
 		</div>`;
 	const mask = kit(dom);
-	exp.addDrag(mask, '.title', '.tipsPanle');
+	exp.addDrag(mask, '.title', '.tipsPanle', '.footBtn');
 	var notifyFn = {
 		title:'', txt: '', type: '',
 		ok:'', now:'', cancel:'',
@@ -340,9 +374,10 @@ exp.sleep = function (delay){
 	});
 };
 
-exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str == ''||str == null); };
+exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str === ''||str == null); };
 
 exp.clearCache = function(){
+	exp.setArgs('userInfo', null);
 	exp.setArgs('fxcache', null);
 };
 
