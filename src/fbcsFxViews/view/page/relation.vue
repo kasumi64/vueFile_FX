@@ -45,7 +45,7 @@
 						</p>
 					</div><div class="right">
 						<el-select class="selm" v-model="sid" :disabled="disabled" multiple filterable remote :remote-method="filter">
-							<el-option v-for="item in idarr" :key="item.value" :label="item.label" :value="item.value">
+							<el-option v-for="item in idarr" :key="item.value" :label="item.lable" :value="item.value">
 							</el-option>
 						</el-select>
 						<button class="defBtn mf" @click="clear">{{$t('fbcsFile.relation.clear')}}</button>

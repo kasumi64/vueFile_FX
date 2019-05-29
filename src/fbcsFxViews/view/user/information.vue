@@ -46,7 +46,7 @@
 							{{$t('fbcsFile.advanced.information.operatorName')}}：
 						</p>
 					</div><div class="right">
-						<input v-model="info.operatorName" @input="filter($event)" data-reg="(\%)|(^\s|\s$)" data-k="operatorName" maxlength="49" autocomplete="off"/>
+						<input v-model="info.operatorName" @input="filter($event)" data-reg="[\%]" data-k="operatorName" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorName')}}</span>
 					</div>
 				</li><li>
@@ -77,7 +77,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManager')}}：</p>
 					</div><div class="right">
-						<input v-model="info.ssccManager" @input="filter($event)" data-reg="(\%)|(^\s|\s$)" data-k="ssccManager" maxlength="49" autocomplete="off"/>
+						<input v-model="info.ssccManager" @input="filter($event)" data-reg="[\%]" data-k="ssccManager" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.ssccManager')}}</span>
 					</div>
 				</li>
@@ -231,6 +231,9 @@ export default {
 				param.cmdID = '600023';
 				param.oldOperatorName = oldOperatorName;
 			}
+			
+			param.operatorName = param.operatorName.trim();
+			param.ssccManager = param.ssccManager.trim();
 			
 			utils.post(param).then(res => {
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});

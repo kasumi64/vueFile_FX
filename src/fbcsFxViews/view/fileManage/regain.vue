@@ -55,7 +55,7 @@
 				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
-		<lgy-wheelReq :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
+		<lgy-wheelReq class="z" :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
 	</div>
 </template>
 
@@ -227,4 +227,5 @@ function nodeCu(type){
 	._dialog li {white-space: nowrap;}
 	._dialog .right .txt {white-space: normal;display: block;width: 350px;}
 	#fbcs_file ._dialog li .left{width: 140px;}
+	.lgy-wheelReq.z{z-index: 7;}
 </style>

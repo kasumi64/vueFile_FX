@@ -306,7 +306,7 @@ function defval(){
 		maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000};
 	var flag, info = this.info, dom = this.$t('fbcsFile.userInfo.errNum');
 	for(var k in def){
-		if(!info[k]){
+		if(info[k]===''){
 			flag = true;
 			info[k] = def[k];
 			dom += this.$t('fbcsFile.userInfo.'+k)+def[k]+'\n';

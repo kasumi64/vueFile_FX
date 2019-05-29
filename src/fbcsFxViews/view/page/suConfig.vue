@@ -92,8 +92,9 @@ export default {
 			}
 		},
 		submit(){
-			if(/[\%]/.test(this.txtVal)){
-				return utils.alert({txt: this.$t('fbcsFile.suConfig.txtErr')});
+			let reg = /[\%％ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９]/;
+			if(reg.test(this.txtVal)){
+				return utils.alert({txt: this.$t('fbcsFile.suConfig.full')});
 			}
 			this.reqsv = {uri: 'cuConfig/modify'};
 			this.showReview = true;
@@ -119,8 +120,9 @@ export default {
 			this.list = [];
 		},
 		history(){
-			if(/[\%]/.test(this.txtVal)){
-				return utils.alert({txt: this.$t('fbcsFile.suConfig.txtErr')});
+			let reg = /[\%％ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９]/;
+			if(reg.test(this.txtVal)){
+				return utils.alert({txt: this.$t('fbcsFile.suConfig.full')});
 			}
 			let params = {
 				url: 'cuConfig/webModifyCompare',

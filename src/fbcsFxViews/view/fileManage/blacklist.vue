@@ -53,6 +53,7 @@ export default {
 		},
 		setBlack(){
 			this.reqsv = {uri: 'batchDispatch/dispatch'};
+			this.reviewTxt = this.$t('fbcsFile.files.blacklist.cuSet');
 			this.showReview = true;
 		},
 		review(args){

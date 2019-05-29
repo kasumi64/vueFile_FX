@@ -34,7 +34,7 @@
 		</el-dialog>
 		
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
+		<lgy-wheelReq class="z" :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
 	</div>
 </template>
 
@@ -175,4 +175,5 @@ function search(){
 
 <style scoped="scoped">
 	.h2{ font-size: 14px; color: #666;  margin-bottom: 10px;}
+	.lgy-wheelReq.z{z-index: 7;}
 </style>

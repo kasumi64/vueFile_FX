@@ -262,7 +262,9 @@ function search(){
 
 	let begin = params.beginTime, end = params.endTime;
 	if(begin || end){
-		if(begin==''||end==''||begin >= end) {
+		begin = parseInt(begin/1000);
+		end = parseInt(end/1000);
+		if(begin==''||end==''||begin > end) {
 			return utils.alert({txt: _this.$t('fbcsFile.err.user.day')});
 		}
 	}

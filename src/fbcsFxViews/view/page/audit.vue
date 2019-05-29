@@ -35,7 +35,7 @@
 		</ul>
 		<lgy-table :list="list" :title="title" :defined="defined" :width="width" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
-		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+		<el-dialog :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
@@ -187,7 +187,9 @@ function search(){
 	
 	let begin = params.operationBeginTime, end = params.operationEndTime;
 	if(begin || end){
-		if(begin==''||end==''||begin >= end) {
+		begin = parseInt(begin/1000);
+		end = parseInt(end/1000);
+		if(begin==''||end==''||begin > end) {
 			return utils.alert({txt: _this.$t('fbcsFile.err.user.day')});
 		}
 	}

@@ -228,12 +228,12 @@ function signalSearch(){
 </script>
 
 <style scoped="scoped">
-	.dispatch{min-width: 820px;}
+	.dispatch{min-width: 900px;}
 	li{white-space: nowrap;}
 	.sel{width: 160px;}
 	.label{display: inline-block;width: 120px;font-size: 14px;color: #666;line-height: 30px;text-align: right;
 		vertical-align: top;padding-right: 5px;}
-	.right{display: inline-block;vertical-align: top;width: 680px;}
+	.right{display: inline-block;vertical-align: top;width: 768px;}
 	.mb{margin-top: 10px;}
 	.ti{width: auto;color: #999;text-align: left;margin-left: 10px;}
 	.txt{width: auto;text-align: left;}

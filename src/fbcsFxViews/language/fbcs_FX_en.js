@@ -41,7 +41,7 @@ var obj = {
 		},
 		user: {
 			userID: '用户ID不能为空', userName: '用户名称不能为空', speedCtrl: '最大收发速度不能为空',
-			maxRelationUser: '最大关系数不能为空', userPasswd: '密码不能为空', day: '开始时间必需小于结束时间',
+			maxRelationUser: '最大关系数不能为空', userPasswd: '密码不能为空', day: '开始时间要小于或等于结束时间',
 			pwdRule: '密码必须包含大小写字母、数字、特殊字符(@#_-*)中的两项且大于等于8位', unlike: '两次输入的密码不一致',
 			blank: '密码不能包含空格', npwd: '新密码不能为空', noidName: '密码不能包含用户ID、用户名称',
 			errNum: '只能输入纯数字', idformat: '用户ID仅能输入英文，数字,“-”和“_”', maxUser: '最大关系数范围在0到1000',
@@ -52,7 +52,7 @@ var obj = {
 		info: {
 			operatorMobileNum: '仅能输入数字、“|”，用“|”做分隔符', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
 			operatorTelNum: '仅能输入数字,“-”,“+”,和“;”', emailFormat: '邮箱格式不对', tell: '手机号不能以“|”结尾',
-			operatorName: '不能包含%，前后不能是空格', ssccManager: '不能包含%，前后不能是空格'
+			operatorName: '输入字符不能包含%', ssccManager: '输入字符不能包含%', trim: '不能包含%，前后不能是空格'
 		},
 		files: {
 			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', format: '仅能输入英文，数字,“-”,“_”和“.”',
@@ -98,7 +98,8 @@ var obj = {
 		first: '全局静态配置', second: '全局动态配置', 'static': '静态配置文件：', dynamic: '动态配置文件：',
 		only: '只读', edit: '编辑', h2: '对比内容：' , section:'段名', type:'操作类型', detail:'详情',
 		field:'字段名' , oldValue:'原数据' , modifyValue:'修改数据' , range:'合理范围' , 
-		err: '异常提示', sub: '是否确定提交？', txtErr: '文件内容不可以包含%'
+		err: '异常提示', sub: '是否确定提交？', txtErr: '文件内容不可以包含%',
+		full: '文件内容不可以包含%和全角字符'
 	},
 	dispatch: {
 		options: [{label: '系统动态配置', value: 1},{label: '系统静态配置', value: 2},
@@ -155,7 +156,7 @@ var obj = {
 		},
 		blacklist: {
 			nodeName: '节点名', cuName: 'CU名', white: '白名单', black: '黑名单', cuList: '主机列表：',
-			blackBtn: '设置黑名单', cuType: '节点状态', title: 'CU黑名单'
+			blackBtn: '设置黑名单', cuType: '节点状态', title: 'CU黑名单', cuSet: '是否设置客户端文件自动比对黑名单'
 		}
 	},
 	

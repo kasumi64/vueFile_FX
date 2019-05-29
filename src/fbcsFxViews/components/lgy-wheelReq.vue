@@ -3,9 +3,6 @@
 	.lgy-wheelReq .warp{display: none;}
 	.lgy-wheelReq .result{padding: 40px;}
 </style>
-<style>
-	#fbcs_file .lgy-wheelReq .el-dialog{width: 70%;}
-</style>
 
 <template>
 	<div class="lgy-wheelReq">
@@ -16,7 +13,7 @@
 				</svg>
 			</div>
 		</div>
-		<el-dialog ref="maskDialog" :visible.sync="showDialog" :title="$t('fbcsFile.components.result')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+		<el-dialog ref="maskDialog" :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.components.result')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
