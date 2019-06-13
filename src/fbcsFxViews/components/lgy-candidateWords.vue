@@ -13,7 +13,7 @@
 </style>
 <template>
 	<div id="lgy-candidateWords">
-		<input :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" 
+		<input :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" maxlength="63" 
 			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle" autocomplete="off"/>
 		<i ref='arrow' @click='close' class="el-icon-circle-close arrow"></i>
 		<ul ref='inTip' class="inTip" @scroll="scrollHandle">
@@ -75,16 +75,17 @@ export default {
 			this.$refs.arrow.style.display = 'block';
 		},
 		inputHandle(e){
-			let self = this;
+			var self = this;
 			clearTimeout(t);
 			t = setTimeout(function(){
 				let val = e.target.value;
 				self.$emit('input', val, e);
 //				self.$refs.arrow.style.display = val ? 'block' : 'none';
-			}, 300);
+			}, 1000);
+			this.value = e.target.value;
 		},
 		changeHandle(e){
-			this.$emit('change', e.target.value, e);
+			// this.$emit('change', e.target.value, e);
 		},
 		isNull(){
 			let k,list = this.keywords;

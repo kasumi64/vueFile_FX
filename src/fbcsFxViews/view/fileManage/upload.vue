@@ -11,7 +11,7 @@
 					{{$t('fbcsFile.files.upload.fileName')}}
 				</div>
 				<div class="right">
-					<input id="ddd" v-model="fileName" data-k="fileName" maxlength="64" autocomplete="off"/>
+					<input v-model="fileName" data-k="fileName" maxlength="64" autocomplete="off"/>
 					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}</p>
 				</div>
 			</li><li>
@@ -38,7 +38,7 @@
 				<div class="label">&nbsp;</div>
 				<div class="right">
 					<h2 class="h2">{{$t('fbcsFile.files.upload.res')}}</h2>
-					<lgy-wheelReq :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
+					<lgy-wheelReq class="z" :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
 				</div>
 			</li>
 		</ul>
@@ -105,11 +105,11 @@ export default {
 };
 
 function check(){
-	let files = this.fileName, vers =  this.version, reg = /[^a-zA-Z0-9\._-]/g,
+	let files = this.fileName, vers =  this.version, reg = /[^a-zA-Z0-9\._-]/,
 		txt = false;
 	if(utils.isSpace(files)) txt = this.$t('fbcsFile.err.files.fileNull');
 	else if(utils.isSpace(vers))  txt = this.$t('fbcsFile.err.files.verNull');
-	else if( /[\%]/.test(files) )  txt = this.$t('fbcsFile.err.files.formatFile');
+	else if( reg.test(files) )  txt = this.$t('fbcsFile.err.files.formatFile');
 	else if( reg.test(vers) )  txt = this.$t('fbcsFile.err.files.formatVer');
 	else if( /[\%]/.test(this.fileComment) ) txt = this.$t('fbcsFile.err.files.fileComment');
 	
@@ -132,4 +132,5 @@ function check(){
 input{width: 100%;}
 .vt{vertical-align: text-bottom;}
 .txt{display:block;color: #BBB;}
+.lgy-wheelReq.z{z-index: 7;}
 </style>

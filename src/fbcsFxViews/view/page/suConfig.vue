@@ -82,19 +82,18 @@ export default {
 			return '';
 		},
 		filter(str){
-			let reg = /[\%]/g, self = this;
+			/* let reg = /[\%]/g, self = this;
 			if(reg.test(str)){
-				// utils.alert({txt: this.$t('fbcsFile.suConfig.txtErr')});
 				setTimeout(() => {
 					self.txtVal = str.replace(reg, '');
 				});
 				utils.weakTips(this.$t('fbcsFile.suConfig.txtErr'), 1);
-			}
+			} */
 		},
 		submit(){
 			let reg = /[\%％ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９]/;
 			if(reg.test(this.txtVal)){
-				return utils.alert({txt: this.$t('fbcsFile.suConfig.full')});
+				return utils.weakTips(this.$t('fbcsFile.suConfig.full'));
 			}
 			this.reqsv = {uri: 'cuConfig/modify'};
 			this.showReview = true;
@@ -122,7 +121,7 @@ export default {
 		history(){
 			let reg = /[\%％ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９]/;
 			if(reg.test(this.txtVal)){
-				return utils.alert({txt: this.$t('fbcsFile.suConfig.full')});
+				return utils.weakTips(this.$t('fbcsFile.suConfig.full'));
 			}
 			let params = {
 				url: 'cuConfig/webModifyCompare',

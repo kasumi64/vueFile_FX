@@ -25,7 +25,9 @@
 					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
 					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
-					<el-table-column prop="equalMask" :label="$t('fbcsFile.versionQuery.isEqual')"></el-table-column>
+					<el-table-column :label="$t('fbcsFile.versionQuery.isEqual')">
+						<span slot-scope="scope" :class="{redTxt: scope.row.isEqual!=0}">{{scope.row.equalMask}}</span>
+					</el-table-column>
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
@@ -34,7 +36,7 @@
 		</el-dialog>
 		
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq class="z" :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
+		<lgy-wheelReq ref="cuList" class="z" :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
 	</div>
 </template>
 
@@ -94,6 +96,7 @@ export default {
 		search(){
 			this.page = 1;
 			search();
+			if(this.$refs.cuList) this.$refs.cuList.syncList();
 		},
 		changePage(num){
 			this.page = num;
@@ -130,6 +133,7 @@ export default {
 				_this.checkDialog = true;
 				utils.tableSTop(_this, 'zdBox');
 			});
+			if(this.$refs.cuList) this.$refs.cuList.syncList();
 		}
 	},
 	created(){
@@ -176,4 +180,5 @@ function search(){
 <style scoped="scoped">
 	.h2{ font-size: 14px; color: #666;  margin-bottom: 10px;}
 	.lgy-wheelReq.z{z-index: 7;}
+	.redTxt{color: #FF7A7D;}
 </style>

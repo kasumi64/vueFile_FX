@@ -41,6 +41,7 @@
 				<button class="defBtn" @click="cancel">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
+		<button class="defBtn sys" @click="system">文件系统</button>
 	</div>
 </template>
 
@@ -88,6 +89,9 @@ export default {
 		cancel(){
 			this.showReview = false;
 			this.pwd = '';
+		},
+		system(){
+			this.$router.push({path: '/main/mxCfg/user'});
 		}
 	},
 	created(){
@@ -196,4 +200,5 @@ function unlockFn(uri){
 		position: absolute;display: none;top: 0;left: 0;width: 100%;padding-left: 20px;
 		font-size: 14px;font-weight: bold;color: #FF7A7D;line-height: 44px;height: 44px;border-bottom: 1px solid #EBEFF4;
 	}
+	.sys{position: absolute;top: 10px;right: 46px;z-index: 2;}
 </style>

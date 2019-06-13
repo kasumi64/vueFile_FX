@@ -15,7 +15,7 @@
 			</el-table-column>
 		</el-table>
 		<div class="paging">
-			<el-pagination v-if="total>size" layout="prev, pager, next, jumper, total" :page-size="size" :total="total"
+			<el-pagination ref="paging" v-if="total>size" layout="prev, pager, next, jumper, total" :page-size="size" :total="total"
 				@current-change="changePage" :current-page="page">
 			</el-pagination>
 			<div v-if="total<=size&&list.length>0" class="onePage">{{$t('fbcsFile.components.paging1')}}{{total}}{{$t('fbcsFile.components.paging2')}}</div>
@@ -81,6 +81,10 @@ export default {
 		maxHeight: {
 			type: [String, Number],
 			default: 'none'
+		},
+		fliover: { // 一个页面同时存在多个分页时用...
+			type: [Boolean, Function],
+			default: false
 		}
 	},
 	methods:{
@@ -120,12 +124,17 @@ export default {
 			this.$emit('selectAll', arr, this.$refs['lgy-table']);
 		},
 		changePage(num){ //当前页
-			this.page = num;
+			// this.page = num;
 //			this.$emit('update:currentPage', num);
-			this.$emit('changePage', num);
+			if(this.fliover !== false) this.fliover(num);
+			else this.$emit('changePage', num);
 		},
 		customShow(k, row){ //功能按钮是否隐藏, k为row的键
 			return row[k] === false ? false : true;
+		},
+		ElPager(num){
+			if(this.$refs.paging)
+				this.$refs.paging$children[1].$emit('change', num);
 		}
 	},
 	created(){
@@ -138,7 +147,7 @@ export default {
 	},
 	watch: {
 		currentPage(num){
-			this.page = num;
+			if(this.fliover === false) this.page = num;
 		}
 	}
 };

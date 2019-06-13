@@ -56,7 +56,7 @@ var obj = {
 		},
 		files: {
 			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', format: '仅能输入英文，数字,“-”,“_”和“.”',
-			formatFile: '文件名不能包含%', formatVer: '版本号仅能输入英文，数字,“-”,“_”和“.”',
+			formatFile: '文件名仅能输入英文，数字,“-”,“_”和“.”', formatVer: '版本号仅能输入英文，数字,“-”,“_”和“.”',
 			fileComment: '描述不能包含%'
 		}
 	},

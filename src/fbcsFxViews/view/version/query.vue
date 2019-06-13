@@ -53,7 +53,9 @@
 					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
 					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
-					<el-table-column prop="equalMask" :label="$t('fbcsFile.versionQuery.isEqual')"></el-table-column>
+					<el-table-column :label="$t('fbcsFile.versionQuery.isEqual')">
+						<span slot-scope="scope" :class="{redTxt: scope.row.isEqual!=0}">{{scope.row.equalMask}}</span>
+					</el-table-column>
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
@@ -106,4 +108,5 @@
 	.el-radio+.el-radio{margin-left: 10px;}
 	.ml{margin-left: 10px;}
 	.mr{margin-right: 20px;}
+	.redTxt{color: #FF7A7D;}
 </style>

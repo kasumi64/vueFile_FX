@@ -259,8 +259,9 @@ export default {
 						url: 'userinfoExt/operatorToBop',
 						cmdID: '600027'
 					};
-					
+					utils.loadShow();
 					utils.post(params).then(res => {
+						utils.loadClose();
 						let mess = `<p>${res.errinfo}</p>`;
 						if(res.webUserFlag == 1){ //网络用户
 							mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;

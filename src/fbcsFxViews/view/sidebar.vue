@@ -81,7 +81,7 @@ export default {
 	methods:{
 		select(path){
 			utils.clearCache();
-			this.active = path
+			this.active = path;
 			this.$router.push({path});
 		},
 	},

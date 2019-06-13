@@ -32,10 +32,10 @@
 			</li>-->
 		</ul>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p>
-		<lgy-table :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage="pageOPE" @changePage="changeOPE" :maxHeight="416">
+		<lgy-table ref="OPE" :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage="pageOPE" @changePage="changeOPE" :maxHeight="416">
 		</lgy-table>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resBOP')}}</p>
-		<lgy-table :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" :maxHeight="416">
+		<lgy-table ref="BOP" :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" :maxHeight="416">
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
@@ -73,7 +73,15 @@ var _this, data = {
 	showDialog: false,
 	fileHref: '#', fileName: '', dialogTitle: '',
 	disabledPOE: false, disabledBOP: false,
-	pageSize: 10
+	pageSize: 10,
+	changeOPE(num){
+		_this.pageOPE = num;
+		search('OPE');
+	},
+	changeBOP(num){
+		_this.pageBOP = num;
+		search('BOP');
+	}
 };
 var idAll = [];
 
@@ -109,21 +117,17 @@ export default {
 			let type = _this.listType;
 			if(type=='OPE'){
 				_this.pageOPE = 1;
+				if(this.$refs.OPE) this.$refs.OPE.ElPager(1);
 			} else if(type == 'BOP'){
 				_this.pageBOP = 1;
+				if(this.$refs.BOP) this.$refs.BOP.ElPager(1);
 			} else {
 				_this.pageOPE = 1;
 				_this.pageBOP = 1;
+				if(this.$refs.OPE) this.$refs.OPE.ElPager(1);
+				if(this.$refs.BOP) this.$refs.BOP.ElPager(1);
 			}
-			search();
-		},
-		changeOPE(num){
-			this.pageOPE = num;
-			search('OPE');
-		},
-		changeBOP(num){
-			this.pageBOP = num;
-			search('BOP');
+			// search();
 		},
 		idInput(val){
 			if(val=='') return this.idWords = [].concat(idAll);
@@ -166,7 +170,9 @@ export default {
 		this.listType = 'all';
 		this.listOPE = this.listBOP = [];
 		this.disabledOPE = this.disabledBOP = false;
-		this.search();
+		this.pageOPE = 1;
+		this.pageBOP = 1;
+		search();
 		utils.keywords({}, arr => {
 			idAll = [].concat(arr);
 			_this.idWords = arr;

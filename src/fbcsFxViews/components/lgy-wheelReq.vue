@@ -121,6 +121,12 @@ export default {
 		rowClass({row, rowIndex}){
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
+		},
+		syncList(arr){
+			let list = [];
+			if(arr instanceof Array) list = arr;
+			this.cuList = list;
+			this.$emit('update:cuList', list);
 		}
 	},
 	created(){

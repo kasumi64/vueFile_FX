@@ -260,7 +260,7 @@ function pass(){
 				if(reg[i].test(pwd)) num++;
 			}
 			if(num < 2){
-				txt = his.$t(err + 'pwdRule');
+				txt = this.$t(err + 'pwdRule');
 			}
 		}
 		

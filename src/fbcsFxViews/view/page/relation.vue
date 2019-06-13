@@ -177,10 +177,10 @@ export default {
 			this.showDialog = true;
 		},
 		clear(){
-			if(this.isPage) {
+			/* if(this.isPage) {
 				this.disabled = true;
 				this.oneid = '';
-			}
+			} */
 			this.sid = [];
 			this.oneWords = [].concat(userid);
 			this.idarr = filterSig(this.oneid, [].concat(userid));
@@ -270,6 +270,7 @@ export default {
 		this.idWords = this.nameWords = this.oneWords = null;
 		this.list = [];
 		userid = [];
+		this.selected = [];
 		this.showReview = false;
 		this.parameter = null;
 		
