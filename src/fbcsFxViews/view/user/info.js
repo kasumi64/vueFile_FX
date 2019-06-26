@@ -236,7 +236,7 @@ function pass(){
 	if(/[^\w-]/.test(info.userID)){
 		utils.weakTips({txt: this.$t(err + 'idformat')});
 		return false;
-	} else if(/[\%]/.test(info.userName)){
+	} else if(/[|$%,";:/\\]/.test(info.userName)){
 		utils.weakTips({txt: this.$t(err + 'nameformat')});
 		return false;
 	}

@@ -144,12 +144,14 @@ export default {
 			operator: this.$t('fbcsFile.audit.operator'),
 			reviewer: this.$t('fbcsFile.audit.reviewer'),
 			role: this.$t('fbcsFile.audit.operatorRole'),
-			errCode: this.$t('fbcsFile.audit.errorCode'),
+			// errCode: this.$t('fbcsFile.audit.errorCode'),
+			errStr: this.$t('fbcsFile.audit.errorCode'),
 //			uuid: this.$t('fbcsFile.audit.uuid')
 		};
 		data.width = {
 			ymd: 160,
-			errInfo: 800
+			errInfo: 800,
+			errStr: 120
 		};
 		return data;
 	},
@@ -288,6 +290,11 @@ function search(){
 			}
 			obj.role = dictRole[obj.operatorRole] || '';
 			obj.uuidBtn = obj.uuid ? true : false;
+			switch(obj.errCode){
+				case '0': obj.errStr = 'success';break;
+				case '1': obj.errStr = 'partial success';break;
+				default: obj.errStr = 'failed';break;
+			}
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

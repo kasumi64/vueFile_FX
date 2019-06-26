@@ -128,6 +128,9 @@ export default {
 				count: this.cuList.length,
 				lists: this.cuList
 			};
+			this.cuList.forEach(item => {
+				item.errinfo = item.errStr = '';
+			});
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				res.type = 0;
