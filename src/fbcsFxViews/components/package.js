@@ -15,3 +15,4 @@ Vue.component("lgy-candidateWords", resolve => require(['./lgy-candidateWords.vu
 Vue.component("lgy-review", resolve => require(['./lgy-review.vue'], resolve));
 Vue.component("lgy-wheelReq", resolve => require(['./lgy-wheelReq.vue'], resolve));
 Vue.component("lgy-table", resolve => require(['./lgy-table.vue'], resolve));
+// Vue.component("lgy-wheelReqMX", resolve => require(['@/fbcsViews/components/lgy-wheelReqMX.vue'], resolve));

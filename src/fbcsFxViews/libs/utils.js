@@ -63,9 +63,10 @@ kit.extend(exp, loading);
 function ReqHttp(){
 	
 	var axios = Axios.create();
-//	axios.defaults.baseURL = window.fbcs_fxIP + '/fbcs_fx/fx/';
-	axios.defaults.baseURL = 'http://localhost:8088/';
-//	axios.defaults.baseURL = '/fbcs_fx/fx/';
+
+	this.setBaseURL = function(url){
+		axios.defaults.baseURL = url;
+	};
 	
 	// 添加请求拦截器
 	axios.interceptors.request.use(function(config){
@@ -248,7 +249,9 @@ function TipsConfirm(){
 					</div>
 					<div class="right"></div>
 				</div>
-				<div class="message confirm"></div>
+				<div class="message confirm">
+					<div class="content"></div>
+				</div>
 				<div class="footBtn">
 					<button class="blueBtn now">立即下发</button>
 					<button class="blueBtn ok">确定</button>
@@ -269,6 +272,7 @@ function TipsConfirm(){
 		panle: mask.find('.tipsPanle'),
 		title : mask.find('.title b'),
 		confirm : mask.find('.confirm'),
+		content : mask.find('.content'),
 		alert : mask.find('.alert'),
 		icon: mask.find('.tipsIcon'),
 		right: mask.find('.right'),
@@ -291,13 +295,14 @@ function TipsConfirm(){
 		notify.panle.css({left: 0, top: 0});
 		if(messType == 1){ //带logo的
 			notify.right.html(opt.txt||'');
-			notify.alert.show();
+			notify.alert.show('flex');
 			notify.confirm.hide();
 			notify.icon[0].src = opt.type==1 ? successIcon : failIcon;
 			btnType(1);
 		} else {
 			notify.alert.hide();
-			notify.confirm.html(opt.txt||'').show();
+			notify.content.html(opt.txt||'');
+			notify.confirm.show('grid');
 			btnType(opt.btn);
 		}
 		

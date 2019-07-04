@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import '@/fbcsFxViews/components/package.js';
 import Vue from 'vue';
-import router from '@/fbcsFxViews/libs/routerConfig.js';
+import router from '@/public/routerConfig.js';
 import App from '@/fbcsFxViews/App';
 import i18n from '@/fbcsFxViews/language/lang.js';
 

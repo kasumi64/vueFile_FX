@@ -96,6 +96,11 @@ export default {
 	},
 	created(){
 		_this = this;
+		let url;
+		// url = window.fbcs_fxIP + '/fbcs_fx/fx/';
+		url = 'http://localhost:8088/';
+		// url = '/fbcs_fx/fx/';
+		utils.setBaseURL(url);
 		let name = sessionStorage.getItem('userName') || 'LOCAL';
 		this.userName = name;
 		utils.setArgs('userName', name); //accountInfo
@@ -200,5 +205,5 @@ function unlockFn(uri){
 		position: absolute;display: none;top: 0;left: 0;width: 100%;padding-left: 20px;
 		font-size: 14px;font-weight: bold;color: #FF7A7D;line-height: 44px;height: 44px;border-bottom: 1px solid #EBEFF4;
 	}
-	.sys{position: absolute;top: 10px;right: 46px;z-index: 2;}
+	.sys{position: absolute;top: 10px;right: 50px;z-index: 2;}
 </style>

@@ -104,7 +104,7 @@ function WheelReq(sv, self){
 }
 
 export default {
-	name: 'lgy-review',
+	name: 'lgy-wheelReq',
 	data() { return data; },
 	props: {
 		parameter: null, //轮询参数

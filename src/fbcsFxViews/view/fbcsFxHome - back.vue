@@ -96,6 +96,11 @@ export default {
 	},
 	created(){
 		_this = this;
+		let url;
+		// url = window.fbcs_fxIP + '/fbcs_fx/fx/';
+		// url = 'http://localhost:8088/';
+		url = '/fbcs_fx/fx/';
+		utils.setBaseURL(url);
 		let name = sessionStorage.getItem('userName') || 'LOCAL';
 		this.userName = name;
 		utils.setArgs('userName', name); //accountInfo
