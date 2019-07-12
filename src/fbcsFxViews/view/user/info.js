@@ -228,16 +228,16 @@ function pass(){
 	for (var i = 0; i < must.length; i++) {
 		let k = must[i], str = info[k];
 		if(utils.isSpace(str)) {
-			utils.weakTips({txt: this.$t(err + k)});
+			utils.alert({txt: this.$t(err + k)});
 			return false;
 		}
 	}
 	
 	if(/[^\w-]/.test(info.userID)){
-		utils.weakTips({txt: this.$t(err + 'idformat')});
+		utils.alert({txt: this.$t(err + 'idformat')});
 		return false;
 	} else if(/[|$%,";:/\\]/.test(info.userName)){
-		utils.weakTips({txt: this.$t(err + 'nameformat')});
+		utils.alert({txt: this.$t(err + 'nameformat')});
 		return false;
 	}
 	
@@ -265,7 +265,7 @@ function pass(){
 		}
 		
 		if(txt){
-			utils.weakTips(txt);
+			utils.alert({txt});
 			return false;
 		}
 	}
@@ -276,10 +276,10 @@ function pass(){
 		oneTask = parseInt(info.maxCltOneDayTaskCount);
 	
 	if(!(speed>=-1&&speed<=999999999999999999)){
-		utils.weakTips({txt: this.$t(err + 'speed')});
+		utils.alert({txt: this.$t(err + 'speed')});
 		return false;
 	} else if (maxTask < 1){
-		utils.weakTips({txt: this.$t(err + 'maxTask')});
+		utils.alert({txt: this.$t(err + 'maxTask')});
 		return false;
 	}
 	/*else if (!(maxUser>=0&&maxUser<=99999999)){
@@ -293,7 +293,7 @@ function pass(){
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
 	if((begin || end)&&info.encFlag==1){
 		if(begin==''||end==''||begin >= end) {
-			utils.weakTips({txt: this.$t(err + 'softDay')});
+			utils.alert({txt: this.$t(err + 'softDay')});
 			return false;
 		}
 	}

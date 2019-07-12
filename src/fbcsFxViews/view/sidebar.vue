@@ -50,9 +50,9 @@ var data = {
 			folder: 'fileManage', label: '文件管理', icon:'el-icon-upload',
 			src1:require('../img/menu/fileManage.png'),
 			sub: [{router:'/main/fxCfg/fileManage/search', icon:'el-icon-search', label:'文件查询'},
-//			{router:'/main/fxCfg/fileManage/upload', icon:'el-icon-upload2', label:'文件下发'},
+			{router:'/main/fxCfg/fileManage/upload', icon:'el-icon-upload2', label:'文件下发'},
 			{router:'/main/fxCfg/fileManage/regain', icon:'el-icon-success', label:'对比恢复'},
-//			{router:'/main/fxCfg/fileManage/blacklist', icon:'el-icon-bell', label:'CU黑名单'}
+			{router:'/main/fxCfg/fileManage/blacklist', icon:'el-icon-bell', label:'CU黑名单'}
 			]
 		},
 		{
@@ -61,7 +61,7 @@ var data = {
 			sub: [{router:'/main/fxCfg/version/query', icon:'el-icon-search', label:'版本查询'},
 			{router:'/main/fxCfg/version/contrast', icon:'el-icon-document', label:'版本对比'}]
 		},
-		/*{
+		{
 			folder: 'advanced', label: '高级搜索', icon:'el-icon-search',
 			src1:require('../img/menu/search_1.png'),
 			sub: [{router:'/main/fxCfg/advanced/user', icon:'el-icon-location', label:'用户'},
@@ -69,7 +69,7 @@ var data = {
 			{router:'/main/fxCfg/advanced/signal', icon:'el-icon-message', label:'通信关系'},
 			{router:'/main/fxCfg/advanced/information', icon:'el-icon-more', label:'扩展信息'},
 			{router:'/main/fxCfg/advanced/audit', icon:'el-icon-document', label:'稽核'}]
-		}*/
+		}
 	]
 };
 export default {

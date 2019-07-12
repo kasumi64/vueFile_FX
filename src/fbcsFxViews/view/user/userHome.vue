@@ -67,7 +67,7 @@
 				<button class="defBtn" @click="showInfo=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
-		<el-dialog :visible.sync="importErr" :title="$t('fbcsFile.tips.title')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+		<el-dialog :visible.sync="importErr" width="70%" :title="$t('fbcsFile.tips.title')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="errList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="line" :label="$t('fbcsFile.userHome.line')"></el-table-column>

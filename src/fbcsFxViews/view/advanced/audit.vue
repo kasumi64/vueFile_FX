@@ -43,14 +43,19 @@
 				<span class="label">{{$t('fbcsFile.advanced.audit.expcsv')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :width="width" :total="total" :currentPage="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :width="width" :total="total" :currentPage="page" @changePage="changePage"
+			:cellClass="cellClass">
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
+						<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">
+							{{scope.row.errStr}}
+						</span>
+					</el-table-column>
 					<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
 					<!--<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>-->
 				</el-table>
@@ -107,6 +112,10 @@ var _this, data = {
 	},
 	showDialog: false,
 	cuList: [],
+	cellClass(row, cellIndex){
+		if(row.errStr != 'success' && cellIndex == 6)
+			return 'red';
+	},
 	linkage: [],
 	showDialog2: false,
 	fileHref: '#', fileName: ''
@@ -150,6 +159,7 @@ export default {
 		};
 		data.width = {
 			ymd: 160,
+			operationType: 140,
 			errInfo: 800,
 			errStr: 120
 		};
@@ -350,4 +360,5 @@ function getDay(val){
 .linkage{display: none;margin-right: 35px;margin-left: -20px;}
 .linkage .el-checkbox+.el-checkbox{margin-left: 10px;}
 .w80{width: 80px;text-align: right;}
+.red{color: red;}
 </style>

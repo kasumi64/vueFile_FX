@@ -1,7 +1,7 @@
 <style>
 .lgy-review{display: none;z-index: 90001;}
-.lgy-review .reviewLayer{padding: 50px 0;}
-.lgy-review .reviewLayer li:first-child{margin-bottom: 20px;}
+.lgy-review .reviewLayer{padding-top: 55px;height: 200px;}
+.lgy-review .reviewLayer li:first-child{margin-bottom: 30px;}
 .lgy-review .label{width: 180px;font-size: 14px;color:#666;line-height: 30px;padding-right: 10px;text-align: right;vertical-align: top;}
 .lgy-review .input{width: 260px;vertical-align: top;}
 </style>

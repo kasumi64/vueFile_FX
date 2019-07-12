@@ -93,7 +93,7 @@
 		</el-dialog>
 		
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='submit' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq :parameter="parameter"></lgy-wheelReq>
+		<lgy-wheelReq ref="loop" :parameter="parameter"></lgy-wheelReq>
 	</div>
 </template>
 

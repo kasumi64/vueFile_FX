@@ -24,7 +24,7 @@
 				</el-table>
 			</div>
 		</div>
-		<el-dialog ref="diaTab" :visible.sync="showDialog" :title="$t('fbcsFile.suConfig.err')" v-dialogDrag
+		<el-dialog ref="diaTab" :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.suConfig.err')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="errList" :row-class-name="rowClass" max-height="294" border>
@@ -93,7 +93,7 @@ export default {
 		submit(){
 			let reg = /[\%％ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９]/;
 			if(reg.test(this.txtVal)){
-				return utils.weakTips(this.$t('fbcsFile.suConfig.full'));
+				return utils.alert({txt: this.$t('fbcsFile.suConfig.full')});
 			}
 			this.reqsv = {uri: 'cuConfig/modify'};
 			this.showReview = true;
@@ -121,7 +121,7 @@ export default {
 		history(){
 			let reg = /[\%％ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９]/;
 			if(reg.test(this.txtVal)){
-				return utils.weakTips(this.$t('fbcsFile.suConfig.full'));
+				return utils.alert({txt: this.$t('fbcsFile.suConfig.full')});
 			}
 			let params = {
 				url: 'cuConfig/webModifyCompare',

@@ -82,7 +82,7 @@ export default {
 				self.$emit('input', val, e);
 //				self.$refs.arrow.style.display = val ? 'block' : 'none';
 			}, 1000);
-			this.value = e.target.value;
+			// this.value = e.target.value;
 		},
 		changeHandle(e){
 			// this.$emit('change', e.target.value, e);

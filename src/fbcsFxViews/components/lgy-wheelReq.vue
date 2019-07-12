@@ -1,7 +1,9 @@
 <style scoped="scoped">
 	.lgy-wheelReq{z-index: 90000;}
 	.lgy-wheelReq .warp{display: none;}
+	/* .lgy-wheelReq .dialog{z-index: 90000;} */
 	.lgy-wheelReq .result{padding: 40px;}
+	.lgy-wheelReq .red{color: red;}
 </style>
 
 <template>
@@ -13,24 +15,33 @@
 				</svg>
 			</div>
 		</div>
-		<el-dialog ref="maskDialog" :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.components.result')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+		<el-dialog ref="cuBox" class="dialog" :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.components.result')"
+			v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
+						<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">
+							{{scope.row.errStr}}
+						</span>
+					</el-table-column>
 					<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
 					<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="close">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
-		<el-table :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border>
+		<el-table ref="cuPox" :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 			<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 			<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-			<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
+			<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
+				<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">
+					{{scope.row.errStr}}
+				</span>
+			</el-table-column>
 			<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
 			<el-table-column v-if="checkType==1" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
 		</el-table>
@@ -40,17 +51,8 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	loading: false,
-	showDialog: false,
-	cuList: [
-//		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok', operationType:'用户'},
-	],
-	checkType: 0,
-};
-
 function WheelReq(sv, self){
-	var beginTime = 0, overTime = 30*1000, timeout = false;
+	var beginTime = 0, overTime = 30*1000, timeout = false, its;
 	function req(){
 		let param = {
 			url: 'batchDispatch/queryBatchDispatchResponse',
@@ -70,7 +72,7 @@ function WheelReq(sv, self){
 			return stop();
 		}
 		if(res.endQueryFlag==0 && !timeout){
-			return setTimeout(req, 2000);
+			return its = setTimeout(req, 2000);
 		}
 		if(res.type==2) { //1.生成大版本, 2.获取中登配置
 			utils.alert({txt: res.errinfo, type:1});
@@ -85,7 +87,8 @@ function WheelReq(sv, self){
 		self.checkType = res.type;
 		if(!self.hideDialog) {
 			self.showDialog = true;
-			utils.tableSTop(self, 'detailBox');
+			utils.tableSTop(self, 'cuBox');
+			utils.tableSTop(self, 'cuPox');
 		}
 		self.$emit('update:cuList', arr);
 		stop(arr);
@@ -100,8 +103,28 @@ function WheelReq(sv, self){
 		beginTime = Date.now();
 		if(sv.loading !== false) self.loading = true;
 		req();
-	}
+	};
+	this.once = function(){
+		clearTimeout(its);
+		let param = {
+			url: 'batchDispatch/queryBatchDispatchResponse',
+			cmdID: '600083', uuid: sv.uuid,
+			type: sv.type || 0,
+			lastQueryFlag: 1
+		};
+		timeout = true;
+		utils.post(param, response).catch(stop);
+	};
 }
+
+var _this, whr, data = {
+	loading: false,
+	showDialog: false,
+	cuList: [
+//		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok', operationType:'用户'},
+	],
+	checkType: 0,
+};
 
 export default {
 	name: 'lgy-wheelReq',
@@ -127,6 +150,24 @@ export default {
 			if(arr instanceof Array) list = arr;
 			this.cuList = list;
 			this.$emit('update:cuList', list);
+		},
+		start(param){
+			if(!param) return utils.loadClose();
+			whr = new WheelReq(param, this);
+			whr.start();
+			utils.loadClose();
+			this.cuList = [];
+		},
+		once(param){ //可用于stop();
+			if(!param) return utils.loadClose();
+			if(!whr) whr = new WheelReq(param, this);
+			whr.once();
+			utils.loadClose();
+			this.cuList = [];
+		},
+		close(){
+			this.showDialog = false;
+			this.$emit('close');
 		}
 	},
 	created(){
@@ -140,9 +181,10 @@ export default {
 	watch: {
 		parameter(param){
 			if(!param) return utils.loadClose();
-			let w = new WheelReq(param, this);
-			w.start();
+			whr = new WheelReq(param, this);
+			whr.start();
 			utils.loadClose();
+			this.cuList = [];
 		}
 	}
 };

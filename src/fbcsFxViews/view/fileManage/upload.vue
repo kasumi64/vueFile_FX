@@ -114,7 +114,7 @@ function check(){
 	else if( /[\%]/.test(this.fileComment) ) txt = this.$t('fbcsFile.err.files.fileComment');
 	
 	if(txt){
-		utils.weakTips(txt);
+		utils.alert({txt});
 		return false;
 	}
 	return true;

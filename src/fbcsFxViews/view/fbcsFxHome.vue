@@ -22,7 +22,7 @@
 		<!--</div>-->
 		<el-dialog :visible.sync="showReview" :title="$t('fbcsFile.tips.title')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
-				<li>
+				<li style="margin: 15px 0 30px;">
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.userInfo.name')}}</p>
 					</div><div class="right">

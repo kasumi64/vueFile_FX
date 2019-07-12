@@ -113,7 +113,7 @@ var obj = {
 	},
 	audit: {
 		operator:'操作员', reviewer:'审核员', operatorRole:'操作员角色', operatorType:'操作类型',
-		operatorTime:'操作时间',errorCode:'操作错误码', errorInfo:'操作错误描述', uuid:'流水号',
+		operatorTime:'操作时间',errorCode:'操作结果', errorInfo:'操作错误描述', uuid:'流水号',
 		sort: '排序方式 ：', lately: '最近', early: '最早', times: '时间段：', today: '今天', week: '近一周',
 		month: '近一个月', begin: '开始时间', end: '结束时间',
 	},

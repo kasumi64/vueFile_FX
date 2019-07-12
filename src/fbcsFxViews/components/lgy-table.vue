@@ -1,7 +1,8 @@
 <template>
 	<div class="lgy-table">
-		<el-table ref="lgy-table" :data= "list" @row-click="rowClick" @current-change="currentChange" @sort-change="sortChange" :row-class-name="rowClass" 
-			@select="select" @selection-change="selectChange" @select-all="selectAll" :max-height="maxHeight" highlight-current-row border>
+		<el-table ref="lgy-table" :data= "list" @row-click="rowClick" @current-change="currentChange" @sort-change="sortChange" 
+			@select="select" @selection-change="selectChange" @select-all="selectAll" :max-height="maxHeight" highlight-current-row border
+			:row-class-name="rowClass" :cell-class-name="cellClassName">
 			<el-table-column v-if="index" type="index" width="50" key></el-table-column>
 			<el-table-column v-if="selection" type="selection" width="40" key></el-table-column>
 			<el-table-column :sortable="isSort(k)" v-for="(val, k) in title" :prop="k" :label="val" :key="k" :width="getWidth(k)"></el-table-column>
@@ -82,6 +83,10 @@ export default {
 			type: [String, Number],
 			default: 'none'
 		},
+		cellClass: {
+			type: [Function],
+			default: null
+		},
 		fliover: { // 一个页面同时存在多个分页时用...
 			type: [Boolean, Function],
 			default: false
@@ -93,7 +98,11 @@ export default {
 			return '';
 		},
 		rowClick(row, e, column){
-			this.$emit('row-click', row, e, column);
+			this.$emit('rowClick', row, e, column);
+		},
+		cellClassName({row, rowIndex, column, columnIndex}){
+			if(this.cellClass instanceof Function)
+				return this.cellClass(row, columnIndex, rowIndex, column);
 		},
 		currentChange(currentRow, oldCurrentRow){
 			this.currRow = currentRow;

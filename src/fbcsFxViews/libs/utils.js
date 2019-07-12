@@ -250,7 +250,7 @@ function TipsConfirm(){
 					<div class="right"></div>
 				</div>
 				<div class="message confirm">
-					<div class="content"></div>
+					<div class="confirmTxt"></div>
 				</div>
 				<div class="footBtn">
 					<button class="blueBtn now">立即下发</button>
@@ -272,7 +272,7 @@ function TipsConfirm(){
 		panle: mask.find('.tipsPanle'),
 		title : mask.find('.title b'),
 		confirm : mask.find('.confirm'),
-		content : mask.find('.content'),
+		content : mask.find('.confirmTxt'),
 		alert : mask.find('.alert'),
 		icon: mask.find('.tipsIcon'),
 		right: mask.find('.right'),
@@ -290,14 +290,20 @@ function TipsConfirm(){
 		}).text( vue.$t('fbcsFile.tips.cancel') )
 	};
 	
+	var autoOff = 0;
+	
 	function show(option, args, messType){
 		var opt = option || {}, args = args || {};
 		notify.panle.css({left: 0, top: 0});
+		clearTimeout(autoOff);
 		if(messType == 1){ //带logo的
 			notify.right.html(opt.txt||'');
 			notify.alert.show('flex');
 			notify.confirm.hide();
-			notify.icon[0].src = opt.type==1 ? successIcon : failIcon;
+			if(opt.type==1||opt.type=='success'){
+				notify.icon[0].src = successIcon;
+				autoOff = setTimeout(hide, 3000);
+			} else notify.icon[0].src = failIcon;
 			btnType(1);
 		} else {
 			notify.alert.hide();
@@ -309,7 +315,7 @@ function TipsConfirm(){
 		notifyFn = {...opt};
 		notifyArgs = {...args};
 		notify.title.html(opt.title||vue.$t('fbcsFile.tips.title'));
-		fbcs.appendChild(mask[0]);
+		if(fbcs) fbcs.appendChild(mask[0]);
 		notify.ok[0].focus();
 	}
 	function btnType(num){

@@ -2,7 +2,7 @@
 	<div class="contrast">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.versionContrast.type')}}：</label>
-			<el-select v-model="type">
+			<el-select v-model="type" @change="changeType">
 				<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 				</el-option>
 			</el-select>
@@ -13,9 +13,9 @@
 			<lgy-candidateWords v-model="id2" :keywords="ver2" :disabled="disabled" @input="input2" class="words"></lgy-candidateWords>
 			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.versionContrast.btn')}}</button>
 		</div>
-		<lgy-table :list="list" :title="title1" class="hide" :class="{show:disabled}" :total="total" :currentPage="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title1" v-if="disabled" :width="width" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
-		<lgy-table :list="list" :title="title2" class="hide" :class="{show:!disabled}" :total="total" :currentPage="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title2" v-if="!disabled" :width="width" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
 	</div>
 </template>
@@ -49,9 +49,17 @@ export default {
 			type: this.$t('fbcsFile.versionContrast.type'),
 			detail: this.$t('fbcsFile.versionContrast.detail')
 		};
+		data.width = {
+			section: 180,
+			field: 180,
+			type: 180
+		};
 		return data;
 	},
 	methods:{
+		changeType(val){
+			changeType(val);
+		},
 		search(){
 			this.page = 1;
 			search();
@@ -80,12 +88,7 @@ export default {
 		keywords('', arr => { words4 = arr; }, 4);
 	},
 	mounted(){
-		changeType(1);
-	},
-	watch: {
-		type(val){
-			changeType(val);
-		}
+		setTimeout(changeType, 40, 1);
 	}
 };
 
@@ -133,25 +136,22 @@ function search(){
 		_this.list = res.lists;
 		_this.page = res.currentPage;
 		_this.total = res.totalSize;
-		if(res.lists.length == 0) utils.confirm({
-			txt: _this.$t('fbcsFile.versionContrast.res'),
-			btn: 1
-		});
+		if(res.lists.length == 0) {
+			utils.alert({txt: _this.$t('fbcsFile.versionContrast.res'), type: 1});
+		}
 	});
 }
 function changeType(val){
 	_this.list = [];
 	_this.total = 0;
-	switch (val){
-		case 1: case 2: 
-			_this.id1 = _this.$t('fbcsFile.versionContrast.temp');
-			_this.id2 = _this.$t('fbcsFile.versionContrast.online');
-			_this.disabled = true;
-			break;
-		default:
-			_this.id1 = _this.id2 = '';
-			_this.disabled = false;
-			break;
+	
+	if(val > 2){
+		_this.id1 = _this.id2 = '';
+		_this.disabled = false;
+	} else {
+		_this.id1 = _this.$t('fbcsFile.versionContrast.temp');
+		_this.id2 = _this.$t('fbcsFile.versionContrast.online');
+		_this.disabled = true;
 	}
 	
 	verWords = [].concat(val==3 ? words3 : words4);

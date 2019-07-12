@@ -37,7 +37,7 @@
 #fbcs_file .tableBG{background: #E5EAF0;}
 #fbcs_file .el-table__body tr.current-row>td{background: #CFE0F3;}
 #fbcs_file .el-table td{padding: 10px 0;}
-#fbcs_file .el-table .cell{line-height: 20px;white-space: pre-wrap;}
+#fbcs_file .el-table .cell{line-height: 20px;white-space: normal;}
 #fbcs_file .el-table--enable-row-hover .el-table__body tr:hover>td { background: inherit; }
 #fbcs_file .el-table--enable-row-hover .el-table__body tr.current-row:hover>td { background: #CFE0F3; }
 /*elment-ui 日期*/
@@ -77,7 +77,7 @@
 #fbcs_file .tipsPanle .alert .right{max-width: 488px;padding-right: 40px;font-size: 16px;color: #666;line-height: 24px;
 	text-align: left;overflow: auto;white-space: pre-wrap;}
 #fbcs_file .tipsPanle .confirm {display: grid;font-size: 16px;color: #666;min-height: 200px;padding: 40px;white-space: pre-wrap;}
-#fbcs_file .tipsPanle .content{margin: auto;text-align: left;max-height: 420px;overflow: auto;}
+#fbcs_file .tipsPanle .confirmTxt{margin: auto;text-align: left;max-height: 420px;overflow: auto;}
 #fbcs_file .tipsPanle .footBtn{height: 50px;border-top: 1px solid #EDEFF4;text-align: right;padding-top: 10px;}/*#D7D8DA,*/
 #fbcs_file .tipsPanle .footBtn button{margin-right: 15px;}
 

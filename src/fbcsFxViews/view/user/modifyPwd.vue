@@ -204,7 +204,7 @@ function pass(){
 			}
 			
 			if(txt){
-				utils.weakTips(txt);
+				utils.alert({txt});
 				return false;
 			}
 		}
