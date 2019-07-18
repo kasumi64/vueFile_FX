@@ -188,9 +188,11 @@ function nodeCu(type){
 		for (let k in temp)  arr.push(temp[k]);
 		_this.nodeList = arr;
 		setTimeout(function(){
-			_this.nodeList.forEach(r => {
-				_this.$refs['nodes'].toggleRowSelection(r, true);
-			});
+			if(_this.$refs['nodes']){
+				_this.nodeList.forEach(r => {
+					_this.$refs['nodes'].toggleRowSelection(r, true);
+				});
+			}
 		});
 	});
 }

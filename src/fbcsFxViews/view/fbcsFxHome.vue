@@ -73,7 +73,7 @@ export default {
 				language: utils.getArgs('lang') || 'zh',
 				uri:  '/fbcs_fx/fx/lock/' + uri
 			};
-			
+
 			let res = await utils.post(args);
 			if(!res) return;
 			if(res.errcode != '0') return utils.alert({txt:res.errinfo, type:0});
@@ -94,27 +94,30 @@ export default {
 			this.$router.push({path: '/main/mxCfg/user'});
 		}
 	},
+  beforeCreate(){
+    let url;
+    // url = window.fbcs_fxIP + '/fbcs_fx/fx/';
+    url = 'http://localhost:8088/';
+    // url = '/fbcs_fx/fx/';
+    utils.setBaseURL(url);
+  },
 	created(){
 		_this = this;
-		let url;
-		// url = window.fbcs_fxIP + '/fbcs_fx/fx/';
-		url = 'http://localhost:8088/';
-		// url = '/fbcs_fx/fx/';
-		utils.setBaseURL(url);
 		let name = sessionStorage.getItem('userName') || 'LOCAL';
 		this.userName = name;
 		utils.setArgs('userName', name); //accountInfo
+		this.showReview = false;
 //		this.isCollapse = true;
 //		this.$router.replace({path: '/main/fxCfg/userHome'});
 	},
 	mounted(){
 		utils.emit('fbcs_file', this.$refs['fbcs_file']);
-		
+
 		unlock = kit('#fbcsMX_unlock').show().click(function(e){
 			_this.uri = 'lock';
 			_this.showReview = true;
 		});
-		
+
 		lock = kit('#fbcsMX_lock').hide().click(function(e){
 			_this.uri = 'unlock';
 			_this.showReview = true;
@@ -156,7 +159,7 @@ function lockFn(uri){
 	let params = {
 		url: 'lock/lock',
 		cmdID: '600112',
-		
+
 	};
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
@@ -197,7 +200,7 @@ function unlockFn(uri){
 	#fbcs_file .fs{margin-left: 10px;}
 	.logoBox{display: inline-block;background: #2861c1;width: 226px;height: 50px;vertical-align: top;}
 	.logo{position: absolute;margin: auto;top: 0;left: 0;right: 0;bottom: 0;}
-	
+
 	.fbcs_lockBox{position: absolute;top: 8px;right: 10px;padding: 10px;line-height: 0;}
 	.fbcs_lockBox:hover{background: #407BDD;border-radius: 5px;}
 	.fbcs_lockBox img{display: none;width: 14px;height: 16px;cursor: pointer;}

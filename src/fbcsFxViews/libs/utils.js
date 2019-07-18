@@ -33,7 +33,7 @@ function MaskLayer(){
 		</div>`;
 //		<p class="el-icon-loading"></p>
 //		<p>loading...</p>
-		
+
 	var mask = kit(html);
 	this.show = function(target){
 		if(target){
@@ -61,13 +61,13 @@ const loading = {
 kit.extend(exp, loading);
 
 function ReqHttp(){
-	
+
 	var axios = Axios.create();
 
 	this.setBaseURL = function(url){
 		axios.defaults.baseURL = url;
 	};
-	
+
 	// 添加请求拦截器
 	axios.interceptors.request.use(function(config){
 //		console.log('拦截器',config)
@@ -85,7 +85,7 @@ function ReqHttp(){
 		}
 		return Promise.reject(err);
 	});
-	
+
 	this.http = function(params, fn, config, efn){
 		var option = { //resolve reject
 			url: params.url,
@@ -98,7 +98,7 @@ function ReqHttp(){
 		}
 		if(option.method=='get') option.params = params;
 		else option.data = params;
-		
+
 		return axios(option).then(function(response){
 			return callback(response, fn);
 		}).catch(function(e){
@@ -108,8 +108,8 @@ function ReqHttp(){
 	this.post = function (params, fn, args, efn){
 		var url = params.url;
 		delete params.url;
-		
-		if('debug'){
+
+		/* if('debug'){
 			console.log(params.cmdID, params);
 			let debugRes = {
 				status: 200,
@@ -122,8 +122,8 @@ function ReqHttp(){
 			}
 			debugRes.data.lists = arr;
 			return Promise.resolve(callback(debugRes, fn, args));
-		}
-		
+		} */
+
 		return axios.post(url, params).then(function(res){
 			return callback(res, fn, args);
 		}).catch(function (err) {
@@ -168,7 +168,7 @@ function addDrag(kel, tit, panl, foot){
 	if(!(kel instanceof kit.constructor)) kel = kit(kel);
 	var title = kel.find(tit), panle = kel.find(panl),
 		footer = kel.find(foot), first, xy = {};
-	
+
 	title.css({
 		cursor: 'move',
 		'-webkit-user-select': 'none',
@@ -289,9 +289,9 @@ function TipsConfirm(){
 			hide();
 		}).text( vue.$t('fbcsFile.tips.cancel') )
 	};
-	
+
 	var autoOff = 0;
-	
+
 	function show(option, args, messType){
 		var opt = option || {}, args = args || {};
 		notify.panle.css({left: 0, top: 0});
@@ -311,7 +311,7 @@ function TipsConfirm(){
 			notify.confirm.show('grid');
 			btnType(opt.btn);
 		}
-		
+
 		notifyFn = {...opt};
 		notifyArgs = {...args};
 		notify.title.html(opt.title||vue.$t('fbcsFile.tips.title'));
@@ -358,7 +358,7 @@ exp.keywords = function(obj, fn){
 		if(res.errcode!='0') {
 			console.info('600001', res.errinfo);
 			res.lists = [];
-		} 
+		}
 		var i, arr = res.lists, len = arr.length, obj;
 		for(i = 0; i < len; i++){
 			obj = arr[i];
@@ -399,7 +399,7 @@ exp.clearCache = function(){
 Object.addProto(exp, 'getFxAuth', {
 	get(){
 		if('debug') return true;
-		
+
 		let authority = sessionStorage.getItem('authoritys') || '';
 		return (/Auth_Fx_Config_Opt/i).test(authority);
 	}
@@ -407,4 +407,4 @@ Object.addProto(exp, 'getFxAuth', {
 
 
 export default exp;
-//(c) Copyright 2019.06 LGY. All Rights Reserved. 
+//(c) Copyright 2019.06 LGY. All Rights Reserved.
