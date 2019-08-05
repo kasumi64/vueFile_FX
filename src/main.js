@@ -13,9 +13,10 @@ Vue.config.productionTip = false;
 
 
 /* eslint-disable no-new */
-window._vm = new Vue({
+window.appVue = new Vue({
 	el: '#app',
 	router,
 	i18n,
-	render: h => h(App)
+	render: h => h(App),
+	// store
 })

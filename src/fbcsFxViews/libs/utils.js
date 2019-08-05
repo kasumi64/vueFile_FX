@@ -63,6 +63,7 @@ kit.extend(exp, loading);
 function ReqHttp(){
 
 	var axios = Axios.create();
+	// axios.defaults.timeout = 120 * 1000;
 
 	this.setBaseURL = function(url){
 		axios.defaults.baseURL = url;

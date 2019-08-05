@@ -32,10 +32,10 @@
 			</li>-->
 		</ul>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p>
-		<lgy-table ref="OPE" :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage="pageOPE" @changePage="changeOPE" :maxHeight="416">
+		<lgy-table ref="OPE" :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage="pageOPE" :fliover="changeOPE" :maxHeight="416">
 		</lgy-table>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resBOP')}}</p>
-		<lgy-table ref="BOP" :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" :maxHeight="416">
+		<lgy-table ref="BOP" :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage="pageBOP" :fliover="changeBOP" :maxHeight="416">
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
@@ -127,7 +127,7 @@ export default {
 				if(this.$refs.OPE) this.$refs.OPE.ElPager(1);
 				if(this.$refs.BOP) this.$refs.BOP.ElPager(1);
 			}
-			// search();
+			search();
 		},
 		idInput(val){
 			if(val=='') return this.idWords = [].concat(idAll);

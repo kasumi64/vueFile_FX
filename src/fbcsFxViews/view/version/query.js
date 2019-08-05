@@ -95,8 +95,9 @@ function fnback(row, scope){
 		signalSearch(); //类型为用户密码表时用，3，7
 		return _this.showPwdinfo = true;
 	}
-	let uri = 'version/rollback',
-	txt = _this.$t('fbcsFile.versionQuery.rollback');
+	let uri = 'version/rollback', txt;
+	if(row.type==1||row.type==5) txt = _this.$t('fbcsFile.versionQuery.rollback2');
+	else txt = _this.$t('fbcsFile.versionQuery.rollback1');
 	review(uri, txt);
 }
 function review(uri, txt){
@@ -215,7 +216,7 @@ export default {
 		},
 		send(){
 			let uri = 'version/rollback',
-			txt = _this.$t('fbcsFile.versionQuery.rollback');
+			txt = _this.$t('fbcsFile.versionQuery.rollback1');
 			review(uri, txt);
 			this.showPwdinfo = false;
 		}

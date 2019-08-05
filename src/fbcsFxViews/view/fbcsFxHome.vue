@@ -94,13 +94,13 @@ export default {
 			this.$router.push({path: '/main/mxCfg/user'});
 		}
 	},
-  beforeCreate(){
-    let url;
-    // url = window.fbcs_fxIP + '/fbcs_fx/fx/';
-    url = 'http://localhost:8088/';
-    // url = '/fbcs_fx/fx/';
-    utils.setBaseURL(url);
-  },
+	beforeCreate(){
+		let url;
+		// url = window.fbcs_fxIP + '/fbcs_fx/fx/';
+		url = 'http://localhost:8088/';
+		// url = '/fbcs_fx/fx/';
+		utils.setBaseURL(url);
+	},
 	created(){
 		_this = this;
 		let name = sessionStorage.getItem('userName') || 'LOCAL';

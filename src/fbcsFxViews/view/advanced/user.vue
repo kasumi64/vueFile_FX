@@ -155,7 +155,7 @@ function search(){
 			hard = _this.$t('fbcsFile.advanced.user.hard');
 		for (i = 0; i < len; i++) {
 			obj = res.lists[i];
-			obj.encLabel = obj.encFlag ? hard : soft;
+			obj.encLabel = obj.encFlag == 1 ? hard : soft;
 			if(obj.beginSoftEncTime){
 				obj.ymdBegin = moment(obj.beginSoftEncTime * 1000).format('YYYY-MM-DD HH:mm:ss');
 			} else  obj.beginSoftEncTime = obj.ymdBegin = '';

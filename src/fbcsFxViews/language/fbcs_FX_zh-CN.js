@@ -113,7 +113,7 @@ var obj = {
 	},
 	audit: {
 		operator:'操作员', reviewer:'审核员', operatorRole:'操作员角色', operatorType:'操作类型',
-		operatorTime:'操作时间',errorCode:'操作结果', errorInfo:'操作错误描述', uuid:'流水号',
+		operatorTime:'操作时间',errorCode:'操作结果', errorInfo:'操作结果描述', uuid:'流水号',
 		sort: '排序方式 ：', lately: '最近', early: '最早', times: '时间段：', today: '今天', week: '近一周',
 		month: '近一个月', begin: '开始时间', end: '结束时间',
 	},
@@ -123,7 +123,8 @@ var obj = {
 			{label: '用户密码信息表', value: '3'},{label: '中登配置', value: '4'},{label: '回滚', value: '5'}],
 		type:'版本类型', version:'版本号', versionPath:'版本路径', operationTime: '操作时间', 
 		operator: '操作人员', reviewer: '审核人员', operationType:'下发类型', checkVer: '比对最新版本MD5',
-		rollback: '您确定要回退到此版本？', bigVer: '您确定要生成大版本？', ZdCfg: '是否获取中登配置？',
+		rollback1: '您确定要回退到此版本？', bigVer: '您确定要生成大版本？', ZdCfg: '是否获取中登配置？',
+		rollback2: '<p>您确定要回退到此版本？</p><p style="color:#F00;">回滚该版本成功后，请回滚密码相关配置文件</p>',
 		equal0: '一致', equal1: '不一致', equal2: '文件不存在', operationType1: '全量下发' , operationType2: '增量下发',
 		operationType3: 'cu上传' , type1: '系统动态配置', type2: '系统静态配置', type3: '用户密码信息表', type4: '中登配置',
 		type5: '回滚_系统动态配置', type6: '回滚_系统静态配置', type7: '回滚_用户密码信息表', type8: '回滚_中登配置', 

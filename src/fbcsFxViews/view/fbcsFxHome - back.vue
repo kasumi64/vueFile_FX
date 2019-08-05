@@ -94,13 +94,13 @@ export default {
 			this.$router.push({path: '/main/mxCfg/user'});
 		}
 	},
-  beforeCreate(){
-    let url;
-    // url = window.fbcs_fxIP + '/fbcs_fx/fx/';
-    // url = 'http://localhost:8088/';
-    url = '/fbcs_fx/fx/';
-    utils.setBaseURL(url);
-  },
+	beforeCreate(){
+		let url;
+		// url = window.fbcs_fxIP + '/fbcs_fx/fx/';
+		// url = 'http://localhost:8088/';
+		url = '/fbcs_fx/fx/';
+		utils.setBaseURL(url);
+	},
 	created(){
 		_this = this;
 		let name = sessionStorage.getItem('userName') || 'LOCAL';
@@ -158,8 +158,7 @@ function checkLock(){
 function lockFn(uri){
 	let params = {
 		url: 'lock/lock',
-		cmdID: '600112',
-
+		cmdID: '600112'
 	};
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
@@ -208,5 +207,5 @@ function unlockFn(uri){
 		position: absolute;display: none;top: 0;left: 0;width: 100%;padding-left: 20px;
 		font-size: 14px;font-weight: bold;color: #FF7A7D;line-height: 44px;height: 44px;border-bottom: 1px solid #EBEFF4;
 	}
-	.sys{position: absolute;top: 10px;right: 46px;z-index: 2;}
+	.sys{position: absolute;top: 10px;right: 50px;z-index: 2;}
 </style>

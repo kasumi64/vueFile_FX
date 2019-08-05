@@ -143,7 +143,7 @@ export default {
 		},
 		ElPager(num){
 			if(this.$refs.paging)
-				this.$refs.paging$children[1].$emit('change', num);
+				this.$refs.paging.$children[1].$emit('change', num);
 		}
 	},
 	created(){
