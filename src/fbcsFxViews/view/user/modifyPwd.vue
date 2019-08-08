@@ -126,6 +126,7 @@ export default {
 			params.cmdID = '600010';
 			params.userPasswd = md5(this.passwd);
 			params.reviewer = obj.name;
+			params.reviewerPasswd = obj.pwd;
 			
 			utils.post(params).then(function(res){
 				if(res.errcode != '0') return utils.alert({txt: res.errinfo});

@@ -151,6 +151,7 @@ export default {
 				url: 'userClientFile/recover',
 				cmdID: '600064',
 				reviewer: args.name,
+				reviewerPasswd: args.pwd,
 				fileName: args.fileName,
 				fileMd5: args.fileMd5,
 				recoverType: args.recoverType,

@@ -81,7 +81,7 @@ export default {
 			utils.confirm({
 				txt: this.$t('fbcsFile.err.lock.'+(uri == 'lock' ? 'lock' : 'unlock')),
 				ok: () => {
-					(uri == 'lock') ? lockFn() : unlockFn();
+					(uri == 'lock') ? lockFn(args) : unlockFn(args);
 				}
 			});
 			this.cancel();
@@ -155,10 +155,12 @@ function checkLock(){
 	});
 }
 
-function lockFn(uri){
+function lockFn({reviewer, password}){
 	let params = {
 		url: 'lock/lock',
-		cmdID: '600112'
+		cmdID: '600112',
+		reviewer,
+		reviewerPasswd: password
 	};
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
@@ -171,10 +173,12 @@ function lockFn(uri){
 	});
 }
 
-function unlockFn(uri){
+function unlockFn({reviewer, password}){
 	let params = {
 		url: 'lock/unlock',
-		cmdID: '600113'
+		cmdID: '600113',
+		reviewer,
+		reviewerPasswd: password
 	};
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});

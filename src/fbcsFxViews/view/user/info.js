@@ -176,6 +176,7 @@ export default {
 			if(params.endSoftEncTime) params.endSoftEncTime = params.endSoftEncTime / 1000;
 			else params.endSoftEncTime = 0;
 			params.reviewer = obj.name;
+			params.reviewerPasswd = obj.pwd;
 			if(params.linkGroupName == '任意') params.linkGroupName = '';
 			
 //			utils.loadShow();
@@ -350,20 +351,20 @@ function initDate(){
 	for (let k in info) info[k] = '';
 	info.isModifyDefaultPasswd = 0;
 	info.userPasswd = defaultPwd;
-	info.userType = '1',
-	info.inZone = '',
-	info.linkGroupName = '任意',
-	info.speedCtrl = -1,
-	info.maxRelationUser = 1000,
-	info.encFlag = 1,
-	info.notOnlineAlarm=0,
-	info.allowBroadcast= 0, 
-	info.allowConnFlag= 1, 
-	info.allowSwitchMsg= 1,
-	info.allowPublishTopicCount= 5, 
-	info.allowSubscribeTopicCount= 5,
+	info.userType = '1';
+	info.inZone = '';
+	info.linkGroupName = '任意';
+	info.speedCtrl = -1;
+	info.maxRelationUser = 1000;
+	info.encFlag = 1;
+	info.notOnlineAlarm=0;
+	info.allowBroadcast= 0; 
+	info.allowConnFlag= 1;
+	info.allowSwitchMsg= 1;
+	info.allowPublishTopicCount= 5; 
+	info.allowSubscribeTopicCount= 5;
 	info.maxPublishTopicDay= 7;
-	info.maxSimultTaskCount= 30,
+	info.maxSimultTaskCount= 30;
 	info.maxCltOneDayTaskCount= 500000;
 	info.webUserFlag = 0;
 	info.expiredTimeFlag = '1';
@@ -373,6 +374,12 @@ function initDate(){
 	_this.indate = _this.$t('fbcsFile.password.options');
 	_this.showReview = false;
 	_this.parameter = null;
+	
+	let day = new Date();
+	day.setHours(0, 0, 0, 0);
+	info.beginSoftEncTime = day.getTime();
+	day.setHours(23, 59, 59, 0);
+	info.endSoftEncTime = day.getTime();
 }
 
 function getUserInfo(user){

@@ -127,7 +127,8 @@ export default {
 			userID1: this.$t('fbcsFile.tableTitle.userID'),
 			userName1: this.$t('fbcsFile.tableTitle.userName'),
 			userID2: this.$t('fbcsFile.tableTitle.userID'),
-			userName2: this.$t('fbcsFile.tableTitle.userName')
+			userName2: this.$t('fbcsFile.tableTitle.userName'),
+			buildTime: this.$t('fbcsFile.tableTitle.buildTime')
 		};
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 52,
@@ -207,7 +208,7 @@ export default {
 		},
 		filter(val){
 			if(val=='') {
-//				this.idarr = filterSig(this.oneid, [].concat(userid));
+				this.idarr = filterSig(this.oneid, [].concat(userid));
 				return;
 			}
 			
@@ -244,6 +245,7 @@ export default {
 				url: 'userComm/addImmediately',
 				cmdID: '600044',
 				reviewer: obj.name,
+				reviewerPasswd: obj.pwd,
 				userID1: this.oneid,
 				userID2: this.sid[0]
 			};
@@ -337,7 +339,7 @@ function nextFrame(){
 	setTimeout(() => {
 		if(_this.isPage){
 			_this.disabled = true;
-			_this.oneid = '';
+			_this.oneid = _this.id;
 			_this.oneDisable = false;
 		} else {
 			_this.disabled = false;

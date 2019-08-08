@@ -8,7 +8,8 @@
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
 			<lgy-candidateWords v-model="userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
-			<input v-model="ekeyName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<!-- <input v-model="userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
+			<lgy-candidateWords v-model="userName" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
 			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
@@ -44,8 +45,9 @@ var _this, data = {
 		{userID1: 'userID', userName1: 'userName', userID2: 1535646546566, userName2: 'ekeyComment'}
 	],
 	page: 1, total: 1,
-	userID: '', ekeyName: '',
+	userID: '', userName: '',
 	idWords: null,
+	nameWords: null,
 	showDialog: false,
 	fileHref: '#', fileName: ''
 };
@@ -79,6 +81,18 @@ export default {
 				_this.idWords = arr;
 			});
 		},
+		nameInput(userName){
+			let params = {
+				userID: userName,
+				userName,
+			};
+			utils.keywords(params, {
+				label: ['userName','userID'],
+				value: 'userName'
+			}).then(arr => {
+				_this.nameWords = arr;
+			});
+		},
 		expcsv(){
 			this.showDialog = true;
 			this.fileName = '';
@@ -89,7 +103,7 @@ export default {
 			param.currentPage = 1;
 			param.type = 1;
 			param.userID = _this.userID;
-			param.userName = _this.ekeyName;
+			param.userName = _this.userName;
 			
 			utils.post(param).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -101,8 +115,9 @@ export default {
 	},
 	created(){
 		_this = this;
-		this.userID = this.ekeyName = '';
+		this.userID = this.userName = '';
 		this.list = [];
+		this.nameWords = null;
 		this.search();
 		utils.keywords({}, arr => {
 			idAll = [].concat(arr);
@@ -119,7 +134,7 @@ function search(){
 	param.currentPage = _this.page;
 	param.type = 0;
 	param.userID = _this.userID;
-	param.userName = _this.ekeyName;
+	param.userName = _this.userName;
 	
 	utils.post(param).then(function(res){
 		if(res.errcode!='0') { //清缓存历史

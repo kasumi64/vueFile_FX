@@ -59,8 +59,8 @@ export default {
 	},
 	methods:{
 		async reviewHandle(param){
-			if(this.name==utils.getArgs('userName')) return utils.confirm({txt:this.$t('fbcsFile.components.reviewSame'), btn:1});
-			if(this.name==''||this.pwd=='') return utils.confirm({txt:this.$t('fbcsFile.components.reviewNull'), btn:1});
+			if(this.name==utils.getArgs('userName')) return utils.alert({txt:this.$t('fbcsFile.components.reviewSame'), btn:1});
+			if(this.name==''||this.pwd=='') return utils.alert({txt:this.$t('fbcsFile.components.reviewNull'), btn:1});
 			if(kit.isFn(param)) param = param();
 			if(!kit.isObject(param)) param = {uri:param};
 			
@@ -75,6 +75,7 @@ export default {
 //			console.log('dispatch:',args.uri);
 			let self = this;
 			param.name = self.name;
+			param.pwd = args.password;
 			
 			/*if('debug'){
 				this.cancel();

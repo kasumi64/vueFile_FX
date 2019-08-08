@@ -2,9 +2,10 @@
 	<div class="Ekey">
 		<div v-if="isPage" class="searchBar">
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
-			<lgy-candidateWords v-model="id" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
+			<lgy-candidateWords v-model="id" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.searchBar.ekeyName')}}</label>
-			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<!-- <input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
+			<lgy-candidateWords v-model="name" :keywords="ekNames" @input="ekNameInput" class="words"></lgy-candidateWords>
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
@@ -44,7 +45,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyDate')}}</p>
 					</div><div class="right">
-						<el-date-picker v-model="ekeyInfo.validDate" class="picker" type="datetime" :clearable="false" :editable="false"
+						<el-date-picker v-model="ekeyInfo.validDate" class="picker" type="datetime" :clearable="true" :editable="false"
 							:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" >
 						</el-date-picker>
 					</div>
@@ -71,11 +72,13 @@
 import utils  from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-var _this, data = {
+var _this, userid, args, isAdd,
+data = {
 	fxAuth: true,
 	id: '',
 	name: '',
 	idWords: null,
+	ekNames: null,
 	ekWords: null,
 	list: [
 		{userID: 'userID', userName: 'userName', ekeyName: 'ekeyName',validDate: 1535646546566, ekeyComment: 'ekeyComment'}
@@ -94,7 +97,7 @@ var _this, data = {
     reviewTxt: '',
     parameter: null,
     jump: false,
-}, userid, args, isAdd;
+};
 
 function delEkey(row){
 	utils.confirm({
@@ -126,6 +129,7 @@ function delNow(obj){
 	params.cmdID = '600037';
 	params.ekeyName = obj.ekeyName;
 	params.reviewer = obj.name;
+	params.reviewerPasswd = obj.pwd;
 	
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -194,6 +198,21 @@ export default {
 				_this.idWords = arr;
 			});
 		},
+		ekNameInput(ekeyName){
+			let params = {
+				url: 'userEkey/query',
+				cmdID: '600031',
+				userID: '',
+				ekeyName,
+				type: 0
+			};
+			utils.keywords(params, {
+				label: ['ekeyName','userID'],
+				value: 'ekeyName'
+			}).then(arr => {
+				_this.ekNames = arr;
+			});
+		},
 		ekInput(val){
 			if(val=='') return this.ekWords = [].concat(userid);
 			utils.keywords({id: val, type: 2}, arr => {
@@ -247,7 +266,7 @@ export default {
 			init.call(_this);
 		});
 		this.id = this.name = ''
-		this.keywords = null;
+		this.keywords = this.ekNames = null;
 		this.showDialog = false;
 		this.list = [];
 		userid = [];
@@ -309,6 +328,7 @@ function addNow(obj){
 	params.cmdID = '600035';
 	params.validDate = _this.ekeyInfo.validDate / 1000;
 	params.reviewer = obj.name;
+	params.reviewerPasswd = obj.pwd;
 	
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -322,6 +342,7 @@ function editNow(obj){
 	params.cmdID = '600036';
 	params.validDate = _this.ekeyInfo.validDate / 1000;
 	params.reviewer = obj.name;
+	params.reviewerPasswd = obj.pwd;
 	
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -340,7 +361,7 @@ function check(){
 	if(utils.isSpace(info.ekeyName)) {
 		utils.alert({txt: _this.$t('fbcsFile.Ekey.errName'), btn: 1});
 		return true;
-	} else if(/[\%]/.test(info.ekeyName)){
+	} else if (/[^\w]/.test(info.ekeyName)){
 		utils.alert({txt: _this.$t('fbcsFile.Ekey.ekeyNameFormat'), btn: 1});
 		return true;
 	}

@@ -13,7 +13,8 @@
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
 			<lgy-candidateWords v-model="info.userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
-			<input v-model="info.userName":disabled="listType=='BOP'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<!-- <input v-model="info.userName":disabled="listType=='BOP'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
+			<lgy-candidateWords v-model="info.userName" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.advanced.information.company')}}：</label>
 			<input v-model="info.opeartorCompany" :disabled="listType=='OPE'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
@@ -62,6 +63,7 @@ var _this, data = {
 	},
 	listType: '', listItem: [],
 	idWords: null,
+	nameWords: null,
 	listOPE: [
 		{userID: 'userID', userName: 'userName', operatorTelNum: 1535646546566, operatorEmail: 'ekeyComment'},
 	],
@@ -94,8 +96,12 @@ export default {
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
 			operatorMobileNum: this.$t('fbcsFile.advanced.information.mobileNum'),
 			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
+			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
 			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
-			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum')
+			ssccManagerTelNum: this.$t('fbcsFile.advanced.information.ssccManagerTelNum'),
+			ssccManagerMobileNum: this.$t('fbcsFile.advanced.information.ssccManagerMobileNum'),
+			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
+			operatorDepartment: this.$t('fbcsFile.advanced.information.department')
 		};
 		data.titleBOP = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
@@ -133,6 +139,18 @@ export default {
 			if(val=='') return this.idWords = [].concat(idAll);
 			utils.keywords({id: val}, arr => {
 				_this.idWords = arr;
+			});
+		},
+		nameInput(userName){
+			let params = {
+				userID: userName,
+				userName,
+			};
+			utils.keywords(params, {
+				label: ['userName','userID'],
+				value: 'userName'
+			}).then(arr => {
+				_this.nameWords = arr;
 			});
 		},
 		expcsv(bop){

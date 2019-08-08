@@ -85,7 +85,7 @@
 			</li><li v-if="info.encFlag==1">
 				<div class="label">{{$t('fbcsFile.userInfo.beginTime')}}</div>
 				<div class="right">
-					<el-date-picker v-model="info.beginSoftEncTime" class="picker" type="datetime" :clearable="false" :editable="false"
+					<el-date-picker v-model="info.beginSoftEncTime" class="picker" type="datetime" :clearable="true" :editable="false"
 						 :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00">
 					</el-date-picker>
 					<!--:picker-options="pickerBegin"-->
@@ -93,8 +93,8 @@
 			</li><li v-if="info.encFlag==1">
 				<div class="label">{{$t('fbcsFile.userInfo.endTime')}}</div>
 				<div class="right">
-					<el-date-picker v-model="info.endSoftEncTime" class="picker" type="datetime" :clearable="false" :editable="false"
-						 :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00">
+					<el-date-picker v-model="info.endSoftEncTime" class="picker" type="datetime" :clearable="true" :editable="false"
+						 :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59">
 					</el-date-picker>
 					<!--:picker-options="pickerEnd"-->
 				</div>

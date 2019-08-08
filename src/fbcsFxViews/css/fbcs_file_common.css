@@ -122,3 +122,7 @@
 #fbcs_file .backHead{height: 50px;margin: -20px 0 20px -20px;border-bottom: 1px solid #d8D8D8;padding-top: 10px;}
 #fbcs_file .backHead .back{font-size: 13px;color: #5A719D;line-height: 30px;vertical-align: middle;padding: 0 20px;cursor: pointer;border-right: 1px solid #EDEEF0;}
 #fbcs_file .backHead .h1{font-size: 16px;color: #656A73;line-height: 30px;vertical-align: middle;padding: 0 20px;}
+
+/* 稽核页面 */
+#fbcs_file .audit .preWrap .cell{white-space: pre-wrap;}
+#fbcs_file .advancedAudit .preWrap .cell{white-space: pre-wrap;}

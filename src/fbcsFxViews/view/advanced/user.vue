@@ -9,6 +9,11 @@
 			<input v-model="info.userID" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
 			<input v-model="info.userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<label class="label">{{$t('fbcsFile.userInfo.encFlag')}}</label>
+			<el-select v-model="info.encFlag" class="words">
+				<el-option v-for="item in encSelect" :key="item.id" :label="item.name" :value="item.id">
+				</el-option>
+			</el-select>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.advanced.user.userType')}}</label>
 			<el-select v-model="info.userType" class="words">
@@ -33,7 +38,8 @@
 				<span class="label">{{$t('fbcsFile.advanced.user.expcsv')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :total="total" :currentPage="page" @changePage="changePage" >
+		<lgy-table :list="list" :title="title" :sortable="sortable" @sortChange="sortChange" 
+			:total="total" :currentPage="page" @changePage="changePage">
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.advanced.user.expcsv')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
@@ -61,11 +67,15 @@ var _this, data = {
 	],
 	page: 1, total: 1,
 	info: {
-		userID: '', userName: '', userType: '', inZone: '', linkGroupName: ''
+		userID: '', userName: '', userType: '', inZone: '', linkGroupName: '', encFlag: ''
 	},
 	userType: [], inZone: [], group: [],
 	showDialog: false,
-	fileHref: '#', fileName: ''
+	fileHref: '#', fileName: '',
+	sortable: {
+		ymdBegin: 1, ymdEnd: 1
+	},
+	encSelect: []
 };
 var userDict;
 
@@ -83,6 +93,7 @@ export default {
 			ymdBegin: this.$t('fbcsFile.tableTitle.beginTime'),
 			ymdEnd: this.$t('fbcsFile.tableTitle.endTime')
 		};
+		data.encSelect = this.$t('fbcsFile.advanced.user.encSelect')
 		return data;
 	},
 	methods:{
@@ -118,6 +129,16 @@ export default {
 				_this.fileName = res.errinfo.split('/').pop();
 			});
 		},
+		sortChange(column, prop, order){
+			// console.log(column, prop, order);
+			if(order == 'ascending'){
+				
+			} else if(order == 'descending'){
+				
+			} else {
+				
+			}
+		}
 	},
 	created(){
 		_this = this;
@@ -176,6 +197,7 @@ function initDate(){
 	info.userType = '',
 	info.inZone = 'all',
 	info.linkGroupName = '全部',
+	info.encFlag = '0';
 	
 	_this.showDialog = false;
 }

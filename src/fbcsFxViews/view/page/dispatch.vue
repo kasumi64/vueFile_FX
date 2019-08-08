@@ -21,6 +21,7 @@
 						@selection-change="selectChange">
 						<el-table-column type="selection" width="40" key></el-table-column>
 						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
+						<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
 					</el-table>
 					<button v-if="fxAuth" @click="review" class="blueBtn mt">{{$t('fbcsFile.tips.submit')}}</button>
 				</div>
@@ -28,7 +29,7 @@
 				<label class="label">&nbsp;</label>
 				<div class="right">
 					<p class="label txt"><b>{{$t('fbcsFile.dispatch.res')}}</b></p>
-					<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
+					<el-table :data="cuList" :row-class-name="rowClass" :cell-class-name="cellClass" max-height="294" highlight-current-row border>
 						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 						<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
 						<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
@@ -100,6 +101,10 @@ export default {
 			if(rowIndex%2 != 0) return 'tableBG';
 			return '';
 		},
+		cellClass({row, columnIndex}){
+			if(columnIndex==2&&row.errStr != 'success') return 'red';
+			return ''
+		},
 		selectChange(arr){
 			var temp = [];
 			for (let i = 0; i < arr.length; i++) {
@@ -120,10 +125,12 @@ export default {
 			this.showReview = true;
 		},
 		submit(args){
+			utils.loadShow();
 			let params = {
 				url: 'batchDispatch/dispatch',
 				cmdID: '600082',
 				reviewer: args.name,
+				reviewerPasswd: args.pwd,
 				type: this.type,
 				count: this.cuList.length,
 				lists: this.cuList
@@ -132,6 +139,7 @@ export default {
 				item.errinfo = item.errStr = '';
 			});
 			utils.post(params).then(function(res){
+				utils.loadClose();
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				res.type = 0;
 				_this.parameter = res;
@@ -142,6 +150,7 @@ export default {
 			signalSearch();
 		},
 		send(){
+			return alert('p')
 			this.reqsv = {uri: 'batchDispatch/dispatch'};
 			this.showReview = true;
 			this.showPwdinfo = false;

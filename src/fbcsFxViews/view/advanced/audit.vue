@@ -113,8 +113,11 @@ var _this, data = {
 	showDialog: false,
 	cuList: [],
 	cellClass(row, cellIndex){
-		if(row.errStr != 'success' && cellIndex == 6)
+		if(row.errStr != 'success' && cellIndex == 6){
 			return 'red';
+		} else if (cellIndex == 2){
+			return 'preWrap';
+		}
 	},
 	linkage: [],
 	showDialog2: false,

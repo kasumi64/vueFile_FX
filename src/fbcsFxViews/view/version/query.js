@@ -68,6 +68,7 @@ function rollback(obj){
 		url: obj.uri,
 		cmdID: '600073',
 		reviewer: obj.name,
+		reviewerPasswd: obj.pwd,
 		version: rollRow.version
 	};
 	utils.post(params).then(function(res){
@@ -79,7 +80,8 @@ function bigVer(obj){
 	let params = {
 		url: obj.uri,
 		cmdID: '600076',
-		reviewer: obj.name
+		reviewer: obj.name,
+		reviewerPasswd: obj.pwd,
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -110,6 +112,7 @@ function zdCfg(obj){
 		url: 'version/getZdCfg',
 		cmdID: '600078',
 		reviewer: obj.name,
+		reviewerPasswd: obj.pwd,
 		type: 2
 	};
 	

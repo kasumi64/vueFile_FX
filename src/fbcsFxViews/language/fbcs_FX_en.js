@@ -27,7 +27,7 @@ var obj = {
 		userID: '用户ID', userName: '用户名称', operation: '操作',
 		ekeyName: 'Ekey名称', ekeyDate: 'Ekey有效期', ekeyInfo: 'Ekey描述',
 		userType: '用户类型', inZone: '所属地区', group: '所在分组', speed: '最大收发速度', encFlag: '加密方式', 
-		beginTime: '软加密开始时间', endTime: '软加密结束时间',
+		beginTime: '软加密开始时间', endTime: '软加密结束时间', buildTime: '创建时间'
 	},
 	tableDefined: {
 		editUser: '修改基本信息', editEkey: '修改Ekey', addSignal: '创建通信关系', delEkey: '删除Ekey',
@@ -52,7 +52,11 @@ var obj = {
 		info: {
 			operatorMobileNum: '仅能输入数字、“|”，用“|”做分隔符', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
 			operatorTelNum: '仅能输入数字,“-”,“+”,和“;”', emailFormat: '邮箱格式不对', tell: '手机号不能以“|”结尾',
-			operatorName: '输入字符不能包含%', ssccManager: '输入字符不能包含%', trim: '不能包含%，前后不能是空格'
+			operatorName: '输入字符不能包含%', ssccManager: '输入字符不能包含%', trim: '不能包含%，前后不能是空格',
+			ssccManagerMobileNum: '仅能输入数字、“|”，用“|”做分隔符', ssccManagerTelNum: '仅能输入数字,“-”,“+”,和“;”',
+			operatorCompany: '公司名称不能包含（|$%,";:/\\）', department: '输入字符不能包含%' , operationFax: '仅能输入数字,“-”,“+”,和“;”',
+			userAlarmSmsNum: '仅能输入数字,“-”,“+”,和“;”', operationPhoneNum: '仅能输入数字,“-”,“+”,和“;”',
+			email: '仅能输入英文，数字,“-”,“_”,“@”和“.”'
 		},
 		files: {
 			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', format: '仅能输入英文，数字,“-”,“_”和“.”',
@@ -86,7 +90,7 @@ var obj = {
 	Ekey: {
 		userID: '用户ID：', ekeyName: 'Ekey名称：', ekeyPwd: 'Ekey密码：', ekeyDate: 'Ekey有效期：', 
 		ekeyInfo:'Ekey描述：', tips: '小于V5版用户必填', errID: '用户ID不能为空！', errName: 'Ekey名称不能为空！',
-		delEkey: '是否要删除Ekey？', ekeyNameFormat: 'Ekey名称不能包含%', ekeyCommentFormat: 'Ekey描述不能包含%'
+		delEkey: '是否要删除Ekey？', ekeyNameFormat: 'Ekey名称必须是字母或数字或下划线', ekeyCommentFormat: 'Ekey描述不能包含%'
 	},
 	relation: {
 		addSignal: '创建通信关系', delSignal: '删除通信关系', userID1: '用户ID：', userID2: '对端用户：',
@@ -104,7 +108,7 @@ var obj = {
 	dispatch: {
 		options: [{label: '系统动态配置', value: 1},{label: '系统静态配置', value: 2},
 			{label: '用户密码信息表', value: 3}, {label: '互联网配置信息', value: 4}],
-		nodeName:'节点名', cuName:'服务名', errcode:'结果', errinfo:'错误信息', type:'操作类型',
+		nodeName:'节点名', cuName:'服务名', errcode:'结果', errinfo:'操作结果描述', type:'操作类型',
 		setFile:'配置文件：', hots1:'分发主机：', hots2:'主机列表', res:'分发结果：',
 		t1:'(系统动态配置文件为：FxDynamic.ini,userinfo.db,userekey.db,usercomm.db,userinfoext.db)',
 		t2:'(系统静态配置文件为：FxStatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)',
@@ -164,7 +168,8 @@ var obj = {
 	advanced: {
 		user: {
 			userID: '用户ID：', userName: '用户名称：', userType: '用户类型：', inZone: '所属地区：', linkGroupName: '所在分组：',
-			soft: '软加密', hard: '硬加密', expcsv: '导出基础信息', fileName: '文件名：', title: '用户高级搜索'
+			soft: '软加密', hard: '硬加密', expcsv: '导出基础信息', fileName: '文件名：', title: '用户高级搜索',
+			encSelect: [{id: '0', name: '全部'},{id: '1', name: '硬加密'},{id: '2', name: '软加密'}]
 		},
 		Ekey: {
 			ekeyName: 'Ekey名称：', expcsv: '导出Ekey', title: 'Ekey高级搜索'
@@ -174,12 +179,14 @@ var obj = {
 		},
 		information: {
 			listType: [{label: '全部', val: 'all'},{label: '运维表', val: 'OPE'},{label: 'BOP表', val: 'BOP'}],
-			listName: '查询表：', company: '公司名称', ssccManager: 'sscc客户经理', department: '所在部门',
+			listName: '查询表：', company: '所属公司', ssccManager: 'sscc客户经理', department: '所属部门',
 			expcsv: '导出运维表', expBOP: '导出BOP表', resOPE: '运维表查询结果：', resBOP: 'BOP表查询结果：',
-			operatorName: '联系人姓名', mobileNum: '联系人手机号', email: '联系人邮箱', telNum: '联系人座机号', 
+			operatorName: '联系人姓名', mobileNum: '联系人手机号', operatorEmail: '联系人邮箱', telNum: '联系人座机号', 
 			addOPE: '增加扩展信息', editOPE: '修改扩展信息', del: '是否要删除扩展信息？',
-			nameNull: '联系人姓名不能为空', mobileNull: '联系人手机号不能为空',
-			title: '扩展信息高级搜索'
+			nameNull: '联系人姓名不能为空', mobileNull: '联系人手机号不能为空', title: '扩展信息高级搜索',
+			ssccManagerTelNum: '客户经理座机号码', ssccManagerMobileNum: '客户经理手机号码',
+			operatorCompany: '所属公司', operatorDepartment: '所属部门', email: '用户运维邮箱',
+			userAlarmSmsNum: '短信报警号码', operationPhoneNum: '用户运维电话', operationFax: '用户运维电话'
 		},
 		audit: {
 			expcsv: '导出稽核', title: '稽核高级搜索'

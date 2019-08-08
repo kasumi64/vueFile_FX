@@ -109,6 +109,7 @@ function ReqHttp(){
 	this.post = function (params, fn, args, efn){
 		var url = params.url;
 		delete params.url;
+		if(params.language===void 0) params.language = sessionStorage.getItem('language') || 'zh';
 
 		/* if('debug'){
 			console.log(params.cmdID, params);
@@ -355,19 +356,30 @@ exp.keywords = function(obj, fn){
 		pageSize: obj.size || 100,
 		currentPage: 1
 	};
+	delete obj.id;
+	params = Object.assign(params, obj);
+	
 	return exp.post(params).then(res => {
 		if(res.errcode!='0') {
 			console.info('600001', res.errinfo);
 			res.lists = [];
 		}
-		var i, arr = res.lists, len = arr.length, obj;
+		var i, arr = res.lists, len = arr.length, obj, other;
+		if(typeof(fn)=="object") other = true;
 		for(i = 0; i < len; i++){
 			obj = arr[i];
-			obj.lable = `${obj.userID}(${obj.userName})`;
-			obj.value = obj.userID;
+			if(other){
+				let label = fn.label;
+				obj.lable = `${obj[label[0]]}(${obj[label[1]]})`;
+				obj.value = obj[fn.value];
+			} else {
+				obj.lable = `${obj.userID}(${obj.userName})`;
+				obj.value = obj.userID;
+			}
 		}
 //		exp.emit('keywords', arr);
 		if(kit.isFn(fn)) fn(arr);
+		return arr;
 	});
 };
 //设table的滚动条

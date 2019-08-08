@@ -8,7 +8,8 @@
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
 			<lgy-candidateWords v-model="userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.Ekey.ekeyName')}}</label>
-			<input v-model="ekeyName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<!-- <input v-model="ekeyName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
+			<lgy-candidateWords v-model="ekeyName" :keywords="ekNames" @input="ekNameInput" class="words"></lgy-candidateWords>
 			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
@@ -46,6 +47,7 @@ var _this, data = {
 	page: 1, total: 1,
 	userID: '', ekeyName: '',
 	idWords: null,
+	ekNames: null,
 	showDialog: false,
 	fileHref: '#', fileName: ''
 };
@@ -55,6 +57,7 @@ export default {
 	data(){
 		data.title = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
+			userName: this.$t('fbcsFile.tableTitle.userName'),
 			ekeyName: this.$t('fbcsFile.tableTitle.ekeyName'),
 			ymd: this.$t('fbcsFile.tableTitle.ekeyDate'),
 			ekeyComment: this.$t('fbcsFile.tableTitle.ekeyInfo')
@@ -77,6 +80,21 @@ export default {
 			if(val=='') return this.idWords = [].concat(idAll);
 			utils.keywords({id: val}, arr => {
 				_this.idWords = arr;
+			});
+		},
+		ekNameInput(ekeyName){
+			let params = {
+				url: 'userEkey/query',
+				cmdID: '600031',
+				userID: '',
+				ekeyName,
+				type: 0
+			};
+			utils.keywords(params, {
+				label: ['ekeyName','userID'],
+				value: 'ekeyName'
+			}).then(arr => {
+				_this.ekNames = arr;
 			});
 		},
 		expcsv(){
@@ -102,6 +120,7 @@ export default {
 	created(){
 		_this = this;
 		this.userID = this.ekeyName = '';
+		this.ekNames = null;
 		this.list = [];
 		this.search();
 		utils.keywords({}, arr => {
