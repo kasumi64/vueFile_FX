@@ -107,7 +107,8 @@ export default {
 				url: 'userClientFile/delete',
 				cmdID: '600063',
 				reviewer: args.name,
-				reviewerPasswd: args.pwd,
+				reviewerPassword: args.pwd,
+				reviewType: 1,
 				fileName: args.fileName,
 				fileMd5: args.fileMd5
 			};

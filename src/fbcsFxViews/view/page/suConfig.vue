@@ -103,7 +103,8 @@ export default {
 				url: 'cuConfig/modify',
 				cmdID: '600092',
 				reviewer: args.name,
-				reviewerPasswd: args.pwd,
+				reviewerPassword: args.pwd,
+				reviewType: 1,
 				type: (this.active == 'first') ? 0 : 1,
 				cfgInfo: this.txtVal
 			};

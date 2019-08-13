@@ -245,7 +245,8 @@ export default {
 				url: 'userComm/addImmediately',
 				cmdID: '600044',
 				reviewer: obj.name,
-				reviewerPasswd: obj.pwd,
+				reviewerPassword: obj.pwd,
+				reviewType: 1,
 				userID1: this.oneid,
 				userID2: this.sid[0]
 			};

@@ -160,7 +160,8 @@ function lockFn({reviewer, password}){
 		url: 'lock/lock',
 		cmdID: '600112',
 		reviewer,
-		reviewerPasswd: password
+		reviewerPassword: password,
+		reviewType: 0
 	};
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
@@ -179,7 +180,8 @@ function unlockFn({reviewer, password}){
 		url: 'lock/unlock',
 		cmdID: '600113',
 		reviewer,
-		reviewerPasswd: password
+		reviewerPassword: password,
+		reviewType: 0
 	};
 	utils.post(params).then(function(res){
 		utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});

@@ -420,4 +420,4 @@ Object.addProto(exp, 'getFxAuth', {
 
 
 export default exp;
-//(c) Copyright 2019.06 LGY. All Rights Reserved.
+//(c) Copyright 2019.08 LGY. All Rights Reserved.

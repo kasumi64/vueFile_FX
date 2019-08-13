@@ -66,7 +66,8 @@ export default {
 				url: 'userClientFile/blackList',
 				cmdID: '600066',
 				reviewer: args.name,
-				reviewerPasswd: args.pwd,
+				reviewerPassword: args.pwd,
+				reviewType: 1,
 				count: nodes.length,
 				lists: nodes
 			};

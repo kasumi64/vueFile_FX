@@ -79,7 +79,8 @@ export default {
 				url: 'userClientFile/dispatch',
 				cmdID: '600062',
 				reviewer: args.name,
-				reviewerPasswd: args.pwd,
+				reviewerPassword: args.pwd,
+				reviewType: 1,
 				version: this.version,
 				fileName: this.fileName,
 				fileComment: this.fileComment

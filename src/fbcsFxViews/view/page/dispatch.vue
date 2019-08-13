@@ -130,7 +130,8 @@ export default {
 				url: 'batchDispatch/dispatch',
 				cmdID: '600082',
 				reviewer: args.name,
-				reviewerPasswd: args.pwd,
+				reviewerPassword: args.pwd,
+				reviewType: 1,
 				type: this.type,
 				count: this.cuList.length,
 				lists: this.cuList

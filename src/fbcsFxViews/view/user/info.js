@@ -176,7 +176,8 @@ export default {
 			if(params.endSoftEncTime) params.endSoftEncTime = params.endSoftEncTime / 1000;
 			else params.endSoftEncTime = 0;
 			params.reviewer = obj.name;
-			params.reviewerPasswd = obj.pwd;
+			params.reviewerPassword = obj.pwd;
+			params.reviewType = 1;
 			if(params.linkGroupName == '任意') params.linkGroupName = '';
 			
 //			utils.loadShow();

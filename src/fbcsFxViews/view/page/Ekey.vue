@@ -129,7 +129,8 @@ function delNow(obj){
 	params.cmdID = '600037';
 	params.ekeyName = obj.ekeyName;
 	params.reviewer = obj.name;
-	params.reviewerPasswd = obj.pwd;
+	params.reviewerPassword = obj.pwd;
+	params.reviewType = 1;
 	
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -328,7 +329,8 @@ function addNow(obj){
 	params.cmdID = '600035';
 	params.validDate = _this.ekeyInfo.validDate / 1000;
 	params.reviewer = obj.name;
-	params.reviewerPasswd = obj.pwd;
+	params.reviewerPassword = obj.pwd;
+	params.reviewType = 1;
 	
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -342,7 +344,8 @@ function editNow(obj){
 	params.cmdID = '600036';
 	params.validDate = _this.ekeyInfo.validDate / 1000;
 	params.reviewer = obj.name;
-	params.reviewerPasswd = obj.pwd;
+	params.reviewerPassword = obj.pwd;
+	params.reviewType = 1;
 	
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
