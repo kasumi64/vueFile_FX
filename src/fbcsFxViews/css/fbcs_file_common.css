@@ -93,8 +93,8 @@
 #fbcs_file .fnField li{display: inline-block;margin-right: 30px;cursor: pointer;padding-right: 5px;}
 #fbcs_file .fnField .icon{height: 30px;width: 30px;}
 #fbcs_file .fnField .label{font-size: 14px;color: #5C759D;line-height: 30px;height: 30px;margin-left: 4px;}
-#fbcs_file li.disabled{background: #F5F7FA; cursor: not-allowed;}
-#fbcs_file .disabled .label{color: #C0C4CC;}
+#fbcs_file .fnField li.disabled{background: #F5F7FA; cursor: not-allowed;}
+#fbcs_file .fnField .disabled .label{color: #C0C4CC;}
 
 /*对话框*/
 #fbcs_file .el-dialog{width: 600px;}

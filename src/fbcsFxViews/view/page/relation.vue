@@ -128,7 +128,7 @@ export default {
 			userName1: this.$t('fbcsFile.tableTitle.userName'),
 			userID2: this.$t('fbcsFile.tableTitle.userID'),
 			userName2: this.$t('fbcsFile.tableTitle.userName'),
-			buildTime: this.$t('fbcsFile.tableTitle.buildTime')
+			commConfigDate: this.$t('fbcsFile.tableTitle.buildTime')
 		};
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 52,

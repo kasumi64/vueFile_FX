@@ -59,7 +59,8 @@ export default {
 			userID1: this.$t('fbcsFile.tableTitle.userID'),
 			userName1: this.$t('fbcsFile.tableTitle.userName'),
 			userID2: this.$t('fbcsFile.tableTitle.userID'),
-			userName2: this.$t('fbcsFile.tableTitle.userName')
+			userName2: this.$t('fbcsFile.tableTitle.userName'),
+			commConfigDate: this.$t('fbcsFile.tableTitle.buildTime')
 		};
 		return data;
 	},

@@ -169,7 +169,7 @@ var obj = {
 		user: {
 			userID: '用户ID：', userName: '用户名称：', userType: '用户类型：', inZone: '所属地区：', linkGroupName: '所在分组：',
 			soft: '软加密', hard: '硬加密', expcsv: '导出基础信息', fileName: '文件名：', title: '用户高级搜索',
-			encSelect: [{id: '0', name: '全部'},{id: '1', name: '硬加密'},{id: '2', name: '软加密'}]
+			encSelect: [{id: 0, name: '全部'},{id: 1, name: '硬加密'},{id: 2, name: '软加密'}]
 		},
 		Ekey: {
 			ekeyName: 'Ekey名称：', expcsv: '导出Ekey', title: 'Ekey高级搜索'

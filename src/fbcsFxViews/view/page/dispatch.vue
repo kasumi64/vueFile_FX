@@ -151,7 +151,6 @@ export default {
 			signalSearch();
 		},
 		send(){
-			return alert('p')
 			this.reqsv = {uri: 'batchDispatch/dispatch'};
 			this.showReview = true;
 			this.showPwdinfo = false;

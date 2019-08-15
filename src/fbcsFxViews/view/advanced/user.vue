@@ -67,7 +67,7 @@ var _this, data = {
 	],
 	page: 1, total: 1,
 	info: {
-		userID: '', userName: '', userType: '', inZone: '', linkGroupName: '', encFlag: ''
+		userID: '', userName: '', userType: '', inZone: '', linkGroupName: '', encFlag: 0, sortType: 0
 	},
 	userType: [], inZone: [], group: [],
 	showDialog: false,
@@ -130,14 +130,17 @@ export default {
 			});
 		},
 		sortChange(column, prop, order){
-			// console.log(column, prop, order);
+			var info = this.info;
 			if(order == 'ascending'){
-				
+				if(prop == 'ymdBegin') info.sortType = 1;
+				else if(prop == 'ymdEnd') info.sortType = 3;
 			} else if(order == 'descending'){
-				
+				if(prop == 'ymdBegin') info.sortType = 2;
+				else if(prop == 'ymdEnd') info.sortType = 4;
 			} else {
-				
+				info.sortType = 0;
 			}
+			this.search();
 		}
 	},
 	created(){
@@ -197,8 +200,8 @@ function initDate(){
 	info.userType = '',
 	info.inZone = 'all',
 	info.linkGroupName = '全部',
-	info.encFlag = '0';
-	
+	info.encFlag = 0;
+	info.sortType = 0;
 	_this.showDialog = false;
 }
 
