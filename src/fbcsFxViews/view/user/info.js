@@ -294,7 +294,7 @@ function pass(){
 	
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
 	if((begin || end)&&info.encFlag==1){
-		if(begin==''||end==''||begin >= end) {
+		if(begin==''||end==''||begin > end) {
 			utils.alert({txt: this.$t(err + 'softDay')});
 			return false;
 		}

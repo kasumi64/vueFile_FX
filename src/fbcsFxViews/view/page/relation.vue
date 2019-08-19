@@ -65,6 +65,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var _this, data = {
 	fxAuth: true,
@@ -128,7 +129,7 @@ export default {
 			userName1: this.$t('fbcsFile.tableTitle.userName'),
 			userID2: this.$t('fbcsFile.tableTitle.userID'),
 			userName2: this.$t('fbcsFile.tableTitle.userName'),
-			commConfigDate: this.$t('fbcsFile.tableTitle.buildTime')
+			buildTime: this.$t('fbcsFile.tableTitle.buildTime')
 		};
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 52,
@@ -329,6 +330,10 @@ function search(){
 		if(res.totalPage>0 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
 			return search();
+		}
+		for (var i = 0; i < res.lists.length; i++) {
+			let obj = res.lists[i];
+			obj.buildTime = moment(obj.commConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;
