@@ -95,7 +95,7 @@ export default {
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
 			operatorMobileNum: this.$t('fbcsFile.advanced.information.mobileNum'),
-			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
+			operatorEmail: this.$t('fbcsFile.advanced.information.useEmail'),
 			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
 			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
 			ssccManagerTelNum: this.$t('fbcsFile.advanced.information.ssccManagerTelNum'),

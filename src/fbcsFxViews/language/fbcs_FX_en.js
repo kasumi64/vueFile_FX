@@ -51,12 +51,13 @@ var obj = {
 		},
 		info: {
 			operatorMobileNum: '仅能输入数字、“|”，用“|”做分隔符', operatorEmail: '仅能输入英文，数字,“-”,“_”,“@”和“.”',
-			operatorTelNum: '仅能输入数字,“-”,“+”,和“;”', emailFormat: '邮箱格式不对', tell: '手机号不能以“|”结尾',
+			operatorTelNum: '仅能输入数字,“-”,“+”,和“;”', emailFormat: '联系人邮箱格式不对', tell: '手机号不能以“|”结尾',
 			operatorName: '输入字符不能包含%', ssccManager: '输入字符不能包含%', trim: '不能包含%，前后不能是空格',
-			ssccManagerMobileNum: '仅能输入数字、“|”，用“|”做分隔符', ssccManagerTelNum: '仅能输入数字,“-”,“+”,和“;”',
-			operatorCompany: '公司名称不能包含（|$%,";:/\\）', department: '输入字符不能包含%' , operationFax: '仅能输入数字,“-”,“+”,和“;”',
+			ssccManagerMobileNum: '仅能输入数字、“|”', ssccManagerTelNum: '仅能输入数字,“-”,“+”,和“;”',
+			operatorCompany: '输入字符不能包含%', department: '输入字符不能包含%' , operationFax: '仅能输入数字,“-”,“+”,和“;”',
 			userAlarmSmsNum: '仅能输入数字,“-”,“+”,和“;”', operationPhoneNum: '仅能输入数字,“-”,“+”,和“;”',
-			email: '仅能输入英文，数字,“-”,“_”,“@”和“.”'
+			email: '仅能输入英文，数字,“-”,“_”,“@”和“.”', operatorDepartment: '输入字符不能包含%',
+			optEmailFormat: '用户运维邮箱格式不对'
 		},
 		files: {
 			fileNull: '文件名不能为空！', verNull: '版本号不能为空！', format: '仅能输入英文，数字,“-”,“_”和“.”',
@@ -185,8 +186,8 @@ var obj = {
 			addOPE: '增加扩展信息', editOPE: '修改扩展信息', del: '是否要删除扩展信息？',
 			nameNull: '联系人姓名不能为空', mobileNull: '联系人手机号不能为空', title: '扩展信息高级搜索',
 			ssccManagerTelNum: '客户经理座机号码', ssccManagerMobileNum: '客户经理手机号码',
-			operatorCompany: '所属公司', operatorDepartment: '所属部门', email: '用户运维邮箱',
-			userAlarmSmsNum: '短信报警号码', operationPhoneNum: '用户运维电话', operationFax: '用户运维电话'
+			operatorCompany: '所属公司', operatorDepartment: '所属部门', email: '用户运维邮箱', useEmail: '联系人邮箱',
+			userAlarmSmsNum: '短信报警号码', operationPhoneNum: '用户运维电话', operationFax: '用户运维传真'
 		},
 		audit: {
 			expcsv: '导出稽核', title: '稽核高级搜索'

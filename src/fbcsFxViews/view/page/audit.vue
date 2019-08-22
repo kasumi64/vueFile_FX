@@ -39,8 +39,8 @@
 		<el-dialog :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
-					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
+					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
 						<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">
 							{{scope.row.errStr}}

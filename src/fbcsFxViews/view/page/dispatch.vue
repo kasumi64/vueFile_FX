@@ -20,8 +20,8 @@
 					<el-table ref="nodes" :data="nodeList" :row-class-name="rowClass" max-height="294" highlight-current-row border
 						@selection-change="selectChange">
 						<el-table-column type="selection" width="40" key></el-table-column>
-						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 						<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
+						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					</el-table>
 					<button v-if="fxAuth" @click="review" class="blueBtn mt">{{$t('fbcsFile.tips.submit')}}</button>
 				</div>
@@ -30,8 +30,8 @@
 				<div class="right">
 					<p class="label txt"><b>{{$t('fbcsFile.dispatch.res')}}</b></p>
 					<el-table :data="cuList" :row-class-name="rowClass" :cell-class-name="cellClass" max-height="294" highlight-current-row border>
-						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 						<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
+						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 						<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
 						<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
 					</el-table>
@@ -106,12 +106,13 @@ export default {
 			return ''
 		},
 		selectChange(arr){
-			var temp = [];
+			/* var temp = [];
 			for (let i = 0; i < arr.length; i++) {
 				let obj = arr[i];
 				temp = temp.concat(dict[obj.nodeName]);
 			}
-			this.cuList = temp;
+			this.cuList = temp; */
+			this.cuList = arr; 
 		},
 		review(){
 			if(this.cuList.length == 0) return utils.alert({txt: this.$t('fbcsFile.dispatch.noNode')});
@@ -163,7 +164,6 @@ export default {
 		this.nodeList = this.cuList = [];
 		this.showReview = this.showPwdinfo = false;
 		isPatch = false;
-//		nodes = this.nodeList;
 		first = true;
 		nodeCu();
 	},
@@ -186,7 +186,7 @@ function nodeCu(type){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		nodes = [].concat(res.lists);
 //		_this.cuList = isPatch ? getCU(res.lists) : res.lists;
-		var temp = {}, arr = [];
+		/* var temp = {}, arr = [];
 		dict = {};
 		for (let i = 0; i < nodes.length; i++) {
 			let obj = nodes[i];
@@ -196,6 +196,8 @@ function nodeCu(type){
 		}
 		for (let k in temp)  arr.push(temp[k]);
 		_this.nodeList = arr;
+		 */
+		_this.nodeList = res.lists;
 		setTimeout(function(){
 			if(_this.$refs['nodes']){
 				_this.nodeList.forEach(r => {

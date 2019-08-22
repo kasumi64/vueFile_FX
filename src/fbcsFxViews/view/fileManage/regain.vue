@@ -44,8 +44,8 @@
 						<el-table ref="nodes" :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border
 							@selection-change="changeCU" style="width: 340px;">
 							<el-table-column type="selection" width="40" key></el-table-column>
-							<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 							<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
+							<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 						</el-table>
 					</div>
 				</li>

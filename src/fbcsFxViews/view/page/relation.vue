@@ -173,7 +173,10 @@ export default {
 			});
 		},
 		add(){
-			this.oneWords = [].concat(userid);
+			// this.oneWords = [].concat(userid);
+			utils.keywords({id: this.id, type: 2}, arr => {
+				this.oneWords = arr;
+			});
 			nextFrame();
 			this.sid = [];
 			this.showDialog = true;
@@ -344,9 +347,10 @@ function search(){
 function nextFrame(){
 	setTimeout(() => {
 		if(_this.isPage){
-			_this.disabled = true;
+			// _this.disabled = true;
 			_this.oneid = _this.id;
 			_this.oneDisable = false;
+			_this.disabled = _this.id == '' ? true : false;
 		} else {
 			_this.disabled = false;
 			_this.oneDisable = true;

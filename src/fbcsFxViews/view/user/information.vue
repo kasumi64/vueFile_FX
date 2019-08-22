@@ -53,7 +53,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.telNum')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorTelNum" @input="filter($event)" data-reg="[^\d\-\+;]" data-k="operatorTelNum" maxlength="511" autocomplete="off"/>
+						<input v-model="info.operatorTelNum" @input="filter($event)" data-reg="[^\d-+;]" data-k="operatorTelNum" maxlength="511" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorTelNum')}}</span>
 					</div>
 				</li>
@@ -97,22 +97,22 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManagerTelNum')}}：</p>
 					</div><div class="right">
-						<input v-model="info.ssccManagerTelNum" @input="filter($event)" data-reg="[^\d\|]" data-k="ssccManagerTelNum" maxlength="49" autocomplete="off"/>
+						<input v-model="info.ssccManagerTelNum" @input="filter($event)" data-reg="[^\d-+;]" data-k="ssccManagerTelNum" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.ssccManagerTelNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManagerMobileNum')}}：</p>
 					</div><div class="right">
-						<input v-model="info.ssccManagerMobileNum" @input="filter($event)" data-reg="[^\d\-\+;]" data-k="ssccManagerMobileNum" maxlength="49" autocomplete="off"/>
+						<input v-model="info.ssccManagerMobileNum" @input="filter($event)" data-reg="[^\d\|]" data-k="ssccManagerMobileNum" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.ssccManagerMobileNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.operatorCompany')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorCompany" @input="filter($event)" data-reg='[|$%,";:/\\]' data-k="operatorCompany" maxlength="49" autocomplete="off"/>
-						<span class="txt">{{$t('fbcsFile.err.info.operatorCompany')}}</span>
+						<input v-model="info.operatorCompany" @input="filter($event)" data-reg='[\%]' data-k="operatorCompany" maxlength="49" autocomplete="off"/>
+						<span class="txt">{{$t('fbcsFile.err.info.ssccManager')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
@@ -193,7 +193,7 @@ export default {
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
 			operatorMobileNum: this.$t('fbcsFile.advanced.information.mobileNum'),
-			operatorEmail: this.$t('fbcsFile.advanced.information.email'),
+			operatorEmail: this.$t('fbcsFile.advanced.information.useEmail'),
 			operatorTelNum: this.$t('fbcsFile.advanced.information.telNum'),
 			ssccManager: this.$t('fbcsFile.advanced.information.ssccManager'),
 			ssccManagerTelNum: this.$t('fbcsFile.advanced.information.ssccManagerTelNum'),

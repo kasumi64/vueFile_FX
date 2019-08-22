@@ -10,8 +10,8 @@
 			<el-table ref="nodes" :data="nodeList" :row-class-name="rowClass" max-height="294" highlight-current-row border
 				@selection-change="selectChange">
 				<el-table-column type="selection" width="40" key></el-table-column>
-				<el-table-column prop="nodeName" :label="$t('fbcsFile.files.blacklist.nodeName')"></el-table-column>
 				<el-table-column prop="cuName" :label="$t('fbcsFile.files.blacklist.cuName')"></el-table-column>
+				<el-table-column prop="nodeName" :label="$t('fbcsFile.files.blacklist.nodeName')"></el-table-column>
 				<el-table-column prop="isBlack" :label="$t('fbcsFile.files.blacklist.cuType')"></el-table-column>
 			</el-table>
 			<button v-if="fxAuth" @click="setBlack" class="blueBtn mt">{{$t('fbcsFile.files.blacklist.blackBtn')}}</button>
