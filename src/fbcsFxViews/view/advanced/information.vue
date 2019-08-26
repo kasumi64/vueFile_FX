@@ -13,8 +13,8 @@
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
 			<lgy-candidateWords v-model="info.userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
-			<!-- <input v-model="info.userName":disabled="listType=='BOP'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
-			<lgy-candidateWords v-model="info.userName" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
+			<!-- <input v-model="info.userName" :disabled="listType=='BOP'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
+			<lgy-candidateWords v-model="info.userName" :disabled="listType=='BOP'" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.advanced.information.company')}}：</label>
 			<input v-model="info.opeartorCompany" :disabled="listType=='OPE'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>

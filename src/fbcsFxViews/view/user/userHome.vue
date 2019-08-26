@@ -71,7 +71,9 @@
 			<div class="_dialog">
 				<el-table :data="errList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="line" :label="$t('fbcsFile.userHome.line')"></el-table-column>
-					<el-table-column prop="userID" :label="$t('fbcsFile.tableTitle.userID')"></el-table-column>
+					<el-table-column prop="userID" :label="$t('fbcsFile.tableTitle.userID')">
+						<span slot-scope="scope" class="red">{{scope.row.userID}}</span>
+					</el-table-column>
 					<el-table-column prop="operatorName" :label="$t('fbcsFile.userHome.operatorName')"></el-table-column>
 					<el-table-column prop="errinfo" :label="$t('fbcsFile.userHome.errinfo')"></el-table-column>
 				</el-table>

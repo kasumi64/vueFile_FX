@@ -89,6 +89,7 @@ function bigVer(obj){
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		res.type = 1;
 		_this.parameter = res;
+		_this.search();
 		// _this.$refs.loop.once(res);
 	});
 }

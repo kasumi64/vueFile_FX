@@ -46,7 +46,7 @@ var obj = {
 			blank: '密码不能包含空格', npwd: '新密码不能为空', noidName: '密码不能包含用户ID、用户名称',
 			errNum: '只能输入纯数字', idformat: '用户ID仅能输入英文，数字,“-”和“_”', maxUser: '最大关系数范围在0到1000',
 			speed: '最大收发速度范围在-1到999999999999999999之间', maxTask: '单用户任务并发数要大于 0',
-			oneTask: '单用户最大发送文件个数要大于 0', softDay: '软加密开始时间必需小于或等于软加密结束时间',
+			oneTask: '单用户最大发送文件个数要大于 0', softDay: '软加密开始时间必须小于或等于软加密结束时间',
 			special: '不能包含(@#_-*)以外的特殊字符', nameformat: '用户名称不能包含（|$%,";:/\\）'
 		},
 		info: {
@@ -190,7 +190,7 @@ var obj = {
 			userAlarmSmsNum: '短信报警号码', operationPhoneNum: '用户运维电话', operationFax: '用户运维传真'
 		},
 		audit: {
-			expcsv: '导出稽核', title: '稽核高级搜索'
+			expcsv: '导出稽核', title: '稽核高级搜索', commFlag: '通信关系', userextFlag: '扩展信息'
 		}
 	}
 };

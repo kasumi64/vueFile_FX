@@ -44,7 +44,8 @@
 							{{$t('fbcsFile.relation.userID2')}}
 						</p>
 					</div><div class="right">
-						<el-select class="selm" v-model="sid" :disabled="disabled" multiple filterable remote :remote-method="filter">
+						<el-select popper-class="fbcs_FX_signal_select" class="selm" v-model="sid" :disabled="disabled" multiple filterable
+							remote :remote-method="filter" reserve-keyword @focus="focus">
 							<el-option v-for="item in idarr" :key="item.value" :label="item.lable" :value="item.value">
 							</el-option>
 						</el-select>
@@ -115,7 +116,7 @@ function del(row){
 			utils.post(params).then(res => {
 				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
 				if(res.errcode != '0') return;
-				search();
+				_this.search();
 			});
 		},
 	});
@@ -175,7 +176,7 @@ export default {
 		add(){
 			// this.oneWords = [].concat(userid);
 			utils.keywords({id: this.id, type: 2}, arr => {
-				this.oneWords = arr;
+				_this.oneWords = arr;
 			});
 			nextFrame();
 			this.sid = [];
@@ -188,7 +189,7 @@ export default {
 			} */
 			this.sid = [];
 			this.oneWords = [].concat(userid);
-			this.idarr = filterSig(this.oneid, [].concat(userid));
+			// this.idarr = filterSig(this.oneid, [].concat(userid));
 		},
 		selectChange(arr){
 			this.selected = arr;
@@ -206,7 +207,7 @@ export default {
 				return this.oneWords = [].concat(userid);
 			}
 			utils.keywords({id: val, type: 2}, arr => {
-				this.oneWords = arr;
+				_this.oneWords = arr;
 			});
 			copySig(val);
 		},
@@ -220,6 +221,11 @@ export default {
 				this.idarr = filterSig(this.oneid, arr);
 			});
 		},
+		focus(e){
+			if(this.sid.length == 0 || this.idarr.length == 0) {
+				this.idarr = filterSig(this.oneid, [].concat(userid));
+			}
+		},
 		submit(){
 			if(utils.isSpace(this.oneid)) return utils.alert({txt:this.$t('fbcsFile.relation.errid1'),btn:1});
 			if(!this.sid.length) return utils.alert({txt:this.$t('fbcsFile.relation.errid2'),btn:1});
@@ -231,9 +237,9 @@ export default {
 				count: this.sid.length
 			};
 			utils.post(params).then(res => {
-				this.search();
-				this.showDialog = false;
-				utils.alert({txt: res.errinfo, type: (res.errcode=='0'||res.errcode=='1')?1:0});
+				_this.search();
+				_this.showDialog = false;
+				utils.alert({txt: res.errinfo, type: res.errcode=='0' ? 1 : 0});
 			});
 		},
 		now(){
@@ -259,7 +265,7 @@ export default {
 			utils.post(params).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
-				search();
+				_search();
 			});
 		}
 	},
@@ -347,16 +353,15 @@ function search(){
 function nextFrame(){
 	setTimeout(() => {
 		if(_this.isPage){
-			// _this.disabled = true;
-			_this.oneid = _this.id;
-			_this.oneDisable = false;
 			_this.disabled = _this.id == '' ? true : false;
+			_this.oneDisable = false;
+			_this.oneid = _this.id;
 		} else {
 			_this.disabled = false;
 			_this.oneDisable = true;
 			_this.oneid = args.userID;
-			_this.idarr = filterSig(args.userID, [].concat(userid));
 		}
+		_this.idarr = filterSig(_this.oneid, [].concat(userid));
 	}, 0);
 }
 
@@ -371,4 +376,5 @@ function nextFrame(){
 <style>
 	#fbcs_file .relation input:disabled{border: none;z-index: 1;}
 	#fbcs_file .relation .el-table__header .el-checkbox{display: inline-block;}
+	.fbcs_FX_signal_select{max-width: 390px;}
 </style>
