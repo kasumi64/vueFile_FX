@@ -294,7 +294,7 @@ function pass(){
 	
 	let begin = info.beginSoftEncTime, end = info.endSoftEncTime;
 	if((begin || end)&&info.encFlag==1){
-		if(begin==''||end==''||begin > end) {
+		if(begin==null||end==null||begin > end) {
 			utils.alert({txt: this.$t(err + 'softDay')});
 			return false;
 		}
@@ -400,8 +400,8 @@ function getUserInfo(user){
 		
 		obj.beginSoftEncTime = obj.beginSoftEncTime * 1000;
 		obj.endSoftEncTime = obj.endSoftEncTime * 1000;
-		if(!obj.beginSoftEncTime) obj.beginSoftEncTime = '';
-		if(!obj.endSoftEncTime) obj.endSoftEncTime = '';
+		if(!obj.beginSoftEncTime) obj.beginSoftEncTime = null;
+		if(!obj.endSoftEncTime) obj.endSoftEncTime = null;
 		obj.isModifyDefaultPasswd = 0;
 		obj.expiredTimeFlag = '1';
 		obj.userPasswd = '';

@@ -1,6 +1,6 @@
 <template>
 	<div class="lgy-table">
-		<el-table ref="lgy-table" :data= "list" @row-click="rowClick" @current-change="currentChange" @sort-change="sortChange" 
+		<el-table ref="lgy-table" :data= "list" @row-click="rowClick" @current-change="currentChange" @sort-change="sortChange" :stripe="stripe"
 			@select="select" @selection-change="selectChange" @select-all="selectAll" :max-height="maxHeight" highlight-current-row border
 			:row-class-name="rowClass" :cell-class-name="cellClassName">
 			<el-table-column v-if="index" type="index" width="50" key></el-table-column>
@@ -38,8 +38,18 @@ export default {
 	name: 'lgy-table',
 	data() { return data; },
 	props: {
-		index: false,
-		selection: false,
+		index: {
+			type: Boolean,
+			default: false
+		},
+		selection: {
+			type: Boolean,
+			default: false
+		},
+		stripe: {
+			type: Boolean,
+			default: false
+		},
 		list: {
 			type: Array,
 			default: []

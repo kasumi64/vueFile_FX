@@ -97,7 +97,7 @@ export default {
 	beforeCreate(){
 		let url;
 		// url = window.fbcs_fxIP + '/fbcs_fx/fx/';
-		url = 'http://localhost:8088/';
+		url = 'http://localhost:8088/fx/';
 		// url = '/fbcs_fx/fx/';
 		utils.setBaseURL(url);
 	},

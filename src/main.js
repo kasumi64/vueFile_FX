@@ -5,6 +5,7 @@ import Vue from 'vue';
 import router from '@/public/routerConfig.js';
 import App from '@/fbcsFxViews/App';
 import i18n from '@/fbcsFxViews/language/lang.js';
+import store from './public/store.js';
 
 
 Vue.config.productionTip = false;
@@ -18,5 +19,5 @@ window.appVue = new Vue({
 	router,
 	i18n,
 	render: h => h(App),
-	// store
+	store
 })
