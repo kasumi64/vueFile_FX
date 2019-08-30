@@ -164,22 +164,20 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			},
 			autoInput2(v) {
 				isInput2 = true;
-				var close = document.getElementById("signalClose1").children[0].children[1];
-				if(v) {
-					close.style.display = "block";
-				} else {
-					close.style.display = "none";
-				}
+				var close = document.getElementById("signalClose1").children[0];
+				if(!close) return;
+				close.children[1].style.display = v ? "block" :"none";
 			},
 			focusDisplay1() {
-				document.getElementById("signalClose1").children[0].children[1].children[0]
-					.addEventListener("click", () => {
-						_this.idName2 = "";
-						document.getElementById("signalClose1").children[0].children[1].style.display = "none";
-						setTimeout(function(){
-							document.getElementById("signalClose1").children[0].children[0].focus();
-						});
-					})
+				var el = document.getElementById("signalClose1").children[0];
+				if(!el) return;
+				el.children[1].children[0].addEventListener("click", () => {
+					_this.idName2 = "";
+					document.getElementById("signalClose1").children[0].children[1].style.display = "none";
+					setTimeout(function(){
+						document.getElementById("signalClose1").children[0].children[0].focus();
+					});
+				});
 			},
 			//查询
 			search() {
@@ -495,7 +493,6 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 </style>
 
 <style>
-	#fbcs_MX #signalClose1 .el-input__suffix { display: none; }
 	/*下拉选择框*/
 	#fbcs_MX .el-select span{display: inline-block;}
 	#fbcs_MX .el-select .el-input__suffix-inner{display: inline;}

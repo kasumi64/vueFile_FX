@@ -348,21 +348,20 @@ import moment from 'moment';
 				this.userID1 = item.userID;
 				// this.searchInfo.userID1 = item.userID + "(" + item.userName + ")";
 				this.searchInfo.userID1 = item.userID;
-				var close = document.getElementById("signalClose").children[0].children[1];
-				close.style.display = "block";
+				var close = document.getElementById("signalClose").children[0];
+				if(!close) return;
+				close.children[1].style.display = "block";
 			},
 			autoInput1(v) {
 				isInput1 = true;
-				var close = document.getElementById("signalClose").children[0].children[1];
-				if(v) {
-					close.style.display = "block";
-				} else {
-					close.style.display = "none";
-				}
+				var close = document.getElementById("signalClose").children[0];
+				if(!close) return;
+				close.children[1].style.display = v ? "block" :"none";
 			},
 			focusDisplay() {
-				document.getElementById("signalClose").children[0].children[1].children[0]
-				.onclick = (e) => {
+				var el =  document.getElementById("signalClose").children[0];
+				if(!el) return;
+				el.children[1].children[0].onclick = (e) => {
 					_this.searchInfo.userID1 = _this.userID1= "";
 					document.getElementById("signalClose").children[0].children[1].style.display = "none";
 					setTimeout(function(){
@@ -379,21 +378,20 @@ import moment from 'moment';
 				this.userID2 = item.userID;
 				// this.searchInfo.userID2 = item.userID + "(" + item.userName + ")";
 				this.searchInfo.userID2 = item.userID;
-				var close = document.getElementById("signalClose1").children[0].children[1];
-				close.style.display = "block";
+				var close = document.getElementById("signalClose1").children[0];
+				if(!close) return;
+				close.children[1].style.display = "block";
 			},
 			autoInput2(v) {
 				isInput2 = true;
-				var close = document.getElementById("signalClose1").children[0].children[1];
-				if(v) {
-					close.style.display = "block";
-				} else {
-					close.style.display = "none";
-				}
+				var close = document.getElementById("signalClose1").children[0];
+				if(!close) return;
+				close.children[1].style.display = v ? "block" :"none";
 			},
 			focusDisplay1() {
-				document.getElementById("signalClose1").children[0].children[1].children[0]
-				.onclick = (e) => {
+				var el =  document.getElementById("signalClose1").children[0];
+				if(!el) return;
+				el.children[1].children[0].onclick = (e) => {
 					_this.searchInfo.userID2 = _this.userID2 = "";
 					document.getElementById("signalClose1").children[0].children[1].style.display = "none";
 					setTimeout(function(){
@@ -514,7 +512,6 @@ import moment from 'moment';
 </style>
 
 <style>
-	#fbcs_MX #signalClose .el-input__suffix,#fbcs_MX  #signalClose1 .el-input__suffix {display: none;}
 	/*下拉选择框*/
 	#fbcs_MX .el-select span{display: inline-block;}
 	#fbcs_MX .el-select .el-input__suffix-inner{display: inline;}

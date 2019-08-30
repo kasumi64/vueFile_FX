@@ -52,7 +52,8 @@
 							<p class="txt">{{pageTxt.popup[3]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-date-picker class='picker' v-model="ainfo.ekeyValidDate" format='yyyy-MM-dd HH:mm:ss' value-format="timestamp" type="datetime" ></el-date-picker>
+							<el-date-picker class='picker' v-model="ainfo.ekeyValidDate" format='yyyy-MM-dd HH:mm:ss' value-format="timestamp" 
+								type="datetime" default-time="23:59:59"></el-date-picker>
 						</div>
 					</li>
 					<li>
@@ -112,7 +113,8 @@
 							<p class="txt">{{pageTxt.popup[3]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-date-picker class='picker' v-model="binfo.ekeyValidDate" format='yyyy-MM-dd HH:mm:ss' value-format="timestamp" type="datetime" ></el-date-picker>
+							<el-date-picker class='picker' v-model="binfo.ekeyValidDate" format='yyyy-MM-dd HH:mm:ss' value-format="timestamp" 
+								type="datetime" default-time="23:59:59"></el-date-picker>
 						</div>
 					</li>
 					<li>

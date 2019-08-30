@@ -90,7 +90,7 @@
 						</div>
 						<div class="rightBox">
 							<el-date-picker class='picker' v-model="ainfo.ekeyValidDate" value-format="timestamp" type="datetime"
-							 placeholder=""></el-date-picker>
+								placeholder="" default-time="23:59:59"></el-date-picker>
 						</div>
 					</li>
 					<li>
@@ -152,7 +152,7 @@
 						</div>
 						<div class="rightBox">
 							<el-date-picker class='picker' v-model="binfo.ekeyValidDate" value-format="timestamp" type="datetime"
-							 placeholder=""></el-date-picker>
+								placeholder="" default-time="23:59:59"></el-date-picker>
 						</div>
 					</li>
 					<li>
@@ -248,14 +248,15 @@
 		},
 		methods: {
 			focusDisplay() {
-				document.getElementById("ekeyClose").children[0].children[1].children[0]
-					.onclick = function() {
-						_this.search.ekeyName = "";
-						document.getElementById("ekeyClose").children[0].children[1].style.display = "none";
-						setTimeout(function() {
-							document.getElementById("ekeyClose").children[0].children[0].focus();
-						});
-					};
+				var el = document.getElementById("ekeyClose").children[0];
+				if(!el) return;
+				el.children[1].children[0].onclick = function() {
+					_this.search.ekeyName = "";
+					document.getElementById("ekeyClose").children[0].children[1].style.display = "none";
+					setTimeout(function() {
+						document.getElementById("ekeyClose").children[0].children[0].focus();
+					});
+				};
 			},
 			fetch1(str, cb) {
 				clearTimeout(autoTime);
@@ -263,19 +264,17 @@
 			},
 			ekeyInput(v) {
 				isEkeyInput = true;
-				var close = document.getElementById("ekeyClose").children[0].children[1];
-				if (v) {
-					close.style.display = "block";
-				} else {
-					close.style.display = "none";
-				}
+				var close = document.getElementById("ekeyClose").children[0];
+				if(!close) return;
+				close.children[1].style.display = v ? "block" :"none";
 			},
 
 			idSelect1(item) {
 				isEkeyInput = false;
 				this.search.ekeyName = item.ekeyName;
-				var close = document.getElementById("ekeyClose").children[0].children[1];
-				close.style.display = "block";
+				var close = document.getElementById("ekeyClose").children[0];
+				if(!close) return;
+				close.children[1].style.display = "block";
 			},
 
 			fetch(str, cb) {
@@ -287,21 +286,20 @@
 				this.userID = item.userID;
 				// this.idName = item.userID + "(" + item.userName + ")";
 				this.idName = item.userID;
-				var close = document.getElementById("ekeyClose1").children[0].children[1];
-				close.style.display = "block";
+				var close = document.getElementById("ekeyClose1").children[0];
+				if(!close) return;
+				close.children[1].style.display = "block";
 			},
 			autoInput(v) {
 				isInput = true;
-				var close = document.getElementById("ekeyClose1").children[0].children[1];
-				if (v) {
-					close.style.display = "block";
-				} else {
-					close.style.display = "none";
-				}
+				var close = document.getElementById("ekeyClose1").children[0];
+				if(!close) return;
+				close.children[1].style.display = v ? "block" :"none";
 			},
 			focusDisplay1() {
-				document.getElementById("ekeyClose1").children[0].children[1].children[0]
-				.onclick = function() {
+				var el = document.getElementById("ekeyClose1").children[0];
+				if(!el) return;
+				el.children[1].children[0].onclick = function() {
 					isInput = true;
 					_this.idName = "";
 					document.getElementById("ekeyClose1").children[0].children[1].style.display = "none";
@@ -683,7 +681,9 @@
 			prefix();
 		},
 		mounted() {
-			let el = document.getElementById("ekeyClose").children[0].children[1];
+			let el = document.getElementById("ekeyClose").children[0]
+			if(!el) return;
+			el = el.children[1];
 			el.style.display = "none";
 			el = document.getElementById("ekeyClose1").children[0].children[1];
 			el.style.display = "none";
