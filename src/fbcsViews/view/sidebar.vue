@@ -31,9 +31,14 @@
 					<em>{{pageTxt.tabs[6]}}</em>
 				</el-menu-item>
 				<el-menu-item v-if="auth.audit>0" name='statist' index="/message/statist" >
+					<img class="icon" src="@/fbcsFxViews/img/menu/audit_1.png" />
+					<img class="activeIcon" src="@/fbcsFxViews/img/menu/audit_2.png" />
+					<em>{{pageTxt.tabs[7]}}</em>
+				</el-menu-item>
+				<el-menu-item name='xiaozhan' index="/order/xiaozhan" >
 					<img class="icon" src="../img/sidebar/audit.png" />
 					<img class="activeIcon" src="../img/sidebar/audit2.png" />
-					<em>{{pageTxt.tabs[7]}}</em>
+					<em>指令管理</em>
 				</el-menu-item>
 				
 				<el-submenu v-if="auth.user>0||auth.topic>0" class='navH' index='subscription' :show-timeout="timeout" :hide-timeout="timeout">
@@ -76,7 +81,8 @@
 import kit       from '@/fbcsViews/libs/kit.js';
 import lang      from '@/fbcsViews/language/lang.js';
 import globalVar from '@/fbcsViews/libs/globalVar.js';
-import utils    from '@/fbcsViews/libs/utils.js';
+import utils     from '@/fbcsViews/libs/utils.js';
+import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 
 
 	var data = {
@@ -110,9 +116,12 @@ import utils    from '@/fbcsViews/libs/utils.js';
 			for (i = 0; i < len; i++) obj[keys[i]] = 2;
 			globalVar.set('lang', 'zh');
 			globalVar.set('status', obj);
-			globalVar.set('urlIP', 'http://localhost:8088/fbcs_mx/');
+			globalVar.set('urlIP', 'http://10.10.27.161:8080/fbcs_mx/');
 			this.auth = obj;
 			this.pageTxt = lang().sidebar;
+			
+			globalVar.set('urlIP', 'http://localhost:8088/fbcs_mx/');
+			fxUtils.setBaseURL('http://localhost:8088/fbcs_mx/');
 		},
 		mounted(){
 			_this = this;

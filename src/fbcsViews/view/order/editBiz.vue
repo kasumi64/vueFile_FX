@@ -1,19 +1,22 @@
 <template>
 	<div class="userEdit">
 		<div class='header'>
-			<img class="header_img" src="@/fbcsViews/img/ico.png">
+			<img class="header_img" @click="back" src="@/fbcsViews/img/ico.png">
 			<span class="header_txt1" @click="back">{{pageTxt.label[0]}}</span>
 			<div class="header_line"></div>
-			<span class='header_txt2'>{{headerText}}</span>
+			<span class='header_txt2'>{{$t('fbcsFile.order.editBiz.title')}}</span>
 		</div>
-		<el-tabs type="card" v-model="$store.state.tabv">
+		<!-- <el-tabs type="card" v-model="$store.state.tabv">
 			<el-tab-pane name="v1" class='v1'>
-				<span slot="label">{{pageTxt.tab[0]}}</span>
+				<span slot="label">{{pageTxt.tab[0]}}</span> -->
 				<el-row class='info'>
 					<el-col :span="6">
 						<ul class="left">
 							<li>
-								<p><span class="red">*&nbsp;</span>{{pageTxt.label[1]}}：</p>
+								<p>{{$t('fbcsFile.order.editBiz.bizKey')}}</p>
+							</li>
+							<li>
+								<p>{{pageTxt.label[1]}}：</p>
 							</li>
 							<li>
 								<p><span class="red">*&nbsp;</span>{{pageTxt.label[2]}}：</p>
@@ -55,6 +58,9 @@
 								<p><span class="red">*&nbsp;</span>{{pageTxt.label[15]}}：</p>
 							</li>
 							<li>
+								<p><span class="red">*&nbsp;</span>{{$t('fbcsFile.order.editBiz.remark')}}</p>
+							</li>
+							<li>
 								<p>{{pageTxt.label[26]}}：</p>
 							</li>
 						</ul>
@@ -62,7 +68,10 @@
 					<el-col :span="18">
 						<ul class="right">
 							<li>
-								<el-input auto-complete="off" v-model="$store.state.transferEditID" disabled></el-input>
+								<el-input auto-complete="off" v-model="info.bizKey" disabled></el-input>
+							</li>
+							<li>
+								<el-input auto-complete="off" v-model="info.userID" disabled></el-input>
 							</li>
 							<li>
 								<input v-model="info.userName" maxlength="128" :placeholder="pageTxt.tips.must" autocomplete="off"/>
@@ -120,17 +129,20 @@
 								<span v-show="maxDaysOfTopic" class="errNum">{{pageTxt.tips.errNum}}</span>
 							</li>
 							<li>
+								<input type="text" data-k='remark' v-model="info.remark" maxlength="128" autocomplete="off">
+							</li>
+							<li>
 								<el-input auto-complete="off" v-model="configTime" placeholder="" disabled></el-input>
 							</li>
 						</ul>
 					</el-col>
 				</el-row>
 				<div class="btn">
-					<el-button v-if="auth>1" type="primary" @click='verify(sendDown)'>{{pageTxt.label[16]}}</el-button>
+					<!-- <el-button v-if="auth>1" type="primary" @click='verify(sendDown)'>{{pageTxt.label[16]}}</el-button> -->
 					<el-button v-if="auth>1" type="primary" @click="verify(edit)">{{pageTxt.label[17]}}</el-button>
 					<el-button type="default" @click='back'>{{pageTxt.label[18]}}</el-button>
 				</div>
-			</el-tab-pane>
+			<!-- </el-tab-pane>
 
 			<el-tab-pane name="v2">
 				<span slot="label">{{pageTxt.tab[1]}}</span>
@@ -144,7 +156,7 @@
 				<span slot="label">{{pageTxt.tab[3]}}</span>
 				<ExtendInfo></ExtendInfo>
 			</el-tab-pane>
-		</el-tabs>
+		</el-tabs> -->
 		<lgy-loopReqMX ref="loop"></lgy-loopReqMX>
 	</div>
 </template>
@@ -176,7 +188,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			"maxSubsCount",
 			"maxDaysOfTopic",
 			"isModifyDefaultPasswd",
-			"userPasswd"
+			"userPasswd",
+			'bizKey', 'remark'
 		];
 	for(var i = 0; i < def.length; i++) {
 		info[def[i]] = "";
@@ -232,7 +245,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 									reviewer: info.name,
 									reviewerPassword: info.pwd,
 									reviewType: 1,
-									userID: _this.$store.state.transferEditID,
+									userID: _this.info.userID,
 									userName: _this.info.userName,
 									userType: _this.info.userType,
 									userDistrict: _this.info.userDistrict,
@@ -296,14 +309,18 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				
 				var val = this.info['speedCtrlKbps'];
 				if(val.length==1&&val=='-') return fxUtils.alert({txt: tips['speedCtrlKbps']});
+				if(!this.info.remark||this.info.remark.trim() == '') {
+					return fxUtils.alert({txt: this.$t('fbcsFile.order.manage.remarks')});
+				}
 				fn();
 			},
 			//修改
 			edit() {
-				utils.post("mx/userinfo/modify", {
-					cmdID: "600004",
-					operator: "admin",
-					userID: _this.$store.state.transferEditID,
+				utils.post("mx/userinfocmd/modify", {
+					cmdID: "700003",
+					operator: fxUtils.userName(),
+					bizKey: _this.info.bizKey,
+					userID: _this.info.userID,
 					userName: _this.info.userName,
 					userType: _this.info.userType,
 					userDistrict: _this.info.userDistrict,
@@ -317,7 +334,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 					maxPubsCount: _this.info.maxPubsCount,
 					maxSubsCount: _this.info.maxSubsCount,
 					maxDaysOfTopic: _this.info.maxDaysOfTopic,
-					configTime: _this.info.configTime
+					configTime: _this.info.configTime,
+					remark: _this.info.remark
 				}, function(data) {
 					if(data.errcode == 0) {
 						fxUtils.alert({txt: data.errinfo, type: 1});
@@ -325,11 +343,9 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 						fxUtils.alert({txt: data.errinfo, type: 0});
 					}
 				});
-			}, //返回
-			back() {
-				this.$router.replace({
-					path: this.$store.state.editBack
-				});
+			},
+			back() { //返回
+				this.$router.replace({path: '/main/mxCfg/order/xiaozhan'});
 			}
 		},
 		//初始化数据
@@ -339,9 +355,15 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			this.pageTxt = pageTxt = l.userEdit;
 			this.auth= globalVar.get('status').user;
 			this.maxPubsCount=this.maxSubsCount=this.maxDaysOfTopic = false;
-			if(!_this.$store.state.transferEditID) return;
+			
+			let bizKey = fxUtils.getArgs('bizKey');
+			if(!bizKey) return;
+			bizKey.softEncBeginDate = bizKey.softEncBeginDate*1000 || null;
+			bizKey.softEncEndDate = bizKey.softEncEndDate*1000 || null;
+			this.info = bizKey;
+			
 			getGroup();
-			if(this.$store.state.editBack == "/main/mxCfg/message/userSet") {
+			/* if(this.$store.state.editBack == "/main/mxCfg/message/userSet") {
 				this.headerText = _this.pageTxt.tips.title;
 			} else {
 				this.headerText = this.$store.state.headerText;
@@ -349,7 +371,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			this.tabv = this.$store.state.tabv;
 			utils.post("mx/userinfo/query", {
 				cmdID: "600002",
-				userID: _this.$store.state.transferEditID,
+				userID: _this.info.userID,
 				type: 0
 			}, function(response) {
 				if(response.errcode != 0) return fxUtils.alert({txt: response.errinfo});
@@ -368,7 +390,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				_this.info.maxDaysOfTopic = response.lists[0].maxDaysOfTopic;
 				_this.configTime = timestampToTime(response.lists[0].configTime);
 				_this.info.configTime = response.lists[0].configTime;
-			});
+			}); */
 			// 用户类型
 			utils.post("mx/dict/query", {
 				cmdID: "600000",
@@ -436,7 +458,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 </script>
 
 <style scoped="scoped">
-	.userEdit{color: #606266;min-height: 630px;}
+	.userEdit{color: #606266;padding-bottom: 20px;}
 	.red{color: red;}
 	.info li{margin-top: 10px; height: 36px;}
 	.info{white-space: nowrap;width: 650px;}

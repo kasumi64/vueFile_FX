@@ -119,6 +119,11 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			_this = this;
 			this.auth= globalVar.get('status').dispatch;
 			getHost();
+		},
+		watch: {
+			type(v){
+				if(this.$refs.loop) this.$refs.loop.clear();
+			}
 		}
 	};
 	function getHost(){

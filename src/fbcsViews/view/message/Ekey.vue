@@ -72,7 +72,7 @@
 						<div class="rightBox">
 							<span :class="{txt1:1,hide: !isOpenEkeyPrefixByWeb}">/C=CN/CN=</span>
 							<el-input auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
-								v-model="ainfo.ekeyName" maxlength="55"></el-input>
+								v-model="ainfo.ekeyName" :maxlength="isOpenEkeyPrefixByWeb!= 0?55:64"></el-input>
 						</div>
 					</li>
 					<li>
@@ -126,7 +126,7 @@
 						<div class="rightBox">
 							<span :class="{txt1:1,hide: !isOpenEkeyPrefixByWeb}">/C=CN/CN=</span>
 							<el-input disabled auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
-								v-model="binfo.ekeyName" maxlength="55"></el-input>
+								v-model="binfo.ekeyName" :maxlength="isOpenEkeyPrefixByWeb!= 0?55:64"></el-input>
 						</div>
 					</li>
 					<li>

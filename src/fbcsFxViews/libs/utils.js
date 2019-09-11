@@ -279,16 +279,16 @@ function TipsConfirm(){
 		icon: mask.find('.tipsIcon'),
 		right: mask.find('.right'),
 		ok : mask.find('.ok').click( e => {
-			if(kit.isFn(notifyFn.ok)) notifyFn.ok(notifyArgs.ok);
 			hide();
+			if(kit.isFn(notifyFn.ok)) notifyFn.ok(notifyArgs.ok);
 		}).text( vue.$t('fbcsFile.tips.ok') ),
 		now : mask.find('.now').click( e => {
-			if(kit.isFn(notifyFn.now)) notifyFn.now(notifyArgs.now);
 			hide();
+			if(kit.isFn(notifyFn.now)) notifyFn.now(notifyArgs.now);
 		}).text( vue.$t('fbcsFile.tips.now') ),
 		cancel : mask.find('.cancel').click( e => {
-			if(kit.isFn(notifyFn.cancel)) notifyFn.cancel(notifyArgs.cancel);
 			hide();
+			if(kit.isFn(notifyFn.cancel)) notifyFn.cancel(notifyArgs.cancel);
 		}).text( vue.$t('fbcsFile.tips.cancel') )
 	};
 
@@ -410,6 +410,9 @@ exp.clearCache = function(){
 	exp.setArgs('fxcache', null);
 };
 
+exp.userName = function(){
+	return sessionStorage.getItem('userName') || '';
+};
 
 Object.addProto(exp, 'getFxAuth', {
 	get(){
@@ -422,4 +425,4 @@ Object.addProto(exp, 'getFxAuth', {
 
 
 export default exp;
-//(c) Copyright 2019.08 LGY. All Rights Reserved.
+//(c) Copyright 2019.09 LGY. All Rights Reserved.

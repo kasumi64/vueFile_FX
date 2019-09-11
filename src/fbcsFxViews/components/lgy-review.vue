@@ -64,13 +64,16 @@ export default {
 			if(kit.isFn(param)) param = param();
 			if(!kit.isObject(param)) param = {uri:param};
 			
-			let args = Object.assign({}, param), uri = '/fbcs_fx/fx/';
+			let args = {}, uri = '/fbcs_fx/fx/';
 			args.url = 'auth/review';
 			args.cmdID = '600122';
 			args.reviewer = this.name;
 			args.password = md5(this.pwd);
 			args.language = utils.getArgs('lang') || 'zh';
-			args.uri = uri + (args.uri||'');
+			args = Object.assign(args, param);
+			
+			if(param.uri.indexOf('mx/') > -1) uri = '/fbcs_mx/';
+			args.uri = uri + (param.uri||'');
 			
 //			console.log('dispatch:',args.uri);
 			let self = this;

@@ -35,7 +35,7 @@
 						<div class="rightBox">
 							<span :class="{txt1:1,hide: !isOpenEkeyPrefixByWeb}">/C=CN/CN=</span>
 							<el-input auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
-								v-model="ainfo.ekeyName" maxlength="55"></el-input>
+								v-model="ainfo.ekeyName" :maxlength="isOpenEkeyPrefixByWeb!= 0?55:64"></el-input>
 						</div>
 					</li>
 					<li>
@@ -88,7 +88,7 @@
 						<div class="rightBox">
 							<span :class="{txt1:1,hide: !isOpenEkeyPrefixByWeb}">/C=CN/CN=</span>
 							<el-input disabled auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
-								v-model="binfo.ekeyName" maxlength="55" :placeholder="pageTxt.popup[13]"></el-input>
+								v-model="binfo.ekeyName" :maxlength="isOpenEkeyPrefixByWeb!= 0?55:64" :placeholder="pageTxt.popup[13]"></el-input>
 						</div>
 					</li>
 					<li>
@@ -332,10 +332,10 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 		let tips = this.pageTxt.tips, isPrefix = !!_this.isOpenEkeyPrefixByWeb;
 		let regName = isPrefix ? /[^\w]/ : /[^\w\/=]|\/$|\=$/g;
 		// if(info.userID == "") return utils.weakTips(tips[0]);
-		// if(info.ekeyName == "") return fxUtils.alert({txt: tips[1]});
+		if(info.ekeyName == "") return fxUtils.alert({txt: tips[1]});
 		// else if (info.ekeyValidDate == "") return utils.weakTips(tips[2]);
 		// else if (info.comment == "") return utils.weakTips(tips[3]);
-		if (/\%/.test(info.comment)) {
+		else if (/\%/.test(info.comment)) {
 			return fxUtils.alert({txt: this.pageTxt.commentErr});
 		} else if(regName.test(info.ekeyName)) {
 			if(isModify !== true){

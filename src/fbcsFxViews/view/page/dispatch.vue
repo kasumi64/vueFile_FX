@@ -112,7 +112,7 @@ export default {
 				temp = temp.concat(dict[obj.nodeName]);
 			}
 			this.cuList = temp; */
-			this.cuList = arr; 
+			this.cuList = arr;
 		},
 		review(){
 			if(this.cuList.length == 0) return utils.alert({txt: this.$t('fbcsFile.dispatch.noNode')});

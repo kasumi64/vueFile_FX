@@ -43,7 +43,9 @@ var data = {
 		{router:'/main/fxCfg/dispatch', icon:'el-icon-tickets', label:'分发', 
 			src1:require('../img/menu/dispatch_1.png'), src2:require('../img/menu/dispatch_2.png')},
 		{router:'/main/fxCfg/audit', icon:'el-icon-document', label:'稽核', 
-			src1:require('../img/menu/audit_1.png'), src2:require('../img/menu/audit_2.png')}
+			src1:require('../img/menu/audit_1.png'), src2:require('../img/menu/audit_2.png')},
+		{router:'/main/fxCfg/order/xiaozhan', icon:'el-icon-document', label:'指令管理',
+			src1:require('../img/menu/order_1.png'), src2:require('../img/menu/order_2.png')}
 	],
 	subNav: [
 		{

@@ -300,7 +300,7 @@ export default {
 	components: {
 		ekey: resolve => require(['@/fbcsFxViews/view/page/Ekey.vue'], resolve),
 		modifyPwd: resolve => require(['@/fbcsFxViews/view/user/modifyPwd.vue'], resolve),
-	},
+	}
 }
 function search(){
 	let params = {

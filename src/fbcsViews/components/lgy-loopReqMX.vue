@@ -130,7 +130,7 @@ var _this, whr, data = {
 	loading: false,
 	showDialog: false,
 	cuList: [
-		// {nodeName:'深圳', serviceID:'CU-2', errStr:'success', errinfo: 'ok', operationType:'用户'},
+		{nodeName:'深圳', serviceID:'CU-2', errStr:'success', errinfo: 'ok', operationType:'用户'},
 	],
 	checkType: 0,
 };
@@ -176,6 +176,9 @@ export default {
 		close(){
 			this.showDialog = false;
 			this.$emit('close');
+		},
+		clear(){
+			this.cuList = [];
 		}
 	},
 	created(){

@@ -176,6 +176,56 @@ const router = new Router({
 				},
 				
 				
+				{
+					path: 'order',
+					component: resolve => require(['@/fbcsFxViews/view/order/manage.vue'], resolve),
+					meta: {
+						auth: true,
+						authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+					},
+					children: [
+						{
+							path: 'xiaozhan',
+							component: resolve => require(['@/fbcsFxViews/view/order/xiaoZhan.vue'], resolve),
+							meta: {
+								auth: true,
+								authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+							}
+						},
+						{
+							path: 'ekeyOrder',
+							component: resolve => require(['@/fbcsFxViews/view/order/ekeyOrder.vue'], resolve),
+							meta: {
+								auth: true,
+								authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+							}
+						},
+						{
+							path: 'signalOrder',
+							component: resolve => require(['@/fbcsFxViews/view/order/signalOrder.vue'], resolve),
+							meta: {
+								auth: true,
+								authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+							}
+						},
+						{
+							path: 'pwdOrder',
+							component: resolve => require(['@/fbcsFxViews/view/order/pwdOrder.vue'], resolve),
+							meta: {
+								auth: true,
+								authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+							}
+						}
+					]
+				},
+				{
+					path: 'order/editBiz',
+					component: resolve => require(['@/fbcsFxViews/view/order/editBiz.vue'], resolve),
+					meta: {
+						auth: true,
+						authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+					}
+				}
 				
 				
 				/*{

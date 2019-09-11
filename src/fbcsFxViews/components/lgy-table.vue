@@ -5,7 +5,9 @@
 			:row-class-name="rowClass" :cell-class-name="cellClassName">
 			<el-table-column v-if="index" type="index" width="50" key></el-table-column>
 			<el-table-column v-if="selection" type="selection" width="40" key></el-table-column>
-			<el-table-column :sortable="isSort(k)" v-for="(val, k) in title" :prop="k" :label="val" :key="k" :width="getWidth(k)"></el-table-column>
+			<el-table-column :sortable="isSort(k)" v-for="(val, k) in title" :prop="k" :label="val" :key="k" :width="getWidth(k)">
+				<div slot-scope="scope" v-html="scope.row[k]"></div>
+			</el-table-column>
 			<el-table-column v-if="defined" :label="defined.label" :width="defined.width">
 				<div class="custom" slot-scope="scope">
 					<div class="operate" v-for="(obj, k) in defined.items" :title="obj.tips" :key="k" 

@@ -1,8 +1,15 @@
 <template>
 	<div class="modifyPwd">
-		<el-dialog :visible.sync="show" :title="$t('fbcsFile.order.pwdOrder.title')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
-			<div class="_dialog">
+		<el-dialog :visible.sync="show" :title="$t('fbcsFile.order.pwdOrder.title')" v-dialogDrag width="600px"
+			:close-on-click-modal='false' :show-close="false">
+			<div class="MX_dialog">
 				<li>
+					<div class="left">
+						<p class="txt">{{$t('fbcsFile.order.editBiz.bizKey')}}</p>
+					</div><div class="right">
+						<input v-model="info.bizKey" disabled autocomplete="off"/>
+					</div>
+				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.password.id')}}</p>
 					</div><div class="right">
@@ -50,10 +57,19 @@
 							</el-option>
 						</el-select>
 					</div>
+				</li><li>
+					<div class="left">
+						<p class="txt">
+							<span class="red">*</span>
+							{{$t('fbcsFile.order.editBiz.remark')}}
+						</p>
+					</div><div class="right">
+						<input v-model="info.remark" maxlength="128" autocomplete="off"/>
+					</div>
 				</li>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="now">{{$t('fbcsFile.tips.now')}}</button>
+				<!-- <button class="blueBtn" @click="now">{{$t('fbcsFile.tips.now')}}</button> -->
 				<button class="blueBtn" @click="submit">{{$t('fbcsFile.tips.modify')}}</button>
 				<button class="defBtn" @click="close">{{$t('fbcsFile.tips.back')}}</button>
 			</div>
@@ -71,7 +87,8 @@ var _this, defaultPwd,
 data = {
 	info: {
 		userID: '', userPasswd: '', isModifyPasswdFlag: 1,
-		isModifyDefaultPasswd: 0, expiredTimeFlag: '1'
+		isModifyDefaultPasswd: 0, expiredTimeFlag: '1',
+		bizKey: '', operator: '', remark: ''
 	},
 	isEdit: true,
 	passwd: defaultPwd,
@@ -102,9 +119,10 @@ export default {
 			if(!pass.call(this)) return;
 			
 			let params = Object.assign({}, this.info);
-			params.url = 'userpasswd/modify';
-			params.cmdID = '600009';
+			params.url = 'userpasswdcmd/modify';
+			params.cmdID = '700031';
 			params.userPasswd = md5(this.passwd);
+			params.operator = utils.userName();
 			
 			utils.post(params).then(function(res){
 				let mess = `<p>${res.errinfo}</p>`;
@@ -117,7 +135,11 @@ export default {
 		},
 		now(){
 			if(!pass.call(this)) return;
-			this.reqsv = {uri: 'userpasswd/modifyImmediately'};
+			this.reqsv = {
+				url: 'mx/userpasswd/modifyImmediately',
+				cmdID: '600112',
+				uri: 'mx/userinfocmd/'
+			};
 			this.showReview = true;
 		},
 		review(obj){
@@ -164,11 +186,14 @@ export default {
 				info.expiredTimeFlag = '1';
 				this.isEdit = true;
 				this.passwd = this.again = defaultPwd;
+				info.bizKey = this.user.bizKey;
+				info.remark = this.user.remark || '';
+				info.operator = utils.userName();
 				getPwdTime();
 				return
 			}
 			this.$emit('update:show', false);
-			utils.confirm({txt: this.$t('fbcsFile.password.not'), btn: 1});
+			// utils.confirm({txt: this.$t('fbcsFile.password.not'), btn: 1});
 		}
 	}
 }
@@ -176,6 +201,10 @@ export default {
 function pass(){
 	let info = _this.info;
 	info.isModifyPasswdFlag = _this.isEdit ? 1 : 0;
+	if(info.remark.trim()==''){
+		utils.alert({txt: _this.$t('fbcsFile.order.manage.remarks')});
+		return false;
+	}
 	
 	if(_this.isEdit){ //1-修改密码
 		if(info.isModifyDefaultPasswd){
@@ -242,4 +271,5 @@ function getDefPwd(){
 <style scoped="scoped">
 	.right{margin-left: 10px;}
 	.radio{line-height: 30px;}
+	.MX_dialog input{width: 208px;}
 </style>

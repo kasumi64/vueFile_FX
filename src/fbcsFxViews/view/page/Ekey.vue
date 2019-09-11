@@ -208,7 +208,7 @@ export default {
 				type: 0
 			};
 			utils.keywords(params, {
-				label: ['ekeyName','userID'],
+				label: ['ekeyName'],
 				value: 'ekeyName'
 			}).then(arr => {
 				_this.ekNames = arr;

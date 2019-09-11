@@ -10,6 +10,21 @@
 #fbcs_MX .hide{display: none !important;}
 #fbcs_MX .show{display: block !important;}
 
+/*搜索栏*/
+#fbcs_MX .searchBar{margin-bottom: 10px;white-space: nowrap;}
+#fbcs_MX .searchBar *{vertical-align: middle;}
+#fbcs_MX .searchBar .label{font-size: 14px;color: #333;line-height: 30px;height: 30px;margin-right: 10px;}
+#fbcs_MX .searchBar .words{margin-right: 35px;}
+
+/*功能按钮区*/
+#fbcs_MX .fnField{margin-bottom: 10px;white-space: nowrap;-moz-user-select: none;-webkit-user-select: none;}
+#fbcs_MX .fnField *{vertical-align: middle;}
+#fbcs_MX .fnField li{display: inline-block;margin-right: 30px;cursor: pointer;padding-right: 5px;}
+#fbcs_MX .fnField .icon{height: 30px;width: 30px;}
+#fbcs_MX .fnField .label{font-size: 14px;color: #5C759D;line-height: 30px;height: 30px;margin-left: 4px;}
+#fbcs_MX .fnField li.disabled{background: #F5F7FA; cursor: not-allowed;}
+#fbcs_MX .fnField .disabled .label{color: #C0C4CC;}
+
 #fbcs_MX .maskLayer{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.5);z-index: 90009;}
 #fbcs_MX .loadPanle{font-size: 16px;color: #06BFF5;line-height: 30px;}
 

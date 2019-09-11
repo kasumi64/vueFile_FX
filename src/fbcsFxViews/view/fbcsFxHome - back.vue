@@ -97,7 +97,7 @@ export default {
 	beforeCreate(){
 		let url;
 		// url = window.fbcs_fxIP + '/fbcs_fx/fx/';
-		// url = 'http://localhost:8088/';
+		// url = 'http://localhost:8088/fx/';
 		url = '/fbcs_fx/fx/';
 		utils.setBaseURL(url);
 	},
@@ -198,7 +198,7 @@ function unlockFn({reviewer, password}){
 	.home{height: 100%;background: #FFF;}
 	.cw{height: calc(100% - 50px);}
 	.nav{height: 50px;background: #409eff;color: #FFF;line-height: 50px;z-index: 2;}
-	.homeView{height: 100%;margin-left: 0;overflow: auto;border: 0px solid #Edf0f5;border-right: none;
+	.homeView{height: 100%;margin-left: 0;overflow: overlay;border: 0px solid #Edf0f5;border-right: none;
 		transition: margin 0.3s;/*padding: 20px 0 20px 20px;*/padding: 20px;}
 	.big{margin-left: 64px;}
 	/*.router{background: #fff;min-height: 100%;}*/
