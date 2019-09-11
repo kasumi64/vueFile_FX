@@ -80,7 +80,7 @@ function reject(row){
 		ok: () => {
 			var param = {
 				url: 'userpasswdcmd/refuse',
-				cmdID: '700032',
+				cmdID: '700031',
 				operator: utils.userName(),
 				bizKey: row.bizKey
 			};
@@ -133,7 +133,7 @@ export default {
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
 			items: [
-				{src:require('@/fbcsFxViews/img/order/edit.png'), click: edit.bind(this), tips: this.$t('fbcsFile.order.manage.edit'), enable: 'acceptBtn' },
+				// {src:require('@/fbcsFxViews/img/order/edit.png'), click: edit.bind(this), tips: this.$t('fbcsFile.order.manage.edit'), enable: 'acceptBtn' },
 				{src:require('@/fbcsFxViews/img/order/reject.png'), click: reject.bind(this), tips: this.$t('fbcsFile.order.manage.reject'), enable: 'rejectBtn'  }
 			]
 		};
@@ -222,7 +222,7 @@ export default {
 					temp.push({bizKey: this.selected[i].bizKey});
 				}
 				param.url += 'exe';
-				param.cmdID = '700033';
+				param.cmdID = '700032';
 				param.exeList = temp;
 			} else {
 				kit('input', this.$refs.feedback.$el).each(el => {
@@ -232,7 +232,7 @@ export default {
 					temp.push(obj);
 				});
 				param.url += 'feedback';
-				param.cmdID = '700034';
+				param.cmdID = '700033';
 				param.feedbackList = temp;
 			}
 			
@@ -312,13 +312,15 @@ function search(){
 			obj = res.lists[i];
 			let {operationType:type, exeState:exe, feedbackState:fb, legal, legalInfo} = obj;
 			//1-未处理，2-已拒绝，3-失败，4-成功
-			obj.acceptBtn = obj.exeState == 1 ? true : false;
-			obj.rejectBtn = obj.exeState == 2 ? true : false;
+			obj.acceptBtn = exe == 1 ? true : false;
+			obj.rejectBtn = exe == 2 ? true : false;
 			obj.operationType = _this.$t(`fbcsFile.order.xiaozhan.type${type||0}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
-			obj.legal = `<img src=${legal == 0 ? cross : tick} `;
-			obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';
+			if(exe == 1) {
+				obj.legal = `<img src=${legal == 0 ? cross : tick} `;
+				obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';
+			} else obj.legal = '';
 			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
 		}
 		_this.list = res.lists;

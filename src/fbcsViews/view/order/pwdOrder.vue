@@ -81,7 +81,7 @@ function reject(row){
 		ok: () => {
 			var param = {
 				url: 'userpasswdcmd/refuse',
-				cmdID: '700032',
+				cmdID: '700031',
 				operator: utils.userName(),
 				bizKey: row.bizKey
 			};
@@ -317,13 +317,15 @@ function search(){
 			obj = res.lists[i];
 			let {operationType:type, exeState:exe, feedbackState:fb, legal, legalInfo} = obj;
 			//1-未处理，2-已拒绝，3-失败，4-成功
-			obj.acceptBtn = obj.exeState == 1 ? true : false;
-			obj.rejectBtn = obj.exeState == 2 ? true : false;
+			obj.acceptBtn = exe == 1 ? true : false;
+			obj.rejectBtn = exe == 2 ? true : false;
 			obj.operationType = _this.$t(`fbcsFile.order.xiaozhan.type${type||0}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
-			obj.legal = `<img src=${legal == 0 ? cross : tick} `;
-			obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';
+			if(exe == 1) {
+				obj.legal = `<img src=${legal == 0 ? cross : tick} `;
+				obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';
+			} else obj.legal = '';
 			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
 		}
 		_this.list = res.lists;

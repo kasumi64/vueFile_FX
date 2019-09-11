@@ -118,8 +118,8 @@ export default {
 			if(!pass.call(this)) return;
 			
 			let params = Object.assign({}, this.info);
-			params.url = 'userpasswdcmd/modify';
-			params.cmdID = '700031';
+			params.url = 'userpasswdcmd/edit';
+			params.cmdID = '700034';
 			params.userPasswd = md5(this.passwd);
 			params.operator = utils.userName();
 			

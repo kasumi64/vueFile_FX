@@ -316,8 +316,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			},
 			//修改
 			edit() {
-				utils.post("mx/userinfocmd/modify", {
-					cmdID: "700003",
+				utils.post("mx/userinfocmd/edit", {
+					cmdID: "700002",
 					operator: fxUtils.userName(),
 					bizKey: _this.info.bizKey,
 					userID: _this.info.userID,

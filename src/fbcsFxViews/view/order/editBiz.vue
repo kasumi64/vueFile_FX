@@ -311,8 +311,8 @@
 					params.cmdID = '600003';
 					params.userPasswd = md5(this.info.userPasswd||'');
 				} else {
-					params.url = 'userinfocmd/modify';
-					params.cmdID = '700003';
+					params.url = 'userinfocmd/edit';
+					params.cmdID = '700002';
 					delete params.userPasswd;
 					params.operator = utils.userName();
 				}
