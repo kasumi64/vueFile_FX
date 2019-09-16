@@ -331,7 +331,7 @@ function search(){
 			} else obj.recvTime = '';
 			if(exe == 1) {
 				obj.legal = `<img src=${legal == 0 ? cross : tick} `;
-				obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';
+				obj.legal += legalInfo ? `title="${legalInfo}" />` : '/>';
 			} else obj.legal = '';
 			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
 		}

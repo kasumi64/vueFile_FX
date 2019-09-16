@@ -101,7 +101,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyInfo')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyComment" maxlength="255" autocomplete="off"/>
+						<input v-model="ekeyInfo.comment" maxlength="255" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -403,7 +403,7 @@ export default {
 function check(){
 	let info = _this.ekeyInfo;
 	
-	if(/[\%]/.test(info.ekeyComment)){
+	if(/[\%]/.test(info.comment)){
 		utils.alert({txt: _this.$t('fbcsFile.Ekey.ekeyCommentFormat'), btn: 1});
 		return true;
 	} else if(info.remark.trim()==''){
@@ -462,7 +462,7 @@ function search(){
 			} else obj.recvTime = '';
 			if(exe == 1) {
 				obj.legal = `<img src=${legal == 0 ? cross : tick} `;
-				obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';
+				obj.legal += legalInfo ? `title="${legalInfo}" />` : '/>';
 			} else obj.legal = '';
 			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
 			if(obj.ekeyValidDate){

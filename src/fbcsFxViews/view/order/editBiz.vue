@@ -606,37 +606,31 @@
 	}
 	
 	function getUserInfo(user){
+		delete user.operationType;
+		delete user.acceptBtn;
+		delete user.exeTxt;
+		delete user.feedbackState;
+		delete user.legal;
+		delete user.legalInfo;
+		delete user.recvTime;
+		delete user.rejectBtn;
+		delete user.remarks;
 		
-		_this.info = user;
+		var obj = user;
+		if(obj.userConfigDate){
+			_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
+		} else _this.buildTime = '';
 		
-		return;
-		
-		//旧逻辑
-		let params = {
-			url: 'userinfocmd/query',
-			cmdID: '700002',
-			userID: user.bizKey
-		};
-		utils.post(params).then(function(res){
-			if(res.errcode != '0') return utils.alert({txt: res.errinfo});
-			var obj = res.lists[0];
-			if(!obj) return _this.info.userID = args.userID;
-			
-			if(obj.userConfigDate){
-				_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
-			} else _this.buildTime = '';
-			
-			obj.beginSoftEncTime = obj.beginSoftEncTime * 1000;
-			obj.endSoftEncTime = obj.endSoftEncTime * 1000;
-			if(!obj.beginSoftEncTime) obj.beginSoftEncTime = null;
-			if(!obj.endSoftEncTime) obj.endSoftEncTime = null;
-			obj.isModifyDefaultPasswd = 0;
-			obj.expiredTimeFlag = '1';
-			obj.userPasswd = '';
-			obj.remark = obj.remark || '';
-			if(obj.linkGroupName=='') obj.linkGroupName = '任意';
-			_this.info = obj;
-		});
+		obj.beginSoftEncTime = obj.beginSoftEncTime * 1000;
+		obj.endSoftEncTime = obj.endSoftEncTime * 1000;
+		if(!obj.beginSoftEncTime) obj.beginSoftEncTime = null;
+		if(!obj.endSoftEncTime) obj.endSoftEncTime = null;
+		obj.isModifyDefaultPasswd = 0;
+		obj.expiredTimeFlag = '1';
+		obj.userPasswd = '';
+		obj.remark = obj.remark || '';
+		if(obj.linkGroupName=='') obj.linkGroupName = '任意';
+		_this.info = obj;
 	}
 	
 	function getDefPwd(){
