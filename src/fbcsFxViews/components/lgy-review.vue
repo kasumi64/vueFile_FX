@@ -4,6 +4,7 @@
 .lgy-review .reviewLayer li:first-child{margin-bottom: 30px;}
 .lgy-review .label{width: 180px;font-size: 14px;color:#666;line-height: 30px;padding-right: 10px;text-align: right;vertical-align: top;}
 .lgy-review .input{width: 260px;vertical-align: top;}
+.lgy-review .autocompleteOFF{position: fixed;top: -100px;left: 0;opacity: 0;pointer-events: none;}
 </style>
 
 <template>

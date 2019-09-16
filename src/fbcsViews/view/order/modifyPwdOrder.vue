@@ -174,7 +174,7 @@ export default {
 		this.showReview = false;
 		this.parameter = null;
 		defaultPwd = '';
-		getDefPwd();
+		// getDefPwd();
 	},
 	watch: {
 		show(){

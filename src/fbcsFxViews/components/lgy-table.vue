@@ -185,6 +185,7 @@ export default {
 </style>
 <style>
 .lgy-table .el-table__header .el-checkbox{display: none;}
+.lgy-table .red{color: #F00;}
 	/*分页*/
 .lgy-table .paging{padding: 20px 0;text-align: left;}
 .lgy-table .paging .el-pagination,.lgy-table .paging .total{display: inline-block;vertical-align: middle;}

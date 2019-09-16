@@ -55,25 +55,25 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.userID')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.userID" disabled autocomplete="off"/>
+						<input v-model="ekeyInfo.userID1" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.order.ekeyOrder.userName')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.userName" disabled autocomplete="off"/>
+						<input v-model="ekeyInfo.userName1" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.order.signalOrder.toUserID')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.toUserID" disabled autocomplete="off"/>
+						<input v-model="ekeyInfo.userID2" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.order.signalOrder.toUserName')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.toUserName" disabled autocomplete="off"/>
+						<input v-model="ekeyInfo.userName2" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -107,7 +107,7 @@
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag width="70%" @open="open"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog orderPane" ref="orderPane">
-				<lgy-table stripe class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="title" :size="200">
+				<lgy-table stripe class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="acceptTitle" :size="200">
 				</lgy-table>
 				<lgy-table stripe class="table" ref="feedback" v-if="batch=='feedback'" :width="width" :list="submitList" :title="feedbackTitle" :size="200">
 				</lgy-table>
@@ -123,12 +123,13 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var tick = require('@/fbcsFxViews/img/order/tick.png'),
    cross = require('@/fbcsFxViews/img/order/cross.png');
 
 
-var _this, data, enable;
+var _this, data, enable, bizTypeObj;
 
 function reject(row){
 	utils.confirm({
@@ -152,11 +153,11 @@ function edit(row){
 	_this.editDialog = true;
 	setTimeout(() => {
 		_this.ekeyInfo.bizKey = row.bizKey || '';
-		_this.ekeyInfo.userID = row.userID1 || '';
-		_this.ekeyInfo.userName = row.userName1 || '';
-		_this.ekeyInfo.toUserID = row.userID2 || '';
-		_this.ekeyInfo.toUserName = row.userName2 || '';
-		_this.ekeyInfo.bizType = row.bizType || '';
+		_this.ekeyInfo.userID1 = row.userID1 || '';
+		_this.ekeyInfo.userName1 = row.userName1 || '';
+		_this.ekeyInfo.userID2 = row.userID2 || '';
+		_this.ekeyInfo.userName2 = row.userName2 || '';
+		_this.ekeyInfo.bizType = row.bizType;
 		_this.ekeyInfo.remark = row.remark || '';
 	});
 }
@@ -187,8 +188,8 @@ export default {
 			showReview: false,
 			editTitle: this.$t('fbcsFile.order.signalOrder.title'),
 			ekeyInfo: {
-				bizKey: '', userID: '', userName: '', ekeyName: '', ekeyPasswd: '',
-				validDate: '', ekeyComment: '',  remark: ''
+				bizKey: '', userID1: '', userName1: '', bizType: '',
+				userID2: '', userName2: '', remark: ''
 			},
 			editDialog: false,
 			bizTypeArr: []
@@ -196,6 +197,7 @@ export default {
 		
 		data.title = {
 			bizKey: this.$t('fbcsFile.order.xiaozhan.bizKey'),
+			bizTypeStr: this.$t('fbcsFile.order.signalOrder.bizType2'),
 			userID1: this.$t('fbcsFile.order.xiaozhan.userID'),
 			userName1: this.$t('fbcsFile.order.xiaozhan.userName'),
 			userID2: this.$t('fbcsFile.order.xiaozhan.userID'),
@@ -219,7 +221,18 @@ export default {
 		data.width = {
 			legal: 64
 		};
-		data.feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		
+		let acceptTitle = Object.assign({}, data.title);
+		delete acceptTitle.expectExeTime;
+		delete acceptTitle.recvTime;
+		delete acceptTitle.feedbackState;
+		data.acceptTitle = acceptTitle;
+		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		delete feedbackTitle.expectExeTime;
+		delete feedbackTitle.recvTime;
+		delete feedbackTitle.legal;
+		data.feedbackTitle = feedbackTitle;
+		
 		data.list = [];
 		return data;
 	},
@@ -245,7 +258,7 @@ export default {
 				if(row.exeState != 1) {
 					enable = false;
 					obj = kit.extend({}, row);
-					obj.userID = `<p class="red">${row.userID}</p>`;
+					obj.userID1 = `<p class="red">${row.userID1}</p>`;
 				}
 				return obj;
 			});
@@ -264,7 +277,7 @@ export default {
 				if(row.exeState == 1) {
 					enable = false;
 					obj = kit.extend({}, row);
-					obj.userID = `<p class="red">${row.userID}</p>`;
+					obj.userID1 = `<p class="red">${row.userID1}</p>`;
 				}
 				return obj;
 			});
@@ -278,9 +291,11 @@ export default {
 				return utils.alert({txt: this.$t('fbcsFile.order.xiaozhan.batch')});
 			}
 			if(this.batch == 'feedback' && !remarkCheck()) return;
+			//反馈不用复核
+			if(this.batch == 'feedback') return this.submit({});
 			
 			let obj = {
-				url: 'mx/auth/review',
+				url: 'auth/review',
 				cmdID: '600112',
 				uri: 'mx/usercommcmd/'
 			};
@@ -305,7 +320,6 @@ export default {
 				}
 				param.url += 'exe';
 				param.cmdID = '700023';
-				param.exeList = temp;
 			} else {
 				kit('input', this.$refs.feedback.$el).each(el => {
 					let {ind} = el.dataset;
@@ -315,8 +329,8 @@ export default {
 				});
 				param.url += 'feedback';
 				param.cmdID = '700024';
-				param.feedbackList = temp;
 			}
+			param.list = temp;
 			
 			utils.post(param).then(res => {
 				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
@@ -348,7 +362,7 @@ export default {
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				utils.alert({txt: res.errinfo, type: 1});
-				search();
+				_this.search();
 				_this.editDialog = false;
 			});
 		}
@@ -356,7 +370,6 @@ export default {
 	created(){
 		_this = this;
 		this.fxAuth = utils.getFxAuth;
-		this.search();
 		getDay(6);
 		getBizType();
 	},
@@ -389,19 +402,21 @@ function remarkCheck(){
 
 function getBizType(){
 	let param = {
-		url: 'mx/dict/query',
+		url: 'dict/query',
 		cmdID: "600000",
 		language: 0,
 		type: 3
 	};
 	utils.post(param).then(res => {
 		if(res.errcode != '0') return;
-		
-		for (var i = 0, len = res.lists; i < len; i++) {
+		bizTypeObj = {};
+		for (var i = 0, len = res.lists.length; i < len; i++) {
 			let obj = res.lists[i];
+			bizTypeObj[obj.id] = obj.name;
 			obj.name = obj.name + "(" + obj.id + ")";
 		}
 		_this.bizTypeArr = res.lists;
+		_this.search();
 	});
 }
 
@@ -426,11 +441,15 @@ function search(){
 			obj = res.lists[i];
 			let {operationType:type, exeState:exe, feedbackState:fb, legal, legalInfo} = obj;
 			//1-未处理，2-已拒绝，3-失败，4-成功
-			obj.acceptBtn = exe == 1 ? true : false;
-			obj.rejectBtn = exe == 2 ? true : false;
+			obj.acceptBtn = exe == 1 && type != -1 ? true : false;
+			obj.rejectBtn = exe == 1 ? true : false;
+			obj.bizTypeStr = bizTypeObj[obj.bizType] || obj.bizType;
 			obj.operationType = _this.$t(`fbcsFile.order.xiaozhan.type${type||0}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
+			if(obj.recvTime){
+				obj.recvTime = moment(obj.recvTime * 1000).format('YYYY-MM-DD HH:mm:ss');
+			} else obj.recvTime = '';
 			if(exe == 1) {
 				obj.legal = `<img src=${legal == 0 ? cross : tick} `;
 				obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';

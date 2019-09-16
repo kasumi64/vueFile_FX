@@ -360,8 +360,11 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			if(!bizKey) return;
 			bizKey.softEncBeginDate = bizKey.softEncBeginDate*1000 || null;
 			bizKey.softEncEndDate = bizKey.softEncEndDate*1000 || null;
+			bizKey.userType += '';
+			bizKey.isAlarmIfOffLine += '';
+			bizKey.allowSendRecvFile += '';
 			this.info = bizKey;
-			
+
 			getGroup();
 			/* if(this.$store.state.editBack == "/main/mxCfg/message/userSet") {
 				this.headerText = _this.pageTxt.tips.title;

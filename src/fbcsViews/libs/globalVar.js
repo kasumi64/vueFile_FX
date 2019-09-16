@@ -7,7 +7,7 @@ vars.debug = false;
 //vars.urlIP = 'http://10.10.27.161:8080/fbcs_mx/';    // vdi内网
 //vars.urlIP = 'http://10.10.27.160:8081/fdep/';    // vdi内网 运维
 //vars.urlIP = 'http://10.10.218.30:8080/fbcs_mx/';    // 路曼
-//vars.urlIP = 'http://10.10.218.22:8080/fbcs_mx/';	// 曼萍 
+//vars.urlIP = 'http://10.10.218.26:8080/fbcs_mx/';	// 曼萍 
 //vars.urlIP = 'http://10.10.27.242:9090/fbcs_mx/';	//测试组
 vars.urlIP = '/fbcs_mx/';    // 上生产技术运维平台nginx
 

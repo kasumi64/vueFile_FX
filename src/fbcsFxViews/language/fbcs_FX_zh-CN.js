@@ -217,7 +217,7 @@ var obj = {
 		},
 		signalOrder: {
 			expectExeTime: '客户期望执行时间', title: '修改通信关系', bizType: '业务类型：',
-			toUserID: '对端用户ID：', toUserName: '对端用户名称：'
+			toUserID: '对端用户ID：', toUserName: '对端用户名称：', bizType2: '业务类型'
 		},
 		pwdOrder: {
 			title: '修改密码'

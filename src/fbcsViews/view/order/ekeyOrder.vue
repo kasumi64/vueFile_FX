@@ -81,17 +81,19 @@
 					</div><div class="right">
 						<input v-model="ekeyInfo.ekeyName" disabled maxlength="63" autocomplete="off"/>
 					</div>
-				</li><li>
+				</li>
+				<!-- <li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.order.ekeyOrder.ekeyPasswd')}}</p>
 					</div><div class="right">
 						<input v-model="ekeyInfo.ekeyPasswd" maxlength="16" autocomplete="off"/>
 					</div>
-				</li><li>
+				</li> -->
+				<li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyDate')}}</p>
 					</div><div class="right">
-						<el-date-picker v-model="ekeyInfo.validDate" class="picker" type="datetime" :clearable="true" :editable="false"
+						<el-date-picker v-model="ekeyInfo.ekeyValidDate" class="picker" type="datetime" :clearable="true" :editable="false"
 							:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" >
 						</el-date-picker>
 					</div>
@@ -121,7 +123,7 @@
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag width="70%" @open="open"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog orderPane" ref="orderPane">
-				<lgy-table stripe class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="title" :size="200">
+				<lgy-table stripe class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="acceptTitle" :size="200">
 				</lgy-table>
 				<lgy-table stripe class="table" ref="feedback" v-if="batch=='feedback'" :width="width" :list="submitList" :title="feedbackTitle" :size="200">
 				</lgy-table>
@@ -137,6 +139,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 
 var tick = require('@/fbcsFxViews/img/order/tick.png'),
@@ -170,11 +173,11 @@ function edit(row){
 		_this.ekeyInfo.userID = row.userID || '';
 		_this.ekeyInfo.userName = row.userName || '';
 		_this.ekeyInfo.ekeyName = row.ekeyName || '';
-		_this.ekeyInfo.ekeyComment = row.ekeyComment || '';
+		_this.ekeyInfo.comment = row.comment || '';
 		_this.ekeyInfo.remark = row.remark || '';
-		_this.ekeyInfo.ekeyPasswd = '';
-		let t = row.validDate;
-		_this.ekeyInfo.validDate = t ? t*1000 : null;
+		// _this.ekeyInfo.ekeyPasswd = '';
+		let t = row.ekeyValidDate;
+		_this.ekeyInfo.ekeyValidDate = t ? t*1000 : null;
 	});
 }
 
@@ -204,8 +207,8 @@ export default {
 			showReview: false,
 			editTitle: this.$t('fbcsFile.fnField.editEkey'),
 			ekeyInfo: {
-				bizKey: '', userID: '', userName: '', ekeyName: '', ekeyPasswd: '',
-				validDate: '', ekeyComment: '',  remark: ''
+				bizKey: '', userID: '', userName: '', ekeyName: '',
+				ekeyValidDate: '', comment: '',  remark: ''
 			},
 			editDialog: false
 		};
@@ -235,7 +238,18 @@ export default {
 		data.width = {
 			legal: 64
 		};
-		data.feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		
+		let acceptTitle = Object.assign({}, data.title);
+		delete acceptTitle.comment;
+		delete acceptTitle.recvTime;
+		delete acceptTitle.feedbackState;
+		data.acceptTitle = acceptTitle;
+		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		delete feedbackTitle.comment;
+		delete feedbackTitle.recvTime;
+		delete feedbackTitle.legal;
+		data.feedbackTitle = feedbackTitle;
+		
 		data.list = [];
 		return data;
 	},
@@ -294,9 +308,11 @@ export default {
 				return utils.alert({txt: this.$t('fbcsFile.order.xiaozhan.batch')});
 			}
 			if(this.batch == 'feedback' && !remarkCheck()) return;
+			//反馈不用复核
+			if(this.batch == 'feedback') return this.submit({});
 			
 			let obj = {
-				url: 'mx/auth/review',
+				url: 'auth/review',
 				cmdID: '600112',
 				uri: 'mx/userekeycmd/'
 			};
@@ -321,7 +337,6 @@ export default {
 				}
 				param.url += 'exe';
 				param.cmdID = '700013';
-				param.exeList = temp;
 			} else {
 				kit('input', this.$refs.feedback.$el).each(el => {
 					let {ind} = el.dataset;
@@ -331,8 +346,8 @@ export default {
 				});
 				param.url += 'feedback';
 				param.cmdID = '700014';
-				param.feedbackList = temp;
 			}
+			param.list = temp;
 			
 			utils.post(param).then(res => {
 				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
@@ -357,15 +372,15 @@ export default {
 			let params = Object.assign({}, _this.ekeyInfo);
 			params.url = 'userekeycmd/edit';
 			params.cmdID = '700011';
-			params.ekeyValidDate = _this.ekeyInfo.validDate / 1000;
+			params.ekeyValidDate = _this.ekeyInfo.ekeyValidDate / 1000;
 			params.operator = utils.userName();
-			let pwd = _this.ekeyInfo.ekeyPasswd;
-			params.ekeyPasswd = pwd ? md5(pwd) : '';
+			// let pwd = _this.ekeyInfo.ekeyPasswd;
+			// params.ekeyPasswd = pwd ? md5(pwd) : '';
 			
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				utils.alert({txt: res.errinfo, type: 1});
-				search();
+				_this.search();
 				_this.editDialog = false;
 			});
 		}
@@ -373,8 +388,8 @@ export default {
 	created(){
 		_this = this;
 		this.fxAuth = utils.getFxAuth;
-		this.search();
 		getDay(6);
+		this.search();
 	},
 	watch: {
 		radio(val){
@@ -437,11 +452,14 @@ function search(){
 			obj = res.lists[i];
 			let {operationType:type, exeState:exe, feedbackState:fb, legal, legalInfo} = obj;
 			//1-未处理，2-已拒绝，3-失败，4-成功
-			obj.acceptBtn = exe == 1 ? true : false;
-			obj.rejectBtn = exe == 2 ? true : false;
+			obj.acceptBtn = exe == 1 && type != -1 ? true : false;
+			obj.rejectBtn = exe == 1 ? true : false;
 			obj.operationType = _this.$t(`fbcsFile.order.xiaozhan.type${type||0}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
+			if(obj.recvTime){
+				obj.recvTime = moment(obj.recvTime * 1000).format('YYYY-MM-DD HH:mm:ss');
+			} else obj.recvTime = '';
 			if(exe == 1) {
 				obj.legal = `<img src=${legal == 0 ? cross : tick} `;
 				obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';
@@ -449,10 +467,7 @@ function search(){
 			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
 			if(obj.ekeyValidDate){
 				obj.ymd = moment(obj.ekeyValidDate * 1000).format('YYYY-MM-DD HH:mm:ss');
-				obj.validDate = obj.ekeyValidDate;
-			} else {
-				obj.validDate = obj.ymd = null;
-			}
+			} else obj.ekeyValidDate = obj.ymd = null;
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

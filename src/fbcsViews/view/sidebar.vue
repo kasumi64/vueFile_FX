@@ -117,11 +117,14 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			globalVar.set('lang', 'zh');
 			globalVar.set('status', obj);
 			globalVar.set('urlIP', 'http://10.10.27.161:8080/fbcs_mx/');
+			fxUtils.setBaseURL('http://10.10.27.161:8080/fbcs_mx/mx/');
 			this.auth = obj;
 			this.pageTxt = lang().sidebar;
 			
 			globalVar.set('urlIP', 'http://localhost:8088/fbcs_mx/');
-			fxUtils.setBaseURL('http://localhost:8088/fbcs_mx/');
+			fxUtils.setBaseURL('http://localhost:8088/fbcs_mx/mx/');
+			// globalVar.set('urlIP', 'http://10.10.218.26:8080/fbcs_mx/');
+			// fxUtils.setBaseURL('http://10.10.218.26:8080/fbcs_mx/mx/');
 		},
 		mounted(){
 			_this = this;

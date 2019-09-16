@@ -47,7 +47,7 @@
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag width="70%" @open="open"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog orderPane" ref="orderPane">
-				<lgy-table stripe class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="title" :size="200">
+				<lgy-table stripe class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="acceptTitle" :size="200">
 				</lgy-table>
 				<lgy-table stripe class="table" ref="feedback" v-if="batch=='feedback'" :width="width" :list="submitList" :title="feedbackTitle" :size="200">
 				</lgy-table>
@@ -63,6 +63,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var tick = require('@/fbcsFxViews/img/order/tick.png'),
    cross = require('@/fbcsFxViews/img/order/cross.png');
@@ -134,7 +135,7 @@ export default {
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
 			items: [
-				{src:require('@/fbcsFxViews/img/order/edit.png'), click: edit.bind(this), tips: this.$t('fbcsFile.order.manage.edit'), enable: 'acceptBtn' },
+				// {src:require('@/fbcsFxViews/img/order/edit.png'), click: edit.bind(this), tips: this.$t('fbcsFile.order.manage.edit'), enable: 'acceptBtn' },
 				{src:require('@/fbcsFxViews/img/order/reject.png'), click: reject.bind(this), tips: this.$t('fbcsFile.order.manage.reject'), enable: 'rejectBtn'  }
 			]
 		};
@@ -142,7 +143,16 @@ export default {
 		data.width = {
 			legal: 64
 		};
-		data.feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		
+		let acceptTitle = Object.assign({}, data.title);
+		delete acceptTitle.recvTime;
+		delete acceptTitle.feedbackState;
+		data.acceptTitle = acceptTitle;
+		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		delete feedbackTitle.recvTime;
+		delete feedbackTitle.legal;
+		data.feedbackTitle = feedbackTitle;
+		
 		data.list = [];
 		return data;
 	},
@@ -201,9 +211,11 @@ export default {
 				return utils.alert({txt: this.$t('fbcsFile.order.xiaozhan.batch')});
 			}
 			if(this.batch == 'feedback' && !remarkCheck()) return;
+			//反馈不用复核
+			if(this.batch == 'feedback') return this.submit({});
 			
 			let obj = {
-				url: 'mx/auth/review',
+				url: 'auth/review',
 				cmdID: '600112',
 				uri: 'mx/userpasswdcmd/'
 			};
@@ -228,7 +240,6 @@ export default {
 				}
 				param.url += 'exe';
 				param.cmdID = '700033';
-				param.exeList = temp;
 			} else {
 				kit('input', this.$refs.feedback.$el).each(el => {
 					let {ind} = el.dataset;
@@ -238,8 +249,8 @@ export default {
 				});
 				param.url += 'feedback';
 				param.cmdID = '700034';
-				param.feedbackList = temp;
 			}
+			param.list = temp;
 			
 			utils.post(param).then(res => {
 				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
@@ -263,8 +274,8 @@ export default {
 	created(){
 		_this = this;
 		this.fxAuth = utils.getFxAuth;
-		this.search();
 		getDay(6);
+		this.search();
 	},
 	watch: {
 		radio(val){
@@ -317,11 +328,14 @@ function search(){
 			obj = res.lists[i];
 			let {operationType:type, exeState:exe, feedbackState:fb, legal, legalInfo} = obj;
 			//1-未处理，2-已拒绝，3-失败，4-成功
-			obj.acceptBtn = exe == 1 ? true : false;
-			obj.rejectBtn = exe == 2 ? true : false;
+			obj.acceptBtn = exe == 1 && type != -1 ? true : false;
+			obj.rejectBtn = exe == 1 ? true : false;
 			obj.operationType = _this.$t(`fbcsFile.order.xiaozhan.type${type||0}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
+			if(obj.recvTime){
+				obj.recvTime = moment(obj.recvTime * 1000).format('YYYY-MM-DD HH:mm:ss');
+			} else obj.recvTime = '';
 			if(exe == 1) {
 				obj.legal = `<img src=${legal == 0 ? cross : tick} `;
 				obj.legal += legalInfo ? `title=${legalInfo} />` : '/>';
