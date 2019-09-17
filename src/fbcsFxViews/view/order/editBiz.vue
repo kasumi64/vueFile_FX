@@ -193,12 +193,13 @@
 						</el-option>
 					</el-select>
 				</div>
-			</li><li v-if="isAdd!='add'">
+			</li>
+			<!-- <li v-if="isAdd!='add'">
 				<div class="label">{{$t('fbcsFile.userInfo.buildTime')}}</div>
 				<div class="right">
 					<input v-model="buildTime" disabled autocomplete="off"/>
 				</div>
-			</li>
+			</li> -->
 		</ul>
 		<ul class="btnBox">
 			<li>
@@ -610,16 +611,16 @@
 		delete user.acceptBtn;
 		delete user.exeTxt;
 		delete user.feedbackState;
-		delete user.legal;
+		delete user.legalImg;
 		delete user.legalInfo;
 		delete user.recvTime;
 		delete user.rejectBtn;
 		delete user.remarks;
 		
 		var obj = user;
-		if(obj.userConfigDate){
-			_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
-		} else _this.buildTime = '';
+		// if(obj.userConfigDate){
+		// 	_this.buildTime = moment(obj.userConfigDate * 1000).format('YYYY-MM-DD HH:mm:ss');
+		// } else _this.buildTime = '';
 		
 		obj.beginSoftEncTime = obj.beginSoftEncTime * 1000;
 		obj.endSoftEncTime = obj.endSoftEncTime * 1000;

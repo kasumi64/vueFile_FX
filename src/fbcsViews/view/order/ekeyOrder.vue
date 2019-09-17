@@ -224,7 +224,7 @@ export default {
 			recvTime: this.$t('fbcsFile.order.xiaozhan.recvTime'),
 			exeTxt: this.$t('fbcsFile.order.xiaozhan.exeState'),
 			feedbackState: this.$t('fbcsFile.order.xiaozhan.feedbackState'),
-			legal: this.$t('fbcsFile.order.xiaozhan.legal'),
+			legalImg: this.$t('fbcsFile.order.xiaozhan.legal'),
 			// legalInfo: this.$t('fbcsFile.order.xiaozhan.legalInfo')
 		};
 		data.defined = {
@@ -236,7 +236,7 @@ export default {
 		};
 		if(!data.fxAuth) delete data.defined;
 		data.width = {
-			legal: 64
+			legalImg: 64
 		};
 		
 		let acceptTitle = Object.assign({}, data.title);
@@ -247,7 +247,7 @@ export default {
 		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
 		delete feedbackTitle.comment;
 		delete feedbackTitle.recvTime;
-		delete feedbackTitle.legal;
+		delete feedbackTitle.legalImg;
 		data.feedbackTitle = feedbackTitle;
 		
 		data.list = [];
@@ -272,10 +272,10 @@ export default {
 			enable = true;
 			var arr = this.selected.map(row => {
 				let obj = row;
-				if(row.exeState != 1) {
+				if(row.exeState != 1 || row.legal) {
 					enable = false;
 					obj = kit.extend({}, row);
-					obj.userID = `<p class="red">${row.userID}</p>`;
+					obj.bizKey = `<p class="red">${row.bizKey}</p>`;
 				}
 				return obj;
 			});
@@ -294,7 +294,7 @@ export default {
 				if(row.exeState == 1) {
 					enable = false;
 					obj = kit.extend({}, row);
-					obj.userID = `<p class="red">${row.userID}</p>`;
+					obj.bizKey = `<p class="red">${row.bizKey}</p>`;
 				}
 				return obj;
 			});
@@ -454,16 +454,16 @@ function search(){
 			//1-未处理，2-已拒绝，3-失败，4-成功
 			obj.acceptBtn = exe == 1 && type != -1 ? true : false;
 			obj.rejectBtn = exe == 1 ? true : false;
-			obj.operationType = _this.$t(`fbcsFile.order.xiaozhan.type${type||0}`);
+			obj.operationType = _this.$t(`fbcsFile.order.ekeyOrder.type${type||1}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
 			if(obj.recvTime){
 				obj.recvTime = moment(obj.recvTime * 1000).format('YYYY-MM-DD HH:mm:ss');
 			} else obj.recvTime = '';
 			if(exe == 1) {
-				obj.legal = `<img src=${legal == 0 ? cross : tick} `;
-				obj.legal += legalInfo ? `title="${legalInfo}" />` : '/>';
-			} else obj.legal = '';
+				obj.legalImg = `<img src=${legal == 0 ? cross : tick} `;
+				obj.legalImg += legalInfo ? `title="${legalInfo}" />` : '/>';
+			} else obj.legalImg = '';
 			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
 			if(obj.ekeyValidDate){
 				obj.ymd = moment(obj.ekeyValidDate * 1000).format('YYYY-MM-DD HH:mm:ss');

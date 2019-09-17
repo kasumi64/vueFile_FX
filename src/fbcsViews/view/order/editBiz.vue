@@ -11,7 +11,7 @@
 				<span slot="label">{{pageTxt.tab[0]}}</span> -->
 				<el-row class='info'>
 					<el-col :span="6">
-						<ul class="left">
+						<ul class="left">z
 							<li>
 								<p>{{$t('fbcsFile.order.editBiz.bizKey')}}</p>
 							</li>
@@ -60,9 +60,9 @@
 							<li>
 								<p><span class="red">*&nbsp;</span>{{$t('fbcsFile.order.editBiz.remark')}}</p>
 							</li>
-							<li>
+							<!-- <li>
 								<p>{{pageTxt.label[26]}}：</p>
-							</li>
+							</li> -->
 						</ul>
 					</el-col>
 					<el-col :span="18">
@@ -131,9 +131,9 @@
 							<li>
 								<input type="text" data-k='remark' v-model="info.remark" maxlength="128" autocomplete="off">
 							</li>
-							<li>
+							<!-- <li>
 								<el-input auto-complete="off" v-model="configTime" placeholder="" disabled></el-input>
-							</li>
+							</li> -->
 						</ul>
 					</el-col>
 				</el-row>
@@ -250,7 +250,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 									userType: _this.info.userType,
 									userDistrict: _this.info.userDistrict,
 									speedCtrlKbps: _this.info.speedCtrlKbps,
-									configTime: _this.info.configTime,
+									// configTime: _this.info.configTime,
 									userInfo: _this.info.userInfo,
 									connSuGroupName: _this.info.connSuGroupName,
 									isAlarmIfOffLine: _this.info.isAlarmIfOffLine,
@@ -334,7 +334,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 					maxPubsCount: _this.info.maxPubsCount,
 					maxSubsCount: _this.info.maxSubsCount,
 					maxDaysOfTopic: _this.info.maxDaysOfTopic,
-					configTime: _this.info.configTime,
+					// configTime: _this.info.configTime,
 					remark: _this.info.remark
 				}, function(data) {
 					if(data.errcode == 0) {
@@ -358,6 +358,14 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			
 			let bizKey = fxUtils.getArgs('bizKey');
 			if(!bizKey) return;
+			delete bizKey.legalImg;
+			delete bizKey.remarks;
+			delete bizKey.operationType;
+			delete bizKey.exeTxt;
+			delete bizKey.acceptBtn;
+			delete bizKey.rejectBtn;
+			delete bizKey.feedbackState;
+			
 			bizKey.softEncBeginDate = bizKey.softEncBeginDate*1000 || null;
 			bizKey.softEncEndDate = bizKey.softEncEndDate*1000 || null;
 			bizKey.userType += '';

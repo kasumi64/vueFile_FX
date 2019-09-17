@@ -209,15 +209,17 @@ var obj = {
 			legal: '合法性', legalInfo: '合法详情', legal0: '合法', legal1: '不合法',
 			'type-1': '删除小站指令', type0: '修改小站指令', type1: '新增小站指令',
 			exe1: '未处理', exe2: '已拒绝', exe3: '失败', exe4: '成功',
-			fb1: '未反馈', fb2: '已反馈', batch: '用户ID标红的指令不可批量执行或反馈！'
+			fb1: '未反馈', fb2: '已反馈', batch: '业务ID标红的指令不可批量执行或反馈！'
 		},
 		ekeyOrder: {
 			ekeyName: 'Ekey名称', ekeyValidDate: 'Ekey有效期', comment: 'Ekey描述',
-			userName: '用户名称：', ekeyPasswd: '修改ekey密码：'
+			userName: '用户名称：', ekeyPasswd: '修改ekey密码：', 'type-1': '删除ekey指令',
+			type1: '新增ekey指令'
 		},
 		signalOrder: {
 			expectExeTime: '客户期望执行时间', title: '修改通信关系', bizType: '业务类型：',
-			toUserID: '对端用户ID：', toUserName: '对端用户名称：', bizType2: '业务类型'
+			toUserID: '对端用户ID：', toUserName: '对端用户名称：', bizType2: '业务类型',
+			type0: '上线关系对指令', type1: '下线关系对指令'
 		},
 		pwdOrder: {
 			title: '修改密码'
