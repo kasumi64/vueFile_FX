@@ -621,6 +621,7 @@ function utils(){
 	exp.clearCache = function(){
 		globalVar.set('cache_user', null);
 		globalVar.set('cache_theme', null);
+		fxUtils.setArgs('bizKeySearch', null);
 	};
 	
 	/*exp.getMxAuth = function ()

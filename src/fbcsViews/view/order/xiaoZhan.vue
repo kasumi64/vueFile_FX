@@ -71,6 +71,10 @@ var _this, data, enable;
 
 function edit(row){
 	utils.setArgs('bizKey', row);
+	let obj = Object.assign({}, _this.info);
+	obj.page = _this.page;
+	obj.radio = _this.radio;
+	utils.setArgs('bizKeySearch', obj);
 	this.$router.push({path: '/main/mxCfg/order/editBiz'});
 }
 
@@ -270,16 +274,28 @@ export default {
 	},
 	created(){
 		_this = this;
-		getDay(6);
-		this.search();
+		let param = utils.getArgs('bizKeySearch');
+		if(param){
+			let {exeState, feedbackState, recvBeginTime, recvEndTime} = param;
+			this.info = {exeState, feedbackState, recvBeginTime, recvEndTime};
+			radio(this.radio = param.radio);
+			search();
+		} else {
+			getDay(6);
+			this.search();
+		}
 	},
 	watch: {
 		radio(val){
-			if(val == 1) getDay();
-			else if(val == 3) getDay(6);
-			else if(val == 5) getDay(29);
+			radio(val);
 		}
 	}
+}
+
+function radio(val){
+	if(val == 1) getDay();
+	else if(val == 3) getDay(6);
+	else if(val == 5) getDay(29);
 }
 
 function remarkCheck(){
@@ -323,7 +339,7 @@ function search(){
 			//1-未处理，2-已拒绝，3-失败，4-成功
 			obj.acceptBtn = exe == 1 && type != -1 ? true : false;
 			obj.rejectBtn = exe == 1 ? true : false;
-			obj.operationType = _this.$t(`fbcsFile.order.xiaozhan.type${type||0}`);
+			obj.operationType = _this.$t(`fbcsFile.order.xiaozhan.type${type}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
 			if(obj.recvTime){

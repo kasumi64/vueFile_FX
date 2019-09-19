@@ -444,7 +444,7 @@ function search(){
 			obj.acceptBtn = exe == 1 && type != -1 ? true : false;
 			obj.rejectBtn = exe == 1 ? true : false;
 			obj.bizTypeStr = bizTypeObj[obj.bizType] || obj.bizType;
-			obj.operationType = _this.$t(`fbcsFile.order.signalOrder.type${type||0}`);
+			obj.operationType = _this.$t(`fbcsFile.order.signalOrder.type${type}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
 			if(obj.recvTime){

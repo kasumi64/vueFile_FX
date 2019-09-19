@@ -73,7 +73,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyDate')}}</p>
 					</div><div class="right">
-						<el-date-picker v-model="ekeyInfo.ekeyValidDate" class="picker" type="datetime" :clearable="true" :editable="false"
+						<el-date-picker v-model="ekeyInfo.validDate" class="picker" type="datetime" :clearable="true" :editable="false"
 							:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" >
 						</el-date-picker>
 					</div>
@@ -81,7 +81,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyInfo')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.comment" maxlength="255" autocomplete="off"/>
+						<input v-model="ekeyInfo.ekeyComment" maxlength="255" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -152,10 +152,10 @@ function edit(row){
 		_this.ekeyInfo.userID = row.userID || '';
 		_this.ekeyInfo.userName = row.userName || '';
 		_this.ekeyInfo.ekeyName = row.ekeyName || '';
-		_this.ekeyInfo.comment = row.comment || '';
+		_this.ekeyInfo.ekeyComment = row.ekeyComment || '';
 		_this.ekeyInfo.remark = row.remark || '';
-		let t = row.ekeyValidDate;
-		_this.ekeyInfo.ekeyValidDate = t ? t*1000 : null;
+		let t = row.validDate;
+		_this.ekeyInfo.validDate = t ? t*1000 : null;
 	});
 }
 
@@ -186,7 +186,7 @@ export default {
 			editTitle: this.$t('fbcsFile.fnField.editEkey'),
 			ekeyInfo: {
 				bizKey: '', userID: '', userName: '', ekeyName: '',
-				ekeyValidDate: '', comment: '',  remark: ''
+				validDate: '', ekeyComment: '',  remark: ''
 			},
 			editDialog: false
 		};
@@ -197,7 +197,7 @@ export default {
 			userName: this.$t('fbcsFile.order.xiaozhan.userName'),
 			ekeyName: this.$t('fbcsFile.order.ekeyOrder.ekeyName'),
 			ymd: this.$t('fbcsFile.order.ekeyOrder.ekeyValidDate'),
-			comment: this.$t('fbcsFile.order.ekeyOrder.comment'),
+			ekeyComment: this.$t('fbcsFile.order.ekeyOrder.comment'),
 			operationType: this.$t('fbcsFile.order.xiaozhan.operationType'),
 			recvTime: this.$t('fbcsFile.order.xiaozhan.recvTime'),
 			exeTxt: this.$t('fbcsFile.order.xiaozhan.exeState'),
@@ -218,12 +218,14 @@ export default {
 		};
 		
 		let acceptTitle = Object.assign({}, data.title);
-		delete acceptTitle.comment;
+		delete acceptTitle.ymd;
+		delete acceptTitle.ekeyComment;
 		delete acceptTitle.recvTime;
 		delete acceptTitle.feedbackState;
 		data.acceptTitle = acceptTitle;
 		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
-		delete feedbackTitle.comment;
+		delete feedbackTitle.ymd;
+		delete feedbackTitle.ekeyComment;
 		delete feedbackTitle.recvTime;
 		delete feedbackTitle.legalImg;
 		data.feedbackTitle = feedbackTitle;
@@ -346,7 +348,7 @@ export default {
 			let params = Object.assign({}, _this.ekeyInfo);
 			params.url = 'userekeycmd/edit';
 			params.cmdID = '700011';
-			params.ekeyValidDate = _this.ekeyInfo.ekeyValidDate / 1000;
+			params.validDate = _this.ekeyInfo.validDate / 1000;
 			params.operator = utils.userName();
 			
 			utils.post(params).then(function(res){
@@ -375,7 +377,7 @@ export default {
 function check(){
 	let info = _this.ekeyInfo;
 	
-	if(/[\%]/.test(info.comment)){
+	if(/[\%]/.test(info.ekeyComment)){
 		utils.alert({txt: _this.$t('fbcsFile.Ekey.ekeyCommentFormat'), btn: 1});
 		return true;
 	} else if(info.remark.trim()==''){
@@ -426,7 +428,7 @@ function search(){
 			//1-未处理，2-已拒绝，3-失败，4-成功
 			obj.acceptBtn = exe == 1 && type != -1 ? true : false;
 			obj.rejectBtn = exe == 1 ? true : false;
-			obj.operationType = _this.$t(`fbcsFile.order.ekeyOrder.type${type||1}`);
+			obj.operationType = _this.$t(`fbcsFile.order.ekeyOrder.type${type||-1}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
 			if(obj.recvTime){
@@ -437,9 +439,9 @@ function search(){
 				obj.legalImg += legalInfo ? `title="${legalInfo}" />` : '/>';
 			} else obj.legalImg = '';
 			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
-			if(obj.ekeyValidDate){
-				obj.ymd = moment(obj.ekeyValidDate * 1000).format('YYYY-MM-DD HH:mm:ss');
-			} else obj.ekeyValidDate = obj.ymd = null;
+			if(obj.validDate){
+				obj.ymd = moment(obj.validDate * 1000).format('YYYY-MM-DD HH:mm:ss');
+			} else obj.validDate = obj.ymd = null;
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;

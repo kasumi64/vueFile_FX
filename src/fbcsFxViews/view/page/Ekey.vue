@@ -356,19 +356,20 @@ function editNow(obj){
 
 function check(){
 	let info = _this.ekeyInfo;
-	if(utils.isSpace(info.userID)) {
-		utils.alert({txt: _this.$t('fbcsFile.Ekey.errID'), btn: 1});
-		return true;
+	if(isAdd){
+		if(utils.isSpace(info.userID)) {
+			utils.alert({txt: _this.$t('fbcsFile.Ekey.errID'), btn: 1});
+			return true;
+		}
+		
+		if(utils.isSpace(info.ekeyName)) {
+			utils.alert({txt: _this.$t('fbcsFile.Ekey.errName'), btn: 1});
+			return true;
+		} else if (/[^\w]/.test(info.ekeyName)){
+			utils.alert({txt: _this.$t('fbcsFile.Ekey.ekeyNameFormat'), btn: 1});
+			return true;
+		}
 	}
-	
-	if(utils.isSpace(info.ekeyName)) {
-		utils.alert({txt: _this.$t('fbcsFile.Ekey.errName'), btn: 1});
-		return true;
-	} else if (/[^\w]/.test(info.ekeyName)){
-		utils.alert({txt: _this.$t('fbcsFile.Ekey.ekeyNameFormat'), btn: 1});
-		return true;
-	}
-	
 	if(/[\%]/.test(info.ekeyComment)){
 		utils.alert({txt: _this.$t('fbcsFile.Ekey.ekeyCommentFormat'), btn: 1});
 		return true;

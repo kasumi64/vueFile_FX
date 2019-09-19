@@ -240,11 +240,13 @@ export default {
 		};
 		
 		let acceptTitle = Object.assign({}, data.title);
+		delete acceptTitle.ymd;
 		delete acceptTitle.comment;
 		delete acceptTitle.recvTime;
 		delete acceptTitle.feedbackState;
 		data.acceptTitle = acceptTitle;
 		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		delete feedbackTitle.ymd;
 		delete feedbackTitle.comment;
 		delete feedbackTitle.recvTime;
 		delete feedbackTitle.legalImg;
@@ -454,7 +456,7 @@ function search(){
 			//1-未处理，2-已拒绝，3-失败，4-成功
 			obj.acceptBtn = exe == 1 && type != -1 ? true : false;
 			obj.rejectBtn = exe == 1 ? true : false;
-			obj.operationType = _this.$t(`fbcsFile.order.ekeyOrder.type${type||1}`);
+			obj.operationType = _this.$t(`fbcsFile.order.ekeyOrder.type${type||-1}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
 			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
 			if(obj.recvTime){

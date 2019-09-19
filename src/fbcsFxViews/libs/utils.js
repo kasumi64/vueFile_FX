@@ -408,6 +408,7 @@ exp.isSpace = function(str){ return !!(/^\s+\s{0,}$/.test(str)||str === ''||str 
 exp.clearCache = function(){
 	exp.setArgs('userInfo', null);
 	exp.setArgs('fxcache', null);
+	exp.setArgs('bizKeySearch', null);
 };
 
 exp.userName = function(){
