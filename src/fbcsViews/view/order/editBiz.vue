@@ -11,7 +11,7 @@
 				<span slot="label">{{pageTxt.tab[0]}}</span> -->
 				<el-row class='info'>
 					<el-col :span="6">
-						<ul class="left">z
+						<ul class="left">
 							<li>
 								<p>{{$t('fbcsFile.order.editBiz.bizKey')}}</p>
 							</li>

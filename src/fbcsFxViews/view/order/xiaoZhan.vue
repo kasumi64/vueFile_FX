@@ -179,7 +179,7 @@ export default {
 				if(row.exeState != 1 || row.legal == 0) {
 					enable = false;
 					obj = kit.extend({}, row);
-					obj.bizKey = `<p class="red">${row.bizKey}</p>`;
+					obj.bizKey = `<p class="red">${row.bizKey||''}</p>`;
 				}
 				return obj;
 			});
@@ -198,7 +198,7 @@ export default {
 				if(row.exeState == 1) {
 					enable = false;
 					obj = kit.extend({}, row);
-					obj.bizKey = `<p class="red">${row.bizKey}</p>`;
+					obj.bizKey = `<p class="red">${row.bizKey||''}</p>`;
 				}
 				return obj;
 			});
