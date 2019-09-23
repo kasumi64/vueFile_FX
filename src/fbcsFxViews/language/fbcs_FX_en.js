@@ -8,7 +8,7 @@ var obj = {
 	components: {
 		placeholder: '输入关键字', not: '暂无数据', paging1: '已显示全部', paging2: '条数据',
 		reviewTitle: '复核操作', reviewName: '复核操作员：', reviewPwd: '复核员密码：',
-		isSubmit: '是否要立即下发！', reviewSame: '复核员不能是登陆用户!', reviewNull: '复核员或密码不能为空!',
+		isSubmit: '是否要立即下发！', reviewSame: '复核员不能是登录用户!', reviewNull: '复核员或密码不能为空!',
 		result: '下发结果',
 	},
 	searchBar: {

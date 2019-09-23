@@ -124,7 +124,7 @@ export default {
 			expectExeTime: this.$t('fbcsFile.order.signalOrder.expectExeTime'),
 			recvTime: this.$t('fbcsFile.order.xiaozhan.recvTime'),
 			exeTxt: this.$t('fbcsFile.order.xiaozhan.exeState'),
-			feedbackState: this.$t('fbcsFile.order.xiaozhan.feedbackState'),
+			feedbackTxt: this.$t('fbcsFile.order.xiaozhan.feedbackState'),
 			legal: this.$t('fbcsFile.order.xiaozhan.legal'),
 			// legalInfo: this.$t('fbcsFile.order.xiaozhan.legalInfo')
 		};
@@ -141,7 +141,7 @@ export default {
 		
 		let acceptTitle = Object.assign({}, data.title);
 		delete acceptTitle.recvTime;
-		delete acceptTitle.feedbackState;
+		delete acceptTitle.feedbackTxt;
 		data.acceptTitle = acceptTitle;
 		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
 		delete feedbackTitle.recvTime;
@@ -189,7 +189,7 @@ export default {
 			enable = true;
 			var arr = this.selected.map(row => {
 				let obj = row;
-				if(row.exeState == 1) {
+				if(row.exeState == 1 || row.feedbackState == 2) {
 					enable = false;
 					obj = kit.extend({}, row);
 					obj.bizKey = `<p class="red">${row.bizKey||''}</p>`;
@@ -320,7 +320,7 @@ function search(){
 			obj.rejectBtn = exe == 1 ? true : false;
 			obj.operationType = _this.$t(`fbcsFile.order.signalOrder.type${type}`);
 			obj.exeTxt = _this.$t(`fbcsFile.order.xiaozhan.exe${exe||1}`);
-			obj.feedbackState = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
+			obj.feedbackTxt = _this.$t(`fbcsFile.order.xiaozhan.fb${fb||1}`);
 			if(obj.recvTime){
 				obj.recvTime = moment(obj.recvTime * 1000).format('YYYY-MM-DD HH:mm:ss');
 			} else obj.recvTime = '';

@@ -1,7 +1,7 @@
 	// utils: {
 	// 	okBtn: 'Yes', nowBtn:'Now', cBtn:'No', title1:'Tips', title2:'review operator', sub:'Yes', back:'No',
 	// 	review:'review name：', reviewPwd:'password：', reviewNull: 'reviewer is null！',reviewNameErr:'reviewer name is error',
-	// 	noAuth: '该用户还没有分配权限', session: '会话已失效，请重新登陆'
+	// 	noAuth: '该用户还没有分配权限', session: '会话已失效，请重新登录'
 	// }
 
 export default {
@@ -12,7 +12,7 @@ export default {
 	utils: {
 		okBtn: 'Yes', nowBtn:'Now', cBtn:'No', title1:'Tips', title2:'review operator', sub:'Yes', back:'No',
 		review:'review name：', reviewPwd:'password：', reviewNull: 'reviewer is null！',reviewNameErr:'reviewer name is error',
-		noAuth: '该用户还没有分配权限', session: '会话已失效，请重新登陆'
+		noAuth: '该用户还没有分配权限', session: '会话已失效，请重新登录'
 	},
 	loopReq: {
 		serviceID: '服务名', errcode: '结果', errinfo: '错误信息', operationType: '操作类型'
@@ -25,7 +25,7 @@ export default {
 	},
 	navHead: {
 		tips:{loginOut: '是否退出系统？',pwdSame: '输入两次的密码不一致。',pwdFormat:'密码必须同时包含英文、数字及特殊字符（@、#、*、_、-）12-18位字符'},
-		label: ['消息系统','业务配置管理系统','FDEP运维平台','基础运维系统','集群管理系统','业务监控分析系统','修改密码','退出登陆'],
+		label: ['消息系统','业务配置管理系统','FDEP运维平台','基础运维系统','集群管理系统','业务监控分析系统','修改密码','退出登录'],
 		pwd: ['修改密码','用户名：','原密码：','新密码：','确认新密码：','提 交','返 回']
 	},
 	sidebar:{

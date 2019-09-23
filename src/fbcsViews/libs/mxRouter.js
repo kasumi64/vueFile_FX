@@ -154,7 +154,7 @@ const router = new Router({
 					component: resolve => require(['@/fbcsViews/view/order/manage.vue'], resolve),
 					meta: {
 						auth: true,
-						authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
 					},
 					children: [
 						{
@@ -162,7 +162,7 @@ const router = new Router({
 							component: resolve => require(['@/fbcsViews/view/order/xiaoZhan.vue'], resolve),
 							meta: {
 								auth: true,
-								authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+								authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
 							}
 						},
 						{
@@ -170,7 +170,7 @@ const router = new Router({
 							component: resolve => require(['@/fbcsViews/view/order/ekeyOrder.vue'], resolve),
 							meta: {
 								auth: true,
-								authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+								authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
 							}
 						},
 						{
@@ -178,7 +178,7 @@ const router = new Router({
 							component: resolve => require(['@/fbcsViews/view/order/signalOrder.vue'], resolve),
 							meta: {
 								auth: true,
-								authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+								authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
 							}
 						},
 						{
@@ -186,7 +186,7 @@ const router = new Router({
 							component: resolve => require(['@/fbcsViews/view/order/pwdOrder.vue'], resolve),
 							meta: {
 								auth: true,
-								authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+								authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
 							}
 						}
 					]
@@ -196,7 +196,7 @@ const router = new Router({
 					component: resolve => require(['@/fbcsViews/view/order/editBiz.vue'], resolve),
 					meta: {
 						auth: true,
-						authFlag: 'Auth_Fx_Config_Read,Auth_Fx_Config_Opt'
+						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
 					}
 				}
 				
