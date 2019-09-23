@@ -11,8 +11,8 @@
 			<lgy-candidateWords v-model="info.operationType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<el-checkbox-group ref="linkage" v-model="linkage" class="linkage">
 				<el-checkbox label="ekeyFlag">Ekey</el-checkbox>
-				<el-checkbox label="通信关系">{{$t('fbcsFile.advanced.audit.commFlag')}}</el-checkbox>
-				<el-checkbox label="扩展信息">{{$t('fbcsFile.advanced.audit.userextFlag')}}</el-checkbox>
+				<el-checkbox label="commFlag">{{$t('fbcsFile.advanced.audit.commFlag')}}</el-checkbox>
+				<el-checkbox label="userextFlag">{{$t('fbcsFile.advanced.audit.userextFlag')}}</el-checkbox>
 			</el-checkbox-group>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>
 			<el-radio-group v-model="info.sequence" class="mr20">

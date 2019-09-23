@@ -41,7 +41,7 @@
 #fbcs_MX .tipsPanle .alert .right{max-width: 488px;padding-right: 40px;font-size: 16px;color: #666;line-height: 24px;
 	text-align: left;overflow: auto;white-space: pre-wrap;}
 #fbcs_MX .tipsPanle .confirm {display: grid;font-size: 16px;color: #666;min-height: 200px;padding: 40px;white-space: pre-wrap;}
-#fbcs_MX .tipsPanle .content{margin: auto;text-align: left;max-height: 420px;overflow: auto;}
+#fbcs_MX .tipsPanle .confirmTxt{margin: auto;text-align: left;max-height: 420px;overflow: auto;}
 #fbcs_MX .tipsPanle .footBtn{height: 50px;border-top: 1px solid #EDEFF4;text-align: right;padding-top: 10px;}/*#D7D8DA,*/
 #fbcs_MX .tipsPanle .footBtn button{margin-right: 15px;}
 /* MaskLayer END*/
