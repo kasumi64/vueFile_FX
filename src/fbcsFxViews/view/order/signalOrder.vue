@@ -125,7 +125,7 @@ export default {
 			recvTime: this.$t('fbcsFile.order.xiaozhan.recvTime'),
 			exeTxt: this.$t('fbcsFile.order.xiaozhan.exeState'),
 			feedbackTxt: this.$t('fbcsFile.order.xiaozhan.feedbackState'),
-			legal: this.$t('fbcsFile.order.xiaozhan.legal'),
+			legalImg: this.$t('fbcsFile.order.xiaozhan.legal'),
 			// legalInfo: this.$t('fbcsFile.order.xiaozhan.legalInfo')
 		};
 		data.defined = {
@@ -140,10 +140,12 @@ export default {
 		};
 		
 		let acceptTitle = Object.assign({}, data.title);
+		delete acceptTitle.expectExeTime;
 		delete acceptTitle.recvTime;
 		delete acceptTitle.feedbackTxt;
 		data.acceptTitle = acceptTitle;
 		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		delete feedbackTitle.expectExeTime;
 		delete feedbackTitle.recvTime;
 		delete feedbackTitle.legalImg;
 		data.feedbackTitle = feedbackTitle;

@@ -275,6 +275,7 @@ export default {
 			let {exeState, feedbackState, recvBeginTime, recvEndTime} = param;
 			this.info = {exeState, feedbackState, recvBeginTime, recvEndTime};
 			radio(this.radio = param.radio);
+			this.page = param.page;
 			search();
 		} else {
 			getDay(6);

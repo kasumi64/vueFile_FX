@@ -176,7 +176,7 @@ export default {
 			enable = true;
 			var arr = this.selected.map(row => {
 				let obj = row;
-				if(row.exeState != 1 || row.legal) {
+				if(row.exeState != 1 || row.legal == 0) {
 					enable = false;
 					obj = kit.extend({}, row);
 					obj.bizKey = `<p class="red">${row.bizKey||''}</p>`;
@@ -279,6 +279,7 @@ export default {
 			let {exeState, feedbackState, recvBeginTime, recvEndTime} = param;
 			this.info = {exeState, feedbackState, recvBeginTime, recvEndTime};
 			radio(this.radio = param.radio);
+			this.page = param.page;
 			search();
 		} else {
 			getDay(6);

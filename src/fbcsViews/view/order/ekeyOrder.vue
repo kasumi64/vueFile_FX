@@ -274,7 +274,7 @@ export default {
 			enable = true;
 			var arr = this.selected.map(row => {
 				let obj = row;
-				if(row.exeState != 1 || row.legal) {
+				if(row.exeState != 1 || row.legal == 0) {
 					enable = false;
 					obj = kit.extend({}, row);
 					obj.bizKey = `<p class="red">${row.bizKey||''}</p>`;

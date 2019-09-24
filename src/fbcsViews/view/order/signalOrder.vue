@@ -213,7 +213,7 @@ export default {
 		data.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
 			items: [
-				{src:require('@/fbcsFxViews/img/order/edit.png'), click: edit.bind(this), tips: this.$t('fbcsFile.order.manage.edit'), enable: 'acceptBtn' },
+				// {src:require('@/fbcsFxViews/img/order/edit.png'), click: edit.bind(this), tips: this.$t('fbcsFile.order.manage.edit'), enable: 'acceptBtn' },
 				{src:require('@/fbcsFxViews/img/order/reject.png'), click: reject.bind(this), tips: this.$t('fbcsFile.order.manage.reject'), enable: 'rejectBtn'  }
 			]
 		};
@@ -255,7 +255,7 @@ export default {
 			enable = true;
 			var arr = this.selected.map(row => {
 				let obj = row;
-				if(row.exeState != 1 || row.legal) {
+				if(row.exeState != 1 || row.legal == 0) {
 					enable = false;
 					obj = kit.extend({}, row);
 					obj.bizKey = `<p class="red">${row.bizKey||''}</p>`;
