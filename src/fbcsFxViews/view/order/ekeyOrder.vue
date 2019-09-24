@@ -382,7 +382,7 @@ function check(){
 	if(/[\%]/.test(info.ekeyComment)){
 		utils.alert({txt: _this.$t('fbcsFile.Ekey.ekeyCommentFormat'), btn: 1});
 		return true;
-	} else if(info.remark.trim()==''){
+	} else if(info.remark==''){
 		utils.alert({txt: _this.$t('fbcsFile.order.manage.remarks')});
 		return true;
 	}
@@ -393,7 +393,7 @@ function remarkCheck(){
 	let empty = false, el = _this.$refs.feedback.$el;
 	kit('input', el).each(el => {
 		let {ind, must} = el.dataset;
-		if(must=='1'&&el.value.trim()===''){
+		if(must=='1'&&el.value===''){
 			empty = _this.list[ind];
 			el.style.border = '1px solid red';
 		} else el.style.border = '1px solid #D7D8DA';

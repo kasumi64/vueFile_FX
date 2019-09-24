@@ -201,7 +201,7 @@ export default {
 function pass(){
 	let info = _this.info;
 	info.isModifyPasswdFlag = _this.isEdit ? 1 : 0;
-	if(info.remark.trim()==''){
+	if(info.remark==''){
 		utils.alert({txt: _this.$t('fbcsFile.order.manage.remarks')});
 		return false;
 	}

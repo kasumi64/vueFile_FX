@@ -353,7 +353,7 @@ export default {
 			}, 40);
 		},
 		editSubmit(){
-			if(this.ekeyInfo.remark.trim() == '') {
+			if(this.ekeyInfo.remark == '') {
 				return utils.alert({txt: this.$t('fbcsFile.order.manage.remarks')});
 			}
 			let params = Object.assign({}, this.ekeyInfo);
@@ -388,7 +388,7 @@ function remarkCheck(){
 	let empty = false, el = _this.$refs.feedback.$el;
 	kit('input', el).each(el => {
 		let {ind, must} = el.dataset;
-		if(must=='1'&&el.value.trim()===''){
+		if(must=='1'&&el.value===''){
 			empty = _this.list[ind];
 			el.style.border = '1px solid red';
 		} else el.style.border = '1px solid #D7D8DA';

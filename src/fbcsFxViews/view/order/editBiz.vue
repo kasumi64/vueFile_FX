@@ -503,7 +503,7 @@
 		} else if (maxTask < 1){
 			utils.alert({txt: this.$t(err + 'maxTask')});
 			return false;
-		} else if(!info.remark||info.remark.trim()==''){
+		} else if(!info.remark||info.remark==''){
 			utils.alert({txt: this.$t('fbcsFile.order.manage.remarks')});
 			return false;
 		}
