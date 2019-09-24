@@ -288,7 +288,9 @@ export default {
 		},
 		review(){
 			if(!enable){
-				return utils.alert({txt: this.$t('fbcsFile.order.xiaozhan.batch')});
+				let txt = 'fbcsFile.order.pwdOrder.batch';
+				txt += this.batch == 'accept' ? '1' : '2';
+				return utils.alert({txt: this.$t(txt)});
 			}
 			if(this.batch == 'feedback' && !remarkCheck()) return;
 			//反馈不用复核

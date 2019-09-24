@@ -209,7 +209,7 @@ var obj = {
 			legal: '合法性', legalInfo: '合法详情', legal0: '合法', legal1: '不合法',
 			'type-1': '下线', type0: '修改', type1: '上线',
 			exe1: '未处理', exe2: '已拒绝', exe3: '失败', exe4: '成功',
-			fb1: '未反馈', fb2: '已反馈', batch: '业务ID标红的指令不可批量执行或反馈！'
+			fb1: '未反馈', fb2: '已反馈'
 		},
 		ekeyOrder: {
 			ekeyName: 'Ekey名称', ekeyValidDate: 'Ekey有效期', comment: 'Ekey描述',
@@ -222,7 +222,8 @@ var obj = {
 			type0: '上线', type1: '下线'
 		},
 		pwdOrder: {
-			title: '修改密码'
+			batch1: '业务ID标红的指令不可批量执行！', batch2: '业务ID标红的指令不可批量反馈！',
+			title: '修改密码', 
 		},
 		editBiz: {
 			title: '编辑小站指令', bizKey: '业务ID：', remark: '备注：'
