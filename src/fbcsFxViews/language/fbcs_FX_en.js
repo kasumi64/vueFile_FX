@@ -198,10 +198,11 @@ var obj = {
 			xiaozhan: '小站指令', ekeyOrder: 'Ekey指令', signalOrder: '关系对指令', pwdOrder: '密码指令',
 			date: '统计时间：', today: '今天', week: '近一周', month: '近一个月', recvBeginTime: '指定时间段',
 			recvEndTime: '至', acceptLabel: '执行状态：', feedbackLabel: '反馈状态：', 
-			acceptState: ['全部','未处理','已拒绝','失败','成功'], feedbackState: ['全部','未反馈','已反馈'],
+			acceptState: ['全部','未处理','已拒绝','失败','成功'], feedbackState: ['全部','未反馈','反馈失败','反馈成功'],
 			batchAccept: '批量执行', batchFeedback: '批量反馈', edit: '编辑', reject: '拒绝',
-			oneData: '至少选择一条数据！', submit: '是否确定要提交', rej: '是否拒绝这条指令？', remarks: '备注不能为空',
-			reportBtn: '上报BOP', reportTxt: '是否上报BOP稽核信息'
+			oneData: '至少选择一条数据！', submit: '是否确定要提交', rej: '是否拒绝这条指令？',
+			reportBtn: '上报BOP', reportTxt: '是否上报BOP稽核信息',
+			remarks: '备注不能为空，且不能包含（%<>）',
 		},
 		xiaozhan: {
 			bizKey: '业务ID', userID: '用户ID', userName: '用户名称', operationType: '操作类别',
@@ -209,7 +210,7 @@ var obj = {
 			legal: '合法性', legalInfo: '合法详情', legal0: '合法', legal1: '不合法',
 			'type-1': '下线', type0: '修改', type1: '上线',
 			exe1: '未处理', exe2: '已拒绝', exe3: '失败', exe4: '成功',
-			fb1: '未反馈', fb2: '已反馈'
+			fb1: '未反馈', fb2: '反馈失败', fb3: '反馈成功'
 		},
 		ekeyOrder: {
 			ekeyName: 'Ekey名称', ekeyValidDate: 'Ekey有效期', comment: 'Ekey描述',

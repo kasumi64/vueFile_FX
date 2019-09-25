@@ -271,7 +271,7 @@ export default {
 			enable = true;
 			var arr = this.selected.map(row => {
 				let obj = row;
-				if(row.exeState == 1 || row.feedbackState == 2) {
+				if(row.exeState == 1 || row.feedbackState == 3) {
 					enable = false;
 					obj = kit.extend({}, row);
 					obj.bizKey = `<p class="red">${row.bizKey||''}</p>`;
@@ -382,7 +382,7 @@ function check(){
 	if(/[\%]/.test(info.ekeyComment)){
 		utils.alert({txt: _this.$t('fbcsFile.Ekey.ekeyCommentFormat'), btn: 1});
 		return true;
-	} else if(info.remark==''){
+	} else if(info.remark=='' || /[%]/.test(info.remark)){
 		utils.alert({txt: _this.$t('fbcsFile.order.manage.remarks')});
 		return true;
 	}
@@ -394,6 +394,9 @@ function remarkCheck(){
 	kit('input', el).each(el => {
 		let {ind, must} = el.dataset;
 		if(must=='1'&&el.value===''){
+			empty = _this.list[ind];
+			el.style.border = '1px solid red';
+		} else if(/[%]/.test(el.value)){
 			empty = _this.list[ind];
 			el.style.border = '1px solid red';
 		} else el.style.border = '1px solid #D7D8DA';

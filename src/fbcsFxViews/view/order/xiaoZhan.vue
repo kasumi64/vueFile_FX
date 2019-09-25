@@ -195,7 +195,7 @@ export default {
 			enable = true;
 			var arr = this.selected.map(row => {
 				let obj = row;
-				if(row.exeState == 1 || row.feedbackState == 2) {
+				if(row.exeState == 1 || row.feedbackState == 3) {
 					enable = false;
 					obj = kit.extend({}, row);
 					obj.bizKey = `<p class="red">${row.bizKey||''}</p>`;
@@ -302,6 +302,9 @@ function remarkCheck(){
 	kit('input', el).each(el => {
 		let {ind, must} = el.dataset;
 		if(must=='1'&&el.value===''){
+			empty = _this.list[ind];
+			el.style.border = '1px solid red';
+		} else if(/[%]/.test(el.value)){
 			empty = _this.list[ind];
 			el.style.border = '1px solid red';
 		} else el.style.border = '1px solid #D7D8DA';

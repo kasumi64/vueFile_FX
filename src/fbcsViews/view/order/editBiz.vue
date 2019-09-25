@@ -309,7 +309,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				
 				var val = this.info['speedCtrlKbps'];
 				if(val.length==1&&val=='-') return fxUtils.alert({txt: tips['speedCtrlKbps']});
-				if(!this.info.remark||this.info.remark == '') {
+				if(!this.info.remark || this.info.remark=='' || /[%]/.test(this.info.remark)) {
 					return fxUtils.alert({txt: this.$t('fbcsFile.order.manage.remarks')});
 				}
 				fn();
