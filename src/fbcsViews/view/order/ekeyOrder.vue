@@ -160,7 +160,7 @@ function reject(row){
 			};
 			utils.post(param).then(res => {
 				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
-				_this.search();
+				search();
 			});
 		}
 	});
@@ -353,9 +353,11 @@ export default {
 			}
 			param.list = temp;
 			
+			utils.loadShow();
 			utils.post(param).then(res => {
+				utils.loadClose();
 				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
-				this.search();
+				search();
 				this.showDialog = false;
 			});
 		},
@@ -384,7 +386,7 @@ export default {
 			utils.post(params).then(function(res){
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				utils.alert({txt: res.errinfo, type: 1});
-				_this.search();
+				search();
 				_this.editDialog = false;
 			});
 		}

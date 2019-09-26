@@ -90,7 +90,7 @@ function reject(row){
 			};
 			utils.post(param).then(res => {
 				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
-				_this.search();
+				search();
 			});
 		}
 	});
@@ -255,9 +255,11 @@ export default {
 			}
 			param.list = temp;
 			
+			utils.loadShow();
 			utils.post(param).then(res => {
+				utils.loadClose();
 				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
-				this.search();
+				search();
 				this.showDialog = false;
 			});
 		},

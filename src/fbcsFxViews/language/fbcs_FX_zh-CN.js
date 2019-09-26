@@ -202,7 +202,7 @@ var obj = {
 			batchAccept: '批量执行', batchFeedback: '批量反馈', edit: '编辑', reject: '拒绝',
 			oneData: '至少选择一条数据！', submit: '是否确定要提交', rej: '是否拒绝这条指令？',
 			reportBtn: '上报BOP', reportTxt: '是否上报BOP稽核信息',
-			remarks: '备注不能为空，且不能包含（%<>）',
+			remarks: '备注不能为空，且不能包含（%）',
 		},
 		xiaozhan: {
 			bizKey: '业务ID', userID: '用户ID', userName: '用户名称', operationType: '操作类别',

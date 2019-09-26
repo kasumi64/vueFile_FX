@@ -30,7 +30,9 @@ export default {
 			utils.confirm({
 				txt: this.$t('fbcsFile.order.manage.reportTxt'),
 				ok: () => {
+					utils.loadShow();
 					utils.post({url: 'bopinfo/report', cmdID: '700040'}).then(res => {
+						utils.loadClose();
 						utils.alert({txt:res.errinfo, type: res.errcode!='0' ? 0 : 1});
 					});
 				}
