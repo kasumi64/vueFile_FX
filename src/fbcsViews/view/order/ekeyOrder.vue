@@ -101,7 +101,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyInfo')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.comment" maxlength="255" autocomplete="off"/>
+						<input v-model="ekeyInfo.comment" maxlength="64" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -473,7 +473,7 @@ function search(){
 				obj.legalImg = `<img src=${legal == 0 ? cross : tick} `;
 				obj.legalImg += legalInfo ? `title="${legalInfo}" />` : '/>';
 			} else obj.legalImg = '';
-			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
+			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" maxlength="128" />`;
 			if(obj.ekeyValidDate){
 				obj.ymd = moment(obj.ekeyValidDate * 1000).format('YYYY-MM-DD HH:mm:ss');
 			} else obj.ekeyValidDate = obj.ymd = null;

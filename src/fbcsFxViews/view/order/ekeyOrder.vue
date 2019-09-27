@@ -445,7 +445,7 @@ function search(){
 				obj.legalImg = `<img src=${legal == 0 ? cross : tick} `;
 				obj.legalImg += legalInfo ? `title="${legalInfo}" />` : '/>';
 			} else obj.legalImg = '';
-			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
+			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" maxlength="128" />`;
 			if(obj.validDate){
 				obj.ymd = moment(obj.validDate * 1000).format('YYYY-MM-DD HH:mm:ss');
 			} else obj.validDate = obj.ymd = null;

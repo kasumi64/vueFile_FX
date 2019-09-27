@@ -353,7 +353,7 @@ function search(){
 				obj.legalImg = `<img src=${legal == 0 ? cross : tick} `;
 				obj.legalImg += legalInfo ? `title="${legalInfo}" />` : '/>';
 			} else obj.legalImg = '';
-			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" />`;
+			obj.remarks = `<input data-ind=${i} data-must=${obj.isModifyFlag||0} style="min-width:60px;width:100%" maxlength="128" />`;
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;
