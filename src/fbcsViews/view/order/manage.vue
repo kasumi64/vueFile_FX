@@ -54,7 +54,7 @@ export default {
 <style>
 	#fbcs_MX .order .remark{min-width: 50px;width: 100%;}
 	#fbcs_MX .order .el-table__header .el-checkbox{display: inline-block;}
-	#fbcs_MX .order .el-dialog__body{padding: 0;}
+	#fbcs_MX .order .el-dialog__body{padding: 0 !important;}
 	#fbcs_MX .order .MX_dialog{padding: 40px;}
 	#fbcs_MX .order .onePage{margin: 0;}
 	#fbcs_MX .orderPane{padding-bottom: 0;max-height: 480px;overflow: auto;}
