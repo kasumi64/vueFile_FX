@@ -186,7 +186,7 @@ function edit(row){
 export default {
 	data(){
 		data = {
-			fxAuth: utils.getFxAuth,
+			fxAuth: utils.getMxAuth,
 			info: {
 				exeState: 0, feedbackState: 0, recvBeginTime: null, recvEndTime: null
 			},
@@ -395,7 +395,6 @@ export default {
 	},
 	created(){
 		_this = this;
-		this.fxAuth = utils.getFxAuth;
 		getDay(6);
 		this.search();
 	},

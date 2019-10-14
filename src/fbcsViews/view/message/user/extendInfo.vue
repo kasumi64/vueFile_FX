@@ -210,7 +210,7 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delExt') },
 			]
 		};
-		if(!utils.getFxAuth) data.defined.items = [];
+		if(!utils.getMxAuth) data.defined.items = [];
 		data.titleBOP = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
@@ -299,7 +299,7 @@ export default {
 	},
 	created(){
 		_this = this;
-		this.fxAuth = utils.getFxAuth;
+		this.fxAuth = utils.getMxAuth;
 		args = utils.getArgs('userInfo');
 		utils.once('fbcs_newUser', user => {
 			args = user;

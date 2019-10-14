@@ -424,6 +424,14 @@ Object.addProto(exp, 'getFxAuth', {
 	}
 });
 
+Object.addProto(exp, 'getMxAuth', {
+	get(){
+		if('debug') return true;
+
+		let authority = sessionStorage.getItem('authoritys') || '';
+		return (/Auth_Mx_Config_Opt/i).test(authority);
+	}
+});
 
 export default exp;
-//(c) Copyright 2019.09 LGY. All Rights Reserved.
+//(c) Copyright 2019.10 LGY. All Rights Reserved.

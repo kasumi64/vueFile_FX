@@ -272,7 +272,6 @@ export default {
 	},
 	created(){
 		_this = this;
-		this.fxAuth = utils.getFxAuth;
 		getDay(6);
 		this.search();
 	},

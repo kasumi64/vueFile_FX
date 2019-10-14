@@ -101,7 +101,7 @@ function reject(row){
 export default {
 	data(){
 		data = {
-			fxAuth: utils.getFxAuth,
+			fxAuth: utils.getMxAuth,
 			info: {
 				exeState: 0, feedbackState: 0, recvBeginTime: null, recvEndTime: null,
 			},
