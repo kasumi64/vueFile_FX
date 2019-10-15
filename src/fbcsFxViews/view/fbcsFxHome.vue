@@ -114,11 +114,15 @@ export default {
 		utils.emit('fbcs_file', this.$refs['fbcs_file']);
 
 		unlock = kit('#fbcsMX_unlock').show().click(function(e){
+			if(!utils.getFxAuth) return utils.alert({txt: _this.$t('fbcsFile.tips.lock')});
+			
 			_this.uri = 'lock';
 			_this.showReview = true;
 		});
 
 		lock = kit('#fbcsMX_lock').hide().click(function(e){
+			if(!utils.getFxAuth) return utils.alert({txt: _this.$t('fbcsFile.tips.lock')});
+			
 			_this.uri = 'unlock';
 			_this.showReview = true;
 		});

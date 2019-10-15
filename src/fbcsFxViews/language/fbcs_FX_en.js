@@ -3,7 +3,8 @@ var obj = {
 		ok: '确定', now: '立即下发', cancel: '取消', build: '创建', back:'返回', refresh: '刷新',
 		modify: '修改', edit: '编辑', submit: '提交', contrast: '对比', close: '关闭',
 		date: '选择日期时间', title: '提示', rightClick: '请在文件名上点击右键，选择“链接另存为...”菜单保存文件。',
-		webUser: '此次修改影响到互联网节点，请手动下发互联网节点配置信息'
+		webUser: '此次修改影响到互联网节点，请手动下发互联网节点配置信息',
+		lock: '您当前没有操作权限！'
 	},
 	components: {
 		placeholder: '输入关键字', not: '暂无数据', paging1: '已显示全部', paging2: '条数据',

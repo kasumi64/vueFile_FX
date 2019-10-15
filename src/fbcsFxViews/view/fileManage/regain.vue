@@ -4,7 +4,7 @@
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.files.regain.compare')}}</button>
 		</div>-->
 		<ul class="fnField">
-			<li @click="search">
+			<li v-if="fxAuth" @click="search">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/fileVer.png"/>
 				<span class="label">{{$t('fbcsFile.files.regain.compare')}}</span>
 			</li><li @click="advanced">
@@ -63,6 +63,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 
 var _this, data = {
+	fxAuth: utils.getFxAuth,
 	page: 1,
 	total: 1,
 	list: [

@@ -423,7 +423,12 @@ function search(){
 	params.recvBeginTime = Math.floor(params.recvBeginTime/1000);
 	params.recvEndTime = Math.floor(params.recvEndTime/1000);
 	utils.post(params).then(function(res){
-		if(res.errcode != '0') return console.warn(res.errcode, res.errinfo);
+		if(res.errcode != '0') {
+			_this.list = [];
+			_this.page = 1;
+			_this.total = 0;
+			return console.warn(res.errcode, res.errinfo);
+		}
 //		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		if(res.totalPage>0 && _this.page > res.totalPage){
 			_this.page = res.totalPage;
