@@ -184,6 +184,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 					name: '',
 					page: _this.currPage
 				});
+				fxUtils.getArgs('userInfo', row);
 				utils.goto('/message/userEdit/mess_userSet');
 			}
 		},

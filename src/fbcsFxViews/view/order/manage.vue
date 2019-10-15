@@ -7,7 +7,7 @@
 			<el-tab-pane :label="$t('fbcsFile.order.manage.pwdOrder')" name="pwdOrder">密码指令</el-tab-pane>
 		</el-tabs>
 		<router-view />
-		<button class="blueBtn rig" @click="report">{{$t('fbcsFile.order.manage.reportBtn')}}</button>
+		<button v-if="fxAuth" class="blueBtn rig" @click="report">{{$t('fbcsFile.order.manage.reportBtn')}}</button>
 	</div>
 </template>
 
@@ -18,6 +18,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 export default {
 	data(){
 		return {
+			fxAuth: utils.getFxAuth,
 			activeTag: 'xiaozhan'
 		};
 	},

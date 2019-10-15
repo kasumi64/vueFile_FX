@@ -68,8 +68,8 @@
 					<!--<el-tooltip v-if="scope.row.userIDEnable!=0" :content="pageTxt.label[10]" placement="bottom" effect="light">
 						<img @click="edit(scope.$index, scope.row, scope)" src="@/fbcsViews/img/theme/edit_2.png" alt="">
 					</el-tooltip>-->
-					<img @click="edit(scope.$index, scope.row, scope)" src="@/fbcsViews/img/theme/edit_2.png" :title="pageTxt.label[10]">
-					<img @click="del(scope.$index, scope.row, scope)" src="@/fbcsViews/img/theme/del_2.png" :title="pageTxt.label[11]">
+					<img v-if="auth>1" @click="edit(scope.$index, scope.row, scope)" src="@/fbcsViews/img/theme/edit_2.png" :title="pageTxt.label[10]">
+					<img v-if="auth>1" @click="del(scope.$index, scope.row, scope)" src="@/fbcsViews/img/theme/del_2.png" :title="pageTxt.label[11]">
 					<img @click="detail(scope.$index, scope.row, scope)" src="@/fbcsViews/img/theme/detail_2.png" :title="pageTxt.label[12]">
 				</div>
 			</el-table-column>

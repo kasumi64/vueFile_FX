@@ -109,8 +109,8 @@
 				<label class="txt">&nbsp;</label>
 				<div class="rightBox">
 					<p class="jg"></p>
-					<button class="blueBtn" @click="now">{{pageTxt.label[11]}}</button>
-					<button class="blueBtn" @click="send">{{pageTxt.label[12]}}</button>
+					<button v-if="auth" class="blueBtn" @click="now">{{pageTxt.label[11]}}</button>
+					<button v-if="auth" class="blueBtn" @click="send">{{pageTxt.label[12]}}</button>
 					<button class="defBtn" @click="back">{{pageTxt.label[13]}}</button>
 					<p class="jg"></p>
 				</div>
@@ -141,6 +141,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 	}*/
 	
 	var data = {
+		auth: fxUtils.getMxAuth,
 		pageTxt,
 		idName: '',
 		info: {
