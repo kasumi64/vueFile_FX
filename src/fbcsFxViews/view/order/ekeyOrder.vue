@@ -185,7 +185,7 @@ export default {
 			showDialog: false,
 			submitList: [],
 			showReview: false,
-			editTitle: this.$t('fbcsFile.fnField.editEkey'),
+			editTitle: this.$t('fbcsFile.order.ekeyOrder.editEkey'),
 			ekeyInfo: {
 				bizKey: '', userID: '', userName: '', ekeyName: '',
 				validDate: '', ekeyComment: '',  remark: ''

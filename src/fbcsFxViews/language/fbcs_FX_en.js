@@ -216,7 +216,7 @@ var obj = {
 		ekeyOrder: {
 			ekeyName: 'Ekey名称', ekeyValidDate: 'Ekey有效期', comment: 'Ekey描述',
 			userName: '用户名称：', ekeyPasswd: '修改ekey密码：', 'type-1': '下线',
-			type1: '上线'
+			type1: '上线', editEkey: '编辑Ekey指令'
 		},
 		signalOrder: {
 			expectExeTime: '客户期望执行时间', title: '修改通信关系', bizType: '业务类型：',

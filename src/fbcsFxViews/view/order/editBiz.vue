@@ -548,7 +548,6 @@
 		utils.post(params).then(function(res){
 			if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 			_this.userType = res.lists;
-			_this.info.userType = res.lists[0].id;
 		});
 		
 		params= { url, cmdID, language, type: 2 };

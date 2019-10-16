@@ -120,7 +120,7 @@ function ReqHttp(){
 			for (var i = 0; i < 10; i++) {
 				arr.push({userID: '01'+i, userName: 'userName'+i,userID1: '006', nodeName: '深圳'+i, cuName: 'CU-1',
 				operationTime: 1555553114000, operationType: 3, type: 4, fileName: 'ABC', reviewer: 'reviewer',
-				linkGroupName: '', inZone: '', webUserFlag: 1});
+				linkGroupName: '', inZone: '', webUserFlag: 1, exeState: 1});
 			}
 			debugRes.data.lists = arr;
 			return Promise.resolve(callback(debugRes, fn, args));
