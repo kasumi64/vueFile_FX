@@ -32,7 +32,8 @@ var _this, data = {
 	currRow: '',
 	widths: {},
 	sortables: {},
-	page: 1
+	page: 1,
+	isCallPage: false
 };
 
 
@@ -147,20 +148,25 @@ export default {
 		changePage(num){ //当前页
 			// this.page = num;
 //			this.$emit('update:currentPage', num);
-			if(this.fliover !== false) this.fliover(num);
-			else this.$emit('changePage', num);
+			if(this.fliover !== false) {
+				if(!this.isCallPage) this.fliover(num);
+				this.isCallPage = false;
+			} else this.$emit('changePage', num);
 		},
 		customShow(k, row){ //功能按钮是否隐藏, k为row的键
 			return row[k] === false ? false : true;
 		},
 		ElPager(num){
-			if(this.$refs.paging)
-				this.$refs.paging.$children[1].$emit('change', num);
+			if(this.$refs.paging) {
+				this.isCallPage = true;
+				this.$refs.paging.$children[1].$emit('change', num||1);
+			}
 		}
 	},
 	created(){
 		_this = this;
 		this.page = this.currentPage;
+		this.isCallPage = false;
 		if(this.width instanceof Object) this.widths = this.width;
 		else this.widths = {};
 		if(this.sortable instanceof Object) this.sortables = this.sortable;

@@ -38,8 +38,8 @@
 				<span class="label">{{$t('fbcsFile.order.manage.batchFeedback')}}</span>
 			</li>
 		</ul>
-		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage="page" @changePage="changePage"
-			:selection="true" @selectChange="selectChange" :width="width">
+		<lgy-table :list="list" :title="title" :defined="defined" :total="total" :currentPage="page" :fliover="changePage"
+			ref="all" :selection="true" @selectChange="selectChange" :width="width">
 		</lgy-table>
 		
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag width="70%" @open="open"
@@ -162,6 +162,7 @@ export default {
 	methods:{
 		search(){
 			this.page = 1;
+			if(this.$refs.all) this.$refs.all.ElPager(1);
 			search();
 		},
 		changePage(num){
