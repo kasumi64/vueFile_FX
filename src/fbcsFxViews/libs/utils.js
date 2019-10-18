@@ -335,7 +335,10 @@ function TipsConfirm(){
 			notify.cancel.show('inline-block');
 		}
 	}
-	function hide(){mask.detach();}
+	function hide(){
+		clearTimeout(autoOff);
+		mask.detach();
+	}
 	this.confirm = function(opt, args){
 		show(opt, args);
 	};

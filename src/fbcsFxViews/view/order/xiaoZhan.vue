@@ -257,7 +257,12 @@ export default {
 			utils.loadShow();
 			utils.post(param).then(res => {
 				utils.loadClose();
-				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
+				let mess = `<p>${res.errinfo}</p>`;
+				if(_this.batch == 'accept'&&res.webUserFlag == 1){ //网络用户
+					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
+				}
+				if(res.errcode!='0') return utils.alert({txt: mess});
+				utils.alert({txt: mess, type: 1});
 				search();
 				this.showDialog = false;
 			});

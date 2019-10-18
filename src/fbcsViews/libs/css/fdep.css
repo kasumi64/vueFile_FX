@@ -1,7 +1,7 @@
 @charset "utf-8";
 #fbcs_MX {
 	font-weight:400;font-style:normal;font-family:"Microsoft YaHei","HiraginoSansGB","Helvetica","Arial","Consolas","sans-serif","宋体";
-	word-break:break-all;-moz-user-select: text;-webkit-user-select: text;user-select: text;
+	word-break:break-word;-moz-user-select: text;-webkit-user-select: text;user-select: text;
 	text-align: left;font-size: 0;
 }
 #fbcs_MX *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}

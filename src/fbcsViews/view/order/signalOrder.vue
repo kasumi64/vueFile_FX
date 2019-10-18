@@ -340,7 +340,8 @@ export default {
 			utils.loadShow();
 			utils.post(param).then(res => {
 				utils.loadClose();
-				utils.alert({txt:res.errinfo, type:res.errcode!='0'?0:1});
+				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
+				utils.alert({txt: res.errinfo, type: 1});
 				search();
 				this.showDialog = false;
 			});
