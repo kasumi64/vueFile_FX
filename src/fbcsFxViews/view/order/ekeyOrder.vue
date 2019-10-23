@@ -285,6 +285,13 @@ export default {
 			this.dialogTitle = this.$t('fbcsFile.order.manage.batchFeedback');
 			this.submitList = arr;
 			this.showDialog = true;
+			
+			let vel = _this.$refs.feedback;
+			if(vel){
+				kit('input', vel.$el).each(el => {
+					el.style.border = '1px solid #D7D8DA';
+				});
+			}
 		},
 		review(){
 			if(!enable){

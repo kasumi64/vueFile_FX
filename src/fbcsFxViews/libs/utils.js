@@ -418,6 +418,12 @@ exp.userName = function(){
 	return sessionStorage.getItem('userName') || '';
 };
 
+Object.addProto(exp, 'language', {
+	get(){
+		return sessionStorage.getItem('language') || 'zh';
+	}
+});
+
 Object.addProto(exp, 'getFxAuth', {
 	get(){
 		if('debug') return true;

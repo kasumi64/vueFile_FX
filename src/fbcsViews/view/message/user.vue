@@ -16,6 +16,7 @@
 				<div v-if="auth>1" @click="createUser"><img src="@/fbcsViews/img/user/creatico.png"><span>{{pageTxt.label[4]}}</span></div>
 				<div v-if="auth>1" @click="showPromptBox"><img src="@/fbcsViews/img/user/deletuser.png"><span>{{pageTxt.table[6]}}</span></div>
 				<div v-if="auth>1" @click="eidtPasswd"><img src="@/fbcsViews/img/user/editPswd.png"><span>{{pageTxt.table[7]}}</span></div>
+				<div v-if="auth>1" @click="batchPwdShow"><img src="@/fbcsFxViews/img/FnIcon/batchPwd.png"><span>{{$t('fbcsFile.fnField.batchPwd')}}</span></div>
 				<div v-if="auth>1" @click="importExtInfo"><img src="@/fbcsViews/img/user/defalutico.png"><span>{{pageTxt.label[5]}}</span></div>
 				<div @click="exportExtInfo"><img src="@/fbcsViews/img/user/importico1.png"><span>{{pageTxt.label[6]}}</span></div>
 				<div @click="exportBasicsInfo"><img src="@/fbcsViews/img/user/importico.png"><span>{{pageTxt.label[7]}}</span></div>
@@ -89,7 +90,8 @@
 				</div>
 			</el-dialog>
 			
-			<el-dialog width="70%" :visible.sync="importErr" :title="$t('fbcsFile.tips.title')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
+			<el-dialog width="70%" :visible.sync="importErr" :title="$t('fbcsFile.tips.title')" v-dialogDrag 
+				:close-on-click-modal='false' :show-close="false">
 				<div class="_dialog">
 					<el-table :data="errList" max-height="294" highlight-current-row border stripe>
 						<el-table-column prop="line" :label="$t('fbcsFile.userHome.line')"></el-table-column>
@@ -103,6 +105,25 @@
 					<button class="defBtn" @click="importErr=false">{{$t('fbcsFile.tips.close')}}</button>
 				</div>
 			</el-dialog>
+			
+			<el-dialog width="600px" :visible.sync="isBatchShow" :title="$t('fbcsFile.fnField.batchPwd')" v-dialogDrag
+				:close-on-click-modal='false' :show-close="false">
+				<div class="_dialog batchPwd">
+					<div class="left">
+						<p class="txt">{{$t('fbcsFile.userHome.setDate')}}</p>
+					</div><div class="right">
+						<el-radio-group v-model="batchType">
+							<el-radio :label="0">{{$t('fbcsFile.userHome.defPwd')}}</el-radio>
+							<el-radio :label="1">{{$t('fbcsFile.userHome.neverPwd')}}</el-radio>
+						</el-radio-group>
+					</div>
+				</div>
+				<div slot="footer" class="_footBtn">
+					<button class="blueBtn" @click="batchPwd">{{$t('fbcsFile.tips.ok')}}</button>
+					<button class="defBtn" @click="isBatchShow=false">{{$t('fbcsFile.tips.close')}}</button>
+				</div>
+			</el-dialog>
+			<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 		</div>
 	</div>
 </template>
@@ -118,7 +139,7 @@
 
 	export default {
 		data() {
-			return {
+			var data = {
 				auth: globalVar.get('status').user,
 				// paging: lang.publics.paging,
 				max: 0,
@@ -145,8 +166,38 @@
 				importErr: true,
 				errList: [],
 			};
+			data.isBatchShow = false;
+			data.batchType = 0;
+			data.showReview = false;
+			data.reviewTxt = this.$t('fbcsFile.userHome.reviewTxt');
+			data.reqsv = {uri: 'userpasswd/batchSetexpiredTime'};
+			return data;
 		},
 		methods: {
+			batchPwdShow(){
+				this.batchType = 0;
+				this.isBatchShow = true;
+			},
+			batchPwd(){
+				this.showReview = true;
+				this.isBatchShow = false;
+			},
+			review(args){
+				let param = {
+					url: 'userpasswd/bathcSetExpiredTime',
+					cmdID: '600018',
+					reviewer: args.name,
+					reviewPassword: args.pwd,
+					reviewType: 1,
+					language: fxUtils.language,
+					bathcSetExpiredTimeType: this.batchType
+				};
+				fxUtils.loadShow();
+				fxUtils.post(param).then(res => {
+					fxUtils.loadClose();
+					fxUtils.alert({txt: res.errinfo, type: res.errcode=='0'?1:0});
+				});
+			},
 			fn(e) {
 				this.arr = e;
 			},
@@ -460,6 +511,11 @@
   .Popup_input { width: 360px; margin-left: 12px; }
   .dialog_pop .red { color: #ff6b6b; }
   .redErr{color: red;}
+  #fbcs_MX .batchPwd{vertical-align: middle;padding-top: 46px;}
+  .batchPwd .left{display: inline-block;width: 200px;text-align: right;}
+  .batchPwd .txt{font-size: 14px;line-height: 30px;color: #666;}
+  .batchPwd .right{display: inline-block;margin-left: 10px;}
+  .batchPwd .el-radio{line-height: 30px;}
 </style>
 <style>
   ._whellError #table_header .l1 { font-size: 14px; font-weight: bold; }

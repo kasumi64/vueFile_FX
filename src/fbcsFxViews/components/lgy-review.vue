@@ -2,8 +2,9 @@
 .lgy-review{display: none;z-index: 90001;}
 .lgy-review .reviewLayer{padding-top: 55px;height: 200px;}
 .lgy-review .reviewLayer li:first-child{margin-bottom: 30px;}
-.lgy-review .label{width: 180px;font-size: 14px;color:#666;line-height: 30px;padding-right: 10px;text-align: right;vertical-align: top;}
-.lgy-review .input{width: 260px;vertical-align: top;}
+.lgy-review .label{width: 180px;font-size: 14px;color:#666;line-height: 30px;padding-right: 10px;text-align: right;vertical-align: middle;}
+.lgy-review .input{width: 260px;font-size: 14px;color: #666;height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;
+	vertical-align: middle; border-radius: 0;}
 .lgy-review .autocompleteOFF{position: fixed;top: -100px;left: 0;opacity: 0;pointer-events: none;}
 </style>
 
@@ -73,7 +74,10 @@ export default {
 			args.language = utils.getArgs('lang') || 'zh';
 			args = Object.assign(args, param);
 			
-			if(param.uri.indexOf('mx/') > -1) uri = '/fbcs_mx/';
+			if(param.uri.indexOf('mx/') > -1) {
+				args.cmdID = '600112';
+				uri = '/fbcs_mx/';
+			}
 			args.uri = uri + (param.uri||'');
 			
 //			console.log('dispatch:',args.uri);

@@ -17,6 +17,9 @@
 			</li><li @click="editPwd" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.editPwd')}}</span>
+			</li><li @click="batchPwdShow" v-if="fxAuth">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/batchPwd.png"/>
+				<span class="label">{{$t('fbcsFile.fnField.batchPwd')}}</span>
 			</li><li @click="importInformation" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/importBasicInformation.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.importInformation')}}</span>
@@ -50,6 +53,24 @@
 		
 		<modifyPwd :show.sync="showPwd" :user="currSelect"></modifyPwd>
 		
+		<el-dialog :visible.sync="isBatchShow" :title="$t('fbcsFile.fnField.batchPwd')" v-dialogDrag 
+			:close-on-click-modal='false' :show-close="false">
+			<div class="_dialog batchPwd">
+				<div class="left">
+					<p class="txt">{{$t('fbcsFile.userHome.setDate')}}</p>
+				</div><div class="right">
+					<el-radio-group v-model="batchType">
+						<el-radio :label="0">{{$t('fbcsFile.userHome.defPwd')}}</el-radio>
+						<el-radio :label="1">{{$t('fbcsFile.userHome.neverPwd')}}</el-radio>
+					</el-radio-group>
+				</div>
+			</div>
+			<div slot="footer" class="_footBtn">
+				<button class="blueBtn" @click="batchPwd">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="isBatchShow=false">{{$t('fbcsFile.tips.close')}}</button>
+			</div>
+		</el-dialog>
+		
 		<el-dialog :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog import">
 				<li>
@@ -82,6 +103,7 @@
 				<button class="defBtn" @click="importErr=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
+		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 	</div>
 </template>
 
@@ -156,6 +178,12 @@ export default {
 			userID2: this.$t('fbcsFile.tableTitle.userID'),
 			userName2: this.$t('fbcsFile.tableTitle.userName')
 		};
+		
+		data.isBatchShow = false;
+		data.batchType = 0;
+		data.showReview = false;
+		data.reviewTxt = this.$t('fbcsFile.userHome.reviewTxt');
+		data.reqsv = {uri: 'userpasswd/batchSetexpiredTime'};
 		return data;
 	},
 	methods:{
@@ -220,6 +248,30 @@ export default {
 		},
 		editPwd(){
 			this.showPwd = true;
+		},
+		batchPwdShow(){
+			this.batchType = 0;
+			this.isBatchShow = true;
+		},
+		batchPwd(){
+			this.showReview = true;
+			this.isBatchShow = false;
+		},
+		review(args){
+			let param = {
+				url: 'userpasswd/bathcSetExpiredTime',
+				cmdID: '600018',
+				reviewer: args.name,
+				reviewPassword: args.pwd,
+				reviewType: 1,
+				language: utils.language,
+				bathcSetExpiredTimeType: this.batchType
+			};
+			utils.loadShow();
+			utils.post(param).then(res => {
+				utils.loadClose();
+				utils.alert({txt: res.errinfo, type: res.errcode=='0'?1:0});
+			});
 		},
 		importInformation(){
 			this.fileName = '';
@@ -364,4 +416,7 @@ function signalSearch(){
 	.w120{vertical-align: middle;}
 	.fileName{width: 350px;}
 	.importTips{font-size: 14px;color: #999;line-height: 20px;margin-left: 122px;white-space: pre-line;}
+	#fbcs_file .batchPwd{vertical-align: middle;padding-top: 82px;}
+	.batchPwd .right{margin-left: 10px;}
+	.batchPwd .el-radio{line-height: 30px;}
 </style>
