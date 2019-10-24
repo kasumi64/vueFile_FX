@@ -19,15 +19,21 @@
 			v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border stripe>
-					<el-table-column prop="serviceID" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-					<el-table-column prop="zone" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
-					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
-						<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">
-							{{scope.row.errStr}}
-						</span>
+					<el-table-column prop="serviceID" :label="$t('fbcsFile.dispatch.cuName')">
+						<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.serviceID}}</span>
 					</el-table-column>
-					<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
-					<el-table-column v-if="checkType>0" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
+					<el-table-column prop="zone" :label="$t('fbcsFile.dispatch.nodeName')">
+						<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.zone}}</span>
+					</el-table-column>
+					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
+						<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">{{scope.row.errStr}}</span>
+					</el-table-column>
+					<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')">
+						<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.errinfo}}</span>
+					</el-table-column>
+					<el-table-column v-if="checkType>0" prop="operationType" :label="$t('fbcsFile.dispatch.type')">
+						<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.operationType}}</span>
+					</el-table-column>
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
@@ -35,15 +41,21 @@
 			</div>
 		</el-dialog>
 		<el-table ref="cuPox" :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border stripe>
-			<el-table-column prop="serviceID" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
-			<el-table-column prop="zone" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
-			<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
-				<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">
-					{{scope.row.errStr}}
-				</span>
+			<el-table-column prop="serviceID" :label="$t('fbcsFile.dispatch.cuName')">
+				<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.serviceID}}</span>
 			</el-table-column>
-			<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')"></el-table-column>
-			<el-table-column v-if="checkType>0" prop="operationType" :label="$t('fbcsFile.dispatch.type')"></el-table-column>
+			<el-table-column prop="zone" :label="$t('fbcsFile.dispatch.nodeName')">
+				<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.zone}}</span>
+			</el-table-column>
+			<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
+				<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">{{scope.row.errStr}}</span>
+			</el-table-column>
+			<el-table-column prop="errinfo" :label="$t('fbcsFile.dispatch.errinfo')">
+				<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.errinfo}}</span>
+			</el-table-column>
+			<el-table-column v-if="checkType>0" prop="operationType" :label="$t('fbcsFile.dispatch.type')">
+				<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.operationType}}</span>
+			</el-table-column>
 		</el-table>
 	</div>
 </template>

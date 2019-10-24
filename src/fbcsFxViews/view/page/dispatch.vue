@@ -102,7 +102,9 @@ export default {
 			return '';
 		},
 		cellClass({row, columnIndex}){
-			if(columnIndex==2&&row.errStr != 'success') return 'red';
+			// if(columnIndex==2&&row.errStr != 'success') return 'red';
+			let str = row.errcode;
+			if(str !== void 0 && str != '0') return 'red';
 			return ''
 		},
 		selectChange(arr){
