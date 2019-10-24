@@ -268,10 +268,10 @@ export default {
 				if(_this.batch == 'accept'&&res.webUserFlag == 1){ //网络用户
 					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
 				}
-				if(res.errcode!='0') return utils.alert({txt: mess});
-				utils.alert({txt: mess, type: 1});
 				search();
 				this.showDialog = false;
+				if(res.errcode!='0') return utils.alert({txt: mess});
+				utils.alert({txt: mess, type: 1});
 			});
 		},
 		open(){
