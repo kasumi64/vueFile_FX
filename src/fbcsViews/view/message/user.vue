@@ -490,7 +490,7 @@
 
 <style scoped="scoped">
   .user * { vertical-align: middle; }
-  .user { padding: 20px; white-space: nowrap; min-width: 960px; }
+  .user { padding: 20px; white-space: nowrap; min-width: 1144px; }
   .user .userH { height: 30px; text-align: left;}
   .user .userH .el-input{ width: auto; }
   .userH .txt { font-size: 14px; line-height: 30px; height: 30px; color: #333; }

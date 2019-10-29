@@ -410,7 +410,7 @@ function signalSearch(){
 </script>
 
 <style scoped="scoped">
-	.userHome{min-width: 1040px;background: #FFF;}
+	.userHome{min-width: 1230px;background: #FFF;}
 	#fbcs_file .signal{padding-bottom: 0;max-height: 320px;overflow: auto;width: 646px;}
 	.import{padding-right: 0 !important;}
 	.w120{vertical-align: middle;}

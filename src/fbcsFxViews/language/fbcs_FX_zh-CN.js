@@ -22,7 +22,7 @@ var obj = {
 		addEkey: '创建Ekey', editEkey: '修改Ekey', exportEkey: '批量导出Ekey',
 		addSignal: '创建通信关系', delSignal: '删除通信关系', exportSignal: '批量导出通信关系',
 		bigVer: '生成大版本', getCfg: '获取中登配置', checkZd: '比对中枢配置最新版本', newVer: '比对客户端文件最新版本',
-		upload: '文件下发', blacklist: 'CU黑名单', batchPwd: '批量修改密码'
+		upload: '文件下发', blacklist: 'CU黑名单', batchPwd: '批量修改密码有效期'
 	},
 	tableTitle: {
 		userID: '用户ID', userName: '用户名称', operation: '操作',
@@ -73,7 +73,7 @@ var obj = {
 		importTips: '请将扩展信息文件放到服务器路径：static/import；<br/>在输入框中填入扩展信息文件名。',
 		OPE: '是否导入运维扩展信息？', BOP: '是否导入BOP扩展信息？', line: '行数', operatorName: '联系人姓名', errinfo: '错误描述',
 		fileErr: '文件名不能为空！', pwd: '用户密码：', defPwd: '默认', neverPwd: '永不过期', setDate: '有效期',
-		reviewTxt: '是否要批量修改密码！'
+		reviewTxt: '是否要批量修改密码有效期！'
 	},
 	userInfo: {
 		id: '用户ID：', name: '用户名称：', pwd: '密码：', def: '默认', hm:'手动', type: '用户类型：', inZone: '所属地区：', 

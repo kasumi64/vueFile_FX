@@ -77,14 +77,18 @@
 			<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.table[6]" :visible.sync="showParticulars" width="70%">
 				<div class="_content">
 					<el-table highlight-current-row :data="responseDate" stripe border>
-						<el-table-column prop="serviceID" :label="pageTxt.serviceID" width="120" show-overflow-tooltip></el-table-column>
-						<el-table-column prop="zone" :label="pageTxt.zone" width="120" show-overflow-tooltip></el-table-column>
-						<el-table-column prop="errStr" :label="pageTxt.result" width="120" show-overflow-tooltip>
-							<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">
-								{{scope.row.errStr}}
-							</span>
+						<el-table-column prop="serviceID" :label="pageTxt.serviceID" width="120" show-overflow-tooltip>
+							<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.serviceID}}</span>
 						</el-table-column>
-						<el-table-column prop="errinfo" :label="pageTxt.errinfo" show-overflow-tooltip></el-table-column>
+						<el-table-column prop="zone" :label="pageTxt.zone" width="120" show-overflow-tooltip>
+							<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.zone}}</span>
+						</el-table-column>
+						<el-table-column prop="errStr" :label="pageTxt.result" width="120" show-overflow-tooltip>
+							<span slot-scope="scope" :class="{red: scope.row.errStr!='success'}">{{scope.row.errStr}}</span>
+						</el-table-column>
+						<el-table-column prop="errinfo" :label="pageTxt.errinfo" show-overflow-tooltip>
+							<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.errinfo}}</span>
+						</el-table-column>
 					</el-table>
 				</div>
 			</el-dialog>

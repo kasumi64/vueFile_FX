@@ -242,53 +242,52 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 			},
 			add() {
 				this.$store.state.transferEditID = this.info.userID;
-				utils.post(
-					"mx/userinfo/add", {
-						cmdId: "600003",
-						operator: "admin",
-						userID: _this.info.userID,
-						userName: _this.info.userName,
-						userType: _this.info.userType,
-						userDistrict: _this.info.userDistrict,
-						speedCtrlKbps: _this.info.speedCtrlKbps,
-						configTime: _this.info.configTime,
-						userInfo: _this.info.userInfo,
-						connSuGroupName: _this.info.connSuGroupName,
-						isAlarmIfOffLine: _this.info.isAlarmIfOffLine,
-						softEncBeginDate: _this.info.softEncBeginDate/1000,
-						softEncEndDate: _this.info.softEncEndDate/1000,
-						allowSendRecvFile: _this.info.allowSendRecvFile,
-						maxPubsCount: _this.info.maxPubsCount,
-						maxSubsCount: _this.info.maxSubsCount,
-						maxDaysOfTopic: _this.info.maxDaysOfTopic,
-						isModifyDefaultPasswd: _this.info.isModifyDefaultPasswd,
-						userPasswd: _this.info.isModifyDefaultPasswd ? md5.hex_md5(_this.info.userPasswd) : md5.hex_md5("111111"),
-						expiredTimeFlag: _this.info.pwdTime
-					},
-					function(data) {
-						if(data.errcode == 0) {
-							utils.hints({
-								txt: data.errinfo,
-								yes: function() {
-									_this.$store.state.tabv = "v2";
-									_this.$router.replace({
-										path: "/main/mxCfg/message/userEdit/mess"
-									});
-								},
-								no: function() {
-									_this.$store.state.headerText;
-									_this.$store.state.tabv = "v1";
-									_this.$router.replace({
-										path: "/main/mxCfg/message/userEdit/mess"
-									});
-								}
-							});
-						} else {
-							// utils.weakTips(data.errinfo);
-							fxUtils.alert({txt: data.errinfo});
-						}
+				var info = {
+					cmdId: "600003",
+					operator: "admin",
+					userID: _this.info.userID,
+					userName: _this.info.userName,
+					userType: _this.info.userType,
+					userDistrict: _this.info.userDistrict,
+					speedCtrlKbps: _this.info.speedCtrlKbps,
+					configTime: _this.info.configTime,
+					userInfo: _this.info.userInfo,
+					connSuGroupName: _this.info.connSuGroupName,
+					isAlarmIfOffLine: _this.info.isAlarmIfOffLine,
+					softEncBeginDate: _this.info.softEncBeginDate/1000,
+					softEncEndDate: _this.info.softEncEndDate/1000,
+					allowSendRecvFile: _this.info.allowSendRecvFile,
+					maxPubsCount: _this.info.maxPubsCount,
+					maxSubsCount: _this.info.maxSubsCount,
+					maxDaysOfTopic: _this.info.maxDaysOfTopic,
+					isModifyDefaultPasswd: _this.info.isModifyDefaultPasswd,
+					userPasswd: _this.info.isModifyDefaultPasswd ? md5.hex_md5(_this.info.userPasswd) : md5.hex_md5("111111"),
+					expiredTimeFlag: _this.info.pwdTime
+				};
+				utils.post("mx/userinfo/add", info, function(data) {
+					if(data.errcode == 0) {
+						fxUtils.setArgs('userInfo', info);
+						utils.hints({
+							txt: data.errinfo,
+							yes: function() {
+								_this.$store.state.tabv = "v2";
+								_this.$router.replace({
+									path: "/main/mxCfg/message/userEdit/mess"
+								});
+							},
+							no: function() {
+								_this.$store.state.headerText;
+								_this.$store.state.tabv = "v1";
+								_this.$router.replace({
+									path: "/main/mxCfg/message/userEdit/mess"
+								});
+							}
+						});
+					} else {
+						// utils.weakTips(data.errinfo);
+						fxUtils.alert({txt: data.errinfo});
 					}
-				);
+				});
 			},
 			verify(fn) {
 //				var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^\w\s]).{8,}|(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
