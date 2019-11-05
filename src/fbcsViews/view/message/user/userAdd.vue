@@ -203,7 +203,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 						utils.hints({
 							txt: _this.pageTxt.tips.now,
 							yes: function() {
-								utils.post("mx/userinfo/addImmediately", {
+								var param = {
 									cmdID: "600006",
 									operator: "admin",
 									reviewer: info.name,
@@ -227,7 +227,9 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 									isModifyDefaultPasswd: _this.info.isModifyDefaultPasswd,
 									userPasswd: _this.info.isModifyDefaultPasswd ? md5.hex_md5(_this.info.userPasswd) : md5.hex_md5("111111"),
 									expiredTimeFlag: _this.info.pwdTime
-								}, function(data) {
+								};
+								fxUtils.setArgs('userInfo', param);
+								utils.post("mx/userinfo/addImmediately", param, function(data) {
 									if(data.errcode!=0) return fxUtils.alert({txt: data.errinfo});
 									data.type = 1;
 									// utils.wheelReq(data);
@@ -264,9 +266,9 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 					userPasswd: _this.info.isModifyDefaultPasswd ? md5.hex_md5(_this.info.userPasswd) : md5.hex_md5("111111"),
 					expiredTimeFlag: _this.info.pwdTime
 				};
+				fxUtils.setArgs('userInfo', info);
 				utils.post("mx/userinfo/add", info, function(data) {
 					if(data.errcode == 0) {
-						fxUtils.setArgs('userInfo', info);
 						utils.hints({
 							txt: data.errinfo,
 							yes: function() {

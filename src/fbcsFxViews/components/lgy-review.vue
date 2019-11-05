@@ -66,6 +66,12 @@ export default {
 			if(kit.isFn(param)) param = param();
 			if(!kit.isObject(param)) param = {uri:param};
 			
+			delete param.reviewer;
+			delete param.password;
+			delete param.name;
+			delete param.pwd;
+			delete param.uri;
+			
 			let args = {}, uri = '/fbcs_fx/fx/';
 			args.url = 'auth/review';
 			args.cmdID = '600122';
