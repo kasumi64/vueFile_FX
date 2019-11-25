@@ -70,7 +70,6 @@ export default {
 			delete param.password;
 			delete param.name;
 			delete param.pwd;
-			delete param.uri;
 			
 			let args = {}, uri = '/fbcs_fx/fx/';
 			args.url = 'auth/review';

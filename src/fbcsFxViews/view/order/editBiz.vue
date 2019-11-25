@@ -21,7 +21,7 @@
 					{{$t('fbcsFile.userInfo.name')}}
 				</div>
 				<div class="right">
-					<input v-model="info.userName"  maxlength="63" autocomplete="off"/>
+					<input v-model="info.userName"  maxlength="127" autocomplete="off"/>
 				</div>
 			</li><li v-if="isAdd=='add'">
 				<div class="label" style="vertical-align: top;">

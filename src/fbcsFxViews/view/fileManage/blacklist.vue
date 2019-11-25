@@ -30,7 +30,7 @@ var _this, data = {
 	],
 	cuList: [],
 	showReview: false,
-	reqsv: {},
+	reqsv: {uri: 'userClientFile/blackList'},
 	reviewTxt: ''
 };
 
@@ -52,7 +52,7 @@ export default {
 			}
 		},
 		setBlack(){
-			this.reqsv = {uri: 'batchDispatch/dispatch'};
+			this.reqsv = {uri: 'userClientFile/blackList'};
 			this.reviewTxt = this.$t('fbcsFile.files.blacklist.cuSet');
 			this.showReview = true;
 		},

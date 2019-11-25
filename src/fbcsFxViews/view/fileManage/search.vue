@@ -59,7 +59,8 @@ var _this, data = {
 };
 
 function del(row){
-	row.uri = 'userClientFile/dispatch';
+	delete row.uri;
+	row.uri = 'userClientFile/delete';
 	_this.reqsv = row;
 	_this.showReview = true;
 }
