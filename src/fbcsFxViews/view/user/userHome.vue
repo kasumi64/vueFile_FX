@@ -67,7 +67,7 @@
 			</div>
 			<div slot="footer" class="_footBtn">
 				<button class="blueBtn" @click="batchPwd">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="isBatchShow=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="isBatchShow=false">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
 		
@@ -183,7 +183,7 @@ export default {
 		data.batchType = 0;
 		data.showReview = false;
 		data.reviewTxt = this.$t('fbcsFile.userHome.reviewTxt');
-		data.reqsv = {uri: 'userpasswd/batchSetexpiredTime'};
+		data.reqsv = {uri: 'userpasswd/batchSetExpiredTime'};
 		return data;
 	},
 	methods:{
@@ -259,13 +259,13 @@ export default {
 		},
 		review(args){
 			let param = {
-				url: 'userpasswd/bathcSetExpiredTime',
-				cmdID: '600018',
+				url: 'userpasswd/batchSetExpiredTime',
+				cmdID: '600014',
 				reviewer: args.name,
-				reviewPassword: args.pwd,
+				reviewerPassword: args.pwd,
 				reviewType: 1,
 				language: utils.language,
-				bathcSetExpiredTimeType: this.batchType
+				batchSetExpiredTime: this.batchType
 			};
 			utils.loadShow();
 			utils.post(param).then(res => {
@@ -410,7 +410,7 @@ function signalSearch(){
 </script>
 
 <style scoped="scoped">
-	.userHome{min-width: 1230px;background: #FFF;}
+	.userHome{min-width: 1040px;background: #FFF;} /*1230*/
 	#fbcs_file .signal{padding-bottom: 0;max-height: 320px;overflow: auto;width: 646px;}
 	.import{padding-right: 0 !important;}
 	.w120{vertical-align: middle;}

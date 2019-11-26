@@ -170,7 +170,7 @@
 			data.batchType = 0;
 			data.showReview = false;
 			data.reviewTxt = this.$t('fbcsFile.userHome.reviewTxt');
-			data.reqsv = {uri: 'userpasswd/batchSetexpiredTime'};
+			data.reqsv = {uri: 'mx/userpasswd/batchSetExpiredTime'};
 			return data;
 		},
 		methods: {
@@ -184,13 +184,13 @@
 			},
 			review(args){
 				let param = {
-					url: 'userpasswd/bathcSetExpiredTime',
+					url: 'userpasswd/batchSetExpiredTime',
 					cmdID: '600018',
 					reviewer: args.name,
-					reviewPassword: args.pwd,
+					reviewerPassword: args.pwd,
 					reviewType: 1,
 					language: fxUtils.language,
-					bathcSetExpiredTimeType: this.batchType
+					batchSetExpiredTimeType: this.batchType
 				};
 				fxUtils.loadShow();
 				fxUtils.post(param).then(res => {

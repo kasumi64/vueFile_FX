@@ -29,7 +29,8 @@
 			</div>
 			<div class="btnBox">
 				<div v-if="auth>1" @click="showCreate"><img src="@/fbcsViews/img/user/creatsignal.png"><span>{{pageTxt.label[5]}}</span></div>
-				<div @click="exportSignalInfo"><img src="@/fbcsViews/img/user/exportsignal.png"><span>{{pageTxt.label[6]}}</span></div>
+				<!-- <div @click="exportSignalInfo"><img src="@/fbcsViews/img/user/exportsignal.png"><span>{{pageTxt.label[6]}}</span></div> -->
+				<div @click="toAdvanced"><img src="@/fbcsFxViews/img/FnIcon/searchSignal.png"><span>{{pageTxt.adv}}</span></div>
 			</div>
 			<el-table stripe border :data="list.lists" tooltip-effect="dark" @current-change="currentRow" highlight-current-row>
 				<!--<el-table-column width="50" label=" " type="index"></el-table-column>-->
@@ -172,6 +173,9 @@ import moment from 'moment';
 			search() {
 				this.renderData(_this.searchInfo.bizType, 1);
 				this.currPage = 1;
+			},
+			toAdvanced(){
+				this.$router.push({path: '/main/mxCfg/advanced/signal'});
 			},
 			//创建
 			showCreate() {

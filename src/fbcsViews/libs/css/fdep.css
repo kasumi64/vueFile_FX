@@ -74,6 +74,13 @@
 #fbcs_MX .MX_dialog input:disabled{background: #F5F7FA;color: #C0C4CC;border: 1px solid #E4E7ED;cursor: not-allowed;}
 /* MX_dialog END*/
 
+/*返回头部*/
+#fbcs_MX .backHead{height: 50px;margin: -20px 0 20px -20px;border-bottom: 1px solid #d8D8D8;padding-top: 10px;}
+#fbcs_MX .backHead .back{font-size: 13px;color: #5A719D;line-height: 30px;vertical-align: middle;padding: 0 20px;cursor: pointer;border-right: 1px solid #EDEEF0;}
+#fbcs_MX .backHead .h1{font-size: 16px;color: #656A73;line-height: 30px;vertical-align: middle;padding: 0 20px;}
+
+
+
 /*.el-message{top: 40%;transform: translate(-50%,-50%);}*/
 #fbcs_MX .el-message__icon{font-size: 14px;}
 #fbcs_MX .el-loading-mask{background: transparent !important;}

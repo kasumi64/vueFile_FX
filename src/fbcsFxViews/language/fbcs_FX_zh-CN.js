@@ -72,7 +72,7 @@ var obj = {
 		addUser: '创建用户', editUser: '修改用户', del: '是否删除该用户信息！', fileName: '扩展信息文件名：',
 		importTips: '请将扩展信息文件放到服务器路径：static/import；<br/>在输入框中填入扩展信息文件名。',
 		OPE: '是否导入运维扩展信息？', BOP: '是否导入BOP扩展信息？', line: '行数', operatorName: '联系人姓名', errinfo: '错误描述',
-		fileErr: '文件名不能为空！', pwd: '用户密码：', defPwd: '默认', neverPwd: '永不过期', setDate: '有效期',
+		fileErr: '文件名不能为空！', pwd: '用户密码：', defPwd: '默认', neverPwd: '永不过期', setDate: '有效期：',
 		reviewTxt: '是否要批量修改密码有效期！'
 	},
 	userInfo: {
@@ -226,7 +226,7 @@ var obj = {
 		},
 		pwdOrder: {
 			batch1: '业务ID标红的指令不可批量执行！', batch2: '业务ID标红的指令不可批量反馈！',
-			title: '修改密码', 
+			title: '修改密码'
 		},
 		editBiz: {
 			title: '编辑小站指令', bizKey: '业务ID：', remark: '备注：'

@@ -71,6 +71,17 @@
 						<em class="two">{{pageTxt.tabs[15]}}</em>
 					</el-menu-item>
 				</el-submenu>
+				
+				<el-submenu class='navH' index='advanced' :show-timeout="timeout" :hide-timeout="timeout">
+					<div slot="title">
+						<img class="icon" src="@/fbcsFxViews/img/menu/search_1.png" />
+						<b class="activeIcon el-icon-search" style="font-size: 16px;width: 34px;text-align: center;font-weight: 700;"></b>
+						<em>高级搜索</em>
+					</div>
+					<el-menu-item name='query' index="/advanced/signal" >
+						<em class="el-icon-message two">通信关系</em>
+					</el-menu-item>
+				</el-submenu>
 			</div>
 			
 		</el-menu>

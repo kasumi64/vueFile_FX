@@ -104,7 +104,7 @@
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog orderPane" ref="orderPane">
 				<lgy-table class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="acceptTitle" 
-					:size="200"  :total="submitList.length">
+					:size="200" :total="submitList.length">
 				</lgy-table>
 				<lgy-table class="table" ref="feedback" v-if="batch=='feedback'" :width="width" :list="submitList" :title="feedbackTitle" 
 					:size="200" :total="submitList.length">

@@ -225,8 +225,8 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 	.lockTxt{height: 44px;line-height: 44px;font-size: 14px;padding-left: 14px;color: #ff7a7d;background: #FFF;font-weight: bold;}
 	.router{
 		min-height: 100%;
-	    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
-		box-shadow: 0 6px 7px 7px rgba(229,233,240,0.18);
+		/* -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+		box-shadow: 0 6px 7px 7px rgba(229,233,240,0.18); */
 		background-color: #FFF;border: 1px solid #EBEFF4;border-right: none;
 	}
 	

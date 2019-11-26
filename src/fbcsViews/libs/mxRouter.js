@@ -198,6 +198,15 @@ const router = new Router({
 						auth: true,
 						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
 					}
+				},
+				
+				{
+					path: 'advanced/signal',
+					component: resolve => require(['@/fbcsViews/view/advanced/signal.vue'], resolve),
+					meta: {
+						auth: true,
+						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
+					}
 				}
 				
 				

@@ -89,13 +89,21 @@ function restore(row){
 	mess.detail = row.fileComment;
 	mess.type = row.typeStr;
 	
+	var arr, tem = row.detail.replace(/\s/g,'').match(/\[(.+)\]/);
+	if(tem) arr = tem[1].split(',');
 	nodes = [];
 	setTimeout(() => {
 		_this.cuList.forEach(r => {
-			if(row.detail.indexOf(r.cuName) >= 0){
-				nodes.push(r);
-				_this.$refs['nodes'].toggleRowSelection(r, true);
-			} else _this.$refs['nodes'].toggleRowSelection(r, false);
+			var flag = false;
+			if(arr){
+				for (var i = 0; i < arr.length; i++) {
+					if(arr[i] == r.cuName) {
+						flag = true;
+						break;
+					}
+				}
+			}  
+			_this.$refs['nodes'].toggleRowSelection(r, flag);
 		});
 	});
 	_this.showDialog = true;
