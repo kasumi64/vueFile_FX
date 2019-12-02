@@ -109,7 +109,7 @@ function ReqHttp(){
 	this.post = function (params, fn, args, efn){
 		var url = params.url;
 		delete params.url;
-		if(params.language===void 0) params.language = sessionStorage.getItem('language') || 'zh';
+		if(params.language===void 0) params.language = localStorage.getItem('language') || 'zh';
 
 		/* if('debug'){
 			console.log(params.cmdID, params);
@@ -396,7 +396,7 @@ exp.tableSTop = function (self, ref, delay){
 };
 
 exp.langCode = function (delay){
-	let lang = sessionStorage.getItem('language') || 'zh';
+	let lang = localStorage.getItem('language') || 'zh';
 	return (lang.indexOf('zh') < 0) ? 1 : 0;
 };
 
@@ -415,12 +415,12 @@ exp.clearCache = function(){
 };
 
 exp.userName = function(){
-	return sessionStorage.getItem('userName') || '';
+	return localStorage.getItem('userName') || '';
 };
 
 Object.addProto(exp, 'language', {
 	get(){
-		return sessionStorage.getItem('language') || 'zh';
+		return localStorage.getItem('language') || 'zh';
 	}
 });
 
@@ -428,7 +428,7 @@ Object.addProto(exp, 'getFxAuth', {
 	get(){
 		if('debug') return true;
 
-		let authority = sessionStorage.getItem('authoritys') || '';
+		let authority = localStorage.getItem('authoritys') || '';
 		return (/Auth_Fx_Config_Opt/i).test(authority);
 	}
 });
@@ -437,7 +437,7 @@ Object.addProto(exp, 'getMxAuth', {
 	get(){
 		if('debug') return true;
 
-		let authority = sessionStorage.getItem('authoritys') || '';
+		let authority = localStorage.getItem('authoritys') || '';
 		return (/Auth_Mx_Config_Opt/i).test(authority);
 	}
 });

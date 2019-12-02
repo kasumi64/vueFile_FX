@@ -92,6 +92,7 @@ function restore(row){
 	var arr, tem = row.detail.replace(/\s/g,'').match(/\[(.+)\]/);
 	if(tem) arr = tem[1].split(',');
 	nodes = [];
+	var nodeTem = [];
 	setTimeout(() => {
 		_this.cuList.forEach(r => {
 			var flag = false;
@@ -99,12 +100,14 @@ function restore(row){
 				for (var i = 0; i < arr.length; i++) {
 					if(arr[i] == r.cuName) {
 						flag = true;
+						nodeTem.push(r);
 						break;
 					}
 				}
 			}  
 			_this.$refs['nodes'].toggleRowSelection(r, flag);
 		});
+		nodes = nodeTem;
 	});
 	_this.showDialog = true;
 }

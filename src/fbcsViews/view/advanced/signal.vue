@@ -238,7 +238,7 @@ import moment from 'moment';
 			//导出通信关系
 			exportSignalInfo() {
 				utils.post("mx/userComm/advancedSearch", {
-					cmdID: "600053",
+					cmdID: "600036",
 					type: 1,
 					bizType: _this.searchInfo.bizType,
 					userID: isInput1 ? _this.searchInfo.userID1 : _this.userID1,
@@ -247,8 +247,8 @@ import moment from 'moment';
 					currentPage: 1
 				}, function(response) {
 					if(response.errcode == 0) {
-						_this.signalInfoSrc = response.filePath;
-						_this.signalInfoName = response.filePath.split("/").pop();
+						_this.signalInfoSrc = response.errinfo;
+						_this.signalInfoName = response.errinfo.split("/").pop();
 						_this.showExportSignalInfo = true;
 					} else {
 						// utils.weakTips(response.errinfo);
@@ -301,7 +301,7 @@ import moment from 'moment';
 			renderData(type, page) {
 				var num = page||_this.currentPage;
 				utils.post("mx/userComm/advancedSearch", {
-					cmdID: "600053",
+					cmdID: "600036",
 					type: 0,
 					bizType: type,
 					userID: isInput1 ? _this.searchInfo.userID1 : _this.userID1,
@@ -378,9 +378,9 @@ import moment from 'moment';
 			},
 			idSelect2(item) {
 				isInput2 = false;
-				this.userID2 = item.userID;
+				this.userID2 = item.userName;
 				// this.searchInfo.userID2 = item.userID + "(" + item.userName + ")";
-				this.searchInfo.userID2 = item.userID;
+				this.searchInfo.userID2 = item.userName;
 				var close = document.getElementById("signalClose1").children[0];
 				if(!close) return;
 				close.children[1].style.display = "block";

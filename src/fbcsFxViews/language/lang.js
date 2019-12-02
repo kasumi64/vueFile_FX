@@ -10,7 +10,7 @@ import cn from '@/fbcsFxViews/language/fbcs_FX_zh-CN.js';
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-	locale: sessionStorage.getItem('language') || 'zh',
+	locale: localStorage.getItem('language') || 'zh',
 	messages: {
 		en: Object.assign(en, elemEN),
 		zh: Object.assign(cn, elemCN)

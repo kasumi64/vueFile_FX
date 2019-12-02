@@ -694,8 +694,8 @@ function utils(){
 			return;
 		} */
 		
-		var authoritys =  sessionStorage.getItem("authoritys") || "",
-			userName = sessionStorage.getItem("userName") || "";
+		var authoritys =  localStorage.getItem("authoritys") || "",
+			userName = localStorage.getItem("userName") || "";
 		var authNum;
 			
 		if(/Auth_Mx_Config_Opt/i.test(authoritys)){
@@ -705,7 +705,7 @@ function utils(){
 		}
 		
 		globalVar.set('accountInfo', {name: userName});
-		globalVar.set('lang', sessionStorage.getItem('language') || 'zh');
+		globalVar.set('lang', localStorage.getItem('language') || 'zh');
 		for (i = 0; i < len; i++) obj[keys[i]] = authNum;
 		globalVar.set('status', obj);
 	};

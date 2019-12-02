@@ -103,7 +103,7 @@ export default {
 	},
 	created(){
 		_this = this;
-		let name = sessionStorage.getItem('userName') || 'LOCAL';
+		let name = localStorage.getItem('userName') || 'LOCAL';
 		this.userName = name;
 		utils.setArgs('userName', name); //accountInfo
 		this.showReview = false;
