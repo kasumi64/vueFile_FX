@@ -24,7 +24,8 @@
 				<label class="txt">{{pageTxt.label[2]}}</label>
 				<div class="rightBox">
 					<p class="txt3">{{pageTxt.label[7]}}</p>
-					<el-table ref="table" class='suList' :data="data" tooltip-effect="dark" @current-change="currentRow" @selection-change="selectionRow" stripe border>
+					<el-table ref="table" class='suList' :data="data" tooltip-effect="dark" @current-change="currentRow" highlight-current-row
+					 @selection-change="selectionRow"stripe border>
 						<!--<el-table-column width="55" type="index"></el-table-column>-->
 						<el-table-column type="selection" width="55"></el-table-column>
 						<el-table-column prop="serviceID" :label="pageTxt.list[2]" ></el-table-column>

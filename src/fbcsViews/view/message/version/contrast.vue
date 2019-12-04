@@ -31,7 +31,7 @@
 				<label for='autoInput_1' class="el-icon-circle-close clearTXT verClose2"></label>
 			</div>
 		</div>
-		<el-table stripe border @current-change="currenRow" @selection-change="selectionRow" :data="data" tooltip-effect="dark">
+		<el-table stripe border @current-change="currenRow" @selection-change="selectionRow" :data="data" tooltip-effect="dark" highlight-current-row>
 			<el-table-column v-if="this.config<3" prop="section" :label="pageTxt.list[0]" width='180px'  show-overflow-tooltip></el-table-column>
 			<el-table-column v-if="this.config<3" prop="field" :label="pageTxt.list[1]" width='180px'  show-overflow-tooltip></el-table-column>
 			<el-table-column prop="type" :label="pageTxt.list[2]" width='180px'  show-overflow-tooltip></el-table-column>

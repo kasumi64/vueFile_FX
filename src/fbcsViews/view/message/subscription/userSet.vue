@@ -28,7 +28,7 @@
 				<span class="btnTxt">{{pageTxt.label[5]}}</span>
 			</el-button>-->
 		</div>
-		<el-table @current-change="currenRow" @selection-change="selectionRow" :data="data"	stripe border tooltip-effect="dark">
+		<el-table @current-change="currenRow" @selection-change="selectionRow" :data="data"	stripe border tooltip-effect="dark" highlight-current-row>
 			<!--<el-table-column width="50" :label="column" type="index"></el-table-column>-->
 			<!--<el-table-column type="selection" width="55"></el-table-column>-->
 			<el-table-column prop="userID" :label="pageTxt.list[0]"  show-overflow-tooltip></el-table-column>

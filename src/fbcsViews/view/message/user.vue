@@ -21,7 +21,8 @@
 				<div @click="exportExtInfo"><img src="@/fbcsViews/img/user/importico1.png"><span>{{pageTxt.label[6]}}</span></div>
 				<div @click="exportBasicsInfo"><img src="@/fbcsViews/img/user/importico.png"><span>{{pageTxt.label[7]}}</span></div>
 			</div>
-			<el-table stripe border ref="multipleTable" tooltip-effect="dark" @select='toggleSelection' @selection-change="fn" @current-change="currentRow" :data="userData">
+			<el-table stripe border ref="multipleTable" tooltip-effect="dark" @select='toggleSelection' @selection-change="fn" :data="userData"
+			 @current-change="currentRow" highlight-current-row>
 				<!--<el-table-column width="50" label=" " type="index" show-overflow-tooltip></el-table-column>-->
 				<el-table-column width="50" type="selection" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="userID" :label="pageTxt.table[0]" show-overflow-tooltip></el-table-column>
@@ -44,7 +45,8 @@
 			</el-table>
 
 			<div class="_pagination" v-if="max>pageSize">
-				<el-pagination @current-change='handleCurrentChange' background layout="prev, pager, next, jumper" :current-page.sync='currPage' @size-change="handleSizeChange" :page-size="pageSize" :total="max"></el-pagination>
+				<el-pagination @current-change='handleCurrentChange' background layout="prev, pager, next, jumper" :current-page.sync='currPage'
+				 @size-change="handleSizeChange" :page-size="pageSize" :total="max"></el-pagination>
 				<div class="rightTxt">{{paging.before1}}{{max}}{{paging.after}}</div>
 			</div>
 			<div class="onePage" v-else-if="max>0&&max<=pageSize">{{paging.before2}}{{max}}{{paging.after}}</div>
