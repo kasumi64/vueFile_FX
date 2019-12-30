@@ -45,7 +45,7 @@
 						</p>
 					</div><div class="right">
 						<el-select popper-class="fbcs_FX_signal_select" class="selm" v-model="sid" :disabled="disabled" multiple filterable
-							remote :remote-method="filter" reserve-keyword @focus="focus">
+							remote :remote-method="filter" :reserve-keyword="false" @focus="focus">
 							<el-option v-for="item in idarr" :key="item.value" :label="item.lable" :value="item.value">
 							</el-option>
 						</el-select>

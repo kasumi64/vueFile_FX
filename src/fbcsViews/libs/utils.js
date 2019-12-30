@@ -354,7 +354,8 @@ function utils(){
 			if(response.status!==200) return console.log(response);
 			var data = response.data;
 			//session失效，返回登陆
-			if(!(globalVar.get('debug') === true)&&data.errcode == '2102'){
+			// if(!(globalVar.get('debug') === true)&&data.errcode == '2102'){
+			if(data.errcode == '2102'){
 				exp.hints({
 					txt: data.errinfo,
 					yes: function(){
@@ -363,6 +364,11 @@ function utils(){
 					btn: 1
 				});
 				return;
+			}
+			// 没有session
+			if(data.errcode == '2102') {
+				window.location.href = '/#/login';
+				return
 			}
 			//特殊错误码
 			var errcode = parseInt(data.errcode), min = 2100, max = 2200;

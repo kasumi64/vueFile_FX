@@ -400,7 +400,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 			info.maxPubsCount = "5";
 			info.maxSubsCount = "5";
 			info.maxDaysOfTopic = "7";
-			info.pwdTime = '1';
+			info.pwdTime = '-1';
 			info.userInfo = '';
 			let day = new Date();
 			day.setHours(0, 0, 0, 0);

@@ -154,6 +154,11 @@ function ReqHttp(){
 			});
 			return;
 		}
+		// 没有session
+		if(data.errcode == '2102') {
+			window.location.href = '/#/login';
+			return
+		}
 		if(kit.isFn(fn)) fn(data, args);
 		return data;
 	}
@@ -345,6 +350,7 @@ function TipsConfirm(){
 	this.alert = function(opt, args){
 		show(opt, args, 1);
 	};
+	this.tipsHide = hide;
 }
 
 kit.extend(exp, new TipsConfirm());

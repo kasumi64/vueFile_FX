@@ -134,12 +134,20 @@ export default {
 				_this.$emit('update:show', false);
 				if(res.webUserFlag == 1){ //网络用户
 					let mess = `<p>${res.errinfo}</p>`;
+					var time = 0;
 					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
 					utils.alert({
 						txt: mess,
-						ok: () => { _this.parameter = res; },
+						ok: () => {
+							clearTimeout(time);
+							_this.parameter = res;
+						},
 						type: 1
 					});
+					time = setTimeout(function(){
+						utils.tipsHide();
+						_this.parameter = res;
+					}, 3200);
 					return;
 				}
 				_this.parameter = res;

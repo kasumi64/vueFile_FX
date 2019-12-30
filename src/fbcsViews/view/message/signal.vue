@@ -90,7 +90,7 @@
 						</div>
 						<div class="rightBox">
 							<el-select popper-class="fbcs_MX_signal_select" class="input_normal select_" :disabled="creatInfo.user?false:true" v-model="creatInfo.other"
-								multiple filterable remote :remote-method="remote2" reserve-keyword @focus="focus">
+								multiple filterable remote :remote-method="remote2" :reserve-keyword="false" @focus="focus">
 								<el-option v-for="item in multipleList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 							</el-select>
 						</div>

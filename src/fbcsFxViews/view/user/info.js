@@ -8,7 +8,7 @@ _info = {
 	maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
 	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1, allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
 	maxPublishTopicDay: 7, maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000, webUserFlag: '',
-	isModifyDefaultPasswd: '', expiredTimeFlag: '',
+	isModifyDefaultPasswd: '', expiredTimeFlag: '1',
 }, data = {
 	fxAuth: true,
 	info: _info,
@@ -188,12 +188,20 @@ export default {
 				}
 				if(res.webUserFlag == 1){ //网络用户
 					let mess = `<p>${res.errinfo}</p>`;
+					var time = 0;
 					mess = `<p style="color: red">${_this.$t('fbcsFile.tips.webUser')}</p>` + mess;
 					utils.alert({
 						txt: mess,
-						ok: () => { _this.parameter = res; },
+						ok: () => {
+							clearTimeout(time);
+							_this.parameter = res;
+						},
 						type: 1
 					});
+					time = setTimeout(function(){
+						utils.tipsHide();
+						_this.parameter = res;
+					}, 3200);
 					return;
 				}
 				_this.parameter = res;
@@ -325,7 +333,9 @@ function getDict(){
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
 		_this.userType = res.lists;
-		_this.info.userType = res.lists[0].id;
+		if(_this.isAdd=='add'){
+			_this.info.userType = res.lists[0].id;
+		}
 	});
 	
 	params= { url, cmdID, language, type: 2 };
@@ -368,7 +378,7 @@ function initDate(){
 	info.maxSimultTaskCount= 30;
 	info.maxCltOneDayTaskCount= 500000;
 	info.webUserFlag = 0;
-	info.expiredTimeFlag = '1';
+	info.expiredTimeFlag = '-1';
 	
 	_this.more = false;
 	_this.userType = _this.inZone = _this.group = [];
@@ -403,7 +413,7 @@ function getUserInfo(user){
 		if(!obj.beginSoftEncTime) obj.beginSoftEncTime = null;
 		if(!obj.endSoftEncTime) obj.endSoftEncTime = null;
 		obj.isModifyDefaultPasswd = 0;
-		obj.expiredTimeFlag = '1';
+		obj.expiredTimeFlag = '-1';
 		obj.userPasswd = '';
 		if(obj.linkGroupName=='') obj.linkGroupName = '任意';
 		_this.info = obj;
