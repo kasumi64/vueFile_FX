@@ -3,7 +3,7 @@
 import '@/fbcsFxViews/components/package.js';
 import Vue from 'vue';
 import router from '@/public/routerConfig.js';
-import App from '@/fbcsFxViews/App';
+import App from '@/App';
 import i18n from '@/fbcsFxViews/language/lang.js';
 import store from './public/store.js';
 

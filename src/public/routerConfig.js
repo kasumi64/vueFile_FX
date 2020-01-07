@@ -2,10 +2,14 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import fx from '@/fbcsFxViews/libs/routerConfig.js';
 import mx from '@/fbcsViews/libs/mxRouter.js';
+import webu from '@/webU/libs/webuRouter.js';
+
+// const originalPush = Router.prototype.push
+// Router.prototype.push = function push(location, onComplete, onAbort) {
+// 	return originalPush.call(this, location, onComplete, onAbort).catch(err => err)
+// }
 
 Vue.use(Router);
-
-// console.log(fx.options.routes[1]);
 
 let config = [
 	{
@@ -21,6 +25,8 @@ let config = [
 	// 消息路由
 	mx.options.routes[1]
 ];
+
+config = webu.options.routes;
 
 var router = new Router({
 	routes: config,
