@@ -17,7 +17,7 @@
 			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle" autocomplete="off"/>
 		<i ref='arrow' @click='close' class="el-icon-circle-close arrow"></i>
 		<ul ref='inTip' class="inTip" @scroll="scrollHandle">
-			<li v-for="o in keywords" @mousedown="clickHandle(o, $event)">{{o.lable}}</li>
+			<li v-for="o in keywords" @mousedown="clickHandle(o, $event)">{{o.label}}</li>
 			<li v-if="isNull()"><center>{{$t('fbcsFile.components.not')}}</center></li>
 		</ul>
 	</div>
@@ -70,7 +70,7 @@ export default {
 			}
 		},
 		clickHandle(o, e){
-			let val = o.value||o.lable;
+			let val = o.value||o.label;
 			this.$emit('input', val, e);
 			this.$refs.arrow.style.display = 'block';
 		},

@@ -379,12 +379,12 @@ exp.keywords = function(obj, fn){
 			obj = arr[i];
 			if(other){
 				let label = fn.label;
-				obj.lable = obj[label[0]];
+				obj.label = obj[label[0]];
 				let second = obj[label[1]];
-				if(second !== void 0) obj.lable += `(${second})`;
+				if(second !== void 0) obj.label += `(${second})`;
 				obj.value = obj[fn.value];
 			} else {
-				obj.lable = `${obj.userID}(${obj.userName})`;
+				obj.label = `${obj.userID}(${obj.userName})`;
 				obj.value = obj.userID;
 			}
 		}

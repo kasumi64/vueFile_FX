@@ -14,8 +14,8 @@ Vue.use(VueI18n);
 const i18n = new VueI18n({
 	locale: localStorage.getItem('language') || 'zh',
 	messages: {
-		en: Object.assign(en, elemEN, weben),
-		zh: Object.assign(cn, elemCN, webzh)
+		en: Object.assign(en, elemEN, webzh),
+		zh: Object.assign(cn, elemCN, weben)
 	}
 });
 

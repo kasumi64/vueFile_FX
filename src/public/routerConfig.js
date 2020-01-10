@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import fx from '@/fbcsFxViews/libs/routerConfig.js';
 import mx from '@/fbcsViews/libs/mxRouter.js';
-// import webu from '@/webU/libs/webuRouter.js';
+import webu from '@/webU/libs/webuRouter.js';
 
 // const originalPush = Router.prototype.push
 // Router.prototype.push = function push(location, onComplete, onAbort) {
@@ -15,15 +15,18 @@ let config = [
 	{
 		path: '/', //默认的首页
 		name: '/',
-		component: resolve => require(['@/fbcsFxViews/view/fbcsFxHome.vue'], resolve),
+		// component: resolve => require(['@/fbcsFxViews/view/fbcsFxHome.vue'], resolve),
 		// component: resolve => require(['@/fbcsViews/view/home.vue'], resolve),
+		component: resolve => require(['@/webU/view/webuHome.vue'], resolve),
 		meta: {auth: false} //'权限设置'
 	},
 	
 	// 文件路由
 	fx.options.routes[1],
 	// 消息路由
-	mx.options.routes[1]
+	mx.options.routes[1],
+	// 互联网用户
+	webu.options.routes[1]
 ];
 
 // config = webu.options.routes;
