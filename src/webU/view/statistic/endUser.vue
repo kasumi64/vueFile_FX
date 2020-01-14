@@ -2,14 +2,11 @@
 	<div class="">
 		<header class="backHead">
 			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
-			<b class="h1">{{this.$t('fbcsFile.advanced.Ekey.title')}}</b>
+			<b class="h1">{{this.$t('webu.webUser.title')}}</b>
 		</header>
 		<div class="searchBar">
-			<label class="label">{{$t('webu.com.id')}}</label>
-			<lgy-candidateWords v-model="userID" :keywords="idList" @input="idInput" class="words" ></lgy-candidateWords>
-			<label class="label">{{$t('webu.com.ip')}}</label>
-			<lgy-candidateWords v-model="userIP" :keywords="ipList" @input="iPInput" class="words" ></lgy-candidateWords>
-			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<b class="label w620">【user001】的对端用户信息</b>
+			<button class="blueBtn" @click="search">{{$t('webu.btn.exported')}}</button>
 		</div>
 		<lgy-table :list="tableList" :title="title" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
@@ -19,15 +16,11 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, defID, defIP;
+var _this;
 
 export default {
 	data(){
 		var data = {
-			userID: '',
-			userIP: '',
-			idList: null,
-			ipList: null,
 			tableList: [],
 			page: 1,
 			total: 1,
@@ -58,46 +51,15 @@ export default {
 		changePage(num){
 			this.page = num;
 			search();
-		},
-		idInput(val){
-			if(val=='') return this.idList = [].concat(defID);
-			utils.keywords({id: val}, arr => {
-				_this.idList = arr;
-			});
-		},
-		iPInput(val){
-			if(val=='') return this.ipList = [].concat(defIP);
-			utils.keywords({id: val}, arr => {
-				_this.ipList = arr;
-			});
 		}
+		
 	},
 	created(){
 		_this = this;
-		defID = defIP = [];
-		autoComplete();
 	},
 	mounted(){
 		
 	}
-}
-
-function autoComplete(){
-	var param, args;
-	param = {
-		cmdID: "600052",
-		type: 0,
-		userID: _this.userID,
-		language: 'zh'
-	};
-	args = {
-		label: ['ekeyName','lastModified'],
-		value: 'userID'
-	};
-	utils.keywords(param, args).then(arr => {
-		defID = defIP = [].concat(arr);
-		_this.idList = arr;
-	});
 }
 
 function search(){
@@ -127,5 +89,5 @@ function search(){
 </script>
 
 <style scoped="scoped">
-
+	.w620{width: 620px;}
 </style>

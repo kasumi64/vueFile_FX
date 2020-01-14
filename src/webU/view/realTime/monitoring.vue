@@ -176,7 +176,7 @@ function search() {}
 	
 	.arial{font-family: Arial;font-size: 22px;}
 	.jiange{margin-bottom: 20px;}
-	.fileImg{display: inline-block;width: 50px;height: 50px;margin-bottom: 10px;}
+	.fileImg{display: inline-block;width: 50px;height: 50px;margin-bottom: 10px;border: 1px solid #E5EAF0;}
 	.NginxImg{width: 76px;}
 	
 	.apply{border: 1px solid #E4E4E4;padding: 0 20px;background: #FFF;}

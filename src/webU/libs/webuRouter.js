@@ -18,44 +18,40 @@ const router = new Router({
 				{
 					path: 'realTime/monitoring',
 					component: () => import('@/webU/view/realTime/monitoring.vue'),
-					meta: {
-						auth: true,
-						authFlag: 'Auth_webU_Read,Auth_webU_Opt'
-					}
+					meta: {authFlag: 'Auth_webU_Read,Auth_webU_Opt', auth: true}
 				},
+				
+				
 				{
 					path: 'statistic/webUser',
 					component: () => import('@/webU/view/statistic/webUser.vue'),
-					meta: {
-						auth: true,
-						authFlag: 'Auth_webU_Read,Auth_webU_Opt'
-					}
+					meta: {authFlag: 'Auth_webU_Read,Auth_webU_Opt', auth: true}
+				},
+				{
+					path: 'statistic/endUser',
+					component: () => import('@/webU/view/statistic/endUser.vue'),
+					meta: {authFlag: 'Auth_webU_Read,Auth_webU_Opt', auth: true}
 				},
 				{
 					path: 'statistic/webFile',
 					component: () => import('@/webU/view/statistic/webFile.vue'),
-					meta: {
-						auth: true,
-						authFlag: 'Auth_webU_Read,Auth_webU_Opt'
-					}
+					meta: {authFlag: 'Auth_webU_Read,Auth_webU_Opt', auth: true}
+				},
+				{
+					path: 'statistic/fileSendDetail',
+					component: () => import('@/webU/view/statistic/fileSendDetail.vue'),
+					meta: {authFlag: 'Auth_webU_Read,Auth_webU_Opt', auth: true}
 				},
 				// {
 				// 	path: 'statistic/nginx',
 				// 	component: () => import('@/webU/view/statistic/nginx.vue'),
-				// 	meta: {
-				// 		auth: true,
-				// 		authFlag: 'Auth_webU_Read,Auth_webU_Opt'
-				// 	}
+				// 	meta: {authFlag: 'Auth_webU_Read,Auth_webU_Opt', auth: true}
 				// },
 				{
 					path: 'statistic/historyLlogin',
 					component: () => import('@/webU/view/statistic/historyLlogin.vue'),
-					meta: {
-						auth: true,
-						authFlag: 'Auth_webU_Read,Auth_webU_Opt'
-					}
+					meta: {authFlag: 'Auth_webU_Read,Auth_webU_Opt', auth: true}
 				}
-				
 			]
 		},
 		
