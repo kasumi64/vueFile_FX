@@ -391,6 +391,11 @@ function initDate(){
 	info.beginSoftEncTime = day.getTime();
 	day.setHours(23, 59, 59, 0);
 	info.endSoftEncTime = day.getTime();
+	
+	_this.blo = [
+		{label: _this.$t('fbcsFile.tips.yes'), value: 1},
+		{label: _this.$t('fbcsFile.tips.no'), value: 0},
+	];
 }
 
 function getUserInfo(user){

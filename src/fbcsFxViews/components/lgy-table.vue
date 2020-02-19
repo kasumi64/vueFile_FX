@@ -11,8 +11,8 @@
 			<el-table-column v-if="defined" :label="defined.label" :width="defined.width">
 				<div class="custom" slot-scope="scope">
 					<div class="operate" v-for="(obj, k) in defined.items" :title="obj.tips" :key="k" 
-						@click="operateClick(obj.click,scope.row,scope)" v-if="customShow(obj.enable,scope.row)">
-						<img class="icon" :src="obj.src" alt="" />
+						@click="operateClick(obj.click,scope.row,scope)" v-if="customShow(obj.enable, scope.row)">
+						<img class="icon" :src="typeof(obj.src)=='function'?obj.src(scope.row):obj.src" alt="" />
 					</div>
 				</div>
 			</el-table-column>
@@ -67,7 +67,7 @@ export default {
 		},
 		//{ defined 的结构
 		//	label:'操作', width: "80px",
-		//	items: [{src:require('@/fbcsFxViews/img/logo.png'), click:function(r,s){console.log(r,s)}, tips: '修改' },]
+		//	items: [{src: 'string'|fn), click: fn, tips: '修改', enable: 'string'|fn(按钮开关)}]
 		//}
 		width: { //宽，与list的字段相同
 			type: Object,
@@ -153,7 +153,8 @@ export default {
 				this.isCallPage = false;
 			} else this.$emit('changePage', num);
 		},
-		customShow(k, row){ //功能按钮是否隐藏, k为row的键
+		customShow(k, row){ //功能按钮是否隐藏, k为自定义键, row[k]为false隐藏, k可以是函数
+			if(typeof(k)=="function") return k(row);
 			return row[k] === false ? false : true;
 		},
 		ElPager(num){

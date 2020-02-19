@@ -41,7 +41,12 @@
 				<button class="defBtn" @click="cancel">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
-		<button class="defBtn sys" @click="system">文件系统</button>
+		<!-- <button class="defBtn sys" @click="system">文件系统</button> -->
+		<select class="sys sl" @change="system">
+			<option value="1" selected>文件系统</option>
+			<option value="2">消息系统</option>
+			<option value="3">互联网用户</option>
+		</select>
 	</div>
 </template>
 
@@ -90,8 +95,17 @@ export default {
 			this.showReview = false;
 			this.pwd = '';
 		},
-		system(){
-			this.$router.push({path: '/main/mxCfg/user'});
+		system(e){
+			var path;
+			switch (e.target.value){
+				case '1':
+					path = '/main/fxCfg/userHome'; break;
+				case '2':
+					path = '/main/mxCfg/user'; break;
+				case '3':
+					path = '/main/webu/realTime/monitoring'; break;
+			}
+			this.$router.push({path});
 		}
 	},
 	beforeCreate(){
@@ -219,4 +233,7 @@ function unlockFn({reviewer, password}){
 		font-size: 14px;font-weight: bold;color: #FF7A7D;line-height: 44px;height: 44px;border-bottom: 1px solid #EBEFF4;
 	}
 	.sys{position: absolute;top: 10px;right: 50px;z-index: 2;}
+	.sl{font-size: 12px;padding: 5px 10px;border: 1px solid #0DB9EB;text-align: center;border-radius: 6px;overflow: hidden;
+		color: #00B5EA;-webkit-appearance: button
+	}
 </style>

@@ -209,10 +209,10 @@
 .info{min-width: 500px;}
 .form{white-space: nowrap;}
 .form li{margin-bottom: 10px;}
-.label{display: inline-block;width: 160px;font-size: 14px;color: #666;text-align: right;vertical-align: middle;}
+.label{display: inline-block;width: 260px;font-size: 14px;color: #666;text-align: right;vertical-align: middle;}
 .right{display: inline-block;margin-left: 10px;vertical-align: middle;}
 .radio{display: block;margin-bottom: 10px;}
-.more{margin-left: 160px;padding: 10px;}
+.more{margin-left: 260px;padding: 10px;}
 .btnBox button{margin-right: 10px;margin-top: 20px;}
 .small{font-size: 12px;margin-left: 10px;color: #999;vertical-align: middle;}
 </style>
