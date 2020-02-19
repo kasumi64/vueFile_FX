@@ -76,7 +76,12 @@
 				</ul>
 			</div>
 		</div>
-		<button class="sys" @click="system">消息系统</button>
+		<!-- <button class="sys" @click="system">消息系统</button> -->
+		<select class="sys sl" @change="system">
+			<option value="1">文件系统</option>
+			<option value="2" selected>消息系统</option>
+			<option value="3">互联网用户</option>
+		</select>
 	</div>
 </template>
 
@@ -168,8 +173,17 @@ import md5		 from "@/fbcsViews/libs/md5.js";
 					});
 				}
 			},
-			system(){
-				this.$router.push({path: '/main/fxCfg/userHome'});
+			system(e){
+				var path;
+				switch (e.target.value){
+					case '1':
+						path = '/main/fxCfg/userHome'; break;
+					case '2':
+						path = '/main/mxCfg/user'; break;
+					case '3':
+						path = '/main/webu/realTime/monitoring'; break;
+				}
+				this.$router.push({path});
 			}
 		},
 		created(){
@@ -372,6 +386,7 @@ import md5		 from "@/fbcsViews/libs/md5.js";
 	.pwdBox .txt{border: none;line-height: 30px;}
 	.sys{position: absolute;top: 10px;right: 50px;z-index: 2;color: #0DB9EB;border: 1px solid #0DB9EB;background: #FFF;display: inline-block; 
 		height: 30px; border-radius: 6px; vertical-align: middle; font-size: 12px; line-height: 30px; padding: 0 10px; min-width: 88px;}
+	.sl{padding: 5px 10px;text-align: center;overflow: hidden;color: #00B5EA;-webkit-appearance: button}
 </style>
 <style>
 	.navHead .warnTxt{display: block;font-size: 13px;line-height: 50px; margin-left: 8px;}
