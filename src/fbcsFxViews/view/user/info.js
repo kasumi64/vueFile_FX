@@ -42,7 +42,7 @@ _info = {
 };
 
 export default {
-	data(){ return data;},
+	data(){return data;},
 	props: {
 		isAdd: {
 			type: String,

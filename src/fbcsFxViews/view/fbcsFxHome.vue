@@ -234,6 +234,6 @@ function unlockFn({reviewer, password}){
 	}
 	.sys{position: absolute;top: 10px;right: 50px;z-index: 2;}
 	.sl{font-size: 12px;padding: 5px 10px;border: 1px solid #0DB9EB;text-align: center;border-radius: 6px;overflow: hidden;
-		color: #00B5EA;-webkit-appearance: button
+		color: #00B5EA;-webkit-appearance: button; height: 30px;line-height: 1.2;
 	}
 </style>

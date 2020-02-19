@@ -133,7 +133,7 @@ export default {
 			buildTime: this.$t('fbcsFile.tableTitle.buildTime')
 		};
 		data.defined = {
-			label: this.$t('fbcsFile.tableTitle.operation'), width: 52,
+			label: this.$t('fbcsFile.tableTitle.operation'), width: 90,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delSignal') }
 			]

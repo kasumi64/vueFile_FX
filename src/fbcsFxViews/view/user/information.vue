@@ -14,7 +14,7 @@
 		<lgy-table :list="listBOP" :title="titleBOP" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" 
 			:maxHeight="416" :size='90000'>
 		</lgy-table>
-		<el-dialog :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false" width="670px">
+		<el-dialog :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false" width="830px">
 			<ul class="_dialog over">
 				<li>
 					<div class="left">
@@ -380,7 +380,7 @@ function searchBOP(){
 	.jg{margin-bottom: 10px;}
 	.w80{width: 80px;text-align: right;}
 	.h2{font-size: 16px;color: #333;margin-bottom: 10px;}
-	#fbcs_file ._dialog .left{width: 140px;}
+	#fbcs_file ._dialog .left{min-width: 140px;}
 	#fbcs_file ._dialog .right .txt{margin-left: 10px;font-size: 12px;color: #999;}
 	li{white-space: nowrap;}
 	.over{height: 473px;overflow: overlay;}
