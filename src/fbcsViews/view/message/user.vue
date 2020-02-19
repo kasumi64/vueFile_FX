@@ -53,7 +53,7 @@
 
 			<Password ref='pwd'></Password>
 
-			<el-dialog class="dialog_pop box1" v-dialogDrag :title="pageTxt.popup[0]" :visible.sync="showImportExtInfo" width='600px'>
+			<el-dialog class="dialog_pop box1" v-dialogDrag :title="pageTxt.popup[0]" :visible.sync="showImportExtInfo" width='680px'>
 				<div class="_messaga box1">
 					<span class="txt"><span class="red">*&nbsp;</span>{{pageTxt.popup[1]}}</span>
 					<el-input auto-complete="off" class="Popup_input" v-model="csvFileName"></el-input>

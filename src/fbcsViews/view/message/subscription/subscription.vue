@@ -49,7 +49,7 @@
 			<el-table-column prop="pubUserName" :label="pageTxt.list[4]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="topicName" :label="pageTxt.list[5]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="pubTime" width="180" sortable='custom' :label="pageTxt.list[6]" show-overflow-tooltip></el-table-column>
-			<el-table-column :label="pageTxt.list[7]" width='60'>
+			<el-table-column :label="pageTxt.list[7]" width='100'>
 				<div slot-scope="scope" class="_zero">
 					<!-- <el-tooltip :content="pageTxt.label[5]" placement="bottom" effect="light"> -->
 						<img @click="see(scope.$index, scope.row, scope)" src="@/fbcsViews/img/theme/detail_2.png" :title="pageTxt.label[5]" alt="">

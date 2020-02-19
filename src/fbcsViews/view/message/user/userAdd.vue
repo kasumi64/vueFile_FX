@@ -444,8 +444,9 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 	.header_line { border-right: 1px solid #ebeff4; height: 30px; float: left; margin-left: 20px; margin-top: 9px; }
 	.header_txt2 { font-size: 16px; color: #656a73; line-height: 44px; margin-left: 20px; font-weight: bold; }
 	#fbcs_MX .el-tabs { padding: 22px; }
-	.info { white-space: nowrap;width: 650px; }
-	#fbcs_MX .el-col-6 { width: 160px; font-size: 14px; color: #666666; }
+	.info { white-space: nowrap;width: 710px; }
+	#fbcs_MX .el-col-6 { width: 311px; font-size: 14px; color: #666666; }
+	#fbcs_MX .el-col-18{width: auto;}
 	.left li { text-align: right; line-height: 40px; }
 	.info li { margin-top: 10px; height: 36px; }
 	.right { margin-left: 15px; line-height: 40px; }

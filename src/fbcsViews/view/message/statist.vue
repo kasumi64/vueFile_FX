@@ -59,7 +59,7 @@
 						{{scope.row.errStr}}
 					</span>
 				</el-table-column>
-				<el-table-column prop="errInfo" width="55" :label="pageTxt.table[6]" show-overflow-tooltip>
+				<el-table-column prop="errInfo" width="70" :label="pageTxt.table[6]" show-overflow-tooltip>
 					<div slot-scope="scope" class="_zero">
 						<div @click='showParticularsFn(scope.row)' v-if="data.lists[scope.$index].uuid != null" :title="pageTxt.table[7]">
 							<img src="@/fbcsViews/img/user/examine.png">

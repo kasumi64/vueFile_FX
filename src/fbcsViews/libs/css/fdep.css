@@ -162,11 +162,11 @@ input[type=text]:focus,input[type=password]:focus,input[type=number]:focus{borde
 #fbcs_MX .el-button--default:active{border-color:#66b1ff;background:#66b1ff;opacity:.8!important;}
 #fbcs_MX .el-button--default:focus,
 #fbcs_MX .el-button--default:hover{border-color:#0DB9EB;background:#FFF;}
-#fbcs_MX .el-button--primary{padding:0 !important;width:88px;height:30px;border-color:#32CCF9;background:#06BFF5;color:#FFF;font-size:12px;line-height:30px;}
+#fbcs_MX .el-button--primary{min-width:88px;padding:0 10px !important;height:30px;border-color:#32CCF9;background:#06BFF5;color:#FFF;font-size:12px;line-height:30px;}
 #fbcs_MX .el-button--primary:active{border-color:#00B5EA!important;background:#00B5EA!important;color:#FFF!important;}
 #fbcs_MX .el-button--primary:focus,
 #fbcs_MX .el-button--primary:hover{border-color:#17CBFF;background:#17CBFF;}
-.blueBtn, .defBtn{display:inline-block;min-width:88px;height:30px;border-radius:4px;background:#06BFF5;color:#FFF;vertical-align:middle;font-size:12px;line-height:30px;}
+.blueBtn, .defBtn{display:inline-block;min-width:88px;height:30px;padding: 0 10px;border-radius:4px;background:#06BFF5;color:#FFF;vertical-align:middle;font-size:12px;line-height:30px;}
 .blueBtn:hover{background:#17CBFF;}
 .blueBtn:active{background:#00B5EA;}
 .defBtn{border:1px solid #0DB9EB;background:#FFF;color:#0DB9EB;}

@@ -439,14 +439,15 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.userEdit{color: #606266;min-height: 630px;}
 	.red{color: red;}
 	.info li{margin-top: 10px; height: 36px;}
-	.info{white-space: nowrap;width: 650px;}
+	.info{white-space: nowrap;width: 710px;}
 	.header{height: 44px; border-bottom: 1px solid #EBEFF4; overflow: hidden;}
 	.header_img{float: left; margin-top: 15px; margin-left: 20px;}
 	.header_txt1{font-size: 13px; color: #5c759d; float: left; line-height: 44px; margin-left: 5px; cursor: pointer;}
 	.header_line{border-right: 1px solid #ebeff4; height: 30px; float: left; margin-left: 20px; margin-top: 9px;}
 	.header_txt2{font-size: 16px; color: #656a73; line-height: 44px; margin-left: 20px; font-weight: bold;}
 	#fbcs_MX .el-tabs{padding: 22px; margin: 0 auto;}
-	#fbcs_MX .el-col-6{width: 160px; font-size: 14px; color: #666;}
+	#fbcs_MX .el-col-6{width: 311px; font-size: 14px; color: #666;}
+	#fbcs_MX .el-col-18{width: auto;}
 	.left li{text-align: right; line-height: 40px;}
 	.right{margin-left: 15px; line-height: 40px;}
 	.right input{font-size: 14px; width: 255px; height: 30px; vertical-align: middle; padding: 0 5px; border: 1px solid #d7d8da; text-indent: 7px;}

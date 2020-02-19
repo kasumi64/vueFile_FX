@@ -783,7 +783,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 		border-right: 1px solid #edeef0;}
 	.h2 .span{font-size: 16px;color: #666;line-height: 50px;height: 50px;padding-left: 20px;font-weight: bold;}
 	.list li{margin-bottom: 10px;}
-	.txt,.txt1{display: inline-block;font-size: 14px;line-height: 30px;width: 160px;vertical-align: top;text-align: right;padding-right: 10px;}
+	.txt,.txt1{display: inline-block;font-size: 14px;line-height: 30px;width: 200px;vertical-align: top;text-align: right;padding-right: 10px;}
 	.txt1{text-align: left;width: auto;}
 	.red{color: #F00;line-height: 1;vertical-align: text-bottom;}
 	.rightBox{vertical-align: top;display: inline-block;}

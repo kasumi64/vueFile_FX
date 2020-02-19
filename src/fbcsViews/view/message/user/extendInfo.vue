@@ -14,7 +14,7 @@
 		<lgy-table :list="listBOP" :title="titleBOP" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" 
 			:maxHeight="416" :size='90000'>
 		</lgy-table> -->
-		<el-dialog class="MX_dialog" :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false" width="670px">
+		<el-dialog class="MX_dialog" :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false" width="830px">
 			<ul ref="dBody" class="dBody over">
 				<li>
 					<div class="left">

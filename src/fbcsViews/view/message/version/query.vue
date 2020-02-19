@@ -44,7 +44,7 @@
 			<el-table-column prop="operator" width="120"  :label="pageTxt.list[4]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="reviewer" width="120"  :label="pageTxt.list[5]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="send" width="100" :label="pageTxt.list[6]" show-overflow-tooltip></el-table-column>
-			<el-table-column :label="pageTxt.list[7]" width='90'>
+			<el-table-column :label="pageTxt.list[7]" width='100'>
 				<div slot-scope="scope" class="_zero">
 					<img v-if="auth>1" @click="rollback(scope.row, scope.$index, scope)" src="@/fbcsViews/img/theme/version.png" :title="pageTxt.label[12]">
 					<img @click="detail(scope.row, scope.$index, scope)" src="@/fbcsViews/img/theme/detail_2.png" :title="pageTxt.label[13]">
@@ -369,7 +369,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.blueBtn{margin-left: 35px;}
 	.btnTxt{color: #5a769e;}
 	.el-button *{vertical-align: middle;}
-	.big{position: absolute;top: 0;right: 0;}
+	.big{position: absolute;top: 0;right: 0;padding: 0 10px;}
 	._zero img{margin-right: 15px;}
 	.daterange{margin-left: 20px;}
 	.Popup ._panle{height: auto}

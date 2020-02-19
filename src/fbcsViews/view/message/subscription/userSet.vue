@@ -36,7 +36,7 @@
 			<el-table-column prop="maxPubsCount" :label="pageTxt.list[2]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="maxSubsCount" :label="pageTxt.list[3]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="maxDaysOfTopic" :label="pageTxt.list[4]" show-overflow-tooltip></el-table-column>
-			<el-table-column :label="pageTxt.list[5]" width='60'>
+			<el-table-column :label="pageTxt.list[5]" width='100'>
 				<div slot-scope="scope" class="_zero">
 					<!-- <el-tooltip :content="pageTxt.label[5]" placement="bottom" effect="light"> -->
 						<img @click="edit(scope.row)" src="@/fbcsViews/img/theme/edit_2.png" :title="pageTxt.label[5]" alt="">

@@ -236,7 +236,7 @@ import lang      from '@/fbcsViews/language/lang.js';
 		border-right: 1px solid #edeef0;}
 	.h2 .span{font-size: 16px;color: #666;line-height: 50px;height: 50px;padding-left: 20px;font-weight: bold;}
 	.list li{margin-bottom: 10px;}
-	.txt,.txt1,.txt2{display: inline-block;font-size: 14px;line-height: 30px;width: 160px;vertical-align: top;text-align: right;padding-right: 10px;}
+	.txt,.txt1,.txt2{display: inline-block;font-size: 14px;line-height: 30px;width: 200px;vertical-align: top;text-align: right;padding-right: 10px;}
 	.txt1,.txt2{text-align: left;width: 800px;white-space: normal;}
 	.txt2{line-height: 20px;white-space: normal;max-width: 800px;padding: 5px 0;}
 	.rightBox{vertical-align: top;display: inline-block;}

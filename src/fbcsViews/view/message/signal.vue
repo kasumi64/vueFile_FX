@@ -40,7 +40,7 @@
 				<el-table-column prop="userID2" :label="pageTxt.table[3]" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="userName2" :label="pageTxt.table[4]" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="buildTime" :label="pageTxt.table[7]" show-overflow-tooltip></el-table-column>
-				<el-table-column :label="pageTxt.table[5]" width="70" show-overflow-tooltip>
+				<el-table-column :label="pageTxt.table[5]" width="110" show-overflow-tooltip>
 					<div v-if="auth>1" slot-scope="scope" class="_zero">
 						<img @click="showPromptBox" src="@/fbcsViews/img/user/deleticos.png" :title="pageTxt.table[6]">
 					</div>

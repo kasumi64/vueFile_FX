@@ -386,7 +386,7 @@ import md5		 from "@/fbcsViews/libs/md5.js";
 	.pwdBox .txt{border: none;line-height: 30px;}
 	.sys{position: absolute;top: 10px;right: 50px;z-index: 2;color: #0DB9EB;border: 1px solid #0DB9EB;background: #FFF;display: inline-block; 
 		height: 30px; border-radius: 6px; vertical-align: middle; font-size: 12px; line-height: 30px; padding: 0 10px; min-width: 88px;}
-	.sl{padding: 5px 10px;text-align: center;overflow: hidden;color: #00B5EA;-webkit-appearance: button}
+	.sl{padding: 5px 10px;text-align: center;overflow: hidden;color: #00B5EA;-webkit-appearance: button; line-height: 1.2;}
 </style>
 <style>
 	.navHead .warnTxt{display: block;font-size: 13px;line-height: 50px; margin-left: 8px;}
