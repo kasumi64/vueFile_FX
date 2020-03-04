@@ -329,7 +329,7 @@ function operatorType(){
 		for (i = 0; i < len; i++) {
 			obj = arr[i];
 			obj.value = obj.name;
-			obj.lable = obj.name;
+			obj.label = obj.name;
 		}
 		keywords = [].concat(arr);
 		_this.idWords = arr;
@@ -362,6 +362,6 @@ function getDay(val){
 .ml{margin-left: 10px;}
 .linkage{display: none;margin-right: 35px;margin-left: -20px;}
 .linkage .el-checkbox+.el-checkbox{margin-left: 10px;}
-.w80{width: 80px;text-align: right;}
+.w80{width: 122px;text-align: right;}
 .red{color: red;}
 </style>

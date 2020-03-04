@@ -263,7 +263,7 @@ function operatorType(){
 		for (i = 0; i < len; i++) {
 			obj = arr[i];
 			obj.value = obj.name;
-			obj.lable = obj.name;
+			obj.label = obj.name;
 		}
 		keywords = [].concat(arr);
 		_this.idWords = arr;

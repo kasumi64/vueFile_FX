@@ -2,7 +2,7 @@
 	<div class="signal">
 		<div class="userH">
 			<span class="txt">{{pageTxt.label[0]}}：</span>
-			<el-select class="input_normal" v-model="searchInfo.bizType" @change='cbizType'>
+			<el-select class="input_normal" v-model="searchInfo.bizType" @change='cbizType' :placeholder="placeholder">
 				<el-option v-for="item in options1" :label="item.name" :key="item.id" :value="item.id"></el-option>
 			</el-select>
 			<span class="txt1">{{pageTxt.label[2]}}：</span>
@@ -50,14 +50,14 @@
 		</div>
 		<div class="onePage" v-else-if="max>0&&max<=pageSize">{{paging.before2}}{{max}}{{paging.after}}</div>
 		
-		<el-dialog v-dialogDrag width='620px' :title="pageTxt.popup[0]" :visible.sync="dialogAdd">
+		<el-dialog v-dialogDrag width='640px' :title="pageTxt.popup[0]" :visible.sync="dialogAdd">
 			<ul class="_dialog">
 				<li>
 					<div class="leftBox">
 						<p class="txt">{{pageTxt.popup[1]}}</p>
 					</div>
 					<div class="rightBox">
-						<el-select popper-class="fbcs_MX_signal_select" class="input_normal" v-model="creatInfo.bizType">
+						<el-select popper-class="fbcs_MX_signal_select" class="input_normal" v-model="creatInfo.bizType" :placeholder="placeholder">
 							<el-option v-for="item in optionsCreat" :label="item.name" :key="item.id" :value="item.id">
 							</el-option>
 						</el-select>
@@ -81,7 +81,7 @@
 					</div>
 					<div class="rightBox">
 						<el-select popper-class="fbcs_MX_signal_select" class="input_normal select_" v-model="creatInfo.other" 
-							multiple filterable remote :remote-method="remote2" :reserve-keyword="false" @focus="focus">
+							multiple filterable remote :remote-method="remote2" :reserve-keyword="false" @focus="focus" :placeholder="placeholder">
 							<el-option v-for="item in multipleList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 						</el-select>
 					</div>
@@ -109,6 +109,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 		data() {
 			return {
 				auth: globalVar.get('status').user,
+				placeholder: this.$t('fbcsFile.tips.psel'),
 				currPage: 1,
 				max:0,
 				options: "",

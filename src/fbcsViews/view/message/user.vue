@@ -267,7 +267,7 @@
 					return;
 				}
 				utils.hints({
-					txt: '是否导入扩展信息？',
+					txt: pageTxt.extended,
 					yes: ins
 				});
 				this.showImportExtInfo = false;

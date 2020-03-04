@@ -1,7 +1,7 @@
 <template>
 	<div class="versionQuery">
 		<div class="searchBar">
-			<label class="label">{{$t('fbcsFile.audit.operatorType')}}：</label>
+			<label class="label">{{$t('fbcsFile.versionQuery.type')}}：</label>
 			<el-select v-model="info.type" class="sel">
 				<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 				</el-option>

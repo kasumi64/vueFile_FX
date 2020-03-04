@@ -104,7 +104,7 @@ export default {
 	},
 	created(){
 		_this = this;
-		defID = [];
+		defID = defIP = [];
 		autoComplete();
 		defaultDay.call(this);
 	},

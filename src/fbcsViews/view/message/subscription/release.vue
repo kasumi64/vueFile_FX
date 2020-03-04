@@ -86,7 +86,7 @@
 		
 		<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.label[13]" :visible.sync="downCSV" width='600px'>
 			<div class="_messaga">
-				<span class="txt">文件名：<a :href="csvUrl" style="color:#5C759D">{{csvName}}</a></span>
+				<span class="txt">{{pageTxt.fileName}}<a :href="csvUrl" style="color:#5C759D">{{csvName}}</a></span>
 				<div class="_messaga_info">
 					<span class="info_txt">{{pageTxt.label[14]}}</span>
 				</div>

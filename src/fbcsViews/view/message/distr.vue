@@ -6,7 +6,7 @@
 			<li>
 				<label class="txt">{{pageTxt.label[1]}}</label>
 				<div class="rightBox">
-					<el-select v-model="type" @change="change" placeholder="请选择">
+					<el-select v-model="type" @change="change">
 						<el-option v-for="item in pageTxt.options" :key="item.val" :label="item.label" :value="item.val">
 						</el-option>
 					</el-select>

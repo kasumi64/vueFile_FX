@@ -189,5 +189,5 @@ function search(){
 	.picker{margin-right: 20px;}
 	#webu .webFile .mar20{margin: 0 20px;}
 	.marb{margin-bottom: 20px;}
-	
+	.icon{cursor: pointer;}
 </style>

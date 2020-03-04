@@ -1,8 +1,3 @@
-	// utils: {
-	// 	okBtn: 'Yes', nowBtn:'Now', cBtn:'No', title1:'Tips', title2:'review operator', sub:'Yes', back:'No',
-	// 	review:'review name：', reviewPwd:'password：', reviewNull: 'reviewer is null！',reviewNameErr:'reviewer name is error',
-	// 	noAuth: '该用户还没有分配权限', session: '会话已失效，请重新登录'
-	// }
 
 export default {
 	publics: {
@@ -39,7 +34,7 @@ export default {
 			'Query','Add user topic','Modify user topic','Delete user topic','Topic details','Export topic information in batch',
 			'Right-click on the file name and select the "Save Link As ..." menu to save the file.','Close'],
 		list: ['Publisher ID','Publisher name','Topic No.','Publish time','Number of topics subscribed','Operation '],
-		hasOne: '请在列表中至少选择一条记录！'
+		hasOne: '请在列表中至少选择一条记录！', fileName: 'File name：'
 	},
 	themeSubscription: {
 		tips: {user: "Please select a record in the list"},
@@ -107,7 +102,8 @@ export default {
 		table: ["UserID","UserName","Operation ","Modify Basic info","Modify Ekey","Create communication relationship","Delete user","Modify password"],
 		popup: ["Import extended information in batch","Name of extended information file","Please put the extended information file in the server path：static/import；","Enter the extended information file name in the input box.","Submit","Back",
 				"Export extended information in batch","File name：",'Right-click on the file name and select the "Save Link As ..." menu to save the file.',"Close","Export basic information in batch"],
-		tips: ["Create user","Release immediately?","Modify user","Delete user information or not","Please select a record in the list",'扩展信息文件名不能为空']
+		tips: ["Create user","Release immediately?","Modify user","Delete user information or not","Please select a record in the list",'扩展信息文件名不能为空'],
+		extended: '是否导入扩展信息？'
 	},
 	Ekey: {
 		label: ["Ekey","Query mode","Query by Ekey","Query by user","Ekey name","User ID","Query","Create Ekey","Export Ekey in batch",'Necessary when lower than V5 version'],

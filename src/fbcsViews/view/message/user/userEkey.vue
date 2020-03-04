@@ -153,21 +153,17 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	var pageTxt = 'lang.Ekey',
 		autoTime, _currentPage = 1,
 		_this;
-
-	var ainfo = {},
-		def = ["operator", "userID", "ekeyName", "type", "ekeyValidDate", "comment"];
-	for(var i = 0; i < def.length; i++) {
-		ainfo[def[i]] = "";
-	}
-
-	var binfo = {},
-		det = ["operator", "userID", "ekeyName", "type", "ekeyValidDate", "comment"];
-	for(var i = 0; i < det.length; i++) {
-		binfo[det[i]] = "";
-	}
+	
 
 	export default {
 		data() {
+			var ainfo = {}, binfo = {},
+				def = ["operator", "userID", "ekeyName", "ekeyPasswd", "type", "ekeyValidDate", "comment"];
+			for (var i = 0; i < def.length; i++) {
+				ainfo[def[i]] = "";
+				binfo[def[i]] = "";
+			}
+			
 			return {
 				auth: globalVar.get('status').user,
 				max:0,
@@ -516,6 +512,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.prefix250{width: 250px;}
 	.prefix156 {width: 156px;}
 	.hide{display: none;}
+	#fbcs ._dialog .leftBox{width: 200px;}
 </style>
 <style>
 	#fbcs_MX .Ekey .picker.el-date-editor.el-input {width: 250px;}

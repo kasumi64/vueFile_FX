@@ -261,7 +261,10 @@
 	};
 	
 	export default {
-		data(){ return data;},
+		data(){
+			data.arbitratily = this.$t('fbcsFile.tips.arbitratily');
+			return data;
+		},
 		props: {
 			isAdd: {
 				type: String,
@@ -322,7 +325,7 @@
 				else params.beginSoftEncTime = 0;
 				if(params.endSoftEncTime) params.endSoftEncTime = params.endSoftEncTime / 1000;
 				else params.endSoftEncTime = 0;
-				if(this.info.linkGroupName == '任意') params.linkGroupName = '';
+				if(this.info.linkGroupName == _this.arbitratily) params.linkGroupName = '';
 				
 	//			console.log('userinfo', params);
 				
@@ -398,7 +401,7 @@
 				params.reviewer = obj.name;
 				params.reviewerPassword = obj.pwd;
 				params.reviewType = 1;
-				if(params.linkGroupName == '任意') params.linkGroupName = '';
+				if(params.linkGroupName == _this.arbitratily) params.linkGroupName = '';
 				
 	//			utils.loadShow();
 				utils.post(params).then(function(res){
@@ -553,7 +556,7 @@
 		params= { url, cmdID, language, type: 2 };
 		utils.post(params).then(function(res){
 			if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-			res.lists.unshift({name:'任意', id:''});
+			res.lists.unshift({name:_this.arbitratily, id:''});
 			_this.inZone = res.lists;
 		});
 		
@@ -563,7 +566,7 @@
 		};
 		utils.post(params).then(function(res){
 			if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-			res.lists.unshift({groupID: '任意'});
+			res.lists.unshift({groupID: _this.arbitratily});
 			_this.group = res.lists;
 		});
 	}
@@ -576,7 +579,7 @@
 		info.userPasswd = defaultPwd;
 		info.userType = '1';
 		info.inZone = '';
-		info.linkGroupName = '任意';
+		info.linkGroupName = _this.arbitratily;
 		info.speedCtrl = -1;
 		info.maxRelationUser = 1000;
 		info.encFlag = 1;
@@ -629,7 +632,7 @@
 		obj.expiredTimeFlag = '1';
 		obj.userPasswd = '';
 		obj.remark = obj.remark || '';
-		if(obj.linkGroupName=='') obj.linkGroupName = '任意';
+		if(obj.linkGroupName=='') obj.linkGroupName = _this.arbitratily;
 		_this.info = obj;
 	}
 	

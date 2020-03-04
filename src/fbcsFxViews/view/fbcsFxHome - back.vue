@@ -114,6 +114,7 @@ export default {
 		// url = 'http://localhost:8088/fx/';
 		url = '/fbcs_fx/fx/';
 		utils.setBaseURL(url);
+		utils.fbcsLanguage = utils.language;
 	},
 	created(){
 		_this = this;

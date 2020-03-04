@@ -93,7 +93,9 @@ export default {
 			ymdBegin: this.$t('fbcsFile.tableTitle.beginTime'),
 			ymdEnd: this.$t('fbcsFile.tableTitle.endTime')
 		};
-		data.encSelect = this.$t('fbcsFile.advanced.user.encSelect')
+		data.encSelect = this.$t('fbcsFile.advanced.user.encSelect');
+		data.labelAll = this.$t('fbcsFile.tips.labelAll');
+		data.arbitratily = this.$t('fbcsFile.tips.arbitratily');
 		return data;
 	},
 	methods:{
@@ -119,8 +121,8 @@ export default {
 			param.type = 1;
 			param.language = utils.langCode();
 			
-			if(param.linkGroupName == '全部') param.linkGroupName = 'all';
-			else if(param.linkGroupName == '任意') param.linkGroupName = '';
+			if(param.linkGroupName == this.labelAll) param.linkGroupName = 'all';
+			else if(param.linkGroupName == this.arbitratily) param.linkGroupName = '';
 			
 			utils.post(param).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
@@ -160,8 +162,8 @@ function search(){
 	param.type = 0;
 	param.language = utils.langCode();
 	
-	if(param.linkGroupName == '全部') param.linkGroupName = 'all';
-	else if(param.linkGroupName == '任意') param.linkGroupName = '';
+	if(param.linkGroupName == _this.labelAll) param.linkGroupName = 'all';
+	else if(param.linkGroupName == _this.arbitratily) param.linkGroupName = '';
 	
 	utils.post(param).then(function(res){
 		if(res.errcode!='0') { //清缓存历史
@@ -199,7 +201,7 @@ function initDate(){
 	for (let k in info) info[k] = '';
 	info.userType = '',
 	info.inZone = 'all',
-	info.linkGroupName = '全部',
+	info.linkGroupName = _this.labelAll,
 	info.encFlag = 0;
 	info.sortType = 0;
 	_this.showDialog = false;
@@ -211,7 +213,7 @@ function getDict(){
 	params = { url, cmdID, language, type: 1 };
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-		res.lists.unshift({name:'全部', id:''});
+		res.lists.unshift({name:_this.labelAll, id:''});
 		userDict = {};
 		for (var i = 0; i < res.lists.length; i++) {
 			var o = res.lists[i];
@@ -224,8 +226,8 @@ function getDict(){
 	params= { url, cmdID, language, type: 2 };
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-		res.lists.unshift({name:'任意', id:''});
-		res.lists.unshift({name:'全部', id:'all'});
+		res.lists.unshift({name:_this.arbitratily, id:''});
+		res.lists.unshift({name:_this.labelAll, id:'all'});
 		_this.inZone = res.lists;
 	});
 	
@@ -235,8 +237,8 @@ function getDict(){
 	};
 	utils.post(params).then(function(res){
 		if(res.errcode!='0') return console.warn(res.errcode, res.errinfo);
-		res.lists.unshift({groupID: '任意'});
-		res.lists.unshift({groupID: '全部'});
+		res.lists.unshift({groupID: _this.arbitratily});
+		res.lists.unshift({groupID: _this.labelAll});
 		_this.group = res.lists;
 	});
 }
@@ -245,5 +247,5 @@ function getDict(){
 <style scoped="scoped">
 	.advancedUser{min-width: 1010px;}
 	.jg{margin-bottom: 10px;}
-	.w80{width: 80px;text-align: right;}
+	.w80{width: 122px;text-align: right;}
 </style>

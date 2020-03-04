@@ -60,7 +60,7 @@
 							<p class="txt"><span class="red">*&nbsp;</span>{{pageTxt.popup[1]}}</p>
 						</div>
 						<div class="rightBox" id="rightBox1">
-							<el-select popper-class="signal_select" id="Ekye_input" filterable v-model="ainfo.userID" :no-match-text='noData'>
+							<el-select popper-class="signal_select" id="Ekye_input" filterable v-model="ainfo.userID" :no-match-text='noData' :placeholder="placeholder">
 								<el-option v-for="item in options" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 							</el-select>
 						</div>
@@ -198,23 +198,20 @@
 	var pageTxt = 'lang.Ekey',
 		autoTime, isInput = false,
 		_this, t, isEkeyInput = false;
-
-	var ainfo = {},
-		def = ["operator", "userID", "ekeyName", "type", "ekeyValidDate", "comment"];
-	for (var i = 0; i < def.length; i++) {
-		ainfo[def[i]] = "";
-	}
-
-	var binfo = {},
-		det = ["operator", "userID", "ekeyName", "type", "ekeyValidDate", "comment"];
-	for (var i = 0; i < det.length; i++) {
-		binfo[det[i]] = "";
-	}
+	
 
 	export default {
 		data() {
+			var ainfo = {}, binfo = {},
+				def = ["operator", "userID", "ekeyName", "ekeyPasswd", "type", "ekeyValidDate", "comment"];
+			for (var i = 0; i < def.length; i++) {
+				ainfo[def[i]] = "";
+				binfo[def[i]] = "";
+			}
+			
 			return {
 				auth: globalVar.get('status').user,
+				placeholder: this.$t('fbcsFile.tips.psel'),
 				idName: "",
 				userID: "",
 				search: {

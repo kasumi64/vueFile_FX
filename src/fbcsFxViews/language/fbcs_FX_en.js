@@ -4,7 +4,7 @@ var obj = {
 		modify: 'modify', edit: 'edit', submit: 'submit', contrast: 'Compare', close: 'Close',
 		date: '选择日期时间', title: 'Prompt', rightClick: 'Right-click on file name and select menu "Save Link As ..." to save  file.',
 		webUser: 'This modification affects the Internet node. Please dispatch the config of the WebUnode manually.',
-		lock: '您当前没有操作权限！', yes: 'Yes', no: 'No'
+		lock: '您当前没有操作权限！', yes: 'Yes', no: 'No', labelAll: 'All', arbitratily: 'Arbitratily', psel: 'Please select'
 	},
 	components: {
 		placeholder: '输入关键字', not: 'No data', paging1: 'All', paging2: 'pieces of data displayed',
@@ -32,7 +32,7 @@ var obj = {
 	},
 	tableDefined: {
 		editUser: 'Modify Basic info', editEkey: 'Modify Ekey', addSignal: 'Create communication relationship', delEkey: 'Delete Ekey',
-		delUser: '删除用户', delSignal: 'Delete communication relationship', back: '回退', detail: 'Details',
+		delUser: '删除用户', delSignal: 'Delete communication relationship', back: 'Back', detail: 'Details',
 		editExt: 'Modify extended info', delExt: 'Delete extended info', verback: 'Version rollback'
 	},
 	err: {
@@ -77,9 +77,9 @@ var obj = {
 	},
 	userInfo: {
 		id: 'UserID：', name: 'UserName：', pwd: 'Password：', def: 'Default', hm:'Manual', type: 'User type：', inZone: 'InZone：', 
-		group: 'GroupID：', speed: 'Max receive&send speed：', maxUser: 'Max. relationship number：', hard: 'Hard encryption', soft: 'Soft encryption',
-		online: 'Offline alarm：', encFlag: 'Encryption method：', beginTime: 'Soft encryption start time：', endTime: 'Soft encryption end time：', broadcast: 'Allow broadcast transmission now?：',
-		connFlag: 'Allow connection flag：', switchMsg: 'Allow message exchange：', allowPublishTopicCount: 'Max. number of published topics：', allowSubscribeTopicCount: 'Max. number of subscribed topics：',
+		group: 'GroupID：', speed: 'Max receive&send speed：', maxUser: 'Max relationship number：', hard: 'Hard encryption', soft: 'Soft encryption',
+		online: 'Offline alarm：', encFlag: 'Encryption method：', beginTime: 'Soft encryption start time：', endTime: 'Soft encryption end time：', broadcast: 'Allow broadcast transmission：',
+		connFlag: 'Allow connection flag：', switchMsg: 'Allow message exchange：', allowPublishTopicCount: 'Max number of published topics：', allowSubscribeTopicCount: 'Max number of subscribed topics：',
 		maxPublishTopicDay: 'Days of validity for topics published ：', maxSimultTaskCount: 'Concurrent tasks per user：', maxCltOneDayTaskCount: 'Max sent file number per user：', 
 		webFlag:'Internet identity flag：', isModifyDefaultPasswd: '新加用户修改默认密码标识：', userPasswd: '系统密码：', expiredTimeFlag: '密码有效期标识：',
 		more: 'More', Kbit: '-1或0为不限速', indate: 'Password validity：', buildTime: 'Creation time：', errNum: '以下数据将设置成默认值：\n'
@@ -96,7 +96,7 @@ var obj = {
 		delEkey: 'Delete Ekey now?', ekeyNameFormat: 'Ekey名称必须是字母或数字或下划线', ekeyCommentFormat: 'Ekey描述不能包含%'
 	},
 	relation: {
-		addSignal: 'Create communication relationship', delSignal: 'Delete communication relationship', userID1: 'UserID：', userID2: 'Peer user：',
+		addSignal: 'Create communication relationship', delSignal: 'Delete communication relationship', userID1: 'UserID：', userID2: 'Peer userID：',
 		clear: 'Clear', errid1: '用户ID不能为空！', errid2: '对端用户不能为空！', errSignal: 'Select at least one communication relationship!', 
 		errid3: '立即下发只能选择一条通信关系！', sureSignal: 'Delete communication relationship now?'
 	},

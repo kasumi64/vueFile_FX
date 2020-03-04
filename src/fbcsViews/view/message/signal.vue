@@ -54,14 +54,14 @@
 			</div>
 			<div class="onePage" v-else-if="max>0&&max<=pageSize">{{paging.before2}}{{max}}{{paging.after}}</div>
 			
-			<el-dialog v-dialogDrag width='620px' :title="pageTxt.popup[0]" :visible.sync="dialogAdd">
+			<el-dialog v-dialogDrag width='640px' :title="pageTxt.popup[0]" :visible.sync="dialogAdd">
 				<ul class="_dialog">
 					<li>
 						<div class="leftBox">
 							<p class="txt">{{pageTxt.popup[1]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-select class="input_normal" v-model="creatInfo.bizType">
+							<el-select class="input_normal" v-model="creatInfo.bizType" placeholder="">
 								<el-option v-for="item in optionsCreat" :label="item.name" :key="item.id" :value="item.id"></el-option>
 							</el-select>
 						</div>
@@ -75,7 +75,7 @@
 						</div>
 						<div class="rightBox">
 							<el-select popper-class="fbcs_MX_signal_select" id="statist_input" class="input_normal" v-model="creatInfo.user" clearable @clear=clear
-								filterable remote :remote-method="remote1" @visible-change="visible" @change="changevalue">
+								filterable remote :remote-method="remote1" @visible-change="visible" @change="changevalue" :placeholder="placeholder">
 								<el-option v-for="item in oneidList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 							</el-select>
 							<span class="cleartxt" @click="clear">{{pageTxt.popup[4]}}</span>
@@ -90,7 +90,7 @@
 						</div>
 						<div class="rightBox">
 							<el-select popper-class="fbcs_MX_signal_select" class="input_normal select_" :disabled="creatInfo.user?false:true" v-model="creatInfo.other"
-								multiple filterable remote :remote-method="remote2" :reserve-keyword="false" @focus="focus">
+								multiple filterable remote :remote-method="remote2" :reserve-keyword="false" @focus="focus" :placeholder="placeholder">
 								<el-option v-for="item in multipleList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 							</el-select>
 						</div>
@@ -138,6 +138,7 @@ import moment from 'moment';
 		data() {
 			return {
 				auth: globalVar.get('status').user,
+				placeholder: this.$t('fbcsFile.tips.psel'),
 				currPage: 1,
 				max:0,
 				nodata: '加载中...',

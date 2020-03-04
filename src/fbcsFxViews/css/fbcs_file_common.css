@@ -112,7 +112,7 @@
 #fbcs_file ._dialog .txt{font-size: 14px;color: #666;line-height: 30px;}
 #fbcs_file a{text-decoration: none;}
 #fbcs_file ._dialog .a{font-size: 14px;color: #5C759D;line-height: 30px;}
-#fbcs_file ._dialog .rClick{font-size: 14px;color: #999;line-height: 30px;margin-left: 80px;}
+#fbcs_file ._dialog .rClick{font-size: 14px;color: #999;line-height: 30px;margin-left: 64px;word-break: break-word;}
 #fbcs_file .red{font-size: 14px;color: #F00;}
 #fbcs_file ._dialog .right{width: auto;}
 #fbcs_file ._footBtn{padding: 10px 0px;border-top: 1px solid #EDEEF0;text-align: right;}

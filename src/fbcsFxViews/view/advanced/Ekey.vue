@@ -168,5 +168,5 @@ function search(){
 
 <style scoped="scoped">
 	.advancedEkey{min-width: 688px;}
-	.w80{width: 80px;text-align: right;}
+	.w80{width: 122px;text-align: right;}
 </style>

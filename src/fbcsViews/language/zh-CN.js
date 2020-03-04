@@ -1,8 +1,3 @@
-	// utils: {
-	// 	okBtn: 'Yes', nowBtn:'Now', cBtn:'No', title1:'Tips', title2:'review operator', sub:'Yes', back:'No',
-	// 	review:'review name：', reviewPwd:'password：', reviewNull: 'reviewer is null！',reviewNameErr:'reviewer name is error',
-	// 	noAuth: '该用户还没有分配权限', session: '会话已失效，请重新登录'
-	// }
 
 export default {
 	publics: {
@@ -39,7 +34,7 @@ export default {
 			'查 询','添加用户主题','修改用户主题','删除用户主题','主题详情','批量导出主题信息',
 			'请在文件名上点击右键，选择“链接另存为...”菜单保存文件。','关 闭'],
 		list: ['发布者ID','发布者名称','主题编号','发布时间','订阅个数','操作'],
-		hasOne: '请在列表中至少选择一条记录！'
+		hasOne: '请在列表中至少选择一条记录！', fileName: '文件名：'
 	},
 	themeSubscription: {
 		tips: {user: "请在列表中选择一条记录！"},
@@ -107,7 +102,8 @@ export default {
 		table: ["用户ID","用户名称","操作","修改基本信息","修改Ekey","创建通信关系","删除用户","修改密码"],
 		popup: ["批量导入扩展信息","扩展信息文件名","请将扩展信息文件放到服务器路径：static/import内；","在输入框中填入扩展信息文件名。","提交","返回",
 				"批量导出扩展信息","文件名：","请在文件名上点击右键，选择“链接另存为...”菜单保存文件。","关闭","批量导出基础信息"],
-		tips: ["创建用户","是否立即下发","修改用户","是否删除该用户信息","请在列表中选择一条记录！",'扩展信息文件名不能为空']
+		tips: ["创建用户","是否立即下发","修改用户","是否删除该用户信息","请在列表中选择一条记录！",'扩展信息文件名不能为空'],
+		extended: '是否导入扩展信息？'
 	},
 	Ekey: {
 		label: ["Ekey","查询方式","按Ekey查询","按用户查询","Ekey名称","用户ID","查询","创建Ekey","批量导出Ekey",'小于V5版用户必填'],

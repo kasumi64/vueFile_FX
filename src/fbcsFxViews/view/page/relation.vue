@@ -45,8 +45,8 @@
 						</p>
 					</div><div class="right">
 						<el-select popper-class="fbcs_FX_signal_select" class="selm" v-model="sid" :disabled="disabled" multiple filterable
-							remote :remote-method="filter" :reserve-keyword="false" @focus="focus">
-							<el-option v-for="item in idarr" :key="item.value" :label="item.lable" :value="item.value">
+							remote :remote-method="filter" :reserve-keyword="false" @focus="focus" :placeholder="placeholder">
+							<el-option v-for="item in idarr" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
 						<button class="defBtn mf" @click="clear">{{$t('fbcsFile.relation.clear')}}</button>
@@ -125,6 +125,7 @@ function del(row){
 
 export default {
 	data(){
+		data.placeholder = this.$t('fbcsFile.tips.psel');
 		data.title = {
 			userID1: this.$t('fbcsFile.tableTitle.userID'),
 			userName1: this.$t('fbcsFile.tableTitle.userName'),

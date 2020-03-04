@@ -439,7 +439,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.userEdit{color: #606266;min-height: 630px;}
 	.red{color: red;}
 	.info li{margin-top: 10px; height: 36px;}
-	.info{white-space: nowrap;width: 710px;}
+	.info{white-space: nowrap;width: 810px;}
 	.header{height: 44px; border-bottom: 1px solid #EBEFF4; overflow: hidden;}
 	.header_img{float: left; margin-top: 15px; margin-left: 20px;}
 	.header_txt1{font-size: 13px; color: #5c759d; float: left; line-height: 44px; margin-left: 5px; cursor: pointer;}

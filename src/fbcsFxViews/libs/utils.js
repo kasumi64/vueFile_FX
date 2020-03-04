@@ -296,11 +296,18 @@ function TipsConfirm(){
 			if(kit.isFn(notifyFn.cancel)) notifyFn.cancel(notifyArgs.cancel);
 		}).text( vue.$t('fbcsFile.tips.cancel') )
 	};
+	
+	function tipsI18n(){
+		notify.ok.text( vue.$t('fbcsFile.tips.ok') );
+		notify.now.text( vue.$t('fbcsFile.tips.now') );
+		notify.cancel.text( vue.$t('fbcsFile.tips.cancel') );
+	}
 
 	var autoOff = 0;
 
 	function show(option, args, messType){
 		var opt = option || {}, args = args || {};
+		tipsI18n();
 		notify.panle.css({left: 0, top: 0});
 		clearTimeout(autoOff);
 		if(messType == 1){ //带logo的
@@ -446,6 +453,11 @@ Object.addProto(exp, 'getMxAuth', {
 		let authority = localStorage.getItem('authoritys') || '';
 		return (/Auth_Mx_Config_Opt/i).test(authority);
 	}
+});
+
+Object.addProto(exp, 'fbcsLanguage', {
+	set(lang){ vue.$i18n.locale = lang; },
+	get(){ return vue.$i18n.locale; }
 });
 
 export default exp;

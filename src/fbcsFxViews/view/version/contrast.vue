@@ -106,7 +106,7 @@ function keywords(val, fn, t){
 		var i, arr = res.lists, len = arr.length, obj;
 		for(i = 0; i < len; i++){
 			obj = arr[i];
-			obj.lable = obj.value = obj.version;
+			obj.label = obj.value = obj.version;
 		}
 		fn(arr);
 	});

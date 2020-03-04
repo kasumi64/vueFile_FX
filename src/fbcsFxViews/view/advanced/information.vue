@@ -280,6 +280,6 @@ function searchBOP(){
 	.information{min-width: 800px;}
 	.jg{margin-bottom: 10px;}
 	.w100{width: 100px;}
-	.w80{width: 80px;text-align: right;}
+	.w80{width: 122px;text-align: right;}
 	.h2{font-size: 16px;color: #333;margin-bottom: 10px;}
 </style>
