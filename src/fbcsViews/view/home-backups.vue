@@ -17,7 +17,8 @@
 				</div><ul class="mess">
 					<li>
 						<label class="lab">{{pageTxt.label[2]}}</label>
-						<span class="int">{{userName}}</span>
+						<input v-model="userName" class="int" disabled autocomplete="off"/>
+						<!-- <span class="int">{{userName}}</span> -->
 					</li><li>
 						<label class="lab">{{pageTxt.label[3]}}</label>
 						<input class="inp" v-model="password" type="password" autocomplete="off"/>
@@ -233,8 +234,8 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 	.mask .mess{padding: 40px 0;text-align: left;}
 	.mask *{vertical-align: middle;}
 	.mask li{margin-bottom: 10px;}
-	.mask .lab{display: inline-block;width: 165px;font-size: 14px; color: #666; line-height: 30px;height: 30px;text-align: right;padding-right: 10px;}
-	.mask .inp,.mask .int{display: inline-block;width: 255px;font-size: 14px; color: #666; height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;}
+	.mask .lab{display: inline-block;width: 200px;font-size: 14px; color: #666; line-height: 30px;height: 30px;text-align: right;padding-right: 10px;}
+	.mask .inp,.mask .int{display: inline-block;width: 200px;font-size: 14px; color: #666; height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;}
 	.mask .inp:focus{border: 2px solid #32CCF9;}
-	.mask .int{line-height: 30px;border: none;}
+	.mask .int{line-height: 30px;background: #F5F7FA;color: #C0C4CC;border: 1px solid #E4E7ED;}
 </style>

@@ -259,7 +259,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			},
 			submit() {
 				if(!this.creatInfo.other.length) {
-					return fxUtils.alert({txt: pageTxt.tips[5]});
+					return fxUtils.alert({txt: pageTxt.tips[6]});
 				}
 				utils.post("mx/userComm/add", {
 					cmdID: "600032",

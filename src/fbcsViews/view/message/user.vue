@@ -481,6 +481,7 @@
 
 	function setCache(row) {
 		var info = _this.userParam;
+		_this.$store.state.transferEditID = row.userID;
 		globalVar.set('cache_theme', {
 			page: _this.currPage,
 			id: info.id,

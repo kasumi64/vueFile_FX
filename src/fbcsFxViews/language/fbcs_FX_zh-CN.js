@@ -189,7 +189,8 @@ var obj = {
 			nameNull: '联系人姓名不能为空', mobileNull: '联系人手机号不能为空', title: '扩展信息高级搜索',
 			ssccManagerTelNum: '客户经理座机号码', ssccManagerMobileNum: '客户经理手机号码',
 			operatorCompany: '所属公司', operatorDepartment: '所属部门', email: '用户运维邮箱', useEmail: '联系人邮箱',
-			userAlarmSmsNum: '短信报警号码', operationPhoneNum: '用户运维电话', operationFax: '用户运维传真'
+			userAlarmSmsNum: '短信报警号码', operationPhoneNum: '用户运维电话', operationFax: '用户运维传真',
+			om_email: '用户运维邮箱'
 		},
 		audit: {
 			expcsv: '导出稽核', title: '稽核高级搜索', commFlag: '通信关系', userextFlag: '扩展信息'

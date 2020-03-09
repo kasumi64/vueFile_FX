@@ -81,7 +81,7 @@
 					</div>
 				</li><li>
 					<div class="left">
-						<p class="txt">{{$t('fbcsFile.advanced.information.email')}}：</p>
+						<p class="txt">{{$t('fbcsFile.advanced.information.om_email')}}：</p>
 					</div><div class="right">
 						<input v-model="info.email" @input="filter($event)" data-reg="[^\w_\-@\.]" data-k="email" maxlength="512" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.email')}}</span>

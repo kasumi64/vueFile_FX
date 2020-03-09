@@ -224,25 +224,23 @@ import moment from 'moment';
 				}
 			},
 			submit() {
-				if(this.creatInfo.user && this.creatInfo.other.length) {
-					utils.post("mx/userComm/add", {
-						cmdID: "600032",
-						operator: "admin",
-						bizType: _this.creatInfo.bizType,
-						userID1: _this.creatInfo.user,
-						lists: _this.creatInfo.other
-					}, function(data) {
-						_this.dialogAdd = false;
-						if(data.errcode == '0'||data.errcode == '1') {
-							_this.renderData(_this.searchInfo.bizType, 1);
-						}
-						let type = data.errcode == '0' ? 1 : 0;
-						fxUtils.alert({txt: data.errinfo, type});
-					});
-				} else {
-					// utils.weakTips(pageTxt.tips[5]);
-					fxUtils.alert({txt: pageTxt.tips[5], type: 0});
-				}
+				if(this.creatInfo.user == '') return fxUtils.alert({txt: pageTxt.tips[5], type: 0});
+				if(this.creatInfo.other.length == 0) return fxUtils.alert({txt: pageTxt.tips[6], type: 0});
+				
+				utils.post("mx/userComm/add", {
+					cmdID: "600032",
+					operator: "admin",
+					bizType: _this.creatInfo.bizType,
+					userID1: _this.creatInfo.user,
+					lists: _this.creatInfo.other
+				}, function(data) {
+					_this.dialogAdd = false;
+					if(data.errcode == '0'||data.errcode == '1') {
+						_this.renderData(_this.searchInfo.bizType, 1);
+					}
+					let type = data.errcode == '0' ? 1 : 0;
+					fxUtils.alert({txt: data.errinfo, type});
+				});
 			},
 			//导出通信关系
 			exportSignalInfo() {
