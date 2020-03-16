@@ -48,7 +48,8 @@ var obj = {
 			errNum: '只能输入纯数字', idformat: '用户ID仅能输入英文，数字,“-”和“_”', maxUser: '最大关系数范围在0到1000',
 			speed: '最大收发速度范围在-1到999999999999999999之间', maxTask: '单用户任务并发数要大于 0',
 			oneTask: '单用户最大发送文件个数要大于 0', softDay: '软加密开始时间必须小于或等于软加密结束时间',
-			special: '不能包含(@#_-*)以外的特殊字符', nameformat: '用户名称不能包含（|$%,";:/\\）'
+			special: '不能包含(@#_-*)以外的特殊字符', nameformat: '用户名称不能包含（|$%,";:/\\）',
+			topicDay: '发布主题有效期天数要大于 0'
 		},
 		info: {
 			operatorMobileNum: 'Enter only numbers and “|”, with “|” as separator', operatorEmail: 'Enter only English letters, digits, “-”, “_”, “@” and “.”',
@@ -189,7 +190,7 @@ var obj = {
 			nameNull: '联系人姓名不能为空', mobileNull: '联系人手机号不能为空', title: 'Advanced search for extended info',
 			ssccManagerTelNum: 'Customer landline number', ssccManagerMobileNum: 'Customer cell phone',
 			operatorCompany: 'Company name', operatorDepartment: 'Department', email: 'e-mail', useEmail: 'Contact e-mail',
-			userAlarmSmsNum: 'SMS alarm number', operationPhoneNum: 'O&M phone number', operationFax: 'O&M fax number'，,
+			userAlarmSmsNum: 'SMS alarm number', operationPhoneNum: 'O&M phone number', operationFax: 'O&M fax number',
 			om_email: '用户运维邮箱'
 		},
 		audit: {

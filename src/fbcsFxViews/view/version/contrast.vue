@@ -162,4 +162,5 @@ function changeType(val){
 <style scoped="scoped">
 	.contrast{min-width: 703px;}
 	.jg{height: 10px;}
+	.el-select{width: 220px;}
 </style>

@@ -363,7 +363,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	._hr{min-width: 980px;}
 	.searchBox *{vertical-align: middle;}
 	.txt{font-size: 14px;line-height: 30px;padding-right: 10px;}
-	.select{width: 180px;}
+	.select{width: 200px;}
 	.el-input{width: 180px;line-height: 30px;}
 	.ver{margin: 10px 0;}
 	.blueBtn{margin-left: 35px;}

@@ -290,7 +290,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 					}
 				}
 				
-				if((/^0/).test(this.info.maxDaysOfTopic)){
+				var tp = parseInt(this.info.maxDaysOfTopic);
+				if(tp > 0){ } else {
 					return fxUtils.alert({txt: this.pageTxt.mustNum.unequalZero});
 				}
 				

@@ -238,9 +238,12 @@ export default {
 				count: this.sid.length
 			};
 			utils.post(params).then(res => {
-				_this.search();
-				_this.showDialog = false;
-				utils.alert({txt: res.errinfo, type: res.errcode=='0' ? 1 : 0});
+				var code = res.errcode;
+				utils.alert({txt: res.errinfo, type: code=='0' ? 1 : 0});
+				if(code == '0'||code == '1'){
+					_this.search();
+					_this.showDialog = false;
+				}
 			});
 		},
 		now(){

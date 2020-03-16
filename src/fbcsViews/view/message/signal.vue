@@ -234,8 +234,8 @@ import moment from 'moment';
 					userID1: _this.creatInfo.user,
 					lists: _this.creatInfo.other
 				}, function(data) {
-					_this.dialogAdd = false;
 					if(data.errcode == '0'||data.errcode == '1') {
+						_this.dialogAdd = false;
 						_this.renderData(_this.searchInfo.bizType, 1);
 					}
 					let type = data.errcode == '0' ? 1 : 0;

@@ -283,7 +283,8 @@ export default {
 			param.ssccManager = param.ssccManager.trim();
 			
 			utils.post(param).then(res => {
-				utils.alert({txt: res.errinfo, type: res.errcode!='0'?0:1});
+				utils.alert({txt: res.errinfo, type: res.errcode != '0' ? 0 : 1});
+				if(res.errcode != '0') return;
 				_this.showInfo = false;
 				searchOPE();
 			});

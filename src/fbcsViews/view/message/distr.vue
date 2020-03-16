@@ -185,5 +185,5 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.el-select{width: 200px;margin-right: 10px;}
 	.blueBtn{margin-right: 40px;}
 	.jg{padding-bottom: 30px;}
-	.distr .suList{max-height: 443px;overflow: auto;width: 730px;}
+	.distr .suList{max-height: 443px;overflow: auto;width: 796px;}
 </style>

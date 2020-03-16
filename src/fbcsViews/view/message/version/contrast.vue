@@ -12,23 +12,29 @@
 			</div>
 			<div class="ver">
 				<label class="txt">{{pageTxt.label[2]}}</label>
-				<el-autocomplete @input='autoInput1' v-model="info.ver1" :disabled="disabled" class="elInput" :fetch-suggestions="fetch" 
-					:placeholder="pageTxt.label[3]" :trigger-on-focus="true" @select="idSelect1">
-					<div slot-scope="{item}">
-						<span>{{item.version}}</span>
-					</div>
-				</el-autocomplete>
+				<div class="verbox">
+					<el-autocomplete @input='autoInput1' v-model="info.ver1" :disabled="disabled" class="elInput" :fetch-suggestions="fetch" 
+						:placeholder="pageTxt.label[3]" :trigger-on-focus="true" @select="idSelect1">
+						<div slot-scope="{item}">
+							<span>{{item.version}}</span>
+						</div>
+					</el-autocomplete>
+					<label for='autoInput_0' class="el-icon-circle-close clearTXT verClose1"></label>
+				</div>
 				<label class="txt">{{pageTxt.label[4]}}</label>
-				<el-autocomplete @input='autoInput2' v-model="info.ver2" :disabled="disabled" class="elInput" :fetch-suggestions="fetch" 
-					:placeholder="pageTxt.label[5]" :trigger-on-focus="true" @select="idSelect2">
-					<div slot-scope="{item}">
-						<span class="name">{{item.version}}</span>
-					</div>
-				</el-autocomplete>
+				<div class="verbox">
+					<el-autocomplete @input='autoInput2' v-model="info.ver2" :disabled="disabled" class="elInput" :fetch-suggestions="fetch" 
+						:placeholder="pageTxt.label[5]" :trigger-on-focus="true" @select="idSelect2">
+						<div slot-scope="{item}">
+							<span class="name">{{item.version}}</span>
+						</div>
+					</el-autocomplete>
+					<label for='autoInput_1' class="el-icon-circle-close clearTXT verClose2"></label>
+				</div>
 				<el-button class='btnS' type='primary' @click='search'>{{pageTxt.label[6]}}</el-button>
 				<!--<span class="txt">{{pageTxt.label[7]}}</span>-->
-				<label for='autoInput_0' class="el-icon-circle-close clearTXT verClose1"></label>
-				<label for='autoInput_1' class="el-icon-circle-close clearTXT verClose2"></label>
+				
+				
 			</div>
 		</div>
 		<el-table stripe border @current-change="currenRow" @selection-change="selectionRow" :data="data" tooltip-effect="dark" highlight-current-row>
@@ -240,11 +246,11 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 </script>
 
 <style scoped="scoped">
-	.contrast{padding: 0 20px;white-space: nowrap;color: #666;min-width: 809px;}
+	.contrast{padding: 0 20px;white-space: nowrap;color: #666;min-width: 912px;}
 	.h2{font-size: 16px;line-height: 44px;color: #666;font-weight: bold;}
 	.searchBox *{vertical-align: middle;}
-	.select{width: 180px;}
-	.elInput{width: 240px;line-height: 1;margin-right: 35px;}
+	.select{width: 200px;}
+	.elInput{width: 272px;line-height: 1;margin-right: 35px;}
 	.txt{font-size: 14px;line-height: 30px;padding-right: 10px;}
 	.el-input{width: 180px;line-height: 30px;}
 	.ver{margin: 10px 0;}
@@ -252,6 +258,6 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.btnTxt{color: #5a769e;}
 	.el-button *{vertical-align: middle;}
 	.clearTXT{display: none;font-size: 14px;color: #CCC;position: absolute;top: 8px;z-index: 1;}
-	.verClose1{left: 298px;}
-	.verClose2{left: 654px;}
+	.verbox{display: inline-block;}
+	.verClose1, .verClose2{position: absolute;top: 9px;right: 42px;}
 </style>

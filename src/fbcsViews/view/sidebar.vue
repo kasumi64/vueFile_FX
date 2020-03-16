@@ -127,8 +127,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			for (i = 0; i < len; i++) obj[keys[i]] = 2;
 			globalVar.set('lang', 'zh');
 			globalVar.set('status', obj);
-			globalVar.set('urlIP', 'http://10.10.27.161:8080/fbcs_mx/');
-			fxUtils.setBaseURL('http://10.10.27.161:8080/fbcs_mx/mx/');
+			globalVar.set('urlIP', 'http://10.172.57.161:8080/fbcs_mx/'); //10.10.27.161
+			fxUtils.setBaseURL('http://10.172.57.161:8080/fbcs_mx/mx/');
 			this.auth = obj;
 			this.pageTxt = lang().sidebar;
 			

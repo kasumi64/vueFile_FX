@@ -331,8 +331,9 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 					}
 				}
 				
-				if((/^0/).test(this.info.maxDaysOfTopic)){
-					 fxUtils.alert({txt: this.pageTxt.mustNum.unequalZero});
+				var tp = parseInt(this.info.maxDaysOfTopic);
+				if(tp > 0){ } else {
+					return fxUtils.alert({txt: this.pageTxt.mustNum.unequalZero});
 				}
 				
 				if(this.info.isModifyDefaultPasswd == 1){

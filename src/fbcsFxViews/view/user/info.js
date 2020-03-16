@@ -286,13 +286,17 @@ function pass(){
 	let speed = parseInt(info.speedCtrl),
 		maxUser = parseInt(info.maxRelationUser),
 		maxTask = parseInt(info.maxSimultTaskCount),
-		oneTask = parseInt(info.maxCltOneDayTaskCount);
+		oneTask = parseInt(info.maxCltOneDayTaskCount),
+		topicDay = parseInt(info.maxPublishTopicDay);
 	
 	if(!(speed>=-1&&speed<=999999999999999999)){
 		utils.alert({txt: this.$t(err + 'speed')});
 		return false;
 	} else if (maxTask < 1){
 		utils.alert({txt: this.$t(err + 'maxTask')});
+		return false;
+	} else if(topicDay <= 0){
+		utils.alert({txt: this.$t(err + 'topicDay')});
 		return false;
 	}
 	/*else if (!(maxUser>=0&&maxUser<=99999999)){

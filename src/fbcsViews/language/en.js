@@ -120,7 +120,7 @@ export default {
 		table: ["Business type","User ID","User name","User ID","User name","Operation ","Delete communication relationship", 'Creation time'],
 		popup: ["Create communication relationship","Business type ：","User ID ：","User ID ：","Clear user ID","Submit","Back",
 				"Export communication relationship in batch","File name：",'Right-click on the file name and select the "Save Link As ..." menu to save the file.',"Close"],
-		tips: ["Delete communication relationship pair or not","All","Prompt","OK","Cancel","用户ID不能为空"],
+		tips: ["Delete communication relationship pair or not","All","Prompt","OK","Cancel","用户ID不能为空","对端用户不能为空"],
 		noData: 'loading...', adv: 'Advanced search'
 	},
 	host:{

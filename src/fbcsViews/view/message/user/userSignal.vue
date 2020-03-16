@@ -1,7 +1,7 @@
 <template>
 	<div class="signal">
 		<div class="userH">
-			<span class="txt">{{pageTxt.label[0]}}：</span>
+			<span class="txt">{{pageTxt.label[1]}}：</span>
 			<el-select class="input_normal" v-model="searchInfo.bizType" @change='cbizType' :placeholder="placeholder">
 				<el-option v-for="item in options1" :label="item.name" :key="item.id" :value="item.id"></el-option>
 			</el-select>
@@ -268,8 +268,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 					userID1: _this.$store.state.transferEditID,
 					lists: _this.creatInfo.other
 				}, function(data) {
-					_this.dialogAdd = false;
 					if(data.errcode == '0'||data.errcode == '1') {
+						_this.dialogAdd = false;
 						_this.renderData(1);
 					}
 					let type = data.errcode == '0' ? 1 : 0;

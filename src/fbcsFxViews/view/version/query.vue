@@ -103,7 +103,7 @@
 
 <style scoped="scoped">
 	.versionQuery{min-width: 1084px;}
-	.sel{width: 160px;}
+	.sel{width: 200px;}
 	.jg{margin-top: 10px;}
 	.el-radio+.el-radio{margin-left: 10px;}
 	.ml{margin-left: 10px;}
