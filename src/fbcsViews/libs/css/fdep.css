@@ -150,7 +150,7 @@ input[type=text]:focus,input[type=password]:focus,input[type=number]:focus{borde
 #fbcs_MX .el-table .cell,
 #fbcs_MX .el-table th>.cell{line-height:40px;} */
 #fbcs_MX .el-table td{padding: 10px 0;}
-#fbcs_MX .el-table .cell{line-height: 20px;white-space: normal;}
+#fbcs_MX .el-table .cell{line-height: 20px;white-space: normal;word-break: break-word;}
 /* #fbcs_MX .el-table .el-table__header-wrapper .has-gutter .cell{height:40px;background:#E5EAF0;} */
 #fbcs_MX .el-table--striped .el-table__body tr.el-table__row td{background: #FFF;}
 #fbcs_MX .el-table--striped .el-table__body tr.el-table__row--striped td{background:#E5EAF0;} /*e1eaed dbeef4*/

@@ -290,7 +290,8 @@ export default {
 	created(){
 		_this = this;
 		let param = utils.getArgs('bizKeySearch');
-		if(param){
+		var goBack = globalVar.get('goBack');
+		if(param && goBack){
 			let {exeState, feedbackState, recvBeginTime, recvEndTime} = param;
 			this.info = {exeState, feedbackState, recvBeginTime, recvEndTime};
 			radio(this.radio = param.radio);
@@ -300,6 +301,7 @@ export default {
 			getDay(6);
 			this.search();
 		}
+		globalVar.set('goBack', false);
 	},
 	watch: {
 		radio(val){

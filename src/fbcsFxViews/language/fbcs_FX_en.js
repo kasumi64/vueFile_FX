@@ -127,8 +127,10 @@ var obj = {
 	},
 	
 	versionQuery: {
-		options: [{label: 'All', value: '0'},{label: 'System dynamic config', value: '1'},{label: 'System static config', value: '2'},
+		options1: [{label: 'All', value: '0'},{label: 'System dynamic config', value: '1'},{label: 'System static config', value: '2'},
 			{label: 'User password info table', value: '3'},{label: 'China clear config', value: '4'},{label: 'Rollback', value: '5'}],
+		options2: [{label: 'All', value: '0'},{label: 'System dynamic config', value: '1'},{label: 'System static config', value: '2'},
+			{label: 'User password info table', value: '3'},{label: 'Rollback', value: '5'}],
 		type:'Version type', version:'Version number', versionPath:'Version path', operationTime: 'Operation time', 
 		operator: 'Operator', reviewer: 'Auditor', operationType:'Dispatch type', checkVer: '比对最新版本MD5',
 		rollback1: 'Rollback to this version?', bigVer: 'Create big version now?', ZdCfg: 'Acquire China clear config?',
@@ -144,8 +146,9 @@ var obj = {
 		ctplst: 'ctplst', zdrela: 'zdrela',
 	},
 	versionContrast: {
-		options: [{label: 'Global dynamic config', value: 1},{label: 'Global static config', value: 2},{label: 'User password info table', value: 3},
+		options1: [{label: 'Global dynamic config', value: 1},{label: 'Global static config', value: 2},{label: 'User password info table', value: 3},
 			{label: 'China clear config CTPLST', value: 4},{label: 'China clear config ZDRela', value: 5}],
+		options2: [{label: 'Global dynamic config', value: 1},{label: 'Global static config', value: 2},{label: 'User password info table', value: 3}],
 		type:'Operation type', ver1: 'Benchmark version：', ver2: 'Comparison version：', btn: 'Compare', temp: 'Temporary version', online: 'Online version',
 		section: 'Segment name', field: 'Field name', detail: 'Details', res: 'No change in comparison results'
 	},

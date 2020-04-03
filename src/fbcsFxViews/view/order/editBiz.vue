@@ -275,7 +275,8 @@
 		},
 		methods:{
 			back(){
-				this.$router.replace({path: '/main/fxCfg/order/xiaozhan'});
+				let query = {bizKeySearch: this.$route.query.bizKeySearch};
+				this.$router.replace({path: '/main/fxCfg/order/xiaozhan', query: query});
 			},
 			defPwd(val){
 				if(!val){ //默认

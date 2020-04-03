@@ -40,7 +40,8 @@ export default {
 	props: {},
 	methods:{
 		back(){
-			this.$router.push({path: '/main/fxCfg/version/query'});
+			let query = { fxcache: this.$route.query.fxcache };
+			this.$router.push({path: '/main/fxCfg/version/query', query: query});
 		},
 		rowClass({row, rowIndex}){
 			if(rowIndex%2 != 0) return 'tableBG';

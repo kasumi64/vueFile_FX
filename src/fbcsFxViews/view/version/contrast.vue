@@ -38,7 +38,7 @@ var verWords = [], words3 = [], words4 = [];
 
 export default {
 	data(){
-		data.options = this.$t('fbcsFile.versionContrast.options');
+		data.options = this.$t('fbcsFile.versionContrast.options1');
 		data.title1 = {
 			section: this.$t('fbcsFile.versionContrast.section'),
 			field: this.$t('fbcsFile.versionContrast.field'),
@@ -86,6 +86,7 @@ export default {
 		this.list = [];
 		keywords('', arr => { words3 = arr; }, 3);
 		keywords('', arr => { words4 = arr; }, 4);
+		getZdEnabled();
 	},
 	mounted(){
 		setTimeout(changeType, 40, 1);
@@ -156,6 +157,21 @@ function changeType(val){
 	
 	verWords = [].concat(val==3 ? words3 : words4);
 	_this.ver1 = _this.ver2 = verWords;
+}
+
+function getZdEnabled(){
+	let params = {
+		url: 'version/isOpenZd',
+		cmdID: '600070'
+	};
+	utils.post(params).then(res => {
+		if(res.errcode != '0') return console.warn("600070:", res.errinfo);
+		if(res.isOpenZd == 0){
+			_this.options = this.$t('fbcsFile.versionContrast.options2');
+		} else {
+			_this.options = this.$t('fbcsFile.versionContrast.options1');
+		}
+	});
 }
 </script>
 

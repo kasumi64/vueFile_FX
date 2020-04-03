@@ -41,7 +41,8 @@ var _this, data = {
 	showPwdinfo: false,
 	signalList: [],
 	signalPage: 1,
-	signalTotal: 1
+	signalTotal: 1,
+	zdEnabled: 1
 };
 var rollRow;
 
@@ -61,7 +62,8 @@ function detail1(row){
 }
 function detail2(row){
 	utils.setArgs('version', row);
-	_this.$router.push({path: '/main/fxCfg/version/detail'});
+	let query = { fxcache: utils.getArgs('fxcache') };
+	_this.$router.push({path: '/main/fxCfg/version/detail', query: query});
 }
 function rollback(obj){
 	let params = {
@@ -131,7 +133,7 @@ function zdCfg(obj){
 
 export default {
 	data(){
-		data.options = this.$t('fbcsFile.versionQuery.options');
+		data.options = this.$t('fbcsFile.versionQuery.options1');
 		data.title = {
 			typeMask: this.$t('fbcsFile.versionQuery.type'),
 			version: this.$t('fbcsFile.versionQuery.version'),
@@ -238,7 +240,7 @@ export default {
 		this.showPwdinfo = false;
 		this.list = [];
 		this.parameter = null;
-		let cache = utils.getArgs('fxcache');
+		var cache = this.$route.query.fxcache;
 		if(cache) setSearch(cache);
 		else {
 			info.type = '0';
@@ -246,6 +248,7 @@ export default {
 			this.radio = 4;
 			getDay(4);
 		}
+		getZdEnabled();
 		search();
 	},
 	watch: {
@@ -361,5 +364,21 @@ function signalSearch(){
 		_this.signalList = res.lists;
 		_this.signalPage = res.currentPage;
 		_this.signalTotal = res.totalSize;
+	});
+}
+
+function getZdEnabled(){
+	let params = {
+		url: 'version/isOpenZd',
+		cmdID: '600070'
+	};
+	utils.post(params).then(res => {
+		if(res.errcode != '0') return console.warn("600070:", res.errinfo);
+		_this.zdEnabled = res.isOpenZd;
+		if(res.isOpenZd == 0){
+			_this.options = this.$t('fbcsFile.versionQuery.options2');
+		} else {
+			_this.options = this.$t('fbcsFile.versionQuery.options1');
+		}
 	});
 }

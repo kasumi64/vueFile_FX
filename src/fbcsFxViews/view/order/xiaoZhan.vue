@@ -76,8 +76,8 @@ function edit(row){
 	let obj = Object.assign({}, _this.info);
 	obj.page = _this.page;
 	obj.radio = _this.radio;
-	utils.setArgs('bizKeySearch', obj);
-	this.$router.push({path: '/main/fxCfg/order/editBiz'});
+	let query = {bizKeySearch: obj};
+	this.$router.push({path: '/main/fxCfg/order/editBiz', query: query});
 }
 
 function reject(row){
@@ -289,7 +289,7 @@ export default {
 	},
 	created(){
 		_this = this;
-		let param = utils.getArgs('bizKeySearch');
+		let param = this.$route.query.bizKeySearch;
 		if(param){
 			let {exeState, feedbackState, recvBeginTime, recvEndTime} = param;
 			this.info = {exeState, feedbackState, recvBeginTime, recvEndTime};

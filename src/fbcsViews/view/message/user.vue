@@ -469,7 +469,8 @@
 	function initParam() {
 		var cache = globalVar.get('cache_theme');
 		var info = _this.userParam;
-		if(cache) {
+		var goBack = globalVar.get('goBack');
+		if(cache && goBack) {
 			info.id = cache.id;
 			info.name = cache.name;
 			_this.currentPage = cache.page;
@@ -477,6 +478,7 @@
 			info.id = info.name = '';
 			_this.currentPage = 1;
 		}
+		globalVar.set('goBack', false);
 	}
 
 	function setCache(row) {

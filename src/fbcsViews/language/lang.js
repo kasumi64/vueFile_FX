@@ -21,5 +21,8 @@ import locale    from 'element-ui/lib/locale';
 
 export default function () {
 	// console.log('Get language =', globalVar.get('lang'));
-	return globalVar.get('lang')=='en' ? en : zhcn;
+	// return globalVar.get('lang')=='en' ? en : zhcn;
+	
+	var lang = localStorage.getItem('language') || 'zh';
+	return (leng == 'en') ? en : zhcn;
 }

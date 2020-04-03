@@ -328,6 +328,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				});
 			}, //返回
 			back() {
+				globalVar.set('goBack', true);
 				this.$router.replace({
 					path: this.$store.state.editBack
 				});

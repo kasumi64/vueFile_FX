@@ -203,7 +203,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 				this.appid = sub;
 				this.canWord = this.appidWord = '';
 			},
-			back(){ utils.goto('/message/release'); },
+			back(){ utils.goto('/message/release', 'goBack', true); },
 			next(){
 				if(isNull()) return;
 				if( isSelectUser() ){

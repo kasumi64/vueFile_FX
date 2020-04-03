@@ -431,7 +431,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	function initParam(){
 		var cache = globalVar.get('cache_theme');
 		var info = _this.info;
-		if(cache){
+		var goBack = globalVar.get('goBack');
+		if(cache && goBack){
 			_this.idName = info.pubUserID = cache.id;
 			_currentPage = cache.page;
 			info.beginDate = cache.beginDate;
@@ -444,6 +445,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			info.sortType = '0';
 			getDay(6);
 		}
+		globalVar.set('goBack', false);
 	}
 	function setCache(){
 		var info = _this.info;

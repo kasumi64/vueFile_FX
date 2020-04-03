@@ -36,7 +36,8 @@ export default {
 	data(){ return data;},
 	methods:{
 		back(){
-			this.$router.push({path: '/main/fxCfg/userHome'});
+			let query = {fxcache: this.$route.query.fxcache}
+			this.$router.replace({path: '/main/fxCfg/userHome', query: query});
 		},
 		tabClick(tabs, e){
 			switch (tabs.name){

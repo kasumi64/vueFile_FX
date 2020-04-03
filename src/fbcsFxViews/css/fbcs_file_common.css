@@ -36,7 +36,7 @@
 #fbcs_file .tableBG{background: #E5EAF0;}
 #fbcs_file .el-table__body tr.current-row>td{background: #CFE0F3;}
 #fbcs_file .el-table td{padding: 10px 0;}
-#fbcs_file .el-table .cell{line-height: 20px;white-space: normal;}
+#fbcs_file .el-table .cell{line-height: 20px;white-space: normal;word-break: break-word;}
 #fbcs_file .el-table--enable-row-hover .el-table__body tr:hover>td { background: inherit; }
 #fbcs_file .el-table--enable-row-hover .el-table__body tr.current-row:hover>td { background: #CFE0F3; }
 /*elment-ui 日期*/

@@ -29,7 +29,7 @@
 			<li @click="bigVer" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/bigVer.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.bigVer')}}</span>
-			</li><li @click="getCfg" v-if="fxAuth">
+			</li><li @click="getCfg" v-if="fxAuth&&(zdEnabled == 1)">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/getzdConfig.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.getCfg')}}</span>
 			</li><li @click="checkVer(0)">

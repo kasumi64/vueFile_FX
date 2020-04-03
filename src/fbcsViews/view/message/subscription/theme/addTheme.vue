@@ -231,7 +231,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 			rightCheck(arr, i){},
 			send(e){ submit('send'); },
 			now(){ submit('now'); },
-			back(){ utils.goto('/message/release'); },
+			back(){ utils.goto('/message/release', 'goBack', true); },
 			number(s){
 				setTimeout(function(){
 					var reg = /[^0123456789]/ig;

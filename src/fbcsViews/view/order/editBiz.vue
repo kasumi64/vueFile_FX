@@ -345,6 +345,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				});
 			},
 			back() { //返回
+				globalVar.set('goBack', true);
 				this.$router.replace({path: '/main/mxCfg/order/xiaozhan'});
 			}
 		},

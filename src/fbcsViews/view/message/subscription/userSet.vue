@@ -212,13 +212,15 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	};
 	function initParam(){
 		var cache = globalVar.get('cache_user');
-		if(cache){
+		var goBack = globalVar.get('goBack');
+		if(cache && goBack){
 			_this.idName = _this.userID = cache.id;
 			_currentPage = cache.page;
 		}else {
 			_this.idName = _this.userID = '';
 			_currentPage = 1;
 		}
+		globalVar.set('goBack', false);
 	}
 	function search(num, size){
 		var userID = isInput ? _this.idName : _this.userID;

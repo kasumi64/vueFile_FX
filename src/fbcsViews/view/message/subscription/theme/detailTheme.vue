@@ -121,7 +121,7 @@ import lang      from '@/fbcsViews/language/lang.js';
 		},
 		methods: {
 			back(){
-				utils.goto('/message/' + utils.route().id);
+				utils.goto('/message/' + utils.route().id, 'goBack', true);
 			},
 			leftSearch(){
 				var word = this.leftWord.toUpperCase(), cu = 0, list = {};

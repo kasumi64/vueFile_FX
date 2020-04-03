@@ -136,20 +136,20 @@ var _this, data = {
 function editUser(row){
 	let obj = Object.assign({tab: 'first', type: 'edit'}, row);
 	utils.setArgs('userInfo', obj);
-	setCache();
-	_this.$router.push({path: '/main/fxCfg/userInfo'});
+	let query = { fxcache: setCache() };
+	_this.$router.push({path: '/main/fxCfg/userInfo', query: query});
 }
 function editEkey(row){
 	let obj = Object.assign({tab: 'second', type: 'ekey'}, row);
 	utils.setArgs('userInfo', obj);
-	setCache();
-	_this.$router.push({path: '/main/fxCfg/userInfo'});
+	let query = { fxcache: setCache() };
+	_this.$router.push({path: '/main/fxCfg/userInfo', query: query});
 }
 function addRelation(row){
 	let obj = Object.assign({tab: 'third', type: 'signal'}, row);
 	utils.setArgs('userInfo', obj);
-	setCache();
-	_this.$router.push({path: '/main/fxCfg/userInfo'});
+	let query = { fxcache: setCache() };
+	_this.$router.push({path: '/main/fxCfg/userInfo', query: query});
 }
 
 function setCache(){
@@ -158,7 +158,7 @@ function setCache(){
 		name: _this.name,
 		page: _this.page
 	};
-	utils.setArgs('fxcache', obj);
+	return obj;
 }
 
 export default {
@@ -207,9 +207,8 @@ export default {
 		},
 		addUser(){
 			utils.setArgs('userInfo', {tab: 'first', type: 'add'});
-//			setCache();
-			utils.setArgs('fxcache', null);
-			this.$router.push({path: '/main/fxCfg/userInfo'});
+			let query = { fxcache: null };
+			this.$router.push({path: '/main/fxCfg/userInfo', query: query});
 		},
 		showSignal(){
 			var user = this.currSelect;
@@ -338,7 +337,7 @@ export default {
 		this.currSelect = null;
 		this.showDialog = false;
 		this.list = [];
-		var cache = utils.getArgs('fxcache');
+		var cache = this.$route.query.fxcache;
 		if(cache){
 			this.id = cache.id;
 			this.name = cache.name;

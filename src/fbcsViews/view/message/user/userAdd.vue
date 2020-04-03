@@ -133,6 +133,7 @@ import utils from "@/fbcsViews/libs/utils.js";
 import md5 from "@/fbcsViews/libs/md5.js";
 import lang from "@/fbcsViews/language/lang.js";
 import fxUtils from '@/fbcsFxViews/libs/utils.js';
+import globalVar  from '../../../libs/globalVar.js';
 
 	var pageTxt, info = {}, _this,
 		def = [
@@ -355,6 +356,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 				}
 			},
 			back() {
+				globalVar.set('goBack', true);
 				this.$router.replace({
 					path: "/main/mxCfg/user"
 				});

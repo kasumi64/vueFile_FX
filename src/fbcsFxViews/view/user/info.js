@@ -56,7 +56,8 @@ export default {
 	},
 	methods:{
 		back(){
-			this.$router.replace({path: '/main/fxCfg/userHome'});
+			let query = {fxcache: this.$route.query.fxcache}
+			this.$router.replace({path: '/main/fxCfg/userHome', query: query});
 		},
 		defPwd(val){
 			if(!val){ //默认

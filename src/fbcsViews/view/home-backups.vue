@@ -86,6 +86,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 		beforeCreate(){
 			fxUtils.setBaseURL(globalVar.get('urlIP') + 'mx/');
 			utils.getMxAuth();
+			fxUtils.fbcsLanguage = utils.language;
 		},
 		created(){
 			_this = this;
