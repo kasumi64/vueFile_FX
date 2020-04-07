@@ -1,6 +1,7 @@
 @charset "utf-8";
 /*@import url("initTag.min.css");*/
 
+body{font-family: "microsoft yahei", "Helvetica Neue", "Helvetica, arial, STHeiTi, sans-serif";}
 #fbcs_file {
 	word-break: break-word;font-style: normal; font-weight: normal;
 	font-family: "Microsoft YaHei", "HiraginoSansGB", "Helvetica", "Arial", "Consolas", "sans-serif", "宋体";

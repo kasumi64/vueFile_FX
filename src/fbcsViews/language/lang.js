@@ -24,5 +24,5 @@ export default function () {
 	// return globalVar.get('lang')=='en' ? en : zhcn;
 	
 	var lang = localStorage.getItem('language') || 'zh';
-	return (leng == 'en') ? en : zhcn;
+	return (lang == 'en') ? en : zhcn;
 }

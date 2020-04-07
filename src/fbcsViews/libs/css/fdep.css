@@ -1,4 +1,6 @@
 @charset "utf-8";
+
+body{font-family: "microsoft yahei", "Helvetica Neue", "Helvetica, arial, STHeiTi, sans-serif";}
 #fbcs_MX {
 	font-weight:400;font-style:normal;font-family:"Microsoft YaHei","HiraginoSansGB","Helvetica","Arial","Consolas","sans-serif","宋体";
 	word-break:break-word;-moz-user-select: text;-webkit-user-select: text;user-select: text;
@@ -144,7 +146,7 @@ input[type=text]:focus,input[type=password]:focus,input[type=number]:focus{borde
 /* 表格 */
 #fbcs_MX .el-table{border:1px solid #EFEFEF;border-width:1px 1px 0;color: #333;}
 #fbcs_MX .el-table thead{color: #333;}
-.el-table__header th{background: #E5EAF0;}
+#fbcs_MX .el-table__header th{background: #E5EAF0;}
 /* #fbcs_MX .el-table td,
 #fbcs_MX .el-table th{padding:0;}
 #fbcs_MX .el-table .cell,

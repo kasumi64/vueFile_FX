@@ -367,7 +367,7 @@
 			},
 			//删除用户
 			showPromptBox() {
-				if(this.arr.length == 1) {
+				if(this.arr.length > 0) {
 					utils.hints({
 						txt: pageTxt.tips[3],
 						yes: _this.userDel,
@@ -401,7 +401,7 @@
 			},
 			//修改密码(row)
 			eidtPasswd() {
-				if(this.arr.length == 1) {
+				if(this.arr.length > 0) {
 					this.$store.state.transferEditID = this.arr[0].userID;
 					this.$refs.pwd.$emit('pwdTime')
 					this.$store.state.passShow = true;

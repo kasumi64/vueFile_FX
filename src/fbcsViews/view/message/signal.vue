@@ -516,11 +516,11 @@ import moment from 'moment';
 
 <style>
 	/*下拉选择框*/
-	#fbcs_MX .el-select span{display: inline-block;}
-	#fbcs_MX .el-select .el-input__suffix-inner{display: inline;}
-	#fbcs_MX .el-select .el-select__tags-text{overflow: hidden;vertical-align: middle;text-overflow: ellipsis;}
+	#fbcs_MX .signal .el-select span{display: inline-block;}
+	#fbcs_MX .signal .el-select .el-input__suffix-inner{display: inline;}
+	#fbcs_MX .signal .el-select .el-select__tags-text{overflow: hidden;vertical-align: middle;text-overflow: ellipsis;}
 	#fbcs_MX .signal .el-select__tags-text{max-width: 284px;}
-	#fbcs_MX .el-select .el-tag .el-tag__close{vertical-align: middle;}
+	#fbcs_MX .signal .el-select .el-tag .el-tag__close{vertical-align: middle;}
 	
 	/* .fbcs_MX_signal_select .el-select-dropdown__item.selected{padding-right: 40px;} */
 </style>
