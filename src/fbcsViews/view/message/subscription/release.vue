@@ -62,7 +62,7 @@
 			<el-table-column prop="pubUserName" :label="pageTxt.list[1]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="topicName" :label="pageTxt.list[2]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="pubTime" width='180' sortable='custom' :label="pageTxt.list[3]" show-overflow-tooltip></el-table-column>
-			<el-table-column prop="subsUserCounts" width='102' sortable='custom' :label="pageTxt.list[4]" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="subsUserCounts" width='120' sortable='custom' :label="pageTxt.list[4]" show-overflow-tooltip></el-table-column>
 			<el-table-column :label="pageTxt.list[5]" width='120'>
 				<div slot-scope="scope" class="_zero">
 					<!--<el-tooltip v-if="scope.row.userIDEnable!=0" :content="pageTxt.label[10]" placement="bottom" effect="light">
@@ -166,6 +166,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 		}
 		utils.post(param, function(data){
 //			console.log('删除主题：',data);
+			search();
 			if(data.errcode != 0) {
 				// utils.weakTips(data.errinfo);
 				fxUtils.alert({txt: data.errinfo});
@@ -178,7 +179,6 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				// utils.wheelReq(data); //轮循
 				_this.$refs.loop.start(data);
 			}
-			search();
 		});
 	}
 	
@@ -446,6 +446,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			getDay(6);
 		}
 		globalVar.set('goBack', false);
+		utils.clearCache();
 	}
 	function setCache(){
 		var info = _this.info;

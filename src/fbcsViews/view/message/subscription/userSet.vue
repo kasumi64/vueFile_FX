@@ -221,6 +221,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			_currentPage = 1;
 		}
 		globalVar.set('goBack', false);
+		utils.clearCache();
 	}
 	function search(num, size){
 		var userID = isInput ? _this.idName : _this.userID;

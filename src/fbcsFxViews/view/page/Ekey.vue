@@ -133,9 +133,9 @@ function delNow(obj){
 	params.reviewType = 1;
 	
 	utils.post(params).then(function(res){
+		search();
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
-		search();
 	});
 }
 function showEditEkey(row){
@@ -285,7 +285,7 @@ function init(){
 	if(!this.isPage && args&&args.userID){
 		this.id = args.userID;
 	}
-	if(!(args&&args.type=='add')) this.search();
+	this.search();
 }
 function add(){
 	let params = Object.assign({}, _this.ekeyInfo);
@@ -333,9 +333,9 @@ function addNow(obj){
 	params.reviewType = 1;
 	
 	utils.post(params).then(function(res){
+		search();
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
-		search();
 	});
 }
 function editNow(obj){
@@ -348,9 +348,9 @@ function editNow(obj){
 	params.reviewType = 1;
 	
 	utils.post(params).then(function(res){
+		search();
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
-		search();
 	});
 }
 

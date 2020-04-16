@@ -52,7 +52,7 @@
 			<el-table-column :label="pageTxt.list[7]" width='100'>
 				<div slot-scope="scope" class="_zero">
 					<!-- <el-tooltip :content="pageTxt.label[5]" placement="bottom" effect="light"> -->
-						<img @click="see(scope.$index, scope.row, scope)" src="@/fbcsViews/img/theme/detail_2.png" :title="pageTxt.label[5]" alt="">
+						<img @click="see(scope.$index, scope.row, scope)" src="../../../img/theme/detail_2.png" :title="pageTxt.label[5]" alt="">
 					<!-- </el-tooltip> -->
 				</div>
 			</el-table-column>
@@ -285,6 +285,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			info.sortType = '0';
 		}
 		globalVar.set('goBack', false);
+		utils.clearCache();
 	}
 	function setCache(){
 		var info = _this.info;

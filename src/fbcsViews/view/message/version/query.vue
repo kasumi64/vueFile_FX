@@ -43,7 +43,7 @@
 			<el-table-column prop="operationTime" width="180" :label="pageTxt.list[3]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="operator" width="120"  :label="pageTxt.list[4]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="reviewer" width="120"  :label="pageTxt.list[5]" show-overflow-tooltip></el-table-column>
-			<el-table-column prop="send" width="100" :label="pageTxt.list[6]" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="send" width="110" :label="pageTxt.list[6]" show-overflow-tooltip></el-table-column>
 			<el-table-column :label="pageTxt.list[7]" width='100'>
 				<div slot-scope="scope" class="_zero">
 					<img v-if="auth>1" @click="rollback(scope.row, scope.$index, scope)" src="@/fbcsViews/img/theme/version.png" :title="pageTxt.label[12]">

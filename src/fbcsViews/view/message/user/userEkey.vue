@@ -393,9 +393,9 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 							// utils.wheelReq(data);
 							_this.$refs.loop.start(data);
 						} else fxUtils.alert({txt: data.errinfo, type: 1});
-						_this.renderDate(1);
+						// _this.renderDate(1);
 					} else {
-						_this.renderDate(1);
+						// _this.renderDate(1);
 						if(act == 'now'){
 							// utils.wheelReq(data);
 							_this.$refs.loop.start(data);
@@ -420,6 +420,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				} else {
 					fxUtils.alert({txt: data.errinfo, type: 0});
 				}
+				_this.renderDate(1);
 			});
 		}
 	}
@@ -464,10 +465,11 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 						// utils.wheelReq(data);
 						_this.$refs.loop.start(data);
 					} else fxUtils.alert({txt: data.errinfo, type: 1});
-                	_this.renderDate(1);
+                	// _this.renderDate(1);
             	} else {
             		fxUtils.alert({txt: data.errinfo});
             	}
+				_this.renderDate(1);
 			});
 		}
 	}

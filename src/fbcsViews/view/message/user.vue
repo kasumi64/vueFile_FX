@@ -479,6 +479,7 @@
 			_this.currentPage = 1;
 		}
 		globalVar.set('goBack', false);
+		utils.clearCache();
 	}
 
 	function setCache(row) {

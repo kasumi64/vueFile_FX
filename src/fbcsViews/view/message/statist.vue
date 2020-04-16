@@ -110,6 +110,7 @@
 import kit		 from '@/fbcsViews/libs/kit.js';
 import utils from "@/fbcsViews/libs/utils.js";
 import lang from '@/fbcsViews/language/lang.js';
+import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 
 	var pageTxt = 'lang.statist', _this;
 

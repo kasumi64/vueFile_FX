@@ -64,6 +64,7 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
+import globalVar from '../../libs/globalVar.js'
 
 var tick = require('@/fbcsFxViews/img/order/tick.png'),
    cross = require('@/fbcsFxViews/img/order/cross.png');
@@ -302,6 +303,7 @@ export default {
 			this.search();
 		}
 		globalVar.set('goBack', false);
+		utils.clearCache();
 	},
 	watch: {
 		radio(val){

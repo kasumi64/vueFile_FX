@@ -389,7 +389,6 @@
 										_this.addEkey = false;
 										// utils.wheelReq(response);
 										_this.$refs.loop.start(response);
-										_this.renderDate(_this.search.type);
 									} else {
 										// utils.weakTips(response.errinfo);
 										fxUtils.alert({
@@ -397,6 +396,7 @@
 											type: 0
 										});
 									}
+									_this.renderDate(_this.search.type);
 								});
 							}
 						});
@@ -508,7 +508,6 @@
 									if (data.errcode == 0) {
 										// utils.wheelReq(data);
 										_this.$refs.loop.start(data);
-										_this.renderDate(_this.search.type);
 									} else {
 										// utils.weakTips(data.errinfo);
 										fxUtils.alert({
@@ -516,6 +515,7 @@
 											type: 0
 										});
 									}
+									_this.renderDate(_this.search.type);
 								});
 							}
 						});

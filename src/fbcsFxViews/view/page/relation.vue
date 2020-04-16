@@ -267,9 +267,9 @@ export default {
 			
 //			console.log(params);
 			utils.post(params).then(res => {
+				_search();
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
-				_search();
 			});
 		}
 	},

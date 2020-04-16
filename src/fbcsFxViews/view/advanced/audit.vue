@@ -194,7 +194,6 @@ export default {
 			this.idWords = arr;
 		},
 		expcsv(){
-			this.showDialog2 = true;
 			this.fileName = '';
 			let params = Object.assign({}, _this.info);
 			params.url = 'advancedSearch/operationRecording';
@@ -207,6 +206,15 @@ export default {
 			params.ekeyFlag = 0;
 			params.userextFlag = 0;
 			
+			let begin = params.operationBeginTime, end = params.operationEndTime;
+			if(begin || end){
+				begin = parseInt(begin/1000);
+				end = parseInt(end/1000);
+				if(begin==''||end==''||begin > end) {
+					return utils.alert({txt: _this.$t('fbcsFile.err.user.day')});
+				}
+			}
+			
 			let j, links = {ekeyFlag: 1, commFlag: 1, userextFlag: 1};
 			for (j = 0; j < _this.linkage.length; j++) {
 				let k = _this.linkage[j];
@@ -216,6 +224,7 @@ export default {
 			utils.post(params).then(res => {
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				if(!res.errinfo) return;
+				_this.showDialog2 = true;
 				_this.fileHref = res.errinfo;
 				_this.fileName = res.errinfo.split('/').pop();
 			});

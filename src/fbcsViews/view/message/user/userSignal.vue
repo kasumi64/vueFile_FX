@@ -33,7 +33,7 @@
 			<el-table-column prop="userName1" :label="pageTxt.table[2]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="userID2" :label="pageTxt.table[3]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="userName2" :label="pageTxt.table[4]" show-overflow-tooltip></el-table-column>
-			<el-table-column :label="pageTxt.table[5]" width="70" show-overflow-tooltip>
+			<el-table-column :label="pageTxt.table[5]" width="90" show-overflow-tooltip>
 				<div v-if="auth>1" slot-scope="scope" class="_zero">
 					<!-- <el-tooltip :content="pageTxt.table[6]" placement="bottom" effect="light"> -->
 						<img @click="showPromptBox" src="@/fbcsViews/img/user/deleticos.png" :title="pageTxt.table[6]">
