@@ -167,9 +167,9 @@ function getZdEnabled(){
 	utils.post(params).then(res => {
 		if(res.errcode != '0') return console.warn("600070:", res.errinfo);
 		if(res.isOpenZd == 0){
-			_this.options = this.$t('fbcsFile.versionContrast.options2');
+			_this.options = _this.$t('fbcsFile.versionContrast.options2');
 		} else {
-			_this.options = this.$t('fbcsFile.versionContrast.options1');
+			_this.options = _this.$t('fbcsFile.versionContrast.options1');
 		}
 	});
 }

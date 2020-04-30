@@ -78,8 +78,20 @@
 						<b class="activeIcon el-icon-search" style="font-size: 16px;width: 34px;text-align: center;font-weight: 700;"></b>
 						<em>高级搜索</em>
 					</div>
+					<el-menu-item name='query' index="/advanced/user" >
+						<em class="el-icon-s-custom two">用户</em>
+					</el-menu-item>
+					<el-menu-item name='query' index="/advanced/Ekey" >
+						<em class="el-icon-key two">Ekey</em>
+					</el-menu-item>
 					<el-menu-item name='query' index="/advanced/signal" >
 						<em class="el-icon-message two">通信关系</em>
+					</el-menu-item>
+					<el-menu-item name='query' index="/advanced/information" >
+						<em class="el-icon-phone two">扩展关系</em>
+					</el-menu-item>
+					<el-menu-item name='query' index="/advanced/audit" >
+						<em class="el-icon-s-check two">稽核</em>
 					</el-menu-item>
 				</el-submenu>
 			</div>

@@ -78,7 +78,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 				textareaValue1: "",
 				textareaValue2: "",
 				active: "first",
-				hostType: 0,
+				hostType: 2,
 				list: [{section:'abc',type:'用户',detail:'详情'},
 				{section:'abc',type:'用户',detail:'详情'}],
 				errList: [],
@@ -92,7 +92,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 			},
 			history(){
 				let reg = /[\%％ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９]/;
-				let txtVal = _this.hostType ? _this.textareaValue2 : _this.textareaValue1;
+				let txtVal = _this.hostType == 1 ? _this.textareaValue2 : _this.textareaValue1;
 				if(reg.test(txtVal)){
 					// return fxUtils.weakTips(this.$t('fbcsFile.suConfig.full'));
 					return fxUtils.alert({txt: this.$t('fbcsFile.suConfig.full')});
@@ -101,7 +101,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 				let params = {
 					url: 'suConfig/webModifyCompare',
 					cmdID: '600084',
-					type: (this.active == 'first') ? 0 : 1,
+					type: (this.active == 'first') ? 2 : 1,
 					cfgInfo: txtVal
 				};
 				fxUtils.post(params).then(function(res){
@@ -111,12 +111,12 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 			},
 			//编辑
 			showReviewFn() {
-				var configinfo = _this.hostType ? _this.switchValue2 : _this.switchValue1;
+				var configinfo = _this.hostType == 1 ? _this.switchValue2 : _this.switchValue1;
 				if(!configinfo) {
 					return;
 				}
 				let reg = /[\%％ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９]/;
-				let txtVal = _this.hostType ? _this.textareaValue2 : _this.textareaValue1;
+				let txtVal = _this.hostType == 1 ? _this.textareaValue2 : _this.textareaValue1;
 				if(reg.test(txtVal)){
 					return fxUtils.alert({txt: this.$t('fbcsFile.suConfig.full')});
 				}
@@ -141,7 +141,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 				utils.post("mx/suConfig/modify", {
 					cmdID: "600082",
 					type: _this.hostType,
-					cfgInfo: _this.hostType ? _this.textareaValue2 : _this.textareaValue1,
+					cfgInfo: _this.hostType == 1 ? _this.textareaValue2 : _this.textareaValue1,
 					reviewer: args.name,
 					reviewerPassword: args.pwd,
 					reviewType: 1
@@ -162,7 +162,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 			//判断静态/动态配置
 			tabClick(tab, event) {
 				if(this.active == "first") {
-					this.hostType = 0;
+					this.hostType = 2;
 				} else {
 					this.hostType = 1;
 				}
@@ -177,7 +177,7 @@ import fxUtils from '@/fbcsFxViews/libs/utils.js';
 					type: _this.hostType
 				}, function(response) {
 					if(response.errcode == 0) {
-						if(_this.hostType == 0) {
+						if(_this.hostType == 2) {
 							_this.textareaValue1 = response.cfgInfo;
 						} else {
 							_this.textareaValue2 = response.cfgInfo;

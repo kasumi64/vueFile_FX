@@ -39,9 +39,12 @@
 					</el-date-picker>
 					
 					<el-button @click="searchFn" type="primary" class="searchBtn">{{pageTxt.label[14]}}</el-button>
-					<el-button @click="exportFn" type="primary" class="exportFn">{{pageTxt.label[15]}}</el-button>
+					<!-- <el-button @click="exportFn" type="primary" class="exportFn">{{pageTxt.label[15]}}</el-button> -->
 				</div>
 			</header>
+			<div>
+				<div @click="toAdvanced"><img src="@/fbcsFxViews/img/FnIcon/searchEkey.png"><span>{{$t('fbcsFile.searchBar.advanced')}}</span></div>
+			</div>
 			<el-table stripe border highlight-current-row :data="data.lists">
 				<!--<el-table-column width="50" label=" " type="index"></el-table-column>-->
 				<el-table-column prop="operationTime" width="170" :label="pageTxt.table[0]" show-overflow-tooltip></el-table-column>
@@ -162,14 +165,17 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			searchFn() {
 				this.renderDate(1);
 			},
+			toAdvanced(){
+				this.$router.push({path: '/main/mxCfg/advanced/audit'});
+			},
 			//导出报表
 			exportFn() {
 				utils.post("mx/operationRecording/query", {
 					cmdID: "600091",
 					operator: _this.modeType.user,
 					operationType: _this.modeType.userType,
-					operationBeginTime: _this.beginDate/1000,
-					operationEndTime: _this.endDate/1000,
+					operationBeginTime: _this.beginDate,
+					operationEndTime: _this.endDate,
 					sequence: _this.statisticalMethod,
 					type: 1,
 					pageSize: _this.pageSize,
@@ -226,10 +232,11 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				_this.currentPage = page || _this.currentPage;
 				utils.post("mx/operationRecording/query", {
 					cmdID: "600091",
+					language: fxUtils.langCode(),
 					operator: _this.modeType.user,
 					operationType: _this.modeType.userType,
-					operationBeginTime: _this.beginDate/1000,
-					operationEndTime: _this.endDate/1000,
+					operationBeginTime: _this.beginDate,
+					operationEndTime: _this.endDate,
 					sequence: _this.statisticalMethod,
 					type: 0,
 					pageSize: _this.pageSize,
@@ -282,15 +289,24 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 		}
 	};
 	function getoprType(){
-		var param = {
+		/* var param = {
 			cmdID: "600092",
 			url: 'mx/operationRecording/queryOperationType'
+		}; */
+		
+		var param = {
+			cmdID: "600000",
+			url: 'mx/dict/query',
+			language: fxUtils.langCode(),
+			type: 4
 		};
 		utils.post(param, function(data){
 			if(data.errcode!=0) return console.warn(data.errinfo);
 			data.lists.forEach(function(obj, i){
-				obj.val = obj.operationType;
-				obj.label = obj.operationType;
+				// obj.val = obj.operationType;
+				// obj.label = obj.operationType;
+				obj.val = obj.name;
+				obj.label = obj.name;
 				obj.key = i+1;
 			});
 			data.lists.unshift({val:'',label:pageTxt.tips[0],key:'0'});
@@ -340,6 +356,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.m0{margin: 0;}
 	.red{color: red;}
 	.preWrap {white-space: pre-wrap;}
+	.btnBox{margin: 10px 0;text-align: left;}
+	.btnBox div{font-size: 14px;color: #5C759D;cursor: pointer;margin-right: 35px;display: inline-block;}
 </style>
 <style>
 	#fbcs_MX .statist .el-input__icon{height:auto;}

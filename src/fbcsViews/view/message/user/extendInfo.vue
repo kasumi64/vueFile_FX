@@ -135,6 +135,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var _this, data = {
 	fxAuth: true,
@@ -187,6 +188,24 @@ function del(row){
 	});
 }
 
+function valid(row){
+	utils.confirm({
+		txt: _this.$t('fbcsFile.advanced.information.valid'),
+		ok: () => {
+			let params = {
+				url: 'userinfoExt/UpdateOperatorTime',
+				cmdID: '600055',
+				userID: row.userID,
+				operatorName: row.operatorName
+			};
+			utils.post(params).then(function(res){
+				utils.alert({txt: res.errinfo, type: res.errcode!=0?0:1});
+				search('OPE');
+			});
+		}
+	});
+}
+
 export default {
 	data(){
 		data.listItem = this.$t('fbcsFile.advanced.information.listType');
@@ -201,13 +220,15 @@ export default {
 			ssccManagerTelNum: this.$t('fbcsFile.advanced.information.ssccManagerTelNum'),
 			ssccManagerMobileNum: this.$t('fbcsFile.advanced.information.ssccManagerMobileNum'),
 			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
-			operatorDepartment: this.$t('fbcsFile.advanced.information.department')
+			operatorDepartment: this.$t('fbcsFile.advanced.information.department'),
+			updataTime: this.$t('fbcsFile.advanced.information.operatorUpdataTime')
 		};
 		data.defined = {
-			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
+			label: this.$t('fbcsFile.tableTitle.operation'), width: 110,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/edit.png'), click: edit, tips: this.$t('fbcsFile.tableDefined.editExt') },
-				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delExt') },
+				{src:require('@/fbcsFxViews/img/table/restore.png'), click: valid, tips: this.$t('fbcsFile.tableDefined.restore') },
+				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delExt') }
 			]
 		};
 		if(!utils.getMxAuth) data.defined.items = [];
@@ -353,6 +374,11 @@ function searchOPE(){
 		if(res.count>1 && _this.pageOPE > res.count){
 			_this.pageOPE = res.count;
 			return searchOPE();
+		}
+		var obj;
+		for (var i = 0; i < res.lists.length; i++) {
+			obj = res.lists[i];
+			obj.updataTime = moment(obj.operatorUpdateTime*1000).format('YYYY-MM-DD HH:mm:ss');
 		}
 		_this.listOPE = res.lists;
 		_this.pageOPE = res.currentPage || 1;

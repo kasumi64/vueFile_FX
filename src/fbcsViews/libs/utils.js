@@ -630,6 +630,12 @@ function utils(){
 		fxUtils.setArgs('bizKeySearch', null);
 	};
 	
+	Object.addProto(exp, 'language', {
+		get(){
+			return localStorage.getItem('language') || 'zh';
+		}
+	});
+	
 	/*exp.getMxAuth = function ()
 	{
 	
@@ -720,4 +726,4 @@ function utils(){
 }
 
 export default utils();
-//(c) Copyright 2019.09 LGY. All Rights Reserved.
+//(c) Copyright 2020.04 LGY. All Rights Reserved.

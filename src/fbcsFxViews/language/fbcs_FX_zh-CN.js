@@ -33,7 +33,8 @@ var obj = {
 	tableDefined: {
 		editUser: '修改基本信息', editEkey: '修改Ekey', addSignal: '创建通信关系', delEkey: '删除Ekey',
 		delUser: '删除用户', delSignal: '删除通信关系', back: '回退', detail: '详情',
-		editExt: '修改扩展信息', delExt: '删除扩展信息', verback: '版本回滚'
+		editExt: '修改扩展信息', delExt: '删除扩展信息', verback: '版本回滚',
+		restore: '设为有效'
 	},
 	err: {
 		lock: {
@@ -194,10 +195,12 @@ var obj = {
 			ssccManagerTelNum: '客户经理座机号码', ssccManagerMobileNum: '客户经理手机号码',
 			operatorCompany: '所属公司', operatorDepartment: '所属部门', email: '用户运维邮箱', useEmail: '联系人邮箱',
 			userAlarmSmsNum: '短信报警号码', operationPhoneNum: '用户运维电话', operationFax: '用户运维传真',
-			om_email: '用户运维邮箱'
+			om_email: '用户运维邮箱', operatorUpdateTime: '更新时间',
+			valid: '是否设为有效？'
 		},
 		audit: {
-			expcsv: '导出稽核', title: '稽核高级搜索', commFlag: '通信关系', userextFlag: '扩展信息'
+			expcsv: '导出稽核', title: '稽核高级搜索', commFlag: '通信关系', userextFlag: '扩展信息',
+			all: '全部'
 		}
 	},
 	order: {

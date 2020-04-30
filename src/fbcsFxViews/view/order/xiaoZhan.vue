@@ -15,7 +15,7 @@
 			<p class="jiange"></p>
 			
 			<label class="label">{{$t('fbcsFile.order.manage.date')}}</label>
-			<el-radio-group v-model="radio">
+			<el-radio-group v-model="radio" class="mr10">
 				<el-radio :label="1">{{$t('fbcsFile.order.manage.today')}}</el-radio>
 				<el-radio :label="3">{{$t('fbcsFile.order.manage.week')}}</el-radio>
 				<el-radio :label="5">{{$t('fbcsFile.order.manage.month')}}</el-radio>
@@ -105,7 +105,7 @@ export default {
 			info: {
 				exeState: 0, feedbackState: 0, recvBeginTime: null, recvEndTime: null,
 			},
-			radio: 3,
+			radio: 1,
 			acceptList: this.$t('fbcsFile.order.manage.acceptState'),
 			feedbackList: this.$t('fbcsFile.order.manage.feedbackState'),
 			list: [
@@ -297,7 +297,7 @@ export default {
 			this.page = param.page;
 			search();
 		} else {
-			getDay(6);
+			getDay(0);
 			this.search();
 		}
 	},
@@ -395,6 +395,7 @@ function getDay(day = 0){
 .xiaoZhan{}
 .el-radio{margin-right: 10px;}
 .ml10{margin-left: 10px;}
+.mr10{margin-right: 10px;}
 .jiange{padding: 5px 0;}
 .table{min-width: 780px;padding-right: 40px;}
 </style>

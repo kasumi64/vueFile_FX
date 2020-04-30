@@ -29,7 +29,7 @@
 			</div>
 			<div class="btnBox">
 				<div v-if="auth>1" @click="showAdd" id='Add'><img src="@/fbcsViews/img/user/addEkey.png"><span>{{pageTxt.label[7]}}</span></div>
-				<div @click="exportEkeyInfo"><img src="@/fbcsViews/img/user/exportEkey.png"><span>{{pageTxt.label[8]}}</span></div>
+				<div @click="exportEkeyInfo"><img src="@/fbcsFxViews/img/FnIcon/searchEkey.png"><span>{{$t('fbcsFile.searchBar.advanced')}}</span></div>
 			</div>
 			<el-table stripe border :data="EkeyData.lists" tooltip-effect="dark" @current-change="currentRow"
 			 highlight-current-row>
@@ -558,6 +558,11 @@
 			},
 			//导出Ekey
 			exportEkeyInfo() {
+				
+				this.$router.push({path: '/main/mxCfg/advanced/Ekey'});
+				
+				return
+				
 				utils.post(
 					"mx/userEkey/ExportCsv", {
 						cmdID: "600028"

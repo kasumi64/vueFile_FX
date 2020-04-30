@@ -12,51 +12,21 @@
 				<el-row class='info'>
 					<el-col :span="6">
 						<ul class="left">
-							<li>
-								<p><span class="red">*&nbsp;</span>{{pageTxt.label[1]}}：</p>
-							</li>
-							<li>
-								<p><span class="red">*&nbsp;</span>{{pageTxt.label[2]}}：</p>
-							</li>
-							<li>
-								<p>{{pageTxt.label[3]}}：</p>
-							</li>
-							<li>
-								<p>{{pageTxt.label[4]}}：</p>
-							</li>
-							<li>
-								<p><span class="red">*&nbsp;</span>{{pageTxt.label[5]}}：</p>
-							</li>
-							<li>
-								<p>{{pageTxt.label[7]}}：</p>
-							</li>
-							<li>
-								<p><span class="red">*&nbsp;</span>{{pageTxt.label[8]}}：</p>
-							</li>
-							<li>
-								<p>{{pageTxt.label[9]}}：</p>
-							</li>
-							<li>
-								<p>{{pageTxt.label[10]}}：</p>
-							</li>
-							<li>
-								<p>{{pageTxt.label[11]}}：</p>
-							</li>
-							<li>
-								<p>{{pageTxt.label[12]}}：</p>
-							</li>
-							<li>
-								<p><span class="red">*&nbsp;</span>{{pageTxt.label[13]}}：</p>
-							</li>
-							<li>
-								<p><span class="red">*&nbsp;</span>{{pageTxt.label[14]}}：</p>
-							</li>
-							<li>
-								<p><span class="red">*&nbsp;</span>{{pageTxt.label[15]}}：</p>
-							</li>
-							<li>
-								<p>{{pageTxt.label[26]}}：</p>
-							</li>
+							<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[1]}}：</p></li>
+							<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[2]}}：</p></li>
+							<li><p>{{pageTxt.label[3]}}：</p></li>
+							<li><p>{{pageTxt.label[4]}}：</p></li>
+							<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[5]}}：</p></li>
+							<!-- <li><p>{{pageTxt.label[7]}}：</p></li> -->
+							<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[8]}}：</p></li>
+							<!-- <li><p>{{pageTxt.label[9]}}：</p></li> -->
+							<li><p>{{pageTxt.label[10]}}：</p></li>
+							<li><p>{{pageTxt.label[11]}}：</p></li>
+							<!-- <li><p>{{pageTxt.label[12]}}：</p></li>
+							<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[13]}}：</p></li>
+							<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[14]}}：</p></li>
+							<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[15]}}：</p></li>
+							<li><p>{{pageTxt.label[26]}}：</p></li> -->
 						</ul>
 					</el-col>
 					<el-col :span="18">
@@ -81,19 +51,19 @@
 								<input type="text" data-k='speedCtrlKbps' v-model="info.speedCtrlKbps" @input="inputInt2" maxlength="18" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
 								<span class="kbit">{{pageTxt.label[6]}}</span>
 							</li>
-							<li>
+							<!-- <li>
 								<input type="text" v-model="info.userInfo" maxlength="512" autocomplete="off">
-							</li>
+							</li> -->
 							<li>
 								<el-select v-model="info.connSuGroupName" placeholder="">
 									<el-option v-for="item in pageTxt.connect" :key="item.value" :label="item.groupID" :value="item.groupID"></el-option>
 								</el-select>
 							</li>
-							<li>
+							<!-- <li>
 								<el-select v-model="info.isAlarmIfOffLine" placeholder="">
 									<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
 								</el-select>
-							</li>
+							</li> -->
 							<li class="icon40">
 								<el-date-picker v-model="info.softEncBeginDate" value-format='timestamp' type="datetime" 
 								:placeholder="pageTxt.label[24]" default-time="00:00:00"></el-date-picker>
@@ -102,7 +72,7 @@
 								<el-date-picker v-model="info.softEncEndDate" value-format='timestamp' type="datetime" 
 								:placeholder="pageTxt.label[24]" default-time="23:59:59"></el-date-picker>
 							</li>
-							<li>
+							<!-- <li>
 								<el-select v-model="info.allowSendRecvFile" placeholder="">
 									<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
 								</el-select>
@@ -121,10 +91,57 @@
 							</li>
 							<li>
 								<el-input auto-complete="off" v-model="configTime" placeholder="" disabled></el-input>
-							</li>
+							</li> -->
 						</ul>
 					</el-col>
 				</el-row>
+				
+				<div class="more">
+					<el-checkbox v-model="more" :label="$t('fbcsFile.userInfo.more')" border></el-checkbox>
+				</div>
+				
+				<div v-if="more" class="info">
+					<ul class="el-col-6 left">
+						<li><p>{{pageTxt.label[7]}}：</p></li>
+						<li><p>{{pageTxt.label[9]}}：</p></li>
+						<li><p>{{pageTxt.label[12]}}：</p></li>
+						<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[13]}}：</p></li>
+						<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[14]}}：</p></li>
+						<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[15]}}：</p></li>
+						<li><p>{{pageTxt.label[26]}}：</p></li>
+					</ul>
+					<ul class="el-col-18 right">
+						<li>
+							<input type="text" v-model="info.userInfo" maxlength="512" autocomplete="off">
+						</li>
+						<li>
+							<el-select v-model="info.isAlarmIfOffLine" placeholder="">
+								<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
+							</el-select>
+						</li>
+						<li>
+							<el-select v-model="info.allowSendRecvFile" placeholder="">
+								<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
+							</el-select>
+						</li>
+						<li>
+							<input type="text" data-k='maxPubsCount' v-model="info.maxPubsCount" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+							<span v-show="maxPubsCount" class="errNum">{{pageTxt.tips.errNum}}</span>
+						</li>
+						<li>
+							<input type="text" data-k='maxSubsCount' v-model="info.maxSubsCount" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+							<span v-show="maxSubsCount" class="errNum">{{pageTxt.tips.errNum}}</span>
+						</li>
+						<li>
+							<input type="text" data-k='maxDaysOfTopic' v-model="info.maxDaysOfTopic" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+							<span v-show="maxDaysOfTopic" class="errNum">{{pageTxt.tips.errNum}}</span>
+						</li>
+						<li>
+							<el-input auto-complete="off" v-model="configTime" placeholder="" disabled></el-input>
+						</li>
+					</ul>
+				</div>
+				
 				<div class="btn">
 					<el-button v-if="auth>1" type="primary" @click='verify(sendDown)'>{{pageTxt.label[16]}}</el-button>
 					<el-button v-if="auth>1" type="primary" @click="verify(edit)">{{pageTxt.label[17]}}</el-button>
@@ -193,11 +210,13 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 		configTime: 0,
 		maxPubsCount: false,
 		maxSubsCount: false,
-		maxDaysOfTopic: false
+		maxDaysOfTopic: false,
+		more: false
 	};
 
 	export default {
 		data() {
+			data.more = false;
 			return data;
 		},
 		methods: {
@@ -441,7 +460,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.userEdit{color: #606266;min-height: 630px;}
 	.red{color: red;}
 	.info li{margin-top: 10px; height: 36px;}
-	.info{white-space: nowrap;width: 810px;}
+	.info{white-space: nowrap;width: 810px;display: table;}
 	.header{height: 44px; border-bottom: 1px solid #EBEFF4; overflow: hidden;}
 	.header_img{float: left; margin-top: 15px; margin-left: 20px;}
 	.header_txt1{font-size: 13px; color: #5c759d; float: left; line-height: 44px; margin-left: 5px; cursor: pointer;}
@@ -452,16 +471,17 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	#fbcs_MX .el-col-18{width: auto;}
 	.left li{text-align: right; line-height: 40px;}
 	.right{margin-left: 15px; line-height: 40px;}
-	.right input{font-size: 14px; width: 255px; height: 30px; vertical-align: middle; padding: 0 5px; border: 1px solid #d7d8da; text-indent: 7px;}
+	.right input{font-size: 14px; width: 255px; height: 30px; vertical-align: middle; border: 1px solid #d7d8da; text-indent: 3px;}
 	input:focus{border: 2px solid #32ccf9;}
 	#fbcs_MX .el-select{width: 255px;}
 	#fbcs_MX .el-textarea{width: 255px;}
 	#fbcs_MX .el-input{width: 255px;}
 	.kbit{font-size: 12px; line-height: 36px; vertical-align: middle; color: #999; margin-left: 10px;}
 	.info .txtH{height: 100px;}
-	.btn{margin-left: 175px; margin-top: 30px;}
+	.btn{margin-left: 198px; margin-top: 30px;}
 	.red{color: red; font-size: 14px;}
 	.errNum{color: red;font-size: 12px;vertical-align: middle;margin-left: 10px;}
+	.more{margin-left: 326px;padding-top: 16px;}
 </style>
 <style>
 	#fbcs_MX .userEdit .el-tabs__content{overflow: visible;}

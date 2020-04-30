@@ -104,10 +104,16 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				var arr = this.selects;
 				if(arr.length < 1) return fxUtils.alert({txt: pageTxt.tips.pc});
 				
-				utils.review({ //审核
-					uri: 'mx/batchDispatch/dispatch',
-					yes: function(args){
-						fullDose(arr, args);
+				var isAll= arr.length == this.data.length;
+				utils.hints({
+					txt: isAll ? pageTxt.dispatchAll : pageTxt.dispatchPart,
+					yes: ()=>{
+						utils.review({ //审核
+							uri: 'mx/batchDispatch/dispatch',
+							yes: function(args){
+								fullDose(arr, args, isAll);
+							}
+						});
 					}
 				});
 			}
@@ -143,7 +149,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			}, 40);
 		});
 	}
-	function fullDose(arr, args){
+	function fullDose(arr, args, isAll){
 		utils.hints({
 			txt:pageTxt.tips.submit,
 			yes: function(){
@@ -155,7 +161,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 					count: arr.length,
 					reviewer: args.name,
 					reviewerPassword: args.pwd,
-					reviewType: 1
+					reviewType: 1,
+					dispatchType: isAll ? 0 : 1 //0-全部节点，1-单个或部分节点
 				};
 				utils.post(param, function(data){
 					if(data.errcode != '0') {

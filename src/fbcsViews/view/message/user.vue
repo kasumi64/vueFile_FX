@@ -18,8 +18,8 @@
 				<div v-if="auth>1" @click="eidtPasswd"><img src="@/fbcsViews/img/user/editPswd.png"><span>{{pageTxt.table[7]}}</span></div>
 				<div v-if="auth>1" @click="batchPwdShow"><img src="@/fbcsFxViews/img/FnIcon/batchPwd.png"><span>{{$t('fbcsFile.fnField.batchPwd')}}</span></div>
 				<div v-if="auth>1" @click="importExtInfo"><img src="@/fbcsViews/img/user/defalutico.png"><span>{{pageTxt.label[5]}}</span></div>
-				<div @click="exportExtInfo"><img src="@/fbcsViews/img/user/importico1.png"><span>{{pageTxt.label[6]}}</span></div>
-				<div @click="exportBasicsInfo"><img src="@/fbcsViews/img/user/importico.png"><span>{{pageTxt.label[7]}}</span></div>
+				<div @click="exportExtInfo"><img src="@/fbcsFxViews/img/FnIcon/searchUser.png"><span>{{$t('fbcsFile.searchBar.advUser')}}</span></div>
+				<div @click="exportBasicsInfo"><img src="@/fbcsFxViews/img/FnIcon/searchInformation.png"><span>{{$t('fbcsFile.searchBar.advExp')}}</span></div>
 			</div>
 			<el-table stripe border ref="multipleTable" tooltip-effect="dark" @select='toggleSelection' @selection-change="fn" :data="userData"
 			 @current-change="currentRow" highlight-current-row>
@@ -305,6 +305,11 @@
 			},
 			//导出扩展信息
 			exportExtInfo() {
+				
+				this.$router.push({path: '/main/mxCfg/advanced/user'});
+				
+				return
+				
 				utils.post("mx/userinfoExt/query", {
 					cmdID: "600014",
 					type: 1
@@ -321,6 +326,11 @@
 			},
 			//导出基本信息
 			exportBasicsInfo() {
+				
+				this.$router.push({path: '/main/mxCfg/advanced/information'});
+				
+				return
+				
 				utils.post("mx/userinfo/ExportCsv", {
 					cmdID: "600014"
 				}, function(data) {
@@ -495,36 +505,36 @@
 </script>
 
 <style scoped="scoped">
-  .user * { vertical-align: middle; }
-  .user { padding: 20px; white-space: nowrap; min-width: 1144px; }
-  .user .userH { height: 30px; text-align: left;}
-  .user .userH .el-input{ width: auto; }
-  .userH .txt { font-size: 14px; line-height: 30px; height: 30px; color: #333; }
-  .userH>span:nth-child(3) { margin-left: 35px; }
-  .userH .el-button { margin-left: 35px; }
-  .userH .el-input { margin-left: 10px; }
-  .btnBox { font-size: 14px; color: #5c759d; margin-top: 20px; margin-bottom: 10px; text-align: left;}
-  .btnBox div { margin-right: 35px; cursor: pointer; display: inline-block; }
-  .btnBox>div>span { margin-left: 4px; line-height: 30px; height: 30px; }
-  ._zero>div { display: inline-block; margin-right: 14px; cursor: pointer; }
-  .Popup .box1 {padding: 40px 0 0 25px;}
-  .Popup ._messaga1_info { margin-left: 125px; margin-top: 15px; line-height: 20px; }
-  .Popup_return { margin-left: 40px; }
-  .Popup .red { color: #ff6b6b; }
-  
-  .dialog_pop .el-dialog__body {padding: 0;}
-  .dialog_pop ._messaga1_info { margin-left: 125px; margin-top: 15px; line-height: 20px; }
-  .Popup_input { width: 360px; margin-left: 12px; }
-  .dialog_pop .red { color: #ff6b6b; }
-  .redErr{color: red;}
-  #fbcs_MX .batchPwd{vertical-align: middle;padding-top: 46px;}
-  .batchPwd .left{display: inline-block;width: 200px;text-align: right;}
-  .batchPwd .txt{font-size: 14px;line-height: 30px;color: #666;}
-  .batchPwd .right{display: inline-block;margin-left: 10px;}
-  .batchPwd .el-radio{line-height: 30px;}
+	.user * { vertical-align: middle; }
+	.user { padding: 20px; white-space: nowrap; min-width: 1144px; }
+	.user .userH { height: 30px; text-align: left;}
+	.user .userH .el-input{ width: auto; }
+	.userH .txt { font-size: 14px; line-height: 30px; height: 30px; color: #333; }
+	.userH>span:nth-child(3) { margin-left: 35px; }
+	.userH .el-button { margin-left: 35px; }
+	.userH .el-input { margin-left: 10px; }
+	.btnBox { font-size: 14px; color: #5c759d; margin-top: 20px; margin-bottom: 10px; text-align: left;}
+	.btnBox div { margin-right: 35px; cursor: pointer; display: inline-block; }
+	.btnBox>div>span { margin-left: 4px; line-height: 30px; height: 30px; }
+	._zero>div { display: inline-block; margin-right: 14px; cursor: pointer; }
+	.Popup .box1 {padding: 40px 0 0 25px;}
+	.Popup ._messaga1_info { margin-left: 125px; margin-top: 15px; line-height: 20px; }
+	.Popup_return { margin-left: 40px; }
+	.Popup .red { color: #ff6b6b; }
+
+	.dialog_pop .el-dialog__body {padding: 0;}
+	.dialog_pop ._messaga1_info { margin-left: 125px; margin-top: 15px; line-height: 20px; }
+	.Popup_input { width: 360px; margin-left: 12px; }
+	.dialog_pop .red { color: #ff6b6b; }
+	.redErr{color: red;}
+	#fbcs_MX .batchPwd{vertical-align: middle;padding-top: 46px;}
+	.batchPwd .left{display: inline-block;width: 200px;text-align: right;}
+	.batchPwd .txt{font-size: 14px;line-height: 30px;color: #666;}
+	.batchPwd .right{display: inline-block;margin-left: 10px;}
+	.batchPwd .el-radio{line-height: 30px;}
 </style>
 <style>
-  ._whellError #table_header .l1 { font-size: 14px; font-weight: bold; }
-  #fbcs_MX .user .el-table__header .el-checkbox { display: none; }
-  #fbcs_MX .user .dialog_pop.box1 .el-dialog__body{padding: 40px 0 0 25px;}
+	._whellError #table_header .l1 { font-size: 14px; font-weight: bold; }
+	#fbcs_MX .user .el-table__header .el-checkbox { display: none; }
+	#fbcs_MX .user .dialog_pop.box1 .el-dialog__body{padding: 40px 0 0 25px;}
 </style>

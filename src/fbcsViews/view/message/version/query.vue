@@ -30,9 +30,18 @@
 					 class='picker' value-format="yyyy-MM-dd HH:mm:ss" default-time="23:59:59">
 				</el-date-picker>
 				<button class='blueBtn' @click='search'>{{pageTxt.label[11]}}</button>
-				<button v-if="auth>1" class='blueBtn big' @click='bigVer'>{{pageTxt.label[14]}}</button>
+				<!-- <button v-if="auth>1" class='blueBtn big' @click='bigVer'>{{pageTxt.label[14]}}</button> -->
 			</div>
 		</div>
+		<ul class="fnField">
+			<li @click="bigVer" v-if="auth>1">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/bigVer.png"/>
+				<span class="label">{{$t('fbcsFile.fnField.bigVer')}}</span>
+			</li><li @click="checkVer">
+				<img class="icon" src="@/fbcsFxViews/img/FnIcon/zdConfig.png"/>
+				<span class="label">{{$t('fbcsFile.fnField.checkZd')}}</span>
+			</li>
+		</ul>
 		<el-table stripe border @row-dblclick="dbl"  @current-change="currenRow" @selection-change="selectionRow" highlight-current-row
 			:data="data" tooltip-effect="dark">
 			<!--<el-table-column width="50" :label="column" type="index"></el-table-column>-->
@@ -57,6 +66,7 @@
 			<div class="rightTxt">{{paging.before1}}{{max}}{{paging.after}}</div>
 		</div>
 		<div class="onePage" v-else-if="max>0&&max<=size">{{paging.before2}}{{max}}{{paging.after}}</div>
+		
 		<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.label[13]" :visible.sync="downCSV" width='600px'>
 			<el-table class="popTable" stripe :data="detailData" tooltip-effect="dark">
 				<el-table-column width="50" :label="column" type="index"></el-table-column>
@@ -64,24 +74,25 @@
 				<el-table-column prop="fileSize" width="120" :label="pageTxt.list[9]" show-overflow-tooltip></el-table-column>
 			</el-table>
 		</el-dialog>
-		<!--<div class="Popup" v-show="downCSV">
-			<div class="_panle">
-				<div>
-					<p id="_title">{{pageTxt.label[13]}}</p>
-					<img id="_close" src="@/fbcsViews/img/close.png" @click="downCSV=false">
-				</div>
-				<el-table class="popTable" stripe :data="detailData" tooltip-effect="dark">
-					<el-table-column width="50" :label="column" type="index"></el-table-column>
-					<el-table-column prop="fileName" :label="pageTxt.list[8]"  show-overflow-tooltip></el-table-column>
-					<el-table-column prop="fileSize" width="120" :label="pageTxt.list[9]" show-overflow-tooltip></el-table-column>
+		
+		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="$t('fbcsFile.fnField.checkZd')" v-dialogDrag
+			:close-on-click-modal='false' :show-close="false">
+			<div class="_dialog">
+				<el-table :data="checkList" max-height="294" stripe border>
+					<el-table-column type="index" width="50" label=" "></el-table-column>
+					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
+					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
+					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
+					<el-table-column :label="$t('fbcsFile.versionQuery.isEqual')">
+						<span slot-scope="scope" :class="{redTxt: scope.row.isEqual!=0}">{{scope.row.equalMask}}</span>
+					</el-table-column>
 				</el-table>
 			</div>
-		</div>-->
-		<!--<div id="_weakTips">
-			<div class="panle">
-				<div class="container"></div>
+			<div slot="footer" class="_footBtn">
+				<button class="defBtn" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
-		</div>-->
+		</el-dialog>
+		
 		<lgy-loopReqMX ref="loop"></lgy-loopReqMX>
 	</div>
 </template>
@@ -127,7 +138,9 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				boundary.setHours(0,0,0);
 		        return  time < boundary;
         	}
-		}
+		},
+		checkDialog: false,
+		checkList: []
 	};
 
 	function search(num, size){
@@ -211,6 +224,22 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 						search(1);
 					});
 				}
+			},
+			checkVer(type){
+				let params = {
+					url: 'version/compareMd5',
+					cmdID: '600067'
+				};
+				fxUtils.post(params).then(function(res){
+					if(res.errcode != '0') return fxUtils.alert({txt: res.errinfo});
+					for (let i = 0; i < res.lists.length; i++) {
+						let obj = res.lists[i], equal= obj.isEqual;
+						obj.equalMask = _this.$t('fbcsFile.versionQuery.equal'+equal);
+					}
+					_this.checkList = res.lists;
+					_this.checkDialog = true;
+					fxUtils.tableSTop(_this, 'zdBox');
+				});
 			},
 			currenRow(row){
 				this.row = row;
@@ -316,6 +345,7 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			let l = lang();
 			this.pageTxt = pageTxt = l.versionQuery;
 			this.paging = l.publics.paging;
+			this.checkDialog = false;
 		},
 		mounted(){
 			_this = this;
@@ -375,4 +405,5 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	.Popup ._panle{height: auto}
 	.popTable{display: block;width: 520px;max-height: 405px;overflow: auto;text-align: left;}
 	.pickerTxt{margin-left: 30px;}
+	.redTxt{color: #FF7A7D;}
 </style>

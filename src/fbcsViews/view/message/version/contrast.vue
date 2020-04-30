@@ -13,7 +13,7 @@
 			<div class="ver">
 				<label class="txt">{{pageTxt.label[2]}}</label>
 				<div class="verbox">
-					<el-autocomplete @input='autoInput1' v-model="info.ver1" :disabled="disabled" class="elInput" :fetch-suggestions="fetch" 
+					<el-autocomplete @input='autoInput1' v-model="info.ver1" class="elInput" :fetch-suggestions="fetch" 
 						:placeholder="pageTxt.label[3]" :trigger-on-focus="true" @select="idSelect1">
 						<div slot-scope="{item}">
 							<span>{{item.version}}</span>
@@ -23,7 +23,7 @@
 				</div>
 				<label class="txt">{{pageTxt.label[4]}}</label>
 				<div class="verbox">
-					<el-autocomplete @input='autoInput2' v-model="info.ver2" :disabled="disabled" class="elInput" :fetch-suggestions="fetch" 
+					<el-autocomplete @input='autoInput2' v-model="info.ver2" class="elInput" :fetch-suggestions="fetch" 
 						:placeholder="pageTxt.label[5]" :trigger-on-focus="true" @select="idSelect2">
 						<div slot-scope="{item}">
 							<span class="name">{{item.version}}</span>
@@ -33,8 +33,6 @@
 				</div>
 				<el-button class='btnS' type='primary' @click='search'>{{pageTxt.label[6]}}</el-button>
 				<!--<span class="txt">{{pageTxt.label[7]}}</span>-->
-				
-				
 			</div>
 		</div>
 		<el-table stripe border @current-change="currenRow" @selection-change="selectionRow" :data="data" tooltip-effect="dark" highlight-current-row>
@@ -59,33 +57,30 @@ import kit       from '@/fbcsViews/libs/kit.js';
 import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 
 
-	var pageTxt, _this, _currentPage = 1, autoTime, isVer, verArr1, verArr2, clearTXT;
+	var pageTxt, _this, _currentPage = 1, autoTime, isVer, verArr1, verArr2, clearTXT, defInput;
 	pageTxt = 'lang.versionContrast';
 	
-	var data = {
-		pageTxt,
-		column: '　',
-		idName1: '',
-		idName2: '',
-		config: '3',
-		info: {config:'3', ver1:'', ver2:''},
-		data: [/*{type:'verType',detail:'detail'}*/],
-		row: {},
-		selects: [],
-		size: 20,
-		currPage: 1,
-		max: 0,
-		disabled: true
-	};
-	
 	function search(num, size){
-		var info = _this.info;
+		var info = _this.info,
+		ver1 = info.ver1, ver2 = info.ver2;
+		
+		if(ver1==''||ver2==''){
+			return fxUtils.alert({
+				txt: pageTxt.noNull
+			});
+		}
+		
+		if(ver1 == defInput[0]) ver1 = 'online';
+		else if(ver1 == defInput[1]) ver1 = 'temp';
+		if(ver2 == defInput[0]) ver2 = 'online';
+		else if(ver2 == defInput[1]) ver2 = 'temp';
+		
 		var param = {
 			cmdID: '600064', type: _this.config,
 			pageSize: size||_this.size,
 			currentPage: num||_currentPage,
-			version1: info.ver1,
-			version2: info.ver2
+			version1: ver1,
+			version2: ver2
 		};
 		utils.post('mx/version/compare', param, function(data){
 //			console.log('版本对比：', data);
@@ -117,26 +112,35 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			cmdID: "600062",
 			type: _this.config,
 			version: str,
-			pageSize: 1000,
+			pageSize: 100,
 			currentPage: 1
 		};
 		utils.post(param, function(data){
 //			console.log('自动输入版本：',data);
-			if(data.errcode != 0) return console.log(data.errinfo);
+			if(data.errcode != 0) {
+				filt(str, [], cb);
+				return console.warn(data.errinfo);
+			}
 			var obj, i, len = data.lists.length;
 			for (i = 0; i < len; i++) {
 				obj = data.lists[i];
 				obj.key = i;
 				obj.label = obj.version;
 			}
-			if(isVer == '1') verArr1 = data.lists;
-			else verArr2 = data.lists;
 			allList = data.lists;
 			filt(str, data.lists, cb);
 		});
 	}
 	function filt(str, data, cb){
-		var i,len = data.length,tem=[];
+		var i, len, tem=[];
+		if(_this.disabled){
+			var label = defInput[1];
+			data.unshift({label: label, version: label, key: label});
+			label = defInput[0];
+			data.unshift({label: label, version: label, key: label});
+		}
+		len = data.length;
+		
 		for (i = 0; i < len; i++) {
 			var label = data[i].label.toLocaleLowerCase();
 			str = str.toLocaleLowerCase();
@@ -148,7 +152,26 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 	export default {
 		name: 'message_query',
 		data() {
-			return data;
+			var bingo = {
+				pageTxt,
+				column: '　',
+				idName1: '',
+				idName2: '',
+				config: '3',
+				info: {config:'3', ver1:'', ver2:''},
+				data: [/*{type:'verType',detail:'detail'}*/],
+				row: {},
+				selects: [],
+				size: 20,
+				currPage: 1,
+				max: 0,
+				disabled: true
+			};
+			defInput = [
+				this.$t('fbcsFile.versionContrast.online'),
+				this.$t('fbcsFile.versionContrast.temp')
+			];
+			return bingo;
 		},
 		methods: {
 			fetch(str, cb){
@@ -201,8 +224,6 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 		},
 		mounted(){
 			_this = this;
-			init('1');
-			_this.config = '1';
 			kit('.contrast .ver .el-autocomplete input').each((el, i)=>{
 				el.id = 'autoInput_' + i;
 			});
@@ -212,11 +233,12 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 				} else _this.info.ver2 = _this.idName2 = '';
 				e.target.style.display = 'none';
 			});
+			init('1');
+			_this.config = '1';
 		},
 		watch: {
 			config(cur, old){
 				init(cur);
-				clearTXT.hide();
 			}
 		}
 	};
@@ -235,10 +257,12 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 		if(val=='3'||val=='4'){
 			_this.disabled = false;
 			_this.info.ver1 = _this.info.ver2 ='';
+			clearTXT.hide();
 		} else {
 			_this.disabled = true;
-			_this.info.ver1 = _this.$t('fbcsFile.versionContrast.temp');
-			_this.info.ver2 = _this.$t('fbcsFile.versionContrast.online');
+			_this.info.ver1 = defInput[0];
+			_this.info.ver2 = defInput[1];
+			clearTXT.show();
 		}
 		_this.max = 0;
 		_currentPage = 1;

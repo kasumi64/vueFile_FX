@@ -77,6 +77,7 @@ function rollback(obj){
 	utils.post(params).then(function(res){
 		if(res.errcode != '0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
+		search();
 	});
 }
 function bigVer(obj){
@@ -164,8 +165,8 @@ export default {
 			detail: this.$t('fbcsFile.versionDetail.title')
 		};
 		data.width = {
-			type: 100,
-			detail: 450
+			type: 115,
+			detail: 435
 		};
 		return data;
 	},
@@ -376,9 +377,9 @@ function getZdEnabled(){
 		if(res.errcode != '0') return console.warn("600070:", res.errinfo);
 		_this.zdEnabled = res.isOpenZd;
 		if(res.isOpenZd == 0){
-			_this.options = this.$t('fbcsFile.versionQuery.options2');
+			_this.options = _this.$t('fbcsFile.versionQuery.options2');
 		} else {
-			_this.options = this.$t('fbcsFile.versionQuery.options1');
+			_this.options = _this.$t('fbcsFile.versionQuery.options1');
 		}
 	});
 }

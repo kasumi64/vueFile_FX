@@ -16,19 +16,19 @@
 							<li><span class="red">*&nbsp;</span>{{pageTxt.label[2]}}：</li>
 							<li><span class="red">*&nbsp;</span>{{pageTxt.label[23]}}：</li>
 							<li>&nbsp;</li>
-							<li>{{pageTxt.label[27]}}</li>
+							<!-- <li>{{pageTxt.label[27]}}</li> -->
 							<li>{{pageTxt.label[3]}}：</li>
 							<li>{{pageTxt.label[4]}}：</li>
 							<li><span class="red">*&nbsp;</span>{{pageTxt.label[5]}}：</li>
-							<li>{{pageTxt.label[7]}}：</li>
+							<!-- <li>{{pageTxt.label[7]}}：</li> -->
 							<li><span class="red">*&nbsp;</span>{{pageTxt.label[8]}}：</li>
-							<li>{{pageTxt.label[9]}}：</li>
+							<!-- <li>{{pageTxt.label[9]}}：</li> -->
 							<li>{{pageTxt.label[10]}}：</li>
 							<li>{{pageTxt.label[11]}}：</li>
-							<li>{{pageTxt.label[12]}}：</li>
+							<!-- <li>{{pageTxt.label[12]}}：</li>
 							<li><span class="red">*&nbsp;</span>{{pageTxt.label[13]}}：</li>
 							<li><span class="red">*&nbsp;</span>{{pageTxt.label[14]}}：</li>
-							<li><span class="red">*&nbsp;</span>{{pageTxt.label[15]}}：</li>
+							<li><span class="red">*&nbsp;</span>{{pageTxt.label[15]}}：</li> -->
 						</ul>
 					</el-col>
 					<el-col :span="18">
@@ -46,11 +46,11 @@
 							<li>
 								<el-input auto-complete="off" v-model="info.userPasswd" maxlength="16" :disabled="info.isModifyDefaultPasswd==0"></el-input>
 							</li>
-							<li>
+							<!-- <li>
 								<el-select v-model="info.pwdTime">
 									<el-option v-for="item in pageTxt.pwdTime" :label="item.txt" :key="item.val" :value="item.val"></el-option>
 								</el-select>
-							</li>
+							</li> -->
 							<li>
 								<el-select v-model="info.userType" placeholder="">
 									<el-option v-for="item in userType" :label="item.name" :key="item.id" :value="item.id"></el-option>
@@ -65,19 +65,19 @@
 								<input type="text" data-k='speedCtrlKbps' v-model="info.speedCtrlKbps" @input="inputInt2" maxlength="18" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
 								<span class="kbit">{{pageTxt.label[6]}}</span>
 							</li>
-							<li>
+							<!-- <li>
 								<input type="text" v-model="info.userInfo" maxlength="512" autocomplete="off">
-							</li>
+							</li> -->
 							<li>
 								<el-select v-model="info.connSuGroupName" placeholder="">
 									<el-option v-for="item in pageTxt.connect" :key="item.value" :label="item.groupID" :value="item.groupID"></el-option>
 								</el-select>
 							</li>
-							<li>
+							<!-- <li>
 								<el-select v-model="info.isAlarmIfOffLine" placeholder="">
 									<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
 								</el-select>
-							</li>
+							</li> -->
 							<li>
 								<el-date-picker v-model="info.softEncBeginDate" value-format="timestamp" type="datetime" 
 								:placeholder="pageTxt.label[24]" default-time="00:00:00"></el-date-picker>
@@ -87,7 +87,7 @@
 								<el-date-picker v-model="info.softEncEndDate" value-format="timestamp" type="datetime" 
 								:placeholder="pageTxt.label[24]" default-time="23:59:59"></el-date-picker>
 							</li>
-							<li>
+							<!-- <li>
 								<el-select v-model="info.allowSendRecvFile" placeholder="">
 									<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
 								</el-select>
@@ -103,10 +103,59 @@
 							<li>
 								<input type="text" data-k='maxDaysOfTopic' v-model="info.maxDaysOfTopic" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
 								<span v-show="maxDaysOfTopic" class="errNum">{{pageTxt.tips.errNum}}</span>
-							</li>
+							</li> -->
 						</ul>
 					</el-col>
 				</el-row>
+				
+				<div class="more">
+					<el-checkbox v-model="more" :label="$t('fbcsFile.userInfo.more')" border></el-checkbox>
+				</div>
+				
+				<div v-if="more" class="info">
+					<ul class="el-col-6 left">
+						<li><p>{{pageTxt.label[27]}}：</p></li>
+						<li><p>{{pageTxt.label[7]}}：</p></li>
+						<li><p>{{pageTxt.label[9]}}：</p></li>
+						<li><p>{{pageTxt.label[12]}}：</p></li>
+						<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[13]}}：</p></li>
+						<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[14]}}：</p></li>
+						<li><p><span class="red">*&nbsp;</span>{{pageTxt.label[15]}}：</p></li>
+					</ul>
+					<ul class="el-col-18 right">
+						<li>
+							<el-select v-model="info.pwdTime">
+								<el-option v-for="item in pageTxt.pwdTime" :label="item.txt" :key="item.val" :value="item.val"></el-option>
+							</el-select>
+						</li>
+						<li>
+							<input type="text" v-model="info.userInfo" maxlength="512" autocomplete="off">
+						</li>
+						<li>
+							<el-select v-model="info.isAlarmIfOffLine" placeholder="">
+								<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
+							</el-select>
+						</li>
+						<li>
+							<el-select v-model="info.allowSendRecvFile" placeholder="">
+								<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
+							</el-select>
+						</li>
+						<li>
+							<input type="text" data-k='maxPubsCount' v-model="info.maxPubsCount" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+							<span v-show="maxPubsCount" class="errNum">{{pageTxt.tips.errNum}}</span>
+						</li>
+						<li>
+							<input type="text" data-k='maxSubsCount' v-model="info.maxSubsCount" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+							<span v-show="maxSubsCount" class="errNum">{{pageTxt.tips.errNum}}</span>
+						</li>
+						<li>
+							<input type="text" data-k='maxDaysOfTopic' v-model="info.maxDaysOfTopic" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+							<span v-show="maxDaysOfTopic" class="errNum">{{pageTxt.tips.errNum}}</span>
+						</li>
+					</ul>
+				</div>
+				
 				<div class="btn">
 					<el-button type="primary" @click='verify(sendDown)'>{{pageTxt.label[16]}}</el-button>
 					<el-button type="primary" @click="verify(add)">{{pageTxt.label[25]}}</el-button>
@@ -172,7 +221,8 @@ import globalVar  from '../../../libs/globalVar.js';
 				judgment: [],
 				maxPubsCount: false,
 				maxSubsCount: false,
-				maxDaysOfTopic: false
+				maxDaysOfTopic: false,
+				more: false
 			};
 		},
 		methods: {
@@ -447,22 +497,23 @@ import globalVar  from '../../../libs/globalVar.js';
 	.header_line { border-right: 1px solid #ebeff4; height: 30px; float: left; margin-left: 20px; margin-top: 9px; }
 	.header_txt2 { font-size: 16px; color: #656a73; line-height: 44px; margin-left: 20px; font-weight: bold; }
 	#fbcs_MX .el-tabs { padding: 22px; }
-	.info { white-space: nowrap;width: 810px; }
+	.info { white-space: nowrap;width: 810px; display: table;}
 	#fbcs_MX .el-col-6 { width: 311px; font-size: 14px; color: #666666; }
 	#fbcs_MX .el-col-18{width: auto;}
 	.left li { text-align: right; line-height: 40px; }
 	.info li { margin-top: 10px; height: 36px; }
 	.right { margin-left: 15px; line-height: 40px; }
-	.right input { font-size: 14px; width: 255px; height: 30px; vertical-align: middle; padding: 0 5px; border: 1px solid #d7d8da; text-indent: 12px; color: #666; }
+	.right input { font-size: 14px; width: 255px; height: 30px; vertical-align: middle; border: 1px solid #d7d8da; text-indent: 3px; color: #666; }
 	input:focus { border: 2px solid #32ccf9; }
 	#fbcs_MX .el-select { width: 255px; }
 	#fbcs_MX .el-textarea { width: 255px; }
 	#fbcs_MX .el-input { width: 255px; }
 	.kbit { font-size: 12px; line-height: 36px; vertical-align: middle; color: #999999; margin-left: 10px; } .info .txtH { height: 100px; }
 	.default_radio { line-height: 50px; }
-	.btn { margin-left: 175px; margin-top: 30px; }
+	.btn { margin-left: 198px; margin-top: 30px; }
 	.red { color: red; font-size: 14px; }
 	.errNum{color: red;font-size: 12px;vertical-align: middle;margin-left: 10px;}
+	.more{margin-left: 326px;padding-top: 16px;}
 </style>
 <style>
 	#fbcs_MX .userAdd .el-input__icon{line-height: 40px !important;}

@@ -80,7 +80,7 @@ const router = new Router({
 					}
 				},
 				
-				
+				//主题
 				{
 					path: 'message/userSet',
 					component: resolve => require(['@/fbcsViews/view/message/subscription/userSet.vue'], resolve),
@@ -130,7 +130,7 @@ const router = new Router({
 					}
 				},
 				
-				
+				//对比
 				{
 					path: 'message/query',
 					component: resolve => require(['@/fbcsViews/view/message/version/query.vue'], resolve),
@@ -148,7 +148,7 @@ const router = new Router({
 					}
 				},
 				
-				
+				//小站指令
 				{
 					path: 'order',
 					component: resolve => require(['@/fbcsViews/view/order/manage.vue'], resolve),
@@ -199,10 +199,42 @@ const router = new Router({
 						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
 					}
 				},
-				
+				//高级搜索
+				{
+					path: 'advanced/audit',
+					component: resolve => require(['@/fbcsViews/view/advanced/audit.vue'], resolve),
+					meta: {
+						auth: true,
+						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
+					}
+				},
+				{
+					path: 'advanced/Ekey',
+					component: resolve => require(['@/fbcsViews/view/advanced/Ekey.vue'], resolve),
+					meta: {
+						auth: true,
+						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
+					}
+				},
+				{
+					path: 'advanced/information',
+					component: resolve => require(['@/fbcsViews/view/advanced/information.vue'], resolve),
+					meta: {
+						auth: true,
+						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
+					}
+				},
 				{
 					path: 'advanced/signal',
 					component: resolve => require(['@/fbcsViews/view/advanced/signal.vue'], resolve),
+					meta: {
+						auth: true,
+						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'
+					}
+				},
+				{
+					path: 'advanced/user',
+					component: resolve => require(['@/fbcsViews/view/advanced/user.vue'], resolve),
 					meta: {
 						auth: true,
 						authFlag: 'Auth_Mx_Config_Read,Auth_Mx_Config_Opt'

@@ -103,7 +103,7 @@ export default {
 			info: {
 				exeState: 0, feedbackState: 0, recvBeginTime: null, recvEndTime: null,
 			},
-			radio: 3,
+			radio: 1,
 			acceptList: this.$t('fbcsFile.order.manage.acceptState'),
 			feedbackList: this.$t('fbcsFile.order.manage.feedbackState'),
 			list: [
@@ -288,7 +288,7 @@ export default {
 	},
 	created(){
 		_this = this;
-		getDay(6);
+		getDay(0);
 		this.search();
 	},
 	watch: {

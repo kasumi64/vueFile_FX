@@ -76,7 +76,8 @@ export default {
 		tips: {user: "Please select a record in the list",ver1: "您输入的版本 1 不正确！",ver2: "您输入的版本 2 不正确！",noChange:'No change in comparison results'},
 		label: ['Comparison','Version type：','Baseline version：','请输入基准版本号','Comparison version：','请输入对比版本号','Comparison','基准版本相对对比版本的变化'],
 		list: ['段名','字段名','Operation type','Details'],
-		option:[{c: '1',t: 'Global dynamic configuration'},{c: '2',t: 'Global static configuration'},{c: '3',t: 'User password information table'},{c: '4',t: 'User topic association information table'}]
+		option:[{c: '1',t: 'Global dynamic configuration'},{c: '2',t: 'Global static configuration'},{c: '3',t: 'User password information table'},{c: '4',t: 'User topic association information table'}],
+		noNull: 'Benchmark version or comparison version cannot be empty.'
 	},
 	versionQuery: {
 		tips: {rollback: "<p>您确定要回退到此版本？</p>",ver:'Are you sure to generate a major version from the latest historical version and release it? Versions include：<br>system dynamic configuration, user topic association information table，<br>system static configuration, user password information table.',
@@ -93,7 +94,9 @@ export default {
 		label: ['分发','Configuration file：','Distribution host：','Recheck operator：','Recheck password：','The system dynamic configuration files are：', 'The system static configuration file is：',
 			'Host list', '必填项...', 'Submit', 'The user password information table file is：', 'The user topic association information table file is：'],
 		list: ['Node name', 'results：', 'Sevice name'], 
-		options: [{val: '1',label:'System dynamic configuration '},{val: '2',label:'System static configuration'},{val: '3',label:'User password information table'},{val: '4',label:'User topic association information table'}]
+		options: [{val: '1',label:'System dynamic configuration '},{val: '2',label:'System static configuration'},{val: '3',label:'User password information table'},{val: '4',label:'User topic association information table'}],
+		dispatchAll: 'Dispatch to all hosts?This operation will create a version',
+		dispatchPart: 'Dispatch to part hosts?This operation do not create a version'
 	},
 
 
@@ -138,7 +141,7 @@ export default {
 	userEdit: {
 		label: ["Back","User ID","User name","User type","Region","Speed","(Kbit/s)-1或0:不限速","User contact means","User group","Any offline alarm",
 			"Soft encryption start time","Soft encryption end time","Whether to allow sending and receiving files","Maximum number of published topics","Maximum number of subscriptions","Maximum expiration days of topic","Dispatch immediately","Modify ","Back",
-			"Create user","使用默认密码","Default","Manual operation ","Password","选择日期时间","Create","Creation time",'Validity period of password :'],
+			"Create user","使用默认密码","Default","Manual operation ","Password","选择日期时间","Create","Creation time",'Password validity：'],
 		pwdTime: [{val: "1", txt: "Default"}, {val: "-1", txt: "Never expire"}, {val: "0", txt: "Expire immediately"}],
 		tab: ["基本信息", "Ekey", "通信关系", "扩展信息"],
 		connect :[

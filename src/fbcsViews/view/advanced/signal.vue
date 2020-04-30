@@ -46,54 +46,6 @@
 		</div>
 		<div class="onePage" v-else-if="max>0&&max<=pageSize">{{paging.before2}}{{max}}{{paging.after}}</div>
 		
-		<!-- <el-dialog v-dialogDrag width='620px' :title="pageTxt.popup[0]" :visible.sync="dialogAdd">
-			<ul class="_dialog">
-				<li>
-					<div class="leftBox">
-						<p class="txt">{{pageTxt.popup[1]}}</p>
-					</div>
-					<div class="rightBox">
-						<el-select class="input_normal" v-model="creatInfo.bizType">
-							<el-option v-for="item in optionsCreat" :label="item.name" :key="item.id" :value="item.id"></el-option>
-						</el-select>
-					</div>
-				</li>
-				<li>
-					<div class="leftBox">
-						<p class="txt">
-							<span class="red">*</span>
-							{{pageTxt.popup[2]}}
-						</p>
-					</div>
-					<div class="rightBox">
-						<el-select popper-class="fbcs_MX_signal_select" id="statist_input" class="input_normal" v-model="creatInfo.user" clearable @clear=clear
-							filterable remote :remote-method="remote1" @visible-change="visible" @change="changevalue">
-							<el-option v-for="item in oneidList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
-						</el-select>
-						<span class="cleartxt" @click="clear">{{pageTxt.popup[4]}}</span>
-					</div>
-				</li>
-				<li>
-					<div class="leftBox bug">
-						<p class="txt">
-							<span class="red">*</span>
-							{{pageTxt.popup[3]}}
-						</p>
-					</div>
-					<div class="rightBox">
-						<el-select popper-class="fbcs_MX_signal_select" class="input_normal select_" :disabled="creatInfo.user?false:true" v-model="creatInfo.other"
-							multiple filterable remote :remote-method="remote2" :reserve-keyword="false" @focus="focus">
-							<el-option v-for="item in multipleList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
-						</el-select>
-					</div>
-				</li>
-			</ul>
-			<div slot="footer" class="_footBtn">
-				<el-button type="primary" @click="submit">{{pageTxt.popup[5]}}</el-button>
-				<el-button @click="dialogAdd = false">{{pageTxt.popup[6]}}</el-button>
-			</div>
-		</el-dialog> -->
-		
 		<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.popup[7]" :visible.sync="showExportSignalInfo" width='600px'>
 			<div class="_messaga">
 				<span class="txt">&nbsp;{{pageTxt.popup[8]}}<a :href="signalInfoSrc" style="color:#5C759D">{{signalInfoName}}</a></span>
@@ -117,14 +69,10 @@ import globalVar from '@/fbcsViews/libs/globalVar.js';
 import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-	var pageTxt = 'lang.signal',
-		autoTime1,
-		isInput1 = false,
-		autoTime2,
-		isInput2 = false,
-		_this,
-		t, biz = {};
+	var pageTxt = 'lang.signal', autoTime1, isInput1 = false, autoTime2,
+		isInput2 = false, _this, t, biz = {};
 
+	
 	export default {
 		name: "mess_signal",
 		data() {
@@ -141,14 +89,6 @@ import moment from 'moment';
 				options1: [],
 				userID1: "",
 				userID2: "",
-				// creatInfo: {
-				// 	bizType: "",
-				// 	user: "",
-				// 	other: []
-				// },
-				// oneidList: [],
-				// multipleList: [],
-				// optionsCreat: [],
 				pageSize: 20,
 				currentPage: 1,
 				// dialogAdd: false,
@@ -169,76 +109,11 @@ import moment from 'moment';
 				this.renderData(_this.searchInfo.bizType, 1);
 				this.currPage = 1;
 			},
-			//创建
-			// showCreate() {
-			// 	utils.post(
-			// 		"mx/dict/query", {
-			// 			cmdID: "600000",
-			// 			language: 0,
-			// 			type: 3
-			// 		},
-			// 		function(response) {
-			// 			if(response.errcode == 0) {
-			// 				_this.optionsCreat = response.lists;
-			// 				for(var i in _this.optionsCreat) {
-			// 					_this.optionsCreat[i].name = _this.optionsCreat[i].name + "(" + _this.optionsCreat[i].id + ")";
-			// 				}
-			// 			}
-			// 		}
-			// 	);
-			// 	getAllid(this.searchInfo.userID1, data => {
-			// 		_this.oneidList = data;
-			// 	});
-			// 	getAllid('', data => {
-			// 		_this.multipleList = data;
-			// 	}, true);
-			// 	this.dialogAdd = true;
-			// 	this.creatInfo.user = this.searchInfo.userID1;
-			// 	this.creatInfo.other = [];
-			// 	this.creatInfo.bizType = '0';
-			// },
-			// remote1(id){
-			// 	getAllid(id, data => {
-			// 		_this.oneidList = data;
-			// 	});
-			// },
-			// remote2(id){
-			// 	getAllid(id, data => {
-			// 		_this.multipleList = data;
-			// 	}, true);
-			// },
-			// focus(e){
-			// 	if(this.creatInfo.other.length == 0 || this.multipleList.length == 0){
-			// 		getAllid('', data => {
-			// 			_this.multipleList = data;
-			// 		}, true);
-			// 	}
-			// },
-			// submit() {
-			// 	if(this.creatInfo.user && this.creatInfo.other.length) {
-			// 		utils.post("mx/userComm/add", {
-			// 			cmdID: "600032",
-			// 			operator: "admin",
-			// 			bizType: _this.creatInfo.bizType,
-			// 			userID1: _this.creatInfo.user,
-			// 			lists: _this.creatInfo.other
-			// 		}, function(data) {
-			// 			_this.dialogAdd = false;
-			// 			if(data.errcode == '0'||data.errcode == '1') {
-			// 				_this.renderData(_this.searchInfo.bizType, 1);
-			// 			}
-			// 			let type = data.errcode == '0' ? 1 : 0;
-			// 			fxUtils.alert({txt: data.errinfo, type});
-			// 		});
-			// 	} else {
-			// 		// utils.weakTips(pageTxt.tips[5]);
-			// 		fxUtils.alert({txt: pageTxt.tips[5], type: 0});
-			// 	}
-			// },
 			//导出通信关系
 			exportSignalInfo() {
 				utils.post("mx/userComm/advancedSearch", {
 					cmdID: "600036",
+					language: utils.language,
 					type: 1,
 					bizType: _this.searchInfo.bizType,
 					userID: isInput1 ? _this.searchInfo.userID1 : _this.userID1,
@@ -256,36 +131,6 @@ import moment from 'moment';
 					}
 				});
 			},
-			//刪除通信关系(row)
-			// showPromptBox() {
-			// 	utils.hints({
-			// 		txt: _this.pageTxt.tips[0],
-			// 		yes: _this.delUser1,
-			// 		btn: 2
-			// 	});
-			// },
-			// delUser1() {
-			// 	utils.post("mx/userComm/delete", {
-			// 		cmdID: "600033",
-			// 		operator: "admin",
-			// 		bizType: _this.row.bizType,
-			// 		userID1: _this.row.userID1,
-			// 		userID2: _this.row.userID2
-			// 	}, function(response) {
-			// 		if(response.errcode == 0) {
-			// 			_this.renderData(_this.searchInfo.bizType);
-			// 			// utils.weakTips(response.errinfo);
-			// 			fxUtils.alert({txt: response.errinfo, type: 1});
-			// 		} else {
-			// 			// utils.weakTips(response.errinfo);
-			// 			fxUtils.alert({txt: response.errinfo, type: 0});
-			// 		}
-			// 	});
-			// },
-			//清空用戶ID
-			// clear() {
-			// 	this.creatInfo.other = [];
-			// },
 			currentRow: function(e) {
 				this.row = e;
 			},
@@ -302,6 +147,7 @@ import moment from 'moment';
 				var num = page||_this.currentPage;
 				utils.post("mx/userComm/advancedSearch", {
 					cmdID: "600036",
+					language: utils.language,
 					type: 0,
 					bizType: type,
 					userID: isInput1 ? _this.searchInfo.userID1 : _this.userID1,
@@ -328,20 +174,6 @@ import moment from 'moment';
 					}
 				});
 			},
-			// visible(v){
-			// 	var id = this.creatInfo.user;
-			// 	if(id==''&&v){
-			// 		getAllid(id, data => {
-			// 			_this.oneidList = data;
-			// 		});
-			// 	}
-			// },
-			// changevalue(id) {
-			// 	getAllid('', data => {
-			// 		_this.multipleList = data;
-			// 	}, true);
-			// 	this.clear();
-			// },
 			fetch1(str, cb) {
 				clearTimeout(autoTime1);
 				autoTime1 = setTimeout(autoInput, 300, str, cb);

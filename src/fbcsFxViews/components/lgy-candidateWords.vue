@@ -81,7 +81,7 @@ export default {
 				let val = e.target.value;
 				self.$emit('input', val, e);
 //				self.$refs.arrow.style.display = val ? 'block' : 'none';
-			}, 1000);
+			}, 300);
 			// this.value = e.target.value;
 		},
 		changeHandle(e){
