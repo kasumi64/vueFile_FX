@@ -54,19 +54,21 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 
-var _this, data = {
-	isCollapse: false,
-	userName: 'local',
-	showReview: false,
-	pwd: '',
-	uri: '',
-};
-var unlock, lock, lockTime = 0;
+var _this, unlock, lock, lockTime = 0;
 
 //require('../img/logo.png');
 export default {
 	name: 'elui',
-	data() { return data; },
+	data() {
+		let bingo = {
+			isCollapse: false,
+			userName: 'local',
+			showReview: false,
+			pwd: '',
+			uri: '',
+		};
+		return bingo;
+	},
 	methods:{
 		async reviewHandle(uri){
 			if(this.pwd=='') return utils.confirm({txt:this.$t('fbcsFile.err.user.userPasswd'), btn:1});

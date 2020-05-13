@@ -1,7 +1,7 @@
 <template>
 	<div class="advancedEkey">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span class="back" @click="back" id="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.advanced.signal.title')}}</b>
 		</header>
 		<div class="searchBar">
@@ -9,11 +9,11 @@
 			<lgy-candidateWords v-model="userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
 			<!-- <input v-model="userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
-			<lgy-candidateWords v-model="userName" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
-			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<lgy-candidateWords v-model="userName" id="userName" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
+			<button class="blueBtn words" @click="search" id="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="expcsv">
+			<li @click="expcsv" id="expcsv">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportSignal.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.signal.expcsv')}}</span>
 			</li>
@@ -30,7 +30,7 @@
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="close">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 	</div>
@@ -40,29 +40,30 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-var _this, data = {
-	list: [
-		{userID1: 'userID', userName1: 'userName', userID2: 1535646546566, userName2: 'ekeyComment'}
-	],
-	page: 1, total: 1,
-	userID: '', userName: '',
-	idWords: null,
-	nameWords: null,
-	showDialog: false,
-	fileHref: '#', fileName: ''
-};
-var idAll = [];
+var _this, idAll = [];
 
 export default {
 	data(){
-		data.title = {
+		let bingo = {
+			list: [
+				{userID1: 'userID', userName1: 'userName', userID2: 1535646546566, userName2: 'ekeyComment'}
+			],
+			page: 1, total: 1,
+			userID: '', userName: '',
+			idWords: null,
+			nameWords: null,
+			showDialog: false,
+			fileHref: '#', fileName: ''
+		};
+		
+		bingo.title = {
 			userID1: this.$t('fbcsFile.tableTitle.userID'),
 			userName1: this.$t('fbcsFile.tableTitle.userName'),
 			userID2: this.$t('fbcsFile.tableTitle.userID'),
 			userName2: this.$t('fbcsFile.tableTitle.userName'),
 			buildTime: this.$t('fbcsFile.tableTitle.buildTime')
 		};
-		return data;
+		return bingo;
 	},
 	methods:{
 		back(){

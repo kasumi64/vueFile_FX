@@ -11,9 +11,11 @@
 #lgy-candidateWords .inTip li{font-size: 12px;padding: 0 10px;color: #666;line-height: 30px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 #lgy-candidateWords .inTip li:hover{background: #f5f7fa;}
 </style>
+
 <template>
 	<div id="lgy-candidateWords">
-		<input :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" maxlength="127" 
+		<input :id="AC" type="text" class="autocompleteOFF" autocomplete="on"/>
+		<input :id="inputID" :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" maxlength="127" 
 			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle" autocomplete="off"/>
 		<i ref='arrow' @click='close' class="el-icon-circle-close arrow"></i>
 		<ul ref='inTip' class="inTip" @scroll="scrollHandle">
@@ -24,13 +26,23 @@
 </template>
 
 <script>
-var _this, t, data = {
-	list: [],
-};
+var _this, t;
+
 export default {
 	name: 'lgy-candidateWords',
-	data() { return data; },
+	data() {
+		let bingo = {
+			AC: 'autocomplete-',
+			inputID: 'userID',
+			list: [],
+		};
+		return bingo;
+	},
 	props: {
+		id: {
+			type: String,
+			default: 'userID'
+		},
 		keywords: {
 			type: [Array, Object],
 			default: null
@@ -102,6 +114,8 @@ export default {
 	},
 	created(){
 		_this = this;
+		this.inputID = this.id;
+		this.AC += this.id;
 		this.$emit('input', '');
 		let p = this.placeholder;
 		if(!p) this.$emit('update:placeholder', this.$t('fbcsFile.components.placeholder'));

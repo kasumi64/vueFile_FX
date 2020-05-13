@@ -29,54 +29,57 @@
 <script>
 import utils  from '@/fbcsFxViews/libs/utils.js';
 	
-var data = {
-	active: '/userHome',
-	nav: [
-		{router:'/main/fxCfg/userHome', icon:'el-icon-location', label:'用户', 
-			src1:require('../img/menu/user_1.png'), src2:require('../img/menu/user_2.png')},
-		{router:'/main/fxCfg/Ekey', icon:'el-icon-menu', label:'Ekey', 
-			src1:require('../img/menu/Ekey_1.png'), src2:require('../img/menu/Ekey_2.png')},
-		{router:'/main/fxCfg/relation', icon:'el-icon-message', label:'通信关系', 
-			src1:require('../img/menu/signal_1.png'), src2:require('../img/menu/signal_2.png')},
-		{router:'/main/fxCfg/suConfig', icon:'el-icon-setting', label:'主机配置', 
-			src1:require('../img/menu/suConfig_1.png'), src2:require('../img/menu/suConfig_2.png')},
-		{router:'/main/fxCfg/dispatch', icon:'el-icon-tickets', label:'分发', 
-			src1:require('../img/menu/dispatch_1.png'), src2:require('../img/menu/dispatch_2.png')},
-		{router:'/main/fxCfg/audit', icon:'el-icon-document', label:'稽核', 
-			src1:require('../img/menu/audit_1.png'), src2:require('../img/menu/audit_2.png')},
-		{router:'/main/fxCfg/order/xiaozhan', icon:'el-icon-document', label:'指令管理',
-			src1:require('../img/menu/order_1.png'), src2:require('../img/menu/order_2.png')}
-	],
-	subNav: [
-		{
-			folder: 'fileManage', label: '文件管理', icon:'el-icon-upload',
-			src1:require('../img/menu/fileManage.png'),
-			sub: [{router:'/main/fxCfg/fileManage/search', icon:'el-icon-search', label:'文件查询'},
-			{router:'/main/fxCfg/fileManage/upload', icon:'el-icon-upload2', label:'文件下发'},
-			{router:'/main/fxCfg/fileManage/regain', icon:'el-icon-success', label:'对比恢复'},
-			{router:'/main/fxCfg/fileManage/blacklist', icon:'el-icon-bell', label:'CU黑名单'}
-			]
-		},
-		{
-			folder: 'version', label: '版本', icon:'el-icon-view',
-			src1:require('../img/menu/version_1.png'),
-			sub: [{router:'/main/fxCfg/version/query', icon:'el-icon-search', label:'版本查询'},
-			{router:'/main/fxCfg/version/contrast', icon:'el-icon-document', label:'版本对比'}]
-		},
-		{
-			folder: 'advanced', label: '高级搜索', icon:'el-icon-search',
-			src1:require('../img/menu/search_1.png'),
-			sub: [{router:'/main/fxCfg/advanced/user', icon:'el-icon-location', label:'用户'},
-			{router:'/main/fxCfg/advanced/Ekey', icon:'el-icon-menu', label:'Ekey'},
-			{router:'/main/fxCfg/advanced/signal', icon:'el-icon-message', label:'通信关系'},
-			{router:'/main/fxCfg/advanced/information', icon:'el-icon-more', label:'扩展信息'},
-			{router:'/main/fxCfg/advanced/audit', icon:'el-icon-document', label:'稽核'}]
-		}
-	]
-};
+
 export default {
 	name: 'sidebar',
-	data() { return data; },
+	data() {
+		let bingo = {
+			active: '/userHome',
+			nav: [
+				{router:'/main/fxCfg/userHome', icon:'el-icon-location', label:'用户', 
+					src1:require('../img/menu/user_1.png'), src2:require('../img/menu/user_2.png')},
+				{router:'/main/fxCfg/Ekey', icon:'el-icon-menu', label:'Ekey', 
+					src1:require('../img/menu/Ekey_1.png'), src2:require('../img/menu/Ekey_2.png')},
+				{router:'/main/fxCfg/relation', icon:'el-icon-message', label:'通信关系', 
+					src1:require('../img/menu/signal_1.png'), src2:require('../img/menu/signal_2.png')},
+				{router:'/main/fxCfg/suConfig', icon:'el-icon-setting', label:'主机配置', 
+					src1:require('../img/menu/suConfig_1.png'), src2:require('../img/menu/suConfig_2.png')},
+				{router:'/main/fxCfg/dispatch', icon:'el-icon-tickets', label:'分发', 
+					src1:require('../img/menu/dispatch_1.png'), src2:require('../img/menu/dispatch_2.png')},
+				{router:'/main/fxCfg/audit', icon:'el-icon-document', label:'稽核', 
+					src1:require('../img/menu/audit_1.png'), src2:require('../img/menu/audit_2.png')},
+				{router:'/main/fxCfg/order/xiaozhan', icon:'el-icon-document', label:'指令管理',
+					src1:require('../img/menu/order_1.png'), src2:require('../img/menu/order_2.png')}
+			],
+			subNav: [
+				{
+					folder: 'fileManage', label: '文件管理', icon:'el-icon-upload',
+					src1:require('../img/menu/fileManage.png'),
+					sub: [{router:'/main/fxCfg/fileManage/search', icon:'el-icon-search', label:'文件查询'},
+					{router:'/main/fxCfg/fileManage/upload', icon:'el-icon-upload2', label:'文件下发'},
+					{router:'/main/fxCfg/fileManage/regain', icon:'el-icon-success', label:'对比恢复'},
+					{router:'/main/fxCfg/fileManage/blacklist', icon:'el-icon-bell', label:'CU黑名单'}
+					]
+				},
+				{
+					folder: 'version', label: '版本', icon:'el-icon-view',
+					src1:require('../img/menu/version_1.png'),
+					sub: [{router:'/main/fxCfg/version/query', icon:'el-icon-search', label:'版本查询'},
+					{router:'/main/fxCfg/version/contrast', icon:'el-icon-document', label:'版本对比'}]
+				},
+				{
+					folder: 'advanced', label: '高级搜索', icon:'el-icon-search',
+					src1:require('../img/menu/search_1.png'),
+					sub: [{router:'/main/fxCfg/advanced/user', icon:'el-icon-location', label:'用户'},
+					{router:'/main/fxCfg/advanced/Ekey', icon:'el-icon-menu', label:'Ekey'},
+					{router:'/main/fxCfg/advanced/signal', icon:'el-icon-message', label:'通信关系'},
+					{router:'/main/fxCfg/advanced/information', icon:'el-icon-more', label:'扩展信息'},
+					{router:'/main/fxCfg/advanced/audit', icon:'el-icon-document', label:'稽核'}]
+				}
+			]
+		};
+		return bingo;
+	},
 	props: {
 		collapse: false
 	},

@@ -1,7 +1,7 @@
 <template>
 	<div class="upload">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span class="back" @click="back" id="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.files.upload.title')}}</b>
 		</header>
 		<ul class="form">
@@ -11,7 +11,7 @@
 					{{$t('fbcsFile.files.upload.fileName')}}
 				</div>
 				<div class="right">
-					<input v-model="fileName" data-k="fileName" maxlength="64" autocomplete="off"/>
+					<input v-model="fileName" id="fileName" data-k="fileName" maxlength="64" autocomplete="off"/>
 					<p class="label txt">{{$t('fbcsFile.files.upload.path')}}</p>
 				</div>
 			</li><li>
@@ -20,49 +20,50 @@
 					{{$t('fbcsFile.files.upload.version')}}
 				</div>
 				<div class="right">
-					<input v-model="version" data-k="version" maxlength="64" autocomplete="off"/>
+					<input v-model="version" id="version" data-k="version" maxlength="64" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">
 					{{$t('fbcsFile.files.upload.fileComment')}}
 				</div>
 				<div class="right">
-					<input v-model="fileComment" maxlength="128" autocomplete="off"/>
+					<input v-model="fileComment" id="comment" maxlength="128" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">&nbsp;</div>
 				<div class="right">
-					<button v-if="fxAuth" class="blueBtn" @click="dispense">{{$t('fbcsFile.files.upload.dispense')}}</button>
+					<button v-if="fxAuth" class="blueBtn" id="dispense" @click="dispense">{{$t('fbcsFile.files.upload.dispense')}}</button>
 				</div>
 			</li><li v-if="fxAuth">
 				<div class="label">&nbsp;</div>
 				<div class="right">
 					<h2 class="h2">{{$t('fbcsFile.files.upload.res')}}</h2>
-					<lgy-wheelReq class="z" :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
+					<lgy-wheelReq id="upload" class="z" :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
 				</div>
 			</li>
 		</ul>
-		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
+		<lgy-review id="upload" :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 	</div>
 </template>
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	fxAuth: true,
-	fileName: '',
-	version: '',
-	fileComment: '',
-	showReview: false,
-	reqsv: {},
-	reviewTxt: '',
-	parameter: null,
-};
+var _this;
 
 export default {
 	data(){
-		return data;
+		let bingo = {
+			fxAuth: true,
+			fileName: '',
+			version: '',
+			fileComment: '',
+			showReview: false,
+			reqsv: {},
+			reviewTxt: '',
+			parameter: null,
+		};
+		return bingo;
 	},
 	methods:{
 		back(){

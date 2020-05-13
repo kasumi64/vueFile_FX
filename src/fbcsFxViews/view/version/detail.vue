@@ -1,11 +1,11 @@
 <template>
 	<div class="detail">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span class="back" @click="back" id="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{$t('fbcsFile.versionDetail.title')}}</b>
 		</header>
 		
-		<el-table class="table" :data="zdList" :row-class-name="rowClass" max-height="294" border>
+		<el-table id="zdlist" class="table" :data="zdList" :row-class-name="rowClass" max-height="294" border>
 			<el-table-column type="index" width="50" label=" "></el-table-column>
 			<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 			<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
@@ -28,15 +28,17 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	zdList: [],
-	active: 'first',
-	txtVal: ''
-};
-var version, cfgInfo
+var _this, version, cfgInfo
 
 export default {
-	data(){ return data;},
+	data(){
+		let bingo = {
+			zdList: [],
+			active: 'first',
+			txtVal: ''
+		};
+		return bingo;
+	},
 	props: {},
 	methods:{
 		back(){

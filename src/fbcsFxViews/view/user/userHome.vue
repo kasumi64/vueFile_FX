@@ -2,34 +2,34 @@
 	<div class="userHome">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
-			<input v-model="id" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<input v-model="id" id="userID" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.searchBar.userName')}}</label>
-			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
-			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<input v-model="name" id="userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<button class="blueBtn" @click="search" id="search-user">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="addUser" v-if="fxAuth">
+			<li @click="addUser" v-if="fxAuth" id="add">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addUser')}}</span>
-			</li><li @click="showSignal" v-if="fxAuth">
+			</li><li @click="showSignal" v-if="fxAuth" id="showSignal">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delUser.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.delUser')}}</span>
-			</li><li @click="editPwd" v-if="fxAuth">
+			</li><li @click="editPwd" v-if="fxAuth" id="edit">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/editPwd.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.editPwd')}}</span>
-			</li><li @click="batchPwdShow" v-if="fxAuth">
+			</li><li @click="batchPwdShow" v-if="fxAuth" id="modify">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/batchPwd.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.batchPwd')}}</span>
-			</li><li @click="importInformation" v-if="fxAuth">
+			</li><li @click="importInformation" v-if="fxAuth" id="improtOPE">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/importBasicInformation.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.importInformation')}}</span>
-			</li><li @click="importInBop" v-if="fxAuth">
+			</li><li @click="importInBop" v-if="fxAuth" id="improtBOP">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/importExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.importInBop')}}</span>
-			</li><li @click="advanced">
+			</li><li @click="advanced" id="advancedUser">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchUser.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advUser')}}</span>
-			</li><li @click="advExp">
+			</li><li @click="advExp" id="advancedExp">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchInformation.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advExp')}}</span>
 			</li>
@@ -41,13 +41,13 @@
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.userHome.signal')" v-dialogDrag width="646px"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog signal">
-				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage="signalPage" 
+				<lgy-table id="signal" :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage="signalPage" 
 					@changePage="signalChange" >
 				</lgy-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="delUser">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="delUser" id="delUser">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="delClose">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
 		
@@ -59,15 +59,15 @@
 				<div class="left">
 					<p class="txt">{{$t('fbcsFile.userHome.setDate')}}</p>
 				</div><div class="right">
-					<el-radio-group v-model="batchType">
+					<el-radio-group v-model="batchType" id="batchType">
 						<el-radio :label="0">{{$t('fbcsFile.userHome.defPwd')}}</el-radio>
 						<el-radio :label="1">{{$t('fbcsFile.userHome.neverPwd')}}</el-radio>
 					</el-radio-group>
 				</div>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="batchPwd">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="isBatchShow=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="batchPwd" id="batchPwd">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="isBatchShow=false" id="batchClose">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
 		
@@ -78,19 +78,19 @@
 						<i class="red">*</i>
 						{{$t('fbcsFile.userHome.fileName')}}
 					</span>
-					<input v-model="fileName" class="fileName" autocomplete="off"/>
+					<input v-model="fileName" id="fileName" class="fileName" autocomplete="off"/>
 				</li><li>
 					<p class="importTips" v-html="$t('fbcsFile.userHome.importTips')"></p>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="save">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showInfo=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="blueBtn" @click="save" id="improtFile">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showInfo=false" id="improtClose">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		<el-dialog :visible.sync="importErr" width="70%" :title="$t('fbcsFile.tips.title')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<el-table :data="errList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
+				<el-table id="improtErr" :data="errList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="line" :label="$t('fbcsFile.userHome.line')"></el-table-column>
 					<el-table-column prop="userID" :label="$t('fbcsFile.tableTitle.userID')">
 						<span slot-scope="scope" class="red">{{scope.row.userID}}</span>
@@ -100,37 +100,17 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="importErr=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="importErr=false" id="errClose">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
-		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
+		<lgy-review id="userHome" :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 	</div>
 </template>
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	fxAuth: true,
-	id: '',
-	name: '',
-	showPwd: false,
-	list: [
-		{userID: '01', userName: 'userName'},{userID: '02', userName: 'ABC'},{userID: '03', userName: 'ABC'}
-	],
-	page: 1,
-	total: 1,
-	currSelect: null,
-	
-	showDialog: false,
-	signalList: [],
-	signalPage: 1,
-	signalTotal: 1,
-	
-	showInfo: false, infoTitle: '',
-	fileName: '', importErr: false,
-	errList: []
-};
+var _this;
 
 
 function editUser(row){
@@ -163,8 +143,30 @@ function setCache(){
 
 export default {
 	data(){
-		data.title = {userID: this.$t('fbcsFile.tableTitle.userID'), userName: this.$t('fbcsFile.tableTitle.userName')};
-		data.defined = {
+		let bingo = {
+			fxAuth: true,
+			id: '',
+			name: '',
+			showPwd: false,
+			list: [
+				{userID: '01', userName: 'userName'},{userID: '02', userName: 'ABC'},{userID: '03', userName: 'ABC'}
+			],
+			page: 1,
+			total: 1,
+			currSelect: null,
+			
+			showDialog: false,
+			signalList: [],
+			signalPage: 1,
+			signalTotal: 1,
+			
+			showInfo: false, infoTitle: '',
+			fileName: '', importErr: false,
+			errList: []
+		};
+		
+		bingo.title = {userID: this.$t('fbcsFile.tableTitle.userID'), userName: this.$t('fbcsFile.tableTitle.userName')};
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 112,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/edit.png'), click: editUser, tips: this.$t('fbcsFile.tableDefined.editUser') },
@@ -172,19 +174,19 @@ export default {
 				{src:require('@/fbcsFxViews/img/table/signal.png'), click: addRelation, tips: this.$t('fbcsFile.tableDefined.addSignal') }
 			]
 		};
-		data.signalTitle = {
+		bingo.signalTitle = {
 			userID1: this.$t('fbcsFile.tableTitle.userID'),
 			userName1: this.$t('fbcsFile.tableTitle.userName'),
 			userID2: this.$t('fbcsFile.tableTitle.userID'),
 			userName2: this.$t('fbcsFile.tableTitle.userName')
 		};
 		
-		data.isBatchShow = false;
-		data.batchType = 0;
-		data.showReview = false;
-		data.reviewTxt = this.$t('fbcsFile.userHome.reviewTxt');
-		data.reqsv = {uri: 'userpasswd/batchSetExpiredTime'};
-		return data;
+		bingo.isBatchShow = false;
+		bingo.batchType = 0;
+		bingo.showReview = false;
+		bingo.reviewTxt = this.$t('fbcsFile.userHome.reviewTxt');
+		bingo.reqsv = {uri: 'userpasswd/batchSetExpiredTime'};
+		return bingo;
 	},
 	methods:{
 		rowClass({row, rowIndex}){

@@ -343,7 +343,7 @@ function getDay(val){
 </script>
 
 <style scoped="scoped">
-.advancedAudit{min-width: 1050px;}
+.advancedAudit{min-width: 1050px;margin: 20px;}
 .jg{margin-top: 10px;}
 .el-radio+.el-radio{margin-left: 10px;}
 .ml{margin-left: 10px;}

@@ -4,10 +4,10 @@
 			<button class="blueBtn" @click="search">{{$t('fbcsFile.files.regain.compare')}}</button>
 		</div>-->
 		<ul class="fnField">
-			<li v-if="fxAuth" @click="search">
+			<li v-if="fxAuth" @click="search" id="contrast">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/fileVer.png"/>
 				<span class="label">{{$t('fbcsFile.files.regain.compare')}}</span>
-			</li><li @click="advanced">
+			</li><li @click="advanced" id="toBlacklist">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/CUblacklist.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.blacklist')}}</span>
 			</li>
@@ -41,7 +41,7 @@
 					<div class="left">
 						<p class="txt">CU：</p>
 					</div><div class="right">
-						<el-table ref="nodes" :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border
+						<el-table id="nodes" ref="nodes" :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border
 							@selection-change="changeCU" style="width: 340px;">
 							<el-table-column type="selection" width="40" key></el-table-column>
 							<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
@@ -51,8 +51,8 @@
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="showCU(cutRow)">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="showCU(cutRow)" id="showCU">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="close">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
 		<lgy-wheelReq class="z" :parameter.sync="parameter" :hideDialog="true" :showTable='true'></lgy-wheelReq>
@@ -62,25 +62,7 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	fxAuth: utils.getFxAuth,
-	page: 1,
-	total: 1,
-	list: [
-		{version: '001', fileName: 'userName', fileMd5: 'MD5',recoverType: '1', fileComment: 'ekeyComment', detail: 'CU-1,CU-2'}
-	],
-	showReview: false,
-	reqsv: {},
-	reviewTxt: '',
-	parameter: null,
-	showDialog: false,
-	cutRow: {},
-	mess: {
-		fileName: 'df', detail: '', type: ''
-	},
-	cuList: [],
-};
-var nodes;
+var _this, nodes;
 
 function restore(row){
 	_this.cutRow = row;
@@ -114,7 +96,26 @@ function restore(row){
 
 export default {
 	data(){
-		data.title = {
+		let bingo = {
+			fxAuth: utils.getFxAuth,
+			page: 1,
+			total: 1,
+			list: [
+				{version: '001', fileName: 'userName', fileMd5: 'MD5',recoverType: '1', fileComment: 'ekeyComment', detail: 'CU-1,CU-2'}
+			],
+			showReview: false,
+			reqsv: {},
+			reviewTxt: '',
+			parameter: null,
+			showDialog: false,
+			cutRow: {},
+			mess: {
+				fileName: 'df', detail: '', type: ''
+			},
+			cuList: [],
+		};
+		
+		bingo.title = {
 			fileName: this.$t('fbcsFile.files.regain.fileName'),
 			version: this.$t('fbcsFile.files.regain.version'),
 			fileComment: this.$t('fbcsFile.files.regain.fileComment'),
@@ -123,14 +124,14 @@ export default {
 //			cuLists: this.$t('fbcsFile.files.regain.cuLists'),
 //			cuName: this.$t('fbcsFile.files.regain.cuName')
 		};
-		data.defined = {
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/restore.png'), click: restore, tips: this.$t('fbcsFile.files.regain.restore') },
 			]
 		};
-		if(!utils.getFxAuth) data.defined.items = [];
-		return data;
+		if(!utils.getFxAuth) bingo.defined.items = [];
+		return bingo;
 	},
 	methods:{
 		rowClass({row, rowIndex}){

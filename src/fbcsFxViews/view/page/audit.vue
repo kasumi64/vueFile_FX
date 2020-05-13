@@ -2,33 +2,33 @@
 	<div class="audit">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.audit.operator')}}：</label>
-			<input v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<input v-model="info.operator" id="operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.audit.operatorType')}}：</label>
-			<lgy-candidateWords v-model="info.operationType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
+			<lgy-candidateWords v-model="info.operationType" id="type" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>
-			<el-radio-group v-model="info.sequence">
+			<el-radio-group v-model="info.sequence" id="sort">
 				<el-radio :label="0">{{$t('fbcsFile.audit.lately')}}</el-radio>
 				<el-radio :label="1">{{$t('fbcsFile.audit.early')}}</el-radio>
 			</el-radio-group>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.audit.times')}}</label>
-			<el-radio-group v-model="radio" class="">
+			<el-radio-group v-model="radio" id="datey" class="">
 				<el-radio :label="2">{{$t('fbcsFile.audit.today')}}</el-radio>
 				<el-radio :label="4">{{$t('fbcsFile.audit.week')}}</el-radio>
 				<el-radio :label="6">{{$t('fbcsFile.audit.month')}}</el-radio>
 				<el-radio :label="9">{{$t('fbcsFile.audit.begin')}}</el-radio>
 			</el-radio-group>
-			<el-date-picker v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="begin" v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
 				 value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
 			<label class="label">{{$t('fbcsFile.audit.end')}}</label>
-			<el-date-picker v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="end" v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
 				 value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
-			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn mr" @click="search" id="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="advanced">
+			<li @click="advanced" id="advanced">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchAudit.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
@@ -55,7 +55,7 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="close">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 	</div>
@@ -65,43 +65,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-var _this, data = {
-	idWords: null,
-	radio: 0,
-	info: {
-		operator: '', operationType: '', sequence: 1 , 
-		operationBeginTime: '', operationEndTime:''
-	},
-	list: [
-		{operator: 'userID', reviewer: 'userName', operationType: 'ekeyName',ymd: 1535646546566, errInfo: 'ekeyComment', uuid: 'uuid'}
-	],
-	page: 1,
-	total: 1,
-	pickerBegin: {
-		disabledDate(time){
-			var boundary = new Date(_this.info.operationEndTime);
-			boundary.setHours(23,59,59);
-			return time > boundary;
-		}
-	},
-	pickerEnd: {
-		disabledDate(time){
-			var boundary = new Date(_this.info.operationBeginTime);
-			boundary.setHours(0, 0, 0);
-			return time < boundary;
-		}
-	},
-	showDialog: false,
-	cuList: [],
-	cellClass(row, cellIndex){
-		if(row.errStr != 'success' && cellIndex == 6){
-			return 'red';
-		} else if (cellIndex == 2){
-			return 'preWrap';
-		}
-	}
-};
-var keywords = [];
+var _this, keywords = [];
 
 function detail(row){
 	_this.cuList = [];
@@ -127,7 +91,44 @@ function detail(row){
 
 export default {
 	data(){
-		data.title = {
+		let bingo = {
+			idWords: null,
+			radio: 0,
+			info: {
+				operator: '', operationType: '', sequence: 1 , 
+				operationBeginTime: '', operationEndTime:''
+			},
+			list: [
+				{operator: 'userID', reviewer: 'userName', operationType: 'ekeyName',ymd: 1535646546566, errInfo: 'ekeyComment', uuid: 'uuid'}
+			],
+			page: 1,
+			total: 1,
+			pickerBegin: {
+				disabledDate(time){
+					var boundary = new Date(_this.info.operationEndTime);
+					boundary.setHours(23,59,59);
+					return time > boundary;
+				}
+			},
+			pickerEnd: {
+				disabledDate(time){
+					var boundary = new Date(_this.info.operationBeginTime);
+					boundary.setHours(0, 0, 0);
+					return time < boundary;
+				}
+			},
+			showDialog: false,
+			cuList: [],
+			cellClass(row, cellIndex){
+				if(row.errStr != 'success' && cellIndex == 6){
+					return 'red';
+				} else if (cellIndex == 2){
+					return 'preWrap';
+				}
+			}
+		};
+		
+		bingo.title = {
 			ymd: this.$t('fbcsFile.audit.operatorTime'),
 			operationType: this.$t('fbcsFile.audit.operatorType'),
 			errInfo: this.$t('fbcsFile.audit.errorInfo'),
@@ -138,19 +139,19 @@ export default {
 			errStr: this.$t('fbcsFile.audit.errorCode'),
 //			uuid: this.$t('fbcsFile.audit.uuid')
 		};
-		data.width = {
+		bingo.width = {
 			ymd: 160,
 			operationType: 140,
 			errInfo: 800,
 			errStr: 120
 		};
-		data.defined = {
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 112,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail, tips: this.$t('fbcsFile.tableDefined.detail'), enable: 'uuidBtn'}
 			]
 		};
-		return data;
+		return bingo;
 	},
 	methods:{
 		rowClass({row, rowIndex}){

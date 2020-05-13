@@ -1,17 +1,17 @@
 <template>
 	<div class="information">
 		<ul class="fnField" v-if="fxAuth">
-			<li @click="addOPE">
+			<li @click="addOPE" id="exp-add">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addTheme.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.information.addOPE')}}</span>
 			</li>
 		</ul>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p>
-		<lgy-table :list="listOPE" :title="titleOPE" :total="totalOPE" :defined="defined" :currentPage="pageOPE" @changePage="changeOPE" 
+		<lgy-table id="OPE" :list="listOPE" :title="titleOPE" :total="totalOPE" :defined="defined" :currentPage="pageOPE" @changePage="changeOPE" 
 			:maxHeight="416" :size='90000'>
 		</lgy-table>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resBOP')}}</p>
-		<lgy-table :list="listBOP" :title="titleBOP" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" 
+		<lgy-table id="BOP" :list="listBOP" :title="titleBOP" :total="totalBOP" :currentPage="pageBOP" @changePage="changeBOP" 
 			:maxHeight="416" :size='90000'>
 		</lgy-table>
 		<el-dialog :visible.sync="showInfo" :title="infoTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false" width="830px">
@@ -20,7 +20,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.user.userID')}}</p>
 					</div><div class="right">
-						<input v-model="info.userID" disabled autocomplete="off"/>
+						<input v-model="info.userID" id="exp-id" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -29,7 +29,7 @@
 							{{$t('fbcsFile.advanced.information.operatorName')}}：
 						</p>
 					</div><div class="right">
-						<input v-model="info.operatorName" @input="filter($event)" data-reg="[\%]" data-k="operatorName" maxlength="49" autocomplete="off"/>
+						<input v-model="info.operatorName" id="exp-name" @input="filter($event)" data-reg="[\%]" data-k="operatorName" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorName')}}</span>
 					</div>
 				</li><li>
@@ -39,21 +39,21 @@
 							{{$t('fbcsFile.advanced.information.mobileNum')}}：
 						</p>
 					</div><div class="right">
-						<input v-model="info.operatorMobileNum" @input="filter($event)" data-reg="[^\d\|]" data-k="operatorMobileNum" maxlength="511" autocomplete="off"/>
+						<input v-model="info.operatorMobileNum" id="exp-mobileNum" @input="filter($event)" data-reg="[^\d\|]" data-k="operatorMobileNum" maxlength="511" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorMobileNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.operatorEmail')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorEmail" @input="filter($event)" data-reg="[^\w_\-@\.]" data-k="operatorEmail" maxlength="49" autocomplete="off"/>
+						<input v-model="info.operatorEmail" id="exp-Email" @input="filter($event)" data-reg="[^\w_\-@\.]" data-k="operatorEmail" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorEmail')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.telNum')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorTelNum" @input="filter($event)" data-reg="[^\d-+;]" data-k="operatorTelNum" maxlength="511" autocomplete="off"/>
+						<input v-model="info.operatorTelNum" id="exp-telNum" @input="filter($event)" data-reg="[^\d-+;]" data-k="operatorTelNum" maxlength="511" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.operatorTelNum')}}</span>
 					</div>
 				</li>
@@ -90,42 +90,42 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManager')}}：</p>
 					</div><div class="right">
-						<input v-model="info.ssccManager" @input="filter($event)" data-reg="[\%]" data-k="ssccManager" maxlength="49" autocomplete="off"/>
+						<input v-model="info.ssccManager" id="exp-manager" @input="filter($event)" data-reg="[\%]" data-k="ssccManager" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.ssccManager')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManagerTelNum')}}：</p>
 					</div><div class="right">
-						<input v-model="info.ssccManagerTelNum" @input="filter($event)" data-reg="[^\d-+;]" data-k="ssccManagerTelNum" maxlength="511" autocomplete="off"/>
+						<input v-model="info.ssccManagerTelNum" id="exp-ssccTel" @input="filter($event)" data-reg="[^\d-+;]" data-k="ssccManagerTelNum" maxlength="511" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.ssccManagerTelNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.ssccManagerMobileNum')}}：</p>
 					</div><div class="right">
-						<input v-model="info.ssccManagerMobileNum" @input="filter($event)" data-reg="[^\d\|]" data-k="ssccManagerMobileNum" maxlength="511" autocomplete="off"/>
+						<input v-model="info.ssccManagerMobileNum" id="exp-ssccMobile" @input="filter($event)" data-reg="[^\d\|]" data-k="ssccManagerMobileNum" maxlength="511" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.ssccManagerMobileNum')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.operatorCompany')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorCompany" @input="filter($event)" data-reg='[\%]' data-k="operatorCompany" maxlength="199" autocomplete="off"/>
+						<input v-model="info.operatorCompany" id="exp-company" @input="filter($event)" data-reg='[\%]' data-k="operatorCompany" maxlength="199" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.ssccManager')}}</span>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.advanced.information.operatorDepartment')}}：</p>
 					</div><div class="right">
-						<input v-model="info.operatorDepartment" @input="filter($event)" data-reg="[\%]" data-k="operatorDepartment" maxlength="49" autocomplete="off"/>
+						<input v-model="info.operatorDepartment" id="exp-department" @input="filter($event)" data-reg="[\%]" data-k="operatorDepartment" maxlength="49" autocomplete="off"/>
 						<span class="txt">{{$t('fbcsFile.err.info.ssccManager')}}</span>
 					</div>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="save">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showInfo=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="save" id="exp-save">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showInfo=false" id="exp-close">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
 	</div>
@@ -134,29 +134,7 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	fxAuth: true,
-	info: {
-		userID: '', operatorName: '', operatorMobileNum: '', operatorEmail: '', operatorTelNum: '',
-		ssccManager: '', ssccManagerTelNum:'', ssccManagerMobileNum:'', operatorCompany:'', operatorDepartment:'',
-		//消息用
-		// email: '', userAlarmSmsNum: '', operationPhoneNum: '', operationFax: ''
-	},
-	idWords: null,
-	listType: '', listItem: [],
-	
-	listOPE: [
-		{userID: 'userID', operatorName: 'userName', operatorTelNum: 13570036088, operatorEmail: 'abc@sscc.com'},
-	],
-	pageOPE: 1, totalOPE: 1,
-	listBOP: [
-		{userID: 'userID', operatorName: 'userName', operatorTelNum: 13570036088, operatorEmail: 'abc@sscc.com'},
-	],
-	pageBOP: 1, totalBOP: 1,
-	showDialog: false, dialogTitle: '',
-	showInfo: false, infoTitle: '',
-};
-var idAll = [], args, isAdd, oldOperatorName;
+var _this, idAll = [], args, isAdd, oldOperatorName;
 
 function edit(row){
 	isAdd = 'edit';
@@ -187,8 +165,31 @@ function del(row){
 
 export default {
 	data(){
-		data.listItem = this.$t('fbcsFile.advanced.information.listType');
-		data.titleOPE = {
+		let bingo = {
+			fxAuth: true,
+			info: {
+				userID: '', operatorName: '', operatorMobileNum: '', operatorEmail: '', operatorTelNum: '',
+				ssccManager: '', ssccManagerTelNum:'', ssccManagerMobileNum:'', operatorCompany:'', operatorDepartment:'',
+				//消息用
+				// email: '', userAlarmSmsNum: '', operationPhoneNum: '', operationFax: ''
+			},
+			idWords: null,
+			listType: '', listItem: [],
+			
+			listOPE: [
+				{userID: 'userID', operatorName: 'userName', operatorTelNum: 13570036088, operatorEmail: 'abc@sscc.com'},
+			],
+			pageOPE: 1, totalOPE: 1,
+			listBOP: [
+				{userID: 'userID', operatorName: 'userName', operatorTelNum: 13570036088, operatorEmail: 'abc@sscc.com'},
+			],
+			pageBOP: 1, totalBOP: 1,
+			showDialog: false, dialogTitle: '',
+			showInfo: false, infoTitle: '',
+		};
+		
+		bingo.listItem = this.$t('fbcsFile.advanced.information.listType');
+		bingo.titleOPE = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
@@ -201,15 +202,15 @@ export default {
 			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
 			operatorDepartment: this.$t('fbcsFile.advanced.information.department')
 		};
-		data.defined = {
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/edit.png'), click: edit, tips: this.$t('fbcsFile.tableDefined.editExt') },
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delExt') },
 			]
 		};
-		if(!utils.getFxAuth) data.defined.items = [];
-		data.titleBOP = {
+		if(!utils.getFxAuth) bingo.defined.items = [];
+		bingo.titleBOP = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
@@ -219,7 +220,7 @@ export default {
 			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
 			operatorDepartment: this.$t('fbcsFile.advanced.information.department')
 		};
-		return data;
+		return bingo;
 	},
 	methods:{
 		search(){

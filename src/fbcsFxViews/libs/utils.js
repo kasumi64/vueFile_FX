@@ -260,9 +260,9 @@ function TipsConfirm(){
 					<div class="confirmTxt"></div>
 				</div>
 				<div class="footBtn">
-					<button class="blueBtn now">立即下发</button>
-					<button class="blueBtn ok">确定</button>
-					<button class="defBtn cancel">取消</button>
+					<button id="tips-now" class="blueBtn now">立即下发</button>
+					<button id="tips-OK" class="blueBtn ok">确定</button>
+					<button id="tips-cancel" class="defBtn cancel">取消</button>
 				</div>
 			</div>
 		</div>`;

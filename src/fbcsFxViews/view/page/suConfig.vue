@@ -8,13 +8,13 @@
 			<div class="title">
 				<span class="red">*</span>
 				<span class="">{{tabName}}</span>
-				<el-switch v-if="fxAuth" :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" v-model="enabled"></el-switch>
+				<el-switch id="enabled" v-if="fxAuth" :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" v-model="enabled"></el-switch>
 			</div>
 			<div class="textarea">
 				<el-input v-model="txtVal" @input="filter($event)" type="textarea" rows="14" :disabled="!enabled" resize="none">
 				</el-input>
-				<button v-if="fxAuth" class="blueBtn mt" @click="submit" :disabled="!enabled">{{$t('fbcsFile.tips.submit')}}</button>
-				<button v-if="fxAuth" class="blueBtn mt" @click="history" :disabled="!enabled">{{$t('fbcsFile.tips.contrast')}}</button>
+				<button v-if="fxAuth" id="submit" class="blueBtn mt" @click="submit" :disabled="!enabled">{{$t('fbcsFile.tips.submit')}}</button>
+				<button v-if="fxAuth" id="contrast" class="blueBtn mt" @click="history" :disabled="!enabled">{{$t('fbcsFile.tips.contrast')}}</button>
 				<h2 class="h2" v-if="fxAuth">{{$t('fbcsFile.suConfig.h2')}}</h2>
 				<el-table v-if="fxAuth" :data="list" :row-class-name="rowClass" highlight-current-row border>
 					<el-table-column prop="section" :label="$t('fbcsFile.suConfig.section')"></el-table-column>
@@ -36,7 +36,7 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button id="close" class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
@@ -46,25 +46,28 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	fxAuth: true,
-	active: 'first',
-	enabled: false,
-	tabName: '',
-	txtVal: '',
-	list: [
-		{section:'abc',type:'用户',detail:'详情'},
-	],
-	showDialog: false,
-	errList: [],
-	showReview: false,
-	reqsv: {},
-	reviewTxt: ''
-};
+var _this;
 
 
 export default {
-	data(){ return data;},
+	data(){
+		let bingo = {
+			fxAuth: true,
+			active: 'first',
+			enabled: false,
+			tabName: '',
+			txtVal: '',
+			list: [
+				{section:'abc',type:'用户',detail:'详情'},
+			],
+			showDialog: false,
+			errList: [],
+			showReview: false,
+			reqsv: {},
+			reviewTxt: ''
+		};
+		return bingo;
+	},
 	methods:{
 		tabClick(){
 			this.enabled = false;

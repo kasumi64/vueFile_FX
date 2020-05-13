@@ -26,10 +26,10 @@
 		<ul class="fnField">
 			<li @click="expcsv('OPE')" :class="{disabled: disabledOPE}">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportExtendInformation.png"/>
-				<span class="label">{{$t('fbcsFile.advanced.information.expcsv')}}</span>
+				<span class="label">{{$t('fbcsFile.advanced.information.expInfo')}}</span>
 			</li>
 		</ul>
-		<p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p>
+		<!-- <p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p> -->
 		<lgy-table ref="OPE" :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage="pageOPE" :fliover="changeOPE" :maxHeight="416">
 		</lgy-table>
 		<!-- <p class="h2">{{$t('fbcsFile.advanced.information.resBOP')}}</p>

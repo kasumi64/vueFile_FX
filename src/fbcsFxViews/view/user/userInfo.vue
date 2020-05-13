@@ -24,16 +24,19 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	title: '',
-	tab: 'first',
-	type: 'edit',
-	isNew: false,
-}, args;
+var _this, args;
 
 
 export default {
-	data(){ return data;},
+	data(){
+		let bingo = {
+			title: '',
+			tab: 'first',
+			type: 'edit',
+			isNew: false,
+		}
+		return bingo;
+	},
 	methods:{
 		back(){
 			let query = {fxcache: this.$route.query.fxcache}
@@ -79,4 +82,3 @@ export default {
 <style scoped="scoped">
 	
 </style>
-	

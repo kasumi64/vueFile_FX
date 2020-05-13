@@ -2,12 +2,12 @@
 	<div class="xiaoZhan">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.order.manage.acceptLabel')}}</label>
-			<el-select v-model="info.exeState" class="words">
+			<el-select v-model="info.exeState" id="exe" class="words">
 				<el-option v-for="(item, i) in acceptList" :key="item" :label="item" :value="i">
 				</el-option>
 			</el-select>
 			<label class="label">{{$t('fbcsFile.order.manage.feedbackLabel')}}</label>
-			<el-select v-model="info.feedbackState">
+			<el-select v-model="info.feedbackState" id="state">
 				<el-option v-for="(item, i) in feedbackList" :key="item" :label="item" :value="i">
 				</el-option>
 			</el-select>
@@ -15,25 +15,25 @@
 			<p class="jiange"></p>
 			
 			<label class="label">{{$t('fbcsFile.order.manage.date')}}</label>
-			<el-radio-group v-model="radio">
+			<el-radio-group v-model="radio" id="radio">
 				<el-radio :label="1">{{$t('fbcsFile.order.manage.today')}}</el-radio>
 				<el-radio :label="3">{{$t('fbcsFile.order.manage.week')}}</el-radio>
 				<el-radio :label="5">{{$t('fbcsFile.order.manage.month')}}</el-radio>
 				<el-radio :label="7">{{$t('fbcsFile.order.manage.recvBeginTime')}}</el-radio>
 			</el-radio-group>
-			<el-date-picker v-model="info.recvBeginTime" class="picker" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="begin" v-model="info.recvBeginTime" class="picker" type="datetime" :clearable="false" :editable="false"
 				 value-format="timestamp" default-time="00:00:00" :disabled='radio!=7'></el-date-picker>
 			<label class="label ml10">{{$t('fbcsFile.order.manage.recvEndTime')}}</label>
-			<el-date-picker v-model="info.recvEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="end" v-model="info.recvEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
 				 value-format="timestamp" default-time="23:59:59" :disabled='radio!=7'></el-date-picker>
 			
-			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn" @click="search" id="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="accept" v-if="fxAuth">
+			<li @click="accept" id="accept" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/order/accept.png"/>
 				<span class="label">{{$t('fbcsFile.order.manage.batchAccept')}}</span>
-			</li><li @click="feedback" v-if="fxAuth">
+			</li><li @click="feedback" id="feedback" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/order/feedback.png"/>
 				<span class="label">{{$t('fbcsFile.order.manage.batchFeedback')}}</span>
 			</li>
@@ -42,21 +42,21 @@
 			ref="all" :selection="true" @selectChange="selectChange" :width="width">
 		</lgy-table>
 		
-		<modifyPwd :show.sync="showPwd" :user="user"></modifyPwd>
+		<!-- <modifyPwd :show.sync="showPwd" :user="user"></modifyPwd> -->
 		
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag width="70%" @open="open"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog orderPane" ref="orderPane">
-				<lgy-table class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="acceptTitle" 
+				<lgy-table id="accept" class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="acceptTitle" 
 					:size="200" :total="submitList.length">
 				</lgy-table>
-				<lgy-table class="table" ref="feedback" v-if="batch=='feedback'" :width="width" :list="submitList" :title="feedbackTitle" 
+				<lgy-table id="feedback" class="table" ref="feedback" v-if="batch=='feedback'" :width="width" :list="submitList" :title="feedbackTitle" 
 					:size="200" :total="submitList.length">
 				</lgy-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="review">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="review" :id="'batch-'+batch">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="batch-close">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='submit' :txt="$t('fbcsFile.order.manage.submit')"></lgy-review>
@@ -71,7 +71,7 @@ var tick = require('@/fbcsFxViews/img/order/tick.png'),
    cross = require('@/fbcsFxViews/img/order/cross.png');
 
 
-var _this, data, enable;
+var _this, enable;
 
 function edit(row){
 	_this.user = row;
@@ -98,7 +98,7 @@ function reject(row){
 
 export default {
 	data(){
-		data = {
+		let bingo = {
 			fxAuth: utils.getFxAuth,
 			info: {
 				exeState: 0, feedbackState: 0, recvBeginTime: null, recvEndTime: null,
@@ -124,7 +124,7 @@ export default {
 			user: null
 		};
 		
-		data.title = {
+		bingo.title = {
 			bizKey: this.$t('fbcsFile.order.xiaozhan.bizKey'),
 			userID: this.$t('fbcsFile.order.xiaozhan.userID'),
 			userName: this.$t('fbcsFile.order.xiaozhan.userName'),
@@ -134,29 +134,29 @@ export default {
 			legalImg: this.$t('fbcsFile.order.xiaozhan.legal'),
 			// legalInfo: this.$t('fbcsFile.order.xiaozhan.legalInfo')
 		};
-		data.defined = {
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
 			items: [
 				// {src:require('@/fbcsFxViews/img/order/edit.png'), click: edit.bind(this), tips: this.$t('fbcsFile.order.manage.edit'), enable: 'acceptBtn' },
 				{src:require('@/fbcsFxViews/img/order/reject.png'), click: reject.bind(this), tips: this.$t('fbcsFile.order.manage.reject'), enable: 'rejectBtn'  }
 			]
 		};
-		if(!data.fxAuth) delete data.defined;
-		data.width = {
+		if(!bingo.fxAuth) delete bingo.defined;
+		bingo.width = {
 			legalImg: 64
 		};
 		
-		let acceptTitle = Object.assign({}, data.title);
+		let acceptTitle = Object.assign({}, bingo.title);
 		delete acceptTitle.recvTime;
 		delete acceptTitle.feedbackTxt;
-		data.acceptTitle = acceptTitle;
-		let feedbackTitle = Object.assign({}, data.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
+		bingo.acceptTitle = acceptTitle;
+		let feedbackTitle = Object.assign({}, bingo.title, {remarks: this.$t('fbcsFile.order.xiaozhan.remarks')});
 		delete feedbackTitle.recvTime;
 		delete feedbackTitle.legalImg;
-		data.feedbackTitle = feedbackTitle;
+		bingo.feedbackTitle = feedbackTitle;
 		
-		data.list = [];
-		return data;
+		bingo.list = [];
+		return bingo;
 	},
 	methods:{
 		search(){
@@ -299,7 +299,7 @@ export default {
 		}
 	},
 	components: {
-		modifyPwd: resolve => require(['@/fbcsFxViews/view/order/modifyPwdOrder.vue'], resolve),
+		// modifyPwd: resolve => require(['@/fbcsFxViews/view/order/modifyPwdOrder.vue'], resolve),
 	}
 }
 

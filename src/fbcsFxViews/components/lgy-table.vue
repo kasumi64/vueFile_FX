@@ -1,6 +1,6 @@
 <template>
 	<div class="lgy-table">
-		<el-table ref="lgy-table" :data= "list" @row-click="rowClick" @current-change="currentChange" @sort-change="sortChange" :stripe="stripe"
+		<el-table ref="lgy-table" :id="tableID" :data= "list" @row-click="rowClick" @current-change="currentChange" @sort-change="sortChange" :stripe="stripe"
 			@select="select" @selection-change="selectChange" @select-all="selectAll" :max-height="maxHeight" highlight-current-row border
 			:row-class-name="rowClass" :cell-class-name="cellClassName">
 			<el-table-column v-if="index" type="index" width="50" key></el-table-column>
@@ -28,19 +28,27 @@
 
 <script>
 
-var _this, data = {
-	currRow: '',
-	widths: {},
-	sortables: {},
-	page: 1,
-	isCallPage: false
-};
+var _this;
 
 
 export default {
 	name: 'lgy-table',
-	data() { return data; },
+	data() {
+		let bingo = {
+			tableID: '',
+			currRow: '',
+			widths: {},
+			sortables: {},
+			page: 1,
+			isCallPage: false
+		};
+		return bingo;
+	},
 	props: {
+		id: {
+			type: String,
+			default: 'tableID'
+		},
 		index: {
 			type: Boolean,
 			default: false
@@ -168,6 +176,7 @@ export default {
 		_this = this;
 		this.page = this.currentPage;
 		this.isCallPage = false;
+		if(this.id) this.tableID = 'table-' + this.id;
 		if(this.width instanceof Object) this.widths = this.width;
 		else this.widths = {};
 		if(this.sortable instanceof Object) this.sortables = this.sortable;
@@ -191,9 +200,18 @@ export default {
 	</lgy-list>*/
 </style>
 <style>
+/*elment-ui 表格*/
+.lgy-table .el-table thead{color: #333;}
+.lgy-table .el-table__header th{background: #E5EAF0;}
 .lgy-table .el-table__header .el-checkbox{display: none;}
 .lgy-table .tableBG{background: #E5EAF0;}
+.lgy-table .el-table__body tr.current-row>td{background: #CFE0F3;}
+.lgy-table .el-table td{padding: 10px 0;}
+.lgy-table .el-table .cell{line-height: 20px;white-space: normal;word-break: break-word;}
+.lgy-table .el-table--enable-row-hover .el-table__body tr:hover>td { background: inherit; }
+.lgy-table .el-table--enable-row-hover .el-table__body tr.current-row:hover>td { background: #CFE0F3; }
 .lgy-table .red{color: #F00;}
+
 	/*分页*/
 .lgy-table .paging{padding: 20px 0;text-align: left;}
 .lgy-table .paging .el-pagination,.lgy-table .paging .total{display: inline-block;vertical-align: middle;}
@@ -203,4 +221,5 @@ export default {
 .lgy-table .paging .number.active{box-shadow: 0 2px 4px 0 rgba(0,0,0,.2) inset;}
 .lgy-table .paging .el-pagination__total{margin-left: 24px;color: #999;}
 .lgy-table .paging .onePage{font-size: 13px;line-height: 28px;text-align: center;color: #999;}
+#fbcs_file .lgy-table .paging input{padding: 0;}
 </style>

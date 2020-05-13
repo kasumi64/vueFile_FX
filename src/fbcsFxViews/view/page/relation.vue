@@ -3,20 +3,20 @@
 	<div class="relation">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
-			<input v-if="!isPage" v-model="id" class="words" disabled="true"/>
-			<lgy-candidateWords v-if="isPage" v-model="id" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
+			<input v-if="!isPage" v-model="id" id="signal-id" class="words" disabled="true"/>
+			<lgy-candidateWords v-if="isPage" v-model="id" id="signal-id" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
-			<lgy-candidateWords v-model="name" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
-			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<lgy-candidateWords v-model="name" id="signal-name" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
+			<button class="blueBtn" @click="search" id="signal-search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="add" v-if="fxAuth">
+			<li @click="add" v-if="fxAuth" id="signal-addDialog">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addSignal.png"/>
 				<span class="label">{{$t('fbcsFile.relation.addSignal')}}</span>
-			</li><li @click="dels" v-if="fxAuth">
+			</li><li @click="dels" v-if="fxAuth" id="signal-del">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/delSignal.png"/>
 				<span class="label">{{$t('fbcsFile.relation.delSignal')}}</span>
-			</li><li @click="advanced" v-if="isPage">
+			</li><li @click="advanced" v-if="isPage" id="signal-advanced">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchSignal.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
@@ -35,7 +35,7 @@
 							{{$t('fbcsFile.relation.userID1')}}
 						</p>
 					</div><div class="right">
-						<lgy-candidateWords v-model="oneid" :keywords="oneWords" @input="oneInput" :disabled="oneDisable"></lgy-candidateWords>
+						<lgy-candidateWords v-model="oneid" id="signal-userID" :keywords="oneWords" @input="oneInput" :disabled="oneDisable"></lgy-candidateWords>
 					</div>
 				</li><li>
 					<div class="left">
@@ -44,23 +44,23 @@
 							{{$t('fbcsFile.relation.userID2')}}
 						</p>
 					</div><div class="right">
-						<el-select popper-class="fbcs_FX_signal_select" class="selm" v-model="sid" :disabled="disabled" multiple filterable
+						<el-select id="signal-addID" popper-class="fbcs_FX_signal_select" class="selm" v-model="sid" :disabled="disabled" multiple filterable
 							remote :remote-method="filter" :reserve-keyword="false" @focus="focus" :placeholder="placeholder">
 							<el-option v-for="item in idarr" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
-						<button class="defBtn mf" @click="clear">{{$t('fbcsFile.relation.clear')}}</button>
+						<button class="defBtn mf" @click="clear" id="signal-clear">{{$t('fbcsFile.relation.clear')}}</button>
 					</div>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="now">{{$t('fbcsFile.tips.now')}}</button>
-				<button class="blueBtn" @click="submit">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="now" id="signal-now">{{$t('fbcsFile.tips.now')}}</button>
+				<button class="blueBtn" @click="submit" id="signal-submit">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="signal-close">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
-		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq :parameter.sync="parameter"></lgy-wheelReq>
+		<lgy-review id="signal" :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
+		<lgy-wheelReq  id="signal" :parameter.sync="parameter"></lgy-wheelReq>
 	</div>
 </template>
 
@@ -68,34 +68,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-var _this, data = {
-	fxAuth: true,
-	id: '',
-	name: '',
-	idWords: null,
-	nameWords: null,
-	placeholder: '',
-	list: [
-		{userID1: '01', userName1: 'name1'},{userID1: '02', userName1: 'name2'},{userID1: '03', userName1: 'name3'},
-	],
-	page: 1,
-	total: 1,
-	selected: [],
-	showDialog: true,
-	oneid: '',
-	oneWords: null,
-	sid: [],
-	idarr: [
-		{value: 'HTML123', label: 'HTML'}, {value: 'CSS123', label: 'CSS'}, {value: 'JavaScript123', label: 'JavaScript'}
-	],
-	oneDisable: false,
-    disabled: true,
-    showReview: false,
-    reqsv: {uri:''},
-    reviewTxt: '',
-    parameter: ''
-};
-var userid, args;
+var _this, userid, args;
 
 function del(row){
 	if(!(row instanceof Array)) row = [row];
@@ -125,22 +98,50 @@ function del(row){
 
 export default {
 	data(){
-		data.placeholder = this.$t('fbcsFile.tips.psel');
-		data.title = {
+		let bingo = {
+			fxAuth: true,
+			id: '',
+			name: '',
+			idWords: null,
+			nameWords: null,
+			placeholder: '',
+			list: [
+				{userID1: '01', userName1: 'name1'},{userID1: '02', userName1: 'name2'},{userID1: '03', userName1: 'name3'},
+			],
+			page: 1,
+			total: 1,
+			selected: [],
+			showDialog: true,
+			oneid: '',
+			oneWords: null,
+			sid: [],
+			idarr: [
+				{value: 'HTML123', label: 'HTML'}, {value: 'CSS123', label: 'CSS'}, {value: 'JavaScript123', label: 'JavaScript'}
+			],
+			oneDisable: false,
+		    disabled: true,
+		    showReview: false,
+		    reqsv: {uri:''},
+		    reviewTxt: '',
+		    parameter: ''
+		};
+		
+		bingo.placeholder = this.$t('fbcsFile.tips.psel');
+		bingo.title = {
 			userID1: this.$t('fbcsFile.tableTitle.userID'),
 			userName1: this.$t('fbcsFile.tableTitle.userName'),
 			userID2: this.$t('fbcsFile.tableTitle.userID'),
 			userName2: this.$t('fbcsFile.tableTitle.userName'),
 			buildTime: this.$t('fbcsFile.tableTitle.buildTime')
 		};
-		data.defined = {
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 90,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delSignal') }
 			]
 		};
-		if(!utils.getFxAuth) data.defined.items = [];
-		return data;
+		if(!utils.getFxAuth) bingo.defined.items = [];
+		return bingo;
 	},
 	props: {
 		isPage: {

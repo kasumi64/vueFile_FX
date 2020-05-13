@@ -1,50 +1,7 @@
 import utils  from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-var _this, data = {
-	fxAuth: true,
-	radio: 0,
-	info: {
-		type: '', beginTime: '', endTime:'', 
-		pageSize: 20, 
-	},
-	list: [
-		{type: 'userID', version: 'userName', versionPath: 'ekeyName',operationTime: '2019/02/26 14:14', fileSize:true},
-		{type: 'userID', version: 'userName', versionPath: 'ekeyName',operationTime: '2019/02/26 14:14', fileSize:false},
-		{type: 'userID', version: 'userName', versionPath: 'ekeyName',operationTime: '2019/02/26 14:14', fileSize:true}
-	],
-	page: 1,
-	total: 1,
-	pickerBegin: {
-		disabledDate(time){
-			var boundary = new Date(_this.info.endTime);
-			boundary.setHours(23,59,59);
-			return time > boundary;
-		}
-	},
-	pickerEnd: {
-		disabledDate(time){
-			var boundary = new Date(_this.info.beginTime);
-			boundary.setHours(0, 0, 0);
-			return time < boundary;
-		}
-	},
-	showDialog: false,
-	detailList: [],
-	showReview: false,
-	reqsv: {},
-	reviewTxt: '',
-	parameter: null,
-	checkDialog: false,
-	checkList: [],
-	
-	showPwdinfo: false,
-	signalList: [],
-	signalPage: 1,
-	signalTotal: 1,
-	zdEnabled: 1
-};
-var rollRow;
+var _this, rollRow;
 
 function detail1(row){
 	let params = {
@@ -134,8 +91,52 @@ function zdCfg(obj){
 
 export default {
 	data(){
-		data.options = this.$t('fbcsFile.versionQuery.options1');
-		data.title = {
+		let bingo = {
+			fxAuth: true,
+			radio: 0,
+			info: {
+				type: '', beginTime: '', endTime:'', 
+				pageSize: 20, 
+			},
+			list: [
+				{type: 'userID', version: 'userName', versionPath: 'ekeyName',operationTime: '2019/02/26 14:14', fileSize:true},
+				{type: 'userID', version: 'userName', versionPath: 'ekeyName',operationTime: '2019/02/26 14:14', fileSize:false},
+				{type: 'userID', version: 'userName', versionPath: 'ekeyName',operationTime: '2019/02/26 14:14', fileSize:true}
+			],
+			page: 1,
+			total: 1,
+			pickerBegin: {
+				disabledDate(time){
+					var boundary = new Date(_this.info.endTime);
+					boundary.setHours(23,59,59);
+					return time > boundary;
+				}
+			},
+			pickerEnd: {
+				disabledDate(time){
+					var boundary = new Date(_this.info.beginTime);
+					boundary.setHours(0, 0, 0);
+					return time < boundary;
+				}
+			},
+			showDialog: false,
+			detailList: [],
+			showReview: false,
+			reqsv: {},
+			reviewTxt: '',
+			parameter: null,
+			checkDialog: false,
+			checkList: [],
+			
+			showPwdinfo: false,
+			signalList: [],
+			signalPage: 1,
+			signalTotal: 1,
+			zdEnabled: 1
+		};
+		
+		bingo.options = this.$t('fbcsFile.versionQuery.options1');
+		bingo.title = {
 			typeMask: this.$t('fbcsFile.versionQuery.type'),
 			version: this.$t('fbcsFile.versionQuery.version'),
 			versionPath: this.$t('fbcsFile.versionQuery.versionPath'),
@@ -144,7 +145,7 @@ export default {
 			reviewer: this.$t('fbcsFile.versionQuery.reviewer'),
 			send: this.$t('fbcsFile.versionQuery.operationType')
 		};
-		data.defined = {
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 112,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/restore.png'), click: fnback, tips: this.$t('fbcsFile.tableDefined.verback')},
@@ -153,22 +154,22 @@ export default {
 			]
 		};
 		if(!utils.getFxAuth) {
-			data.defined.items = [
+			bingo.defined.items = [
 				{src:require('@/fbcsFxViews/img/table/detail.png'), click: detail1, tips: this.$t('fbcsFile.versionDetail.title'), enable: 'fileSize'},
 				{src:require('@/fbcsFxViews/img/table/attachment.png'), click: detail2, tips: this.$t('fbcsFile.versionDetail.title'),enable: 'zdCfg'},
 			];
 		}
-		data.signalTitle = {
+		bingo.signalTitle = {
 //			section: this.$t('fbcsFile.dispatch.section'),
 			field: this.$t('fbcsFile.dispatch.field'),
 			type: this.$t('fbcsFile.dispatch.notype'),
 			detail: this.$t('fbcsFile.versionDetail.title')
 		};
-		data.width = {
+		bingo.width = {
 			type: 115,
 			detail: 435
 		};
-		return data;
+		return bingo;
 	},
 	methods:{
 		rowClass({row, rowIndex}){

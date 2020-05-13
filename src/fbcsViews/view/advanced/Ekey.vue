@@ -42,7 +42,7 @@ import moment from 'moment';
 
 var _this, data = {
 	list: [
-		{userID: 'userID', ekeyName: 'userName', ymd: 1535646546566, ekeyComment: 'ekeyComment'}
+		{userID: 'userID', ekeyName: 'userName', ymd: 1535646546566, comment: 'ekeyComment'}
 	],
 	page: 1, total: 1,
 	userID: '', ekeyName: '',
@@ -62,7 +62,7 @@ export default {
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			ekeyName: this.$t('fbcsFile.tableTitle.ekeyName'),
 			ymd: this.$t('fbcsFile.tableTitle.ekeyDate'),
-			ekeyComment: this.$t('fbcsFile.tableTitle.ekeyInfo')
+			comment: this.$t('fbcsFile.tableTitle.ekeyInfo')
 		};
 		return data;
 	},
@@ -172,9 +172,9 @@ function search(){
 		let i, len = res.lists.length, obj;
 		for (i = 0; i < len; i++) {
 			obj = res.lists[i];
-			if(obj.validDate){
-				obj.ymd = moment(obj.validDate * 1000).format('YYYY-MM-DD HH:mm:ss');
-			} else  obj.validDate = obj.ymd = '';
+			if(obj.ekeyValidDate){
+				obj.ymd = moment(obj.ekeyValidDate * 1000).format('YYYY-MM-DD HH:mm:ss');
+			} else  obj.ekeyValidDate = obj.ymd = '';
 		}
 		_this.list = res.lists;
 		_this.page = res.currentPage;
@@ -185,6 +185,6 @@ function search(){
 </script>
 
 <style scoped="scoped">
-	.advancedEkey{min-width: 688px;}
+	.advancedEkey{min-width: 688px;margin: 20px;}
 	.w80{width: 122px;text-align: right;}
 </style>

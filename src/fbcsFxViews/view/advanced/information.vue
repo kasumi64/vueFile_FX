@@ -6,7 +6,7 @@
 		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.advanced.information.listName')}}</label>
-			<el-select v-model="listType" class="words w100">
+			<el-select v-model="listType" id="type" class="words w100">
 				<el-option v-for="item in listItem" :key="item.val" :label="item.label" :value="item.val">
 				</el-option>
 			</el-select>
@@ -14,16 +14,16 @@
 			<lgy-candidateWords v-model="info.userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
 			<!-- <input v-model="info.userName" :disabled="listType=='BOP'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
-			<lgy-candidateWords v-model="info.userName" :disabled="listType=='BOP'" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
+			<lgy-candidateWords v-model="info.userName" id="userName" :disabled="listType=='BOP'" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.advanced.information.company')}}：</label>
-			<input v-model="info.opeartorCompany" :disabled="listType=='OPE'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<input v-model="info.opeartorCompany" id="company" :disabled="listType=='OPE'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.advanced.information.ssccManager')}}：</label>
-			<input v-model="info.ssccManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
-			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<input v-model="info.ssccManager" id="sscc" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<button class="blueBtn words" @click="search" id="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="expcsv('OPE')" :class="{disabled: disabledOPE}">
+			<li id="OPE" @click="expcsv('OPE')" :class="{disabled: disabledOPE}">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.information.expcsv')}}</span>
 			</li>
@@ -33,10 +33,10 @@
 			</li>-->
 		</ul>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resOPE')}}</p>
-		<lgy-table ref="OPE" :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage="pageOPE" :fliover="changeOPE" :maxHeight="416">
+		<lgy-table id="OPE" ref="OPE" :list="listOPE" :title="titleOPE" :size="pageSize" :total="totalOPE" :currentPage="pageOPE" :fliover="changeOPE" :maxHeight="416">
 		</lgy-table>
 		<p class="h2">{{$t('fbcsFile.advanced.information.resBOP')}}</p>
-		<lgy-table ref="BOP" :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage="pageBOP" :fliover="changeBOP" :maxHeight="416">
+		<lgy-table id="BOP" ref="BOP" :list="listBOP" :title="titleBOP" :size="pageSize" :total="totalBOP" :currentPage="pageBOP" :fliover="changeBOP" :maxHeight="416">
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
@@ -48,7 +48,7 @@
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="close">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 	</div>
@@ -57,40 +57,41 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	info: {
-		userID: '', userName: '', ssccManager: '', opeartorCompany: '',
-	},
-	listType: '', listItem: [],
-	idWords: null,
-	nameWords: null,
-	listOPE: [
-		{userID: 'userID', userName: 'userName', operatorTelNum: 1535646546566, operatorEmail: 'ekeyComment'},
-	],
-	pageOPE: 1, totalOPE: 1,
-	listBOP: [
-		{userID: 'userID', userName: 'userName', operatorTelNum: 1535646546566, operatorEmail: 'ekeyComment'},
-	],
-	pageBOP: 1, totalBOP: 1,
-	showDialog: false,
-	fileHref: '#', fileName: '', dialogTitle: '',
-	disabledPOE: false, disabledBOP: false,
-	pageSize: 10,
-	changeOPE(num){
-		_this.pageOPE = num;
-		search('OPE');
-	},
-	changeBOP(num){
-		_this.pageBOP = num;
-		search('BOP');
-	}
-};
-var idAll = [];
+var _this, idAll = [];
 
 export default {
 	data(){
-		data.listItem = this.$t('fbcsFile.advanced.information.listType');
-		data.titleOPE = {
+		let bingo = {
+			info: {
+				userID: '', userName: '', ssccManager: '', opeartorCompany: '',
+			},
+			listType: '', listItem: [],
+			idWords: null,
+			nameWords: null,
+			listOPE: [
+				{userID: 'userID', userName: 'userName', operatorTelNum: 1535646546566, operatorEmail: 'ekeyComment'},
+			],
+			pageOPE: 1, totalOPE: 1,
+			listBOP: [
+				{userID: 'userID', userName: 'userName', operatorTelNum: 1535646546566, operatorEmail: 'ekeyComment'},
+			],
+			pageBOP: 1, totalBOP: 1,
+			showDialog: false,
+			fileHref: '#', fileName: '', dialogTitle: '',
+			disabledPOE: false, disabledBOP: false,
+			pageSize: 10,
+			changeOPE(num){
+				_this.pageOPE = num;
+				search('OPE');
+			},
+			changeBOP(num){
+				_this.pageBOP = num;
+				search('BOP');
+			}
+		};
+		
+		bingo.listItem = this.$t('fbcsFile.advanced.information.listType');
+		bingo.titleOPE = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
@@ -103,7 +104,7 @@ export default {
 			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
 			operatorDepartment: this.$t('fbcsFile.advanced.information.department')
 		};
-		data.titleBOP = {
+		bingo.titleBOP = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			operatorName: this.$t('fbcsFile.advanced.information.operatorName'),
@@ -113,7 +114,7 @@ export default {
 			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
 			operatorDepartment: this.$t('fbcsFile.advanced.information.department'),
 		};
-		return data;
+		return bingo;
 	},
 	methods:{
 		back(){

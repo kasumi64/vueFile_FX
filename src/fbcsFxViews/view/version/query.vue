@@ -2,37 +2,37 @@
 	<div class="versionQuery">
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.versionQuery.type')}}：</label>
-			<el-select v-model="info.type" class="sel">
+			<el-select v-model="info.type" id="type" class="sel">
 				<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 				</el-option>
 			</el-select>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.audit.times')}}</label>
-			<el-radio-group v-model="radio">
+			<el-radio-group v-model="radio" id="radio">
 				<el-radio :label="2">{{$t('fbcsFile.audit.today')}}</el-radio>
 				<el-radio :label="4">{{$t('fbcsFile.audit.week')}}</el-radio>
 				<el-radio :label="6">{{$t('fbcsFile.audit.month')}}</el-radio>
 				<el-radio :label="9">{{$t('fbcsFile.audit.begin')}}</el-radio>
 			</el-radio-group>
 			<!--<label class="label">{{$t('fbcsFile.audit.begin')}}</label>-->
-			<el-date-picker v-model="info.beginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="begin" v-model="info.beginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
 				:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
 			<label class="label">{{$t('fbcsFile.audit.end')}}</label>
-			<el-date-picker v-model="info.endTime" class="picker words" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="end" v-model="info.endTime" class="picker words" type="datetime" :clearable="false" :editable="false"
 				:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
-			<button class="blueBtn mr" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn mr" @click="search" id="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		
 		<ul class="fnField">
-			<li @click="bigVer" v-if="fxAuth">
+			<li @click="bigVer" id="bigVer" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/bigVer.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.bigVer')}}</span>
-			</li><li @click="getCfg" v-if="fxAuth&&(zdEnabled == 1)">
+			</li><li @click="getCfg" id="getCfg" v-if="fxAuth&&(zdEnabled == 1)">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/getzdConfig.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.getCfg')}}</span>
-			</li><li @click="checkVer(0)">
+			</li><li @click="checkVer(0)" id="contrast">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/zdConfig.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.checkZd')}}</span>
 			</li>
@@ -48,7 +48,7 @@
 		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="$t('fbcsFile.fnField.checkZd')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
+				<el-table id="ZD" :data="checkList" :row-class-name="rowClass" max-height="294" border>
 					<el-table-column type="index" width="50" label=" "></el-table-column>
 					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
@@ -59,14 +59,14 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="checkDialog=false" id="zd-close">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		
 		<el-dialog ref="detailBox" :visible.sync="showDialog" :title="$t('fbcsFile.versionDetail.title')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<el-table :data="detailList" :row-class-name="rowClass" max-height="294" border>
+				<el-table id="detail" :data="detailList" :row-class-name="rowClass" max-height="294" border>
 					<el-table-column type="index" width="50" label=" "></el-table-column>
 					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 					<el-table-column prop="fileName" :label="$t('fbcsFile.versionDetail.fileName')"></el-table-column>
@@ -75,20 +75,20 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="detail-close">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		
 		<el-dialog :visible.sync="showPwdinfo" :title="$t('fbcsFile.tips.title')" v-dialogDrag  width="800px"
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<lgy-table :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage="signalPage" 
+				<lgy-table id="rollback" :list="signalList" :title="signalTitle" :total="signalTotal" :currentPage="signalPage" 
 					@changePage="signalChange"  max-height="394" :width="width">
 				</lgy-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="send">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showPwdinfo=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="send" id="rollback-send">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showPwdinfo=false" id="rollback-close">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
 		

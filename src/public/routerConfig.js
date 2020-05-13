@@ -15,9 +15,9 @@ let config = [
 	{
 		path: '/', //默认的首页
 		name: '/',
-		// component: resolve => require(['@/fbcsFxViews/view/fbcsFxHome.vue'], resolve),
+		component: resolve => require(['@/fbcsFxViews/view/fbcsFxHome.vue'], resolve),
 		// component: resolve => require(['@/fbcsViews/view/home.vue'], resolve),
-		component: resolve => require(['@/webU/view/webuHome.vue'], resolve),
+		// component: resolve => require(['@/webU/view/webuHome.vue'], resolve),
 		meta: {auth: false} //'权限设置'
 	},
 	

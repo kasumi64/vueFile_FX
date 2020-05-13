@@ -10,7 +10,6 @@
 
 <template>
 	<div class="lgy-review" :class="{show:show}">
-		<input type="text" class="autocompleteOFF" autocomplete="on"/>
 		<div ref='lgy-review' class="maskLayer">
 			<div ref='tipsPanle' class="tipsPanle">
 				<div class="title">
@@ -19,15 +18,15 @@
 				<ul class="reviewLayer">
 					<li>
 						<span class="label">{{$t('fbcsFile.components.reviewName')}}</span>
-						<input v-model="name" class="input" autocomplete="off"/>
+						<input v-model="name" :id="nameID" class="input" autocomplete="off"/>
 					</li><li>
 						<span class="label">{{$t('fbcsFile.components.reviewPwd')}}</span>
-						<input v-model="pwd" class="input" type="password" autocomplete="off"/>
+						<input v-model="pwd" :id="pwdID" class="input" type="password" autocomplete="off"/>
 					</li>
 				</ul>
 				<div class="footBtn">
-					<button @click="reviewHandle(reqsv)" class="blueBtn ok">{{$t('fbcsFile.tips.ok')}}</button>
-					<button @click="cancel" class="defBtn cancel">{{$t('fbcsFile.tips.cancel')}}</button>
+					<button @click="reviewHandle(reqsv)" :id="nameID+'-OK'" class="blueBtn ok">{{$t('fbcsFile.tips.ok')}}</button>
+					<button @click="cancel" class="defBtn cancel" :id="nameID+'-close'">{{$t('fbcsFile.tips.cancel')}}</button>
 				</div>
 			</div>
 		</div>
@@ -38,14 +37,24 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 
-var _this, data = {
-	name: '',
-	pwd: ''
-};
+var _this;
+
 export default {
 	name: 'lgy-review',
-	data() { return data; },
+	data() {
+		let bingo = {
+			nameID: 'reviewID',
+			pwdID: 'reviewPwd',
+			name: '',
+			pwd: ''
+		};
+		return bingo;
+	},
 	props: {
+		id: {
+			type: String,
+			default: ''
+		},
 		show: {
 			type: Boolean,
 			default: false
@@ -57,7 +66,7 @@ export default {
 		txt: { //弹框文本
 			type: String,
 			default: ''
-		},
+		}
 	},
 	methods:{
 		async reviewHandle(param){
@@ -117,6 +126,11 @@ export default {
 	},
 	created(){
 		_this = this;
+		if(this.id){
+			let str = '-' + this.id;
+			this.nameID += str;
+			this.pwdID += str;
+		}
 		this.cancel();
 	},
 	mounted(){

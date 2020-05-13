@@ -92,6 +92,8 @@ module.exports = {
 		port: 8080,
 		https: false,
 		hotOnly: false,
+		stats: 'errors-only',
+		compress: false,
 		before: app => {},
 		// proxy: { // 设置代理
 		// 	'/api': {

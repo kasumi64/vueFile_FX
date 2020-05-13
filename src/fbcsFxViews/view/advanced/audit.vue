@@ -1,44 +1,44 @@
 <template>
 	<div class="advancedAudit">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span class="back" @click="back" id="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.advanced.audit.title')}}</b>
 		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.audit.operator')}}：</label>
-			<input v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<input v-model="info.operator" id="operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.audit.operatorType')}}：</label>
-			<lgy-candidateWords v-model="info.operationType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
-			<el-checkbox-group ref="linkage" v-model="linkage" class="linkage">
+			<lgy-candidateWords v-model="info.operationType" id="type" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
+			<el-checkbox-group ref="linkage" v-model="linkage" id="linkage" class="linkage">
 				<el-checkbox label="ekeyFlag">Ekey</el-checkbox>
 				<el-checkbox label="commFlag">{{$t('fbcsFile.advanced.audit.commFlag')}}</el-checkbox>
 				<el-checkbox label="userextFlag">{{$t('fbcsFile.advanced.audit.userextFlag')}}</el-checkbox>
 			</el-checkbox-group>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>
-			<el-radio-group v-model="info.sequence" class="mr20">
+			<el-radio-group v-model="info.sequence" id="sequence" class="mr20">
 				<el-radio :label="0">{{$t('fbcsFile.audit.lately')}}</el-radio>
 				<el-radio :label="1">{{$t('fbcsFile.audit.early')}}</el-radio>
 			</el-radio-group>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.audit.times')}}</label>
-			<el-radio-group v-model="radio">
+			<el-radio-group v-model="radio" id="radio">
 				<el-radio :label="2">{{$t('fbcsFile.audit.today')}}</el-radio>
 				<el-radio :label="4">{{$t('fbcsFile.audit.week')}}</el-radio>
 				<el-radio :label="6">{{$t('fbcsFile.audit.month')}}</el-radio>
 				<el-radio :label="9">{{$t('fbcsFile.audit.begin')}}</el-radio>
 			</el-radio-group>
 			<!--<label class="label">{{$t('fbcsFile.audit.begin')}}</label>-->
-			<el-date-picker v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="begin" v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
 				value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
 			<label class="label">{{$t('fbcsFile.audit.end')}}</label>
-			<el-date-picker v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="end" v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
 				value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
-			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn mr20" @click="search" id="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="expcsv">
+			<li @click="expcsv" id="expcsv">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportTheme.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.audit.expcsv')}}</span>
 			</li>
@@ -61,7 +61,7 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="close-detail">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		<el-dialog :visible.sync="showDialog2" :title="$t('fbcsFile.advanced.audit.expcsv')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
@@ -74,7 +74,7 @@
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog2=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="showDialog2=false" id="close-exp">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 	</div>
@@ -84,46 +84,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-var _this, data = {
-	idWords: null,
-	radio: 0,
-	info: {
-		operator: '', operationType: '', sequence: 1 , 
-		operationBeginTime: '', operationEndTime:''
-	},
-	list: [
-		{operator: 'userID', reviewer: 'userName', operationType: 'ekeyName',ymd: 1535646546566, errInfo: 'ekeyComment', uuid: 'uuid'}
-	],
-	page: 1,
-	total: 1,
-	pickerBegin: {
-		disabledDate(time){
-			var boundary = new Date(_this.info.operationEndTime);
-			boundary.setHours(23,59,59);
-			return time > boundary;
-		}
-	},
-	pickerEnd: {
-		disabledDate(time){
-			var boundary = new Date(_this.info.operationBeginTime);
-			boundary.setHours(0, 0, 0);
-			return time < boundary;
-		}
-	},
-	showDialog: false,
-	cuList: [],
-	cellClass(row, cellIndex){
-		if(row.errStr != 'success' && cellIndex == 6){
-			return 'red';
-		} else if (cellIndex == 2){
-			return 'preWrap';
-		}
-	},
-	linkage: [],
-	showDialog2: false,
-	fileHref: '#', fileName: ''
-};
-var keywords = [];
+var _this, keywords = [];
 
 function detail(row){
 	_this.cuList = [];
@@ -149,7 +110,47 @@ function detail(row){
 
 export default {
 	data(){
-		data.title = {
+		let bingo = {
+			idWords: null,
+			radio: 0,
+			info: {
+				operator: '', operationType: '', sequence: 1 , 
+				operationBeginTime: '', operationEndTime:''
+			},
+			list: [
+				{operator: 'userID', reviewer: 'userName', operationType: 'ekeyName',ymd: 1535646546566, errInfo: 'ekeyComment', uuid: 'uuid'}
+			],
+			page: 1,
+			total: 1,
+			pickerBegin: {
+				disabledDate(time){
+					var boundary = new Date(_this.info.operationEndTime);
+					boundary.setHours(23,59,59);
+					return time > boundary;
+				}
+			},
+			pickerEnd: {
+				disabledDate(time){
+					var boundary = new Date(_this.info.operationBeginTime);
+					boundary.setHours(0, 0, 0);
+					return time < boundary;
+				}
+			},
+			showDialog: false,
+			cuList: [],
+			cellClass(row, cellIndex){
+				if(row.errStr != 'success' && cellIndex == 6){
+					return 'red';
+				} else if (cellIndex == 2){
+					return 'preWrap';
+				}
+			},
+			linkage: [],
+			showDialog2: false,
+			fileHref: '#', fileName: ''
+		};
+		
+		bingo.title = {
 			ymd: this.$t('fbcsFile.audit.operatorTime'),
 			operationType: this.$t('fbcsFile.audit.operatorType'),
 			errInfo: this.$t('fbcsFile.audit.errorInfo'),
@@ -160,13 +161,13 @@ export default {
 			errStr: this.$t('fbcsFile.audit.errorCode'),
 //			uuid: this.$t('fbcsFile.audit.uuid')
 		};
-		data.width = {
+		bingo.width = {
 			ymd: 160,
 			operationType: 140,
 			errInfo: 800,
 			errStr: 120
 		};
-		return data;
+		return bingo;
 	},
 	methods:{
 		back(){

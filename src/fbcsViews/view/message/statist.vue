@@ -43,7 +43,7 @@
 				</div>
 			</header>
 			<div>
-				<div @click="toAdvanced"><img src="@/fbcsFxViews/img/FnIcon/searchEkey.png"><span>{{$t('fbcsFile.searchBar.advanced')}}</span></div>
+				<div @click="toAdvanced"><img src="@/fbcsFxViews/img/FnIcon/searchAudit.png"><span>{{$t('fbcsFile.searchBar.advanced')}}</span></div>
 			</div>
 			<el-table stripe border highlight-current-row :data="data.lists">
 				<!--<el-table-column width="50" label=" " type="index"></el-table-column>-->

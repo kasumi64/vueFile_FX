@@ -2,17 +2,17 @@
 	<div class="Ekey">
 		<div v-if="isPage" class="searchBar">
 			<label class="label">{{$t('fbcsFile.searchBar.userID')}}</label>
-			<lgy-candidateWords v-model="id" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
+			<lgy-candidateWords v-model="id" id="search-ekeyID" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.searchBar.ekeyName')}}</label>
-			<input v-model="name" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<input v-model="name" id="search-ekeyName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<!-- <lgy-candidateWords v-model="name" :keywords="ekNames" @input="ekNameInput" class="words"></lgy-candidateWords> -->
-			<button class="blueBtn" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button class="blueBtn" @click="search" id="Ekey-search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="showAddEkey" v-if="fxAuth">
+			<li @click="showAddEkey" id="addEkey" v-if="fxAuth">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/addEkey.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.addEkey')}}</span>
-			</li><li @click="advanced" v-if="isPage">
+			</li><li @click="advanced" id="Ekey-advanced" v-if="isPage">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/searchEkey.png"/>
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
@@ -30,7 +30,7 @@
 							{{$t('fbcsFile.Ekey.userID')}}
 						</p>
 					</div><div class="right">
-						<lgy-candidateWords v-model="ekeyInfo.userID" :keywords="ekWords" @input="ekInput" :disabled="disabled"></lgy-candidateWords>
+						<lgy-candidateWords id="ekey-id" v-model="ekeyInfo.userID" :keywords="ekWords" @input="ekInput" :disabled="disabled"></lgy-candidateWords>
 					</div>
 				</li><li>
 					<div class="left">
@@ -39,13 +39,13 @@
 							{{$t('fbcsFile.Ekey.ekeyName')}}
 						</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyName" :disabled="disName" maxlength="63" autocomplete="off"/>
+						<input v-model="ekeyInfo.ekeyName" id="ekey-name" :disabled="disName" maxlength="63" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyDate')}}</p>
 					</div><div class="right">
-						<el-date-picker v-model="ekeyInfo.validDate" class="picker" type="datetime" :clearable="true" :editable="false"
+						<el-date-picker v-model="ekeyInfo.validDate"  id="ekey-datey" class="picker" type="datetime" :clearable="true" :editable="false"
 							:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" >
 						</el-date-picker>
 					</div>
@@ -53,18 +53,18 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyInfo')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyComment" maxlength="255" autocomplete="off"/>
+						<input v-model="ekeyInfo.ekeyComment" id="ekey-comm" maxlength="255" autocomplete="off"/>
 					</div>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="now">{{$t('fbcsFile.tips.now')}}</button>
-				<button class="blueBtn" @click="submit">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="now" id="ekey-now">{{$t('fbcsFile.tips.now')}}</button>
+				<button class="blueBtn" @click="submit" id="ekey-OK">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showDialog=false" id="ekey-close">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
-		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq :parameter.sync="parameter"></lgy-wheelReq>
+		<lgy-review id="ekey" :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
+		<lgy-wheelReq id="ekey" :parameter.sync="parameter"></lgy-wheelReq>
 	</div>
 </template>
 
@@ -72,32 +72,8 @@
 import utils  from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-var _this, userid, args, isAdd,
-data = {
-	fxAuth: true,
-	id: '',
-	name: '',
-	idWords: null,
-	ekNames: null,
-	ekWords: null,
-	list: [
-		{userID: 'userID', userName: 'userName', ekeyName: 'ekeyName',validDate: 1535646546566, ekeyComment: 'ekeyComment'}
-	],
-	page: 1,
-	total: 1,
-	showDialog: false,
-	dialogTitle: '',
-	ekeyInfo: {
-		userID: '', userName: '', validDate: '', ekeyComment: '', 
-	},
-	disabled: false,
-	disName: false,
-	showReview: false,
-    reqsv: {uri:''},
-    reviewTxt: '',
-    parameter: null,
-    jump: false,
-};
+var _this, userid, args, isAdd;
+
 
 function delEkey(row){
 	utils.confirm({
@@ -154,22 +130,48 @@ function showEditEkey(row){
 
 export default {
 	data(){
-		data.title = {
+		let bingo = {
+			fxAuth: true,
+			id: '',
+			name: '',
+			idWords: null,
+			ekNames: null,
+			ekWords: null,
+			list: [
+				{userID: 'userID', userName: 'userName', ekeyName: 'ekeyName',validDate: 1535646546566, ekeyComment: 'ekeyComment'}
+			],
+			page: 1,
+			total: 1,
+			showDialog: false,
+			dialogTitle: '',
+			ekeyInfo: {
+				userID: '', userName: '', validDate: '', ekeyComment: '', 
+			},
+			disabled: false,
+			disName: false,
+			showReview: false,
+		    reqsv: {uri:''},
+		    reviewTxt: '',
+		    parameter: null,
+		    jump: false,
+		};
+		
+		bingo.title = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
 			userName: this.$t('fbcsFile.tableTitle.userName'),
 			ekeyName: this.$t('fbcsFile.tableTitle.ekeyName'),
 			ymd: this.$t('fbcsFile.tableTitle.ekeyDate'),
 			ekeyComment: this.$t('fbcsFile.tableTitle.ekeyInfo'),
 		};
-		data.defined = {
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/edit.png'), click: showEditEkey, tips: this.$t('fbcsFile.tableDefined.editEkey') },
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: delEkey, tips: this.$t('fbcsFile.tableDefined.delEkey') },
 			]
 		};
-		if(!utils.getFxAuth) data.defined.items = [];
-		return data;
+		if(!utils.getFxAuth) bingo.defined.items = [];
+		return bingo;
 	},
 	props: {
 		isPage: {

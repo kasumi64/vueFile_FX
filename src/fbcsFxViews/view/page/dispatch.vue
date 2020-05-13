@@ -17,19 +17,19 @@
 				<label class="label">{{$t('fbcsFile.dispatch.hots1')}}</label>
 				<div class="right">
 					<p class="label txt">{{$t('fbcsFile.dispatch.hots2')}}</p>
-					<el-table ref="nodes" :data="nodeList" :row-class-name="rowClass" max-height="294" highlight-current-row border
+					<el-table id="nodeList" ref="nodes" :data="nodeList" :row-class-name="rowClass" max-height="294" highlight-current-row border
 						@selection-change="selectChange">
 						<el-table-column type="selection" width="40" key></el-table-column>
 						<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
 						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					</el-table>
-					<button v-if="fxAuth" @click="review" class="blueBtn mt">{{$t('fbcsFile.tips.submit')}}</button>
+					<button v-if="fxAuth" @click="review" id="reviewBtn" class="blueBtn mt">{{$t('fbcsFile.tips.submit')}}</button>
 				</div>
 			</li><li class="mb">
 				<label class="label">&nbsp;</label>
 				<div class="right">
 					<p class="label txt"><b>{{$t('fbcsFile.dispatch.res')}}</b></p>
-					<el-table :data="cuList" :row-class-name="rowClass" :cell-class-name="cellClass" max-height="294" highlight-current-row border>
+					<el-table id="cuList" :data="cuList" :row-class-name="rowClass" :cell-class-name="cellClass" max-height="294" highlight-current-row border>
 						<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
 						<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 						<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')"></el-table-column>
@@ -47,8 +47,8 @@
 				</lgy-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="blueBtn" @click="send">{{$t('fbcsFile.tips.ok')}}</button>
-				<button class="defBtn" @click="showPwdinfo=false">{{$t('fbcsFile.tips.cancel')}}</button>
+				<button class="blueBtn" @click="send" id="send">{{$t('fbcsFile.tips.ok')}}</button>
+				<button class="defBtn" @click="showPwdinfo=false" id="close">{{$t('fbcsFile.tips.cancel')}}</button>
 			</div>
 		</el-dialog>
 		
@@ -60,41 +60,42 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	fxAuth: true,
-	type: 1,
-	nodeList: [
-		{nodeName:'深圳', cuName:'CU-2'},
-	],
-	cuList: [
-		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok'},
-	],
-	showReview: false,
-	reqsv: {},
-	reviewTxt: '',
-	parameter: null,
-	
-	showPwdinfo: false,
-	signalList: [],
-	signalPage: 1,
-	signalTotal: 1
-};
-var nodes, dict, isPatch, first;
+var _this, nodes, dict, isPatch, first;
 
 export default {
 	data(){
-		data.options = this.$t('fbcsFile.dispatch.options');
-		data.signalTitle = {
+		let bingo = {
+			fxAuth: true,
+			type: 1,
+			nodeList: [
+				{nodeName:'深圳', cuName:'CU-2'},
+			],
+			cuList: [
+				{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok'},
+			],
+			showReview: false,
+			reqsv: {},
+			reviewTxt: '',
+			parameter: null,
+			
+			showPwdinfo: false,
+			signalList: [],
+			signalPage: 1,
+			signalTotal: 1
+		};
+		
+		bingo.options = this.$t('fbcsFile.dispatch.options');
+		bingo.signalTitle = {
 //			section: this.$t('fbcsFile.dispatch.section'),
 			field: this.$t('fbcsFile.dispatch.field'),
 			type: this.$t('fbcsFile.dispatch.notype'),
 			detail: this.$t('fbcsFile.dispatch.detail')
 		};
-		data.width = {
+		bingo.width = {
 			type: 100,
 			detail: 450
 		};
-		return data;
+		return bingo;
 	},
 	methods:{
 		rowClass({row, rowIndex}){

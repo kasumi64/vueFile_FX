@@ -1,7 +1,7 @@
 <template>
 	<div class="blacklist">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span class="back" @click="back" id="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.files.blacklist.title')}}</b>
 		</header>
 		<div class="left">
@@ -14,7 +14,7 @@
 				<el-table-column prop="nodeName" :label="$t('fbcsFile.files.blacklist.nodeName')"></el-table-column>
 				<el-table-column prop="isBlack" :label="$t('fbcsFile.files.blacklist.cuType')"></el-table-column>
 			</el-table>
-			<button v-if="fxAuth" @click="setBlack" class="blueBtn mt">{{$t('fbcsFile.files.blacklist.blackBtn')}}</button>
+			<button v-if="fxAuth" @click="setBlack" class="blueBtn mt" id="close">{{$t('fbcsFile.files.blacklist.blackBtn')}}</button>
 		</div>
 		<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
 	</div>
@@ -23,19 +23,22 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, data = {
-	fxAuth: true,
-	nodeList: [
-		{nodeName:'shenzhen', cuName:'cu-2', isBlack:'白名单'}, {nodeName:'beijing', cuName:'cu-1', isBlack:'白名单'}
-	],
-	cuList: [],
-	showReview: false,
-	reqsv: {uri: 'userClientFile/blackList'},
-	reviewTxt: ''
-};
+var _this;
 
 export default {
-	data(){ return data;},
+	data(){
+		let bingo = {
+			fxAuth: true,
+			nodeList: [
+				{nodeName:'shenzhen', cuName:'cu-2', isBlack:'白名单'}, {nodeName:'beijing', cuName:'cu-1', isBlack:'白名单'}
+			],
+			cuList: [],
+			showReview: false,
+			reqsv: {uri: 'userClientFile/blackList'},
+			reviewTxt: ''
+		};
+		return bingo;
+	},
 	methods:{
 		back(){
 			this.$router.push({path: '/main/fxCfg/fileManage/regain'});

@@ -2,49 +2,52 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 import moment from 'moment';
 
-var _this, args, defaultPwd, 
-_info = {
-	userID: '', userName: '', userType: '1', userPasswd: '', inZone: '',linkGroupName: '', speedCtrl: -1,
-	maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
-	allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1, allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
-	maxPublishTopicDay: 7, maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000, webUserFlag: '',
-	isModifyDefaultPasswd: '', expiredTimeFlag: '1',
-}, data = {
-	fxAuth: true,
-	info: _info,
-	pwd: 1,
-	more: true,
-	blo: [{label: '是', value: 1},{label: '否', value: 0}],
-	userType: [{name: '系统动态配置', id: '1'}],
-	inZone: [],
-	group: [],
-	indate: '',
-	showReview: false,
-	reqsv: {},
-	reviewTxt: '',
-	parameter: null,
-	jump: false,
-	buildTime: '',
-	pickerBegin: {
-		disabledDate(time){
-			var boundary = new Date(_this.info.endSoftEncTime);
-			boundary.setHours(23,59,59);
-			return time > boundary;
-		}
-	},
-	pickerEnd: {
-		disabledDate(time){
-			var boundary = new Date(_this.info.beginSoftEncTime);
-			boundary.setHours(0, 0, 0);
-			return time < boundary;
-		}
-	},
-};
+var _this, args, defaultPwd;
+
 
 export default {
 	data(){
-		data.arbitratily = this.$t('fbcsFile.tips.arbitratily');
-		return data;
+		let _info = {
+			userID: '', userName: '', userType: '1', userPasswd: '', inZone: '',linkGroupName: '', speedCtrl: -1,
+			maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
+			allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1, allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
+			maxPublishTopicDay: 7, maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000, webUserFlag: '',
+			isModifyDefaultPasswd: '', expiredTimeFlag: '1',
+		};
+		let bingo = {
+			fxAuth: true,
+			info: _info,
+			pwd: 1,
+			more: true,
+			blo: [{label: '是', value: 1},{label: '否', value: 0}],
+			userType: [{name: '系统动态配置', id: '1'}],
+			inZone: [],
+			group: [],
+			indate: '',
+			showReview: false,
+			reqsv: {},
+			reviewTxt: '',
+			parameter: null,
+			jump: false,
+			buildTime: '',
+			pickerBegin: {
+				disabledDate(time){
+					var boundary = new Date(_this.info.endSoftEncTime);
+					boundary.setHours(23,59,59);
+					return time > boundary;
+				}
+			},
+			pickerEnd: {
+				disabledDate(time){
+					var boundary = new Date(_this.info.beginSoftEncTime);
+					boundary.setHours(0, 0, 0);
+					return time < boundary;
+				}
+			},
+		};
+		
+		bingo.arbitratily = this.$t('fbcsFile.tips.arbitratily');
+		return bingo;
 	},
 	props: {
 		isAdd: {

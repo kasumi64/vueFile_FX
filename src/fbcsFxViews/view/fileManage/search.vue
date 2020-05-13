@@ -1,13 +1,13 @@
 <template>
 	<div class="search">
 		<ul class="fnField">
-			<li @click="search">
+			<li @click="search" id="refresh">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/refresh.png"/>
 				<span class="label">{{$t('fbcsFile.tips.refresh')}}</span>
-			</li><li @click="checkVer(1)">
+			</li><li @click="checkVer(1)" id="contrast">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/fileVer.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.newVer')}}</span>
-			</li><li @click="advanced">
+			</li><li @click="advanced" id="toUpload">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/upload.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.upload')}}</span>
 			</li>
@@ -20,7 +20,7 @@
 		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="$t('fbcsFile.fnField.newVer')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<el-table :data="checkList" :row-class-name="rowClass" max-height="294" border>
+				<el-table id="check" :data="checkList" :row-class-name="rowClass" max-height="294" border>
 					<el-table-column type="index" width="50" label=" "></el-table-column>
 					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
@@ -31,7 +31,7 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="checkDialog=false" id="close">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		
@@ -44,19 +44,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
-var _this, data = {
-	page: 1,
-	total: 1,
-	list: [
-		{fileName: 'userID', fileComment: 'userName', fileMd5: 'ekeyName',dispatchTime: 1535646546566, reviewer: 'ekeyComment'}
-	],
-	showReview: false,
-	reqsv: {},
-	reviewTxt: '',
-	parameter: null,
-	checkDialog: false,
-	checkList: []
-};
+var _this;
 
 function del(row){
 	delete row.uri;
@@ -67,7 +55,21 @@ function del(row){
 
 export default {
 	data(){
-		data.title = {
+		let bingo = {
+			page: 1,
+			total: 1,
+			list: [
+				{fileName: 'userID', fileComment: 'userName', fileMd5: 'ekeyName',dispatchTime: 1535646546566, reviewer: 'ekeyComment'}
+			],
+			showReview: false,
+			reqsv: {},
+			reviewTxt: '',
+			parameter: null,
+			checkDialog: false,
+			checkList: []
+		};
+		
+		bingo.title = {
 			fileName: this.$t('fbcsFile.files.search.fileName'),
 			version: this.$t('fbcsFile.files.search.version'),
 			fileComment: this.$t('fbcsFile.files.search.fileComment'),
@@ -77,14 +79,14 @@ export default {
 			operator: this.$t('fbcsFile.files.search.operater'),
 			reviewer: this.$t('fbcsFile.files.search.reviewer')
 		};
-		data.defined = {
+		bingo.defined = {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 82,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.files.search.del') },
 			]
 		};
-		if(!utils.getFxAuth) data.defined.items = [];
-		return data;
+		if(!utils.getFxAuth) bingo.defined.items = [];
+		return bingo;
 	},
 	methods:{
 		rowClass({row, rowIndex}){

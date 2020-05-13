@@ -1,19 +1,19 @@
 <template>
 	<div class="editBiz">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span class="back" @click="back" id="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{$t('fbcsFile.order.editBiz.title')}}</b>
 		</header>
 		<ul class="form">
 			<li>
 				<div class="label">{{$t('fbcsFile.order.editBiz.bizKey')}}</div>
 				<div class="right">
-					<input v-model="info.bizKey" disabled autocomplete="off"/>
+					<input v-model="info.bizKey" id="bizKey" disabled autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.id')}}</div>
 				<div class="right">
-					<input v-model="info.userID" :disabled="isAdd!='add'" maxlength="31" autocomplete="off"/>
+					<input v-model="info.userID" id="userID" :disabled="isAdd!='add'" maxlength="31" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -21,7 +21,7 @@
 					{{$t('fbcsFile.userInfo.name')}}
 				</div>
 				<div class="right">
-					<input v-model="info.userName"  maxlength="127" autocomplete="off"/>
+					<input v-model="info.userName" id="userName"  maxlength="127" autocomplete="off"/>
 				</div>
 			</li><li v-if="isAdd=='add'">
 				<div class="label" style="vertical-align: top;">
@@ -29,16 +29,16 @@
 					{{$t('fbcsFile.userInfo.pwd')}}
 				</div>
 				<div class="right"><!--密码-->
-					<el-radio-group v-model="info.isModifyDefaultPasswd" @change="defPwd" class="radio">
+					<el-radio-group v-model="info.isModifyDefaultPasswd" id="isDefPwd" @change="defPwd" class="radio">
 						<el-radio :label="0">{{$t('fbcsFile.userInfo.def')}}</el-radio>
 						<el-radio :label="1">{{$t('fbcsFile.userInfo.hm')}}</el-radio>
 					</el-radio-group>
-					<input v-model="info.userPasswd" :disabled="!info.isModifyDefaultPasswd" maxlength="18" autocomplete="off"/>
+					<input v-model="info.userPasswd" id="pwd" :disabled="!info.isModifyDefaultPasswd" maxlength="18" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.type')}}</div>
 				<div class="right">
-					<el-select v-model="info.userType">
+					<el-select v-model="info.userType" id="type">
 						<el-option v-for="item in userType" :key="item.id" :label="item.name" :value="item.id">
 						</el-option>
 					</el-select>
@@ -46,7 +46,7 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.inZone')}}</div>
 				<div class="right">
-					<el-select v-model="info.inZone">
+					<el-select v-model="info.inZone" id="inZone">
 						<el-option v-for="item in inZone" :key="item.id" :label="item.name" :value="item.id">
 						</el-option>
 					</el-select>
@@ -54,7 +54,7 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.group')}}</div>
 				<div class="right">
-					<el-select v-model="info.linkGroupName">
+					<el-select v-model="info.linkGroupName" id="group">
 						<el-option v-for="item in group" :key="item.groupID" :label="item.groupID" :value="item.groupID">
 						</el-option>
 					</el-select>
@@ -65,7 +65,7 @@
 					{{$t('fbcsFile.userInfo.speed')}}
 				</div>
 				<div class="right">
-					<input v-model="info.speedCtrl" data-k="speedCtrl" @input="onlyNum_1($event)" maxlength="18" autocomplete="off"/>
+					<input v-model="info.speedCtrl" id="speed" data-k="speedCtrl" @input="onlyNum_1($event)" maxlength="18" autocomplete="off"/>
 					<span class="small">Kbit/s({{$t('fbcsFile.userInfo.Kbit')}})</span>
 					<!--
 						oninput="if(value.length>5)value=value.slice(0,5)"
@@ -78,7 +78,7 @@
 					{{$t('fbcsFile.userInfo.maxUser')}}
 				</div>
 				<div class="right">
-					<input v-model="info.maxRelationUser" data-k="maxRelationUser" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
+					<input v-model="info.maxRelationUser" id="signal" data-k="maxRelationUser" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">
@@ -86,12 +86,12 @@
 					{{$t('fbcsFile.order.editBiz.remark')}}
 				</div>
 				<div class="right">
-					<input v-model="info.remark"  maxlength="128" autocomplete="off"/>
+					<input v-model="info.remark" id="remark" maxlength="128" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label" style="vertical-align: top;">{{$t('fbcsFile.userInfo.encFlag')}}</div>
 				<div class="right"><!--加密方式-->
-					<el-radio-group v-model="info.encFlag" class="radio">
+					<el-radio-group v-model="info.encFlag" id="encFlag" class="radio">
 						<el-radio :label="1">{{$t('fbcsFile.userInfo.hard')}}</el-radio>
 						<el-radio :label="2">{{$t('fbcsFile.userInfo.soft')}}</el-radio>
 					</el-radio-group>
@@ -99,7 +99,7 @@
 			</li><li v-if="info.encFlag==1">
 				<div class="label">{{$t('fbcsFile.userInfo.beginTime')}}</div>
 				<div class="right">
-					<el-date-picker v-model="info.beginSoftEncTime" class="picker" type="datetime" :clearable="true" :editable="false"
+					<el-date-picker id="begin" v-model="info.beginSoftEncTime" class="picker" type="datetime" :clearable="true" :editable="false"
 						 :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="00:00:00">
 					</el-date-picker>
 					<!--:picker-options="pickerBegin"-->
@@ -107,7 +107,7 @@
 			</li><li v-if="info.encFlag==1">
 				<div class="label">{{$t('fbcsFile.userInfo.endTime')}}</div>
 				<div class="right">
-					<el-date-picker v-model="info.endSoftEncTime" class="picker" type="datetime" :clearable="true" :editable="false"
+					<el-date-picker id="end" v-model="info.endSoftEncTime" class="picker" type="datetime" :clearable="true" :editable="false"
 						 :placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59">
 					</el-date-picker>
 					<!--:picker-options="pickerEnd"-->
@@ -116,14 +116,14 @@
 		</ul>
 		
 		<div class="more">
-			<el-checkbox v-model="more" :label="$t('fbcsFile.userInfo.more')" border></el-checkbox>
+			<el-checkbox v-model="more" id="more" :label="$t('fbcsFile.userInfo.more')" border></el-checkbox>
 		</div>
 		
 		<ul v-if="more" class="form">
 			<li>
 				<div class="label">{{$t('fbcsFile.userInfo.online')}}</div>
 				<div class="right">
-					<el-select v-model="info.notOnlineAlarm">
+					<el-select v-model="info.notOnlineAlarm" id="online">
 						<el-option v-for="item in blo" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
@@ -131,7 +131,7 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.broadcast')}}</div>
 				<div class="right">
-					<el-select v-model="info.allowBroadcast">
+					<el-select v-model="info.allowBroadcast" id="broadcast">
 						<el-option v-for="item in blo" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
@@ -139,7 +139,7 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.connFlag')}}</div>
 				<div class="right">
-					<el-select v-model="info.allowConnFlag">
+					<el-select v-model="info.allowConnFlag" id="connFlag">
 						<el-option v-for="item in blo" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
@@ -147,7 +147,7 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.switchMsg')}}</div>
 				<div class="right">
-					<el-select v-model="info.allowSwitchMsg">
+					<el-select v-model="info.allowSwitchMsg" id="msg">
 						<el-option v-for="item in blo" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
@@ -155,32 +155,32 @@
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.allowPublishTopicCount')}}</div>
 				<div class="right">
-					<input v-model="info.allowPublishTopicCount" data-k="allowPublishTopicCount" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
+					<input v-model="info.allowPublishTopicCount" id="topicCount" data-k="allowPublishTopicCount" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.allowSubscribeTopicCount')}}</div>
 				<div class="right">
-					<input v-model="info.allowSubscribeTopicCount" data-k="allowSubscribeTopicCount" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
+					<input v-model="info.allowSubscribeTopicCount" id="topicNum" data-k="allowSubscribeTopicCount" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxPublishTopicDay')}}</div>
 				<div class="right">
-					<input v-model="info.maxPublishTopicDay" data-k="maxPublishTopicDay" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
+					<input v-model="info.maxPublishTopicDay" id="topicDay" data-k="maxPublishTopicDay" @input="onlyNum($event)" maxlength="4" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxSimultTaskCount')}}</div>
 				<div class="right">
-					<input v-model="info.maxSimultTaskCount" data-k="maxSimultTaskCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
+					<input v-model="info.maxSimultTaskCount" id="maxTask" data-k="maxSimultTaskCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.maxCltOneDayTaskCount')}}</div>
 				<div class="right">
-					<input v-model="info.maxCltOneDayTaskCount" data-k="maxCltOneDayTaskCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
+					<input v-model="info.maxCltOneDayTaskCount" id="dayTask" data-k="maxCltOneDayTaskCount" @input="onlyNum($event)" maxlength="9" autocomplete="off"/>
 				</div>
 			</li><li>
 				<div class="label">{{$t('fbcsFile.userInfo.webFlag')}}</div>
 				<div class="right">
-					<el-select v-model="info.webUserFlag">
+					<el-select v-model="info.webUserFlag" id="webUser">
 						<el-option v-for="item in blo" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
@@ -188,7 +188,7 @@
 			</li><li v-if="isAdd=='add'">
 				<div class="label">{{$t('fbcsFile.userInfo.indate')}}</div>
 				<div class="right">
-					<el-select v-model="info.expiredTimeFlag">
+					<el-select v-model="info.expiredTimeFlag" id="expired">
 						<el-option v-for="item in indate" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
@@ -206,8 +206,8 @@
 				<div class="label">&nbsp;</div>
 				<div class="right">
 					<!-- <button v-if="fxAuth" @click="now" class="blueBtn">{{$t('fbcsFile.tips.now')}}</button> -->
-					<button v-if="fxAuth" @click="submit" class="blueBtn">{{$t('fbcsFile.tips.ok')}}</button>
-					<button @click="back" class="defBtn">{{$t('fbcsFile.tips.back')}}</button>
+					<button v-if="fxAuth" @click="submit" id="submit" class="blueBtn">{{$t('fbcsFile.tips.ok')}}</button>
+					<button @click="back" class="defBtn" id="close">{{$t('fbcsFile.tips.back')}}</button>
 				</div>
 			</li>
 		</ul>
@@ -221,49 +221,52 @@
 	import md5 from '@/fbcsFxViews/libs/md5.js';
 	import moment from 'moment';
 	
-	var _this, args, defaultPwd, 
-	_info = {
-		userID: '', userName: '', userType: '1', userPasswd: '', inZone: '',linkGroupName: '', speedCtrl: -1,
-		maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
-		allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1, allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
-		maxPublishTopicDay: 7, maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000, webUserFlag: '',
-		isModifyDefaultPasswd: '', expiredTimeFlag: '', bizKey: '', remark: ''
-	}, data = {
-		fxAuth: true,
-		info: _info,
-		pwd: 1,
-		more: true,
-		blo: [{label: '是', value: 1},{label: '否', value: 0}],
-		userType: [{name: '系统动态配置', id: '1'}],
-		inZone: [],
-		group: [],
-		indate: '',
-		showReview: false,
-		reqsv: {},
-		reviewTxt: '',
-		parameter: null,
-		jump: false,
-		buildTime: '',
-		pickerBegin: {
-			disabledDate(time){
-				var boundary = new Date(_this.info.endSoftEncTime);
-				boundary.setHours(23,59,59);
-				return time > boundary;
-			}
-		},
-		pickerEnd: {
-			disabledDate(time){
-				var boundary = new Date(_this.info.beginSoftEncTime);
-				boundary.setHours(0, 0, 0);
-				return time < boundary;
-			}
-		},
-	};
+	var _this, args, defaultPwd;
+	
 	
 	export default {
 		data(){
-			data.arbitratily = this.$t('fbcsFile.tips.arbitratily');
-			return data;
+			let _info = {
+				userID: '', userName: '', userType: '1', userPasswd: '', inZone: '',linkGroupName: '', speedCtrl: -1,
+				maxRelationUser: '',notOnlineAlarm: 0, encFlag: 1, beginSoftEncTime: '', endSoftEncTime: '',
+				allowBroadcast: 0, allowConnFlag: 1, allowSwitchMsg: 1, allowPublishTopicCount: 5, allowSubscribeTopicCount: 5,
+				maxPublishTopicDay: 7, maxSimultTaskCount: 30, maxCltOneDayTaskCount: 500000, webUserFlag: '',
+				isModifyDefaultPasswd: '', expiredTimeFlag: '', bizKey: '', remark: ''
+			};
+			let bingo = {
+				fxAuth: true,
+				info: _info,
+				pwd: 1,
+				more: true,
+				blo: [{label: '是', value: 1},{label: '否', value: 0}],
+				userType: [{name: '系统动态配置', id: '1'}],
+				inZone: [],
+				group: [],
+				indate: '',
+				showReview: false,
+				reqsv: {},
+				reviewTxt: '',
+				parameter: null,
+				jump: false,
+				buildTime: '',
+				pickerBegin: {
+					disabledDate(time){
+						var boundary = new Date(_this.info.endSoftEncTime);
+						boundary.setHours(23,59,59);
+						return time > boundary;
+					}
+				},
+				pickerEnd: {
+					disabledDate(time){
+						var boundary = new Date(_this.info.beginSoftEncTime);
+						boundary.setHours(0, 0, 0);
+						return time < boundary;
+					}
+				},
+			};
+			
+			bingo.arbitratily = this.$t('fbcsFile.tips.arbitratily');
+			return bingo;
 		},
 		props: {
 			isAdd: {

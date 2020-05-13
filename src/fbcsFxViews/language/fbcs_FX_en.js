@@ -34,7 +34,7 @@ var obj = {
 		editUser: 'Modify Basic info', editEkey: 'Modify Ekey', addSignal: 'Create communication relationship', delEkey: 'Delete Ekey',
 		delUser: '删除用户', delSignal: 'Delete communication relationship', back: 'Back', detail: 'Details',
 		editExt: 'Modify extended info', delExt: 'Delete extended info', verback: 'Version rollback',
-		restore: 'Set as valid'
+		restore: 'validate'
 	},
 	err: {
 		lock: {
@@ -195,8 +195,8 @@ var obj = {
 			ssccManagerTelNum: 'Customer landline number', ssccManagerMobileNum: 'Customer cell phone',
 			operatorCompany: 'Company name', operatorDepartment: 'Department', email: 'e-mail', useEmail: 'Contact e-mail',
 			userAlarmSmsNum: 'SMS alarm number', operationPhoneNum: 'O&M phone number', operationFax: 'O&M fax number',
-			om_email: '用户运维邮箱', operatorUpdateTime: 'Update time',
-			valid: 'Set to valid?'
+			om_email: '用户运维邮箱', operatorUpdateTime: 'Update time', valid: 'Set to valid?',
+			expInfo: 'Export extended info'
 		},
 		audit: {
 			expcsv: 'Export audit', title: 'Audit advanced search', commFlag: '通信关系', userextFlag: 'extended info',

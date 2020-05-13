@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		
-		<el-dialog ref="cuBox" class="dialog" :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.components.result')"
+		<el-dialog ref="cuBox" :id="boxID" class="dialog" :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.components.result')"
 			v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
@@ -38,11 +38,11 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="close">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="close" :id="cancel">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		
-		<el-table ref="cuPox" :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border>
+		<el-table ref="cuPox" :id="poxID" :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 			<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')">
 				<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.cuName}}</span>
 			</el-table-column>
@@ -131,19 +131,29 @@ function WheelReq(sv, self){
 	};
 }
 
-var _this, whr, data = {
-	loading: false,
-	showDialog: false,
-	cuList: [
-//		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok', operationType:'用户'},
-	],
-	checkType: 0,
-};
+var _this, whr;
 
 export default {
 	name: 'lgy-wheelReq',
-	data() { return data; },
+	data() {
+		let bingo = {
+			boxID: 'loopList',
+			poxID: 'loopTable',
+			cancel: 'loop',
+			loading: false,
+			showDialog: false,
+			cuList: [
+		//		{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok', operationType:'用户'},
+			],
+			checkType: 0,
+		};
+		return bingo;
+	},
 	props: {
+		id: {
+			type: String,
+			default: ''
+		},
 		parameter: null, //轮询参数
 		hideDialog: {
 			type: Boolean,
@@ -191,6 +201,12 @@ export default {
 		this.checkType = 0;
 		this.cuList = [];
 		this.parameter = null;
+		if(this.id){
+			let str = '_' + this.id;
+			this.boxID += str;
+			this.poxID += str;
+			this.cancel += str;
+		}
 	},
 	watch: {
 		parameter(param){
