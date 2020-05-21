@@ -56,6 +56,7 @@
 
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
+import moment from 'moment';
 
 var _this, idAll = [];
 
@@ -102,7 +103,8 @@ export default {
 			ssccManagerTelNum: this.$t('fbcsFile.advanced.information.ssccManagerTelNum'),
 			ssccManagerMobileNum: this.$t('fbcsFile.advanced.information.ssccManagerMobileNum'),
 			operatorCompany: this.$t('fbcsFile.advanced.information.company'),
-			operatorDepartment: this.$t('fbcsFile.advanced.information.department')
+			operatorDepartment: this.$t('fbcsFile.advanced.information.department'),
+			updateTime: this.$t('fbcsFile.advanced.information.operatorUpdateTime')
 		};
 		bingo.titleBOP = {
 			userID: this.$t('fbcsFile.tableTitle.userID'),
@@ -243,6 +245,11 @@ function searchOPE(){
 		if(res.totalPage>0 && _this.pageOPE > res.totalPage){
 			_this.pageOPE = res.totalPage;
 			return searchOPE();
+		}
+		var obj;
+		for (var i = 0; i < res.lists.length; i++) {
+			obj = res.lists[i];
+			obj.updateTime = moment(obj.operatorUpdateTime*1000).format('YYYY-MM-DD HH:mm:ss');
 		}
 		_this.listOPE = res.lists;
 		_this.pageOPE = res.currentPage;

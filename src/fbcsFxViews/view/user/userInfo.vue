@@ -6,7 +6,7 @@
 		</header>
 		<el-tabs v-model="tab" type="card" @tab-click="tabClick">
 			<el-tab-pane :label="$t('fbcsFile.userHome.info')" name="first">
-				<user :isAdd.sync="type" :tab.sync='tab' :isNew="isNew"></user>
+				<user ref="basicInfo" :parent="that" :isAdd.sync="type" :tab.sync='tab' :isNew="isNew"></user>
 			</el-tab-pane>
 			<el-tab-pane :label="$t('fbcsFile.userHome.ekey')" name="second" :disabled="type=='add'">
 				<ekey ref="ekey" :isPage="false" :tab.sync='tab' :isNew="isNew"></ekey>
@@ -18,6 +18,7 @@
 				<information></information>
 			</el-tab-pane>
 		</el-tabs>
+		<lgy-wheelReq ref="basic" id="basic" @finish="finish" :parameter.sync="parameter"></lgy-wheelReq>
 	</div>
 </template>
 
@@ -34,6 +35,8 @@ export default {
 			tab: 'first',
 			type: 'edit',
 			isNew: false,
+			that: this,
+			parameter: null
 		}
 		return bingo;
 	},
@@ -54,6 +57,12 @@ export default {
 			function next(fn){
 				setTimeout(() => { fn(); });
 			};
+		},
+		finish(){
+			if(this.isNew){
+				this.isNew = false;
+				this.$refs.basicInfo.updateUser();
+			}
 		}
 	},
 	created(){

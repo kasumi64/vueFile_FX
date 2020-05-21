@@ -27,7 +27,6 @@ export default {
 			showReview: false,
 			reqsv: {},
 			reviewTxt: '',
-			parameter: null,
 			jump: false,
 			buildTime: '',
 			pickerBegin: {
@@ -55,7 +54,8 @@ export default {
 			default: 'add'
 		},
 		tab: '',
-		isNew: false
+		isNew: false,
+		parent: null
 	},
 	methods:{
 		back(){
@@ -193,6 +193,7 @@ export default {
 //					utils.loadClose();
 					return utils.alert({txt: res.errinfo});
 				}
+				var basic = _this.parent.$refs.basic;
 				if(res.webUserFlag == 1){ //网络用户
 					let mess = `<p>${res.errinfo}</p>`;
 					var time = 0;
@@ -201,20 +202,20 @@ export default {
 						txt: mess,
 						ok: () => {
 							clearTimeout(time);
-							_this.parameter = res;
+							basic.start(res);
 						},
 						type: 1
 					});
 					time = setTimeout(function(){
 						utils.tipsHide();
-						_this.parameter = res;
+						basic.start(res);
 					}, 3200);
 					return;
 				}
-				_this.parameter = res;
+				basic.start(res);
 			});
 		},
-		finish(){
+		updateUser(){
 			if(this.jump){
 				this.jump = false;
 				utils.emit('fbcs_newUser', this.info);
@@ -395,7 +396,6 @@ function initDate(){
 	_this.userType = _this.inZone = _this.group = [];
 	_this.indate = _this.$t('fbcsFile.password.options');
 	_this.showReview = false;
-	_this.parameter = null;
 	
 	let day = new Date();
 	day.setHours(0, 0, 0, 0);

@@ -197,7 +197,7 @@
 			</li>
 		</ul>
 		<lgy-review id="basic" :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>
-		<lgy-wheelReq id="basic" :parameter.sync="parameter" @finish="finish"></lgy-wheelReq>
+		<!-- <lgy-wheelReq id="basic" :parameter.sync="parameter" @finish="finish"></lgy-wheelReq> -->
 	</div>
 </template>
 

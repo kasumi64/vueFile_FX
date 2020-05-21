@@ -1,6 +1,7 @@
 <style>
 #lgy-candidateWords {display: inline-block;position: relative;}
-#lgy-candidateWords .inp{width: 192px;font-size: 12px;padding: 0 26px 0 10px;height: 30px;border:1px solid #dcdfe6;border-radius: 0;color: #666;}
+.lgy-candidateWords{width: 192px;}
+#lgy-candidateWords .inp{width: 100%;font-size: 12px;padding: 0 26px 0 10px;height: 30px;border:1px solid #dcdfe6;border-radius: 0;color: #666;}
 /*#lgy-candidateWords .inp:focus{border:2px solid #32ccF9}*/
 #lgy-candidateWords .arrow{position: absolute;top: 7px;right: 7px;font-size: 14px;color: #c0c4cc;transition: transform 0.3s;display: none;}
 #lgy-candidateWords .inTip {
@@ -13,7 +14,7 @@
 </style>
 
 <template>
-	<div id="lgy-candidateWords">
+	<div id="lgy-candidateWords" class="lgy-candidateWords">
 		<input :id="AC" type="text" class="autocompleteOFF" autocomplete="on"/>
 		<input :id="inputID" :value="value" :disabled="disabled" class="inp" :placeholder="placeholder" maxlength="127" 
 			@focus="focusHandle" @blur="blurHandle" @input="inputHandle" @change="changeHandle" autocomplete="off"/>

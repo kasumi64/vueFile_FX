@@ -31,6 +31,16 @@ body{font-family: "microsoft yahei", "Helvetica Neue", "Helvetica, arial, STHeiT
 /*#fbcs_file .el-select__tags{overflow: auto;max-height: 300px;}*/
 #fbcs_file .el-select__tags-text{max-width: 230px;overflow: hidden;text-overflow: ellipsis;}
 
+/*elment-ui 表格*/
+#fbcs_file .el-table thead{color: #333;}
+#fbcs_file .el-table__header th{background: #E5EAF0;}
+#fbcs_file .tableBG{background: #E5EAF0;}
+#fbcs_file .el-table__body tr.current-row>td{background: #CFE0F3;}
+#fbcs_file .el-table td{padding: 10px 0;}
+#fbcs_file .el-table .cell{line-height: 20px;white-space: normal;word-break: break-word;}
+#fbcs_file .el-table--enable-row-hover .el-table__body tr:hover>td { background: inherit; }
+#fbcs_file .el-table--enable-row-hover .el-table__body tr.current-row:hover>td { background: #CFE0F3; }
+
 /*elment-ui 日期*/
 #fbcs_file .picker{width: 192px;}
 #fbcs_file .picker .el-input__inner{padding-left: 30px;}

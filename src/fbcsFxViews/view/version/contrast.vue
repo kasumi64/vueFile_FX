@@ -8,9 +8,9 @@
 			</el-select>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.versionContrast.ver1')}}</label>
-			<lgy-candidateWords v-model="id1" id="version1" :keywords="ver1" :disabled="disabled" @input="input1" class="words"></lgy-candidateWords>
+			<lgy-candidateWords v-model="id1" id="version1" :keywords="ver1" @input="input1" class="words"></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.versionContrast.ver2')}}</label>
-			<lgy-candidateWords v-model="id2" id="version2" :keywords="ver2" :disabled="disabled" @input="input2" class="words"></lgy-candidateWords>
+			<lgy-candidateWords v-model="id2" id="version2" :keywords="ver2" @input="input2" class="words"></lgy-candidateWords>
 			<button class="blueBtn mr20" @click="search" id="search">{{$t('fbcsFile.versionContrast.btn')}}</button>
 		</div>
 		<lgy-table :list="list" :title="title1" v-if="disabled" :width="width" :total="total" :currentPage="page" @changePage="changePage" >
@@ -23,7 +23,7 @@
 <script>
 import utils from '@/fbcsFxViews/libs/utils.js';
 
-var _this, verWords = [], words3 = [], words4 = [];
+var _this, verWords = [], words3 = [], words4 = [], defInput;
 
 export default {
 	data(){
@@ -32,9 +32,9 @@ export default {
 			id2: '',
 			ver1: [],
 			ver2: [],
-			type: 3,
-			disabled: false,
-			list: '',
+			type: 1,
+			disabled: true,
+			list: [],
 			page: 1,
 			total: 1
 		};
@@ -55,6 +55,10 @@ export default {
 			field: 180,
 			type: 180
 		};
+		defInput = [
+			this.$t('fbcsFile.versionContrast.online'),
+			this.$t('fbcsFile.versionContrast.temp')
+		];
 		return bingo;
 	},
 	methods:{
@@ -70,11 +74,11 @@ export default {
 			search();
 		},
 		input1(val){
-			if(val=='') return this.ver1 = [].concat(verWords);
+			// if(val=='') return this.ver1 = [].concat(verWords);
 			keywords(val, arr => { _this.ver1 = arr; });
 		},
 		input2(val){
-			if(val=='') return this.ver2 = [].concat(verWords);
+			// if(val=='') return this.ver2 = [].concat(verWords);
 			keywords(val, arr => { _this.ver2 = arr; });
 		},
 	},
@@ -85,21 +89,22 @@ export default {
 		this.page = 1;
 		this.total = 1;
 		this.list = [];
-		keywords('', arr => { words3 = arr; }, 3);
-		keywords('', arr => { words4 = arr; }, 4);
+		// keywords('', arr => { words3 = arr; }, 3);
+		// keywords('', arr => { words4 = arr; }, 4);
 		getZdEnabled();
 	},
 	mounted(){
-		setTimeout(changeType, 40, 1);
+		setTimeout(changeType, 500, 1);
 	}
 };
 
 function keywords(val, fn, t){
+	var type = t || _this.type;
 	let params = {
 		url: 'version/queryCompare',
 		cmdID: '600072',
 		version: val,
-		type: t || _this.type,
+		type: type,
 		pageSize: 100,
 		currentPage: 1
 	};
@@ -110,17 +115,36 @@ function keywords(val, fn, t){
 			obj = arr[i];
 			obj.label = obj.value = obj.version;
 		}
+		if(type < 3){
+			for (i = defInput.length-1; i >= 0; i--) {
+				let label = defInput[i].toLocaleLowerCase();
+				let str = val.toLocaleLowerCase();
+				if(label.indexOf(str)!=-1) arr.unshift({label:label, value: label});
+			}
+		}
 		fn(arr);
 	});
 }
 
 function search(){
+	var ver1 = _this.id1, ver2 = _this.id2;
+	if(ver1==''||ver2==''){
+		return utils.alert({
+			txt: _this.$t('fbcsFile.versionContrast.noNull')
+		});
+	}
+	
+	if(ver1 == defInput[0]) ver1 = 'online';
+	else if(ver1 == defInput[1]) ver1 = 'temp';
+	if(ver2 == defInput[0]) ver2 = 'online';
+	else if(ver2 == defInput[1]) ver2 = 'temp';
+	
 	let params = {
 		url: 'version/compare',
 		cmdID: '600074',
 		type: _this.type,
-		version1: _this.id1,
-		version2: _this.id2,
+		version1: ver1,
+		version2: ver2,
 		pageSize: 20,
 		currentPage: _this.page
 	};
@@ -151,13 +175,14 @@ function changeType(val){
 		_this.id1 = _this.id2 = '';
 		_this.disabled = false;
 	} else {
-		_this.id1 = _this.$t('fbcsFile.versionContrast.temp');
-		_this.id2 = _this.$t('fbcsFile.versionContrast.online');
+		_this.id1 = defInput[0];
+		_this.id2 = defInput[1];
 		_this.disabled = true;
 	}
 	
-	verWords = [].concat(val==3 ? words3 : words4);
-	_this.ver1 = _this.ver2 = verWords;
+	// verWords = [].concat(val==3 ? words3 : words4);
+	// _this.ver1 = _this.ver2 = verWords;
+	keywords('', arr => { _this.ver1 = _this.ver2 = arr; });
 }
 
 function getZdEnabled(){
@@ -178,6 +203,7 @@ function getZdEnabled(){
 
 <style scoped="scoped">
 	.contrast{min-width: 703px;}
+	.words{width: 272px;}
 	.jg{height: 10px;}
 	.el-select{width: 220px;}
 </style>

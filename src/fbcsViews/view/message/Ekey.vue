@@ -60,7 +60,8 @@
 							<p class="txt"><span class="red">*&nbsp;</span>{{pageTxt.popup[1]}}</p>
 						</div>
 						<div class="rightBox" id="rightBox1">
-							<el-select popper-class="signal_select" id="Ekye_input" filterable v-model="ainfo.userID" :no-match-text='noData' :placeholder="placeholder">
+							<el-select v-model="ainfo.userID" filterable :filter-method="addEkeyFilter" id="Ekye_input"
+								popper-class="signal_select" :no-match-text='noData' :placeholder="placeholder">
 								<el-option v-for="item in options" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 							</el-select>
 						</div>
@@ -165,7 +166,7 @@
 					</li>
 				</ul>
 				<div slot="footer" class="_footBtn">
-					<el-button type="primary" @click="lijixiafa">{{pageTxt.popup[5]}}</el-button>
+					<el-button type="primary" @click="editIssue">{{pageTxt.popup[5]}}</el-button>
 					<el-button type="primary" @click="submitEdit">{{pageTxt.popup[13]}}</el-button>
 					<el-button @click="editEkdy = false">{{pageTxt.popup[7]}}</el-button>
 				</div>
@@ -336,30 +337,27 @@
 				this.ainfo.ekeyPasswd = '';
 				this.ainfo.ekeyValidDate = "";
 				this.ainfo.comment = "";
-				
-				setTimeout(function() {
-					document.getElementById("Ekye_input").oninput = function(e) {
-						clearTimeout(t);
-						t = setTimeout(function() {
-							utils.post("mx/userinfo/queryLists", {
-								cmdID: "600001",
-								userID: e.target.value,
-								userName: e.target.value,
-								pageSize: 100,
-								currentPage: 1,
-								type: 2
-							},
-							function(response) {
-								if (response.errcode == 0) {
-									_this.options = response.lists;
-									for (var i = 0; i < _this.options.length; i++) {
-										_this.options[i].userName = _this.options[i].userID + "(" + _this.options[i].userName + ")";
-									}
-								}
-							});
-						}, 300);
-					};
-				}, 100);
+			},
+			addEkeyFilter(words){ //自定义搜索方法
+				clearTimeout(t);
+				t = setTimeout(function() {
+					utils.post("mx/userinfo/queryLists", {
+						cmdID: "600001",
+						userID: e.target.value,
+						userName: e.target.value,
+						pageSize: 100,
+						currentPage: 1,
+						type: 2
+					},
+					function(response) {
+						if (response.errcode == 0) {
+							_this.options = response.lists;
+							for (var i = 0; i < _this.options.length; i++) {
+								_this.options[i].userName = _this.options[i].userID + "(" + _this.options[i].userName + ")";
+							}
+						}
+					});
+				}, 300);
 			},
 			//立即下发
 			sendDown() {
@@ -478,7 +476,7 @@
 				}
 				this.binfo.comment = row.comment;
 			},
-			lijixiafa() {
+			editIssue() {
 				if (check(this.binfo, true) !== true) return;
 
 				this.editEkdy = false;

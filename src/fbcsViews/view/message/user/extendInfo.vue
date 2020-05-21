@@ -227,7 +227,7 @@ export default {
 			label: this.$t('fbcsFile.tableTitle.operation'), width: 110,
 			items: [
 				{src:require('@/fbcsFxViews/img/table/edit.png'), click: edit, tips: this.$t('fbcsFile.tableDefined.editExt') },
-				{src:require('@/fbcsFxViews/img/table/restore.png'), click: valid, tips: this.$t('fbcsFile.tableDefined.restore') },
+				{src:require('@/fbcsFxViews/img/table/valid.png'), click: valid, tips: this.$t('fbcsFile.tableDefined.restore') },
 				{src:require('@/fbcsFxViews/img/table/del.png'), click: del, tips: this.$t('fbcsFile.tableDefined.delExt') }
 			]
 		};

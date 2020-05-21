@@ -118,7 +118,9 @@ var obj = {
 		t1:'(系统动态配置文件为：FxDynamic.ini,userinfo.db,userekey.db,usercomm.db,userinfoext.db)',
 		t2:'(系统静态配置文件为：FxStatic.ini)', t3:'(用户密码信息表文件为：userpasswd.db)',
 		t4:'(互联网配置信息文件为：userinfo.db,userinfoext.db,userpasswd.db)',
-		section: '段名', field: '用户ID', notype: '不一致类型', detail: '详情', noNode: '节点名不能为空'
+		section: '段名', field: '用户ID', notype: '不一致类型', detail: '详情', noNode: '节点名不能为空',
+		dispatchAll: '分发到全部中枢主机？此次操作将生成版本',
+		dispatchPart: '分发到部分中枢主机？此次操作不生成版本'
 	},
 	audit: {
 		operator:'操作员', reviewer:'审核员', operatorRole:'操作员角色', operatorType:'操作类型',
@@ -151,7 +153,8 @@ var obj = {
 			{label: '中登CTPLST', value: 4},{label: '中登ZDRela', value: 5}],
 		options2: [{label: '全局动态配置', value: 1},{label: '全局静态配置', value: 2},{label: '用户密码信息表', value: 3}],
 		type:'操作类型', ver1: '基准版本：', ver2: '对比版本：', btn: '对比', temp: '临时版本', online: '线上版本',
-		section: '段名', field: '字段名', detail: '详情', res: '对比结果没有变化'
+		section: '段名', field: '字段名', detail: '详情', res: '对比结果没有变化',
+		noNull: '基准版本或对比版本不能为空'
 	},
 	
 	files: {

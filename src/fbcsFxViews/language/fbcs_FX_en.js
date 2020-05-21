@@ -118,7 +118,9 @@ var obj = {
 		t1:'(System dynamic config file is：FxDynamic.ini,userinfo.db,userekey.db,usercomm.db,userinfoext.db)',
 		t2:'(System static config file is：FxStatic.ini)', t3:'(User password info table file is ：userpasswd.db)',
 		t4:'(Internet config info file is：userinfo.db,userinfoext.db,userpasswd.db)',
-		section: 'Segment name', field: 'UserID', notype: 'Inconsistent type', detail: 'Details', noNode: '节点名不能为空'
+		section: 'Segment name', field: 'UserID', notype: 'Inconsistent type', detail: 'Details', noNode: '节点名不能为空',
+		dispatchAll: 'Dispatch to all hosts?This operation will create a version',
+		dispatchPart: 'Dispatch to part hosts?This operation do not create a version'
 	},
 	audit: {
 		operator:'Operator', reviewer:'Audit', operatorRole:'Operator role', operatorType:'Operation type',
@@ -151,7 +153,8 @@ var obj = {
 			{label: 'China clear config CTPLST', value: 4},{label: 'China clear config ZDRela', value: 5}],
 		options2: [{label: 'Global dynamic config', value: 1},{label: 'Global static config', value: 2},{label: 'User password info table', value: 3}],
 		type:'Operation type', ver1: 'Benchmark version：', ver2: 'Comparison version：', btn: 'Compare', temp: 'Temporary version', online: 'Online version',
-		section: 'Segment name', field: 'Field name', detail: 'Details', res: 'No change in comparison results'
+		section: 'Segment name', field: 'Field name', detail: 'Details', res: 'No change in comparison results',
+		noNull: 'Benchmark version or comparison version cannot be empty.'
 	},
 	
 	files: {

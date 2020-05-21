@@ -119,17 +119,25 @@ export default {
 		},
 		review(){
 			if(this.cuList.length == 0) return utils.alert({txt: this.$t('fbcsFile.dispatch.noNode')});
-			if(this.type == '3'){
-				isPatch = true;
-				this.signalPage = 1;
-				signalSearch();  //类型为用户密码表时用，3，7
-				return this.showPwdinfo = true;
-			}
-			this.reqsv = {uri: 'batchDispatch/dispatch'};
-			this.showReview = true;
+			
+			let isAll = (this.cuList.length == this.nodeList.length);
+			utils.confirm({
+				txt: _this.$t('fbcsFile.dispatch.' + (isAll ? 'dispatchAll' : 'dispatchPart')),
+				ok: () => {
+					if(this.type == '3'){
+						isPatch = true;
+						this.signalPage = 1;
+						signalSearch();  //类型为用户密码表时用，3，7
+						return this.showPwdinfo = true;
+					}
+					this.reqsv = {uri: 'batchDispatch/dispatch'};
+					this.showReview = true;
+				}
+			});
 		},
 		submit(args){
 			utils.loadShow();
+			let isAll = (this.cuList.length == this.nodeList.length);
 			let params = {
 				url: 'batchDispatch/dispatch',
 				cmdID: '600082',
@@ -138,7 +146,8 @@ export default {
 				reviewType: 1,
 				type: this.type,
 				count: this.cuList.length,
-				lists: this.cuList
+				lists: this.cuList,
+				dispatchType: isAll ? 0 : 1 //0-全部节点,1-单个或部分节点
 			};
 			this.cuList.forEach(item => {
 				item.errinfo = item.errStr = '';
