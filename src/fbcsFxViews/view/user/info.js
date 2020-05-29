@@ -187,10 +187,10 @@ export default {
 			params.reviewType = 1;
 			if(params.linkGroupName == _this.arbitratily) params.linkGroupName = '';
 			
-//			utils.loadShow();
+			utils.loadShow();
 			utils.post(params).then(function(res){
+				utils.loadClose();
 				if(res.errcode != '0') {
-//					utils.loadClose();
 					return utils.alert({txt: res.errinfo});
 				}
 				var basic = _this.parent.$refs.basic;

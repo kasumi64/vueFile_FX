@@ -11,6 +11,18 @@ export default new Vuex.Store({
 		dateListsUserID: {},
 		HeaderText: '',			// 修改创建标题
 		creatAndEdit: '',
-		editBack: ''			// 修改返回路径
+		editBack: '',			// 修改返回路径
+		
+		isLockFbcs: false		//锁的状态
+	},
+	mutations: {
+		setLockFbcs(state, bln){
+			state.isLockFbcs = bln;
+		}
+	},
+	actions: {
+		changeLockFbcs(store, bln){
+			store.commit('setLockFbcs', bln);
+		}
 	}
 });

@@ -42,7 +42,7 @@ export default {
 	},
 	created(){
 		this.activeTag = 'xiaozhan';
-		this.$router.push({path:'/main/mxCfg/order/xiaozhan'});
+		this.$router.push({path:'/main/mxCfg/order/xiaozhan', query: this.$route.query});
 	}
 }
 </script>

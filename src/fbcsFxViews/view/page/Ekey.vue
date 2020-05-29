@@ -110,6 +110,7 @@ function delNow(obj){
 	
 	utils.post(params).then(function(res){
 		search();
+		utils.loadClose();
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
 	});
@@ -248,6 +249,7 @@ export default {
 			this.showDialog = false;
 		},
 		review(obj){
+			utils.loadShow();
 			switch (obj.uri){
 				case "userEkey/addImmediately": 
 					addNow(obj); break;
@@ -255,7 +257,7 @@ export default {
 					editNow(obj); break;
 				case "userEkey/deleteImmediately": 
 					delNow(obj); break;
-				default: break;
+				default: utils.loadClose(); break;
 			}
 		},
 	},
@@ -336,6 +338,7 @@ function addNow(obj){
 	
 	utils.post(params).then(function(res){
 		search();
+		utils.loadClose();
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
 	});
@@ -351,6 +354,7 @@ function editNow(obj){
 	
 	utils.post(params).then(function(res){
 		search();
+		utils.loadClose();
 		if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 		_this.parameter = res;
 	});

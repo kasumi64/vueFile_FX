@@ -12,40 +12,18 @@
 			<div class="ico3"><span class='ioc3_txt'>0</span></div>
 			<ul class="warn"></ul>
 		</div>
-	
+		<select class="sys sl" @change="system">
+			<option value="1">文件系统</option>
+			<option value="2" selected>消息系统</option>
+			<option value="3">互联网用户</option>
+		</select>
 		<div class="userBox">
-			<!-- <div>
-				<div class="ico4"><img src="../img/switchico.png"></div> 
-				<span class="margin_left" @click="swc">{{pageTxt.label[0]}}</span>		
-			</div> -->
-	
-			<!--<el-dropdown trigger="click" @command="goto">
-				<span class="el-dropdown-link dropTop">
-					<span class="margin_left">{{pageTxt.label[1]}}</span>
-					<div class="ico5"><img class="csor" src="../img/selectdico1.png"></div>
-				</span>
-				<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item command="FDEPUrl">{{pageTxt.label[2]}} </el-dropdown-item>
-					<el-dropdown-item command="FMPUrl">{{pageTxt.label[3]}}</el-dropdown-item>
-					<el-dropdown-item command="CMSUrl">{{pageTxt.label[4]}} </el-dropdown-item>
-					<el-dropdown-item command="FBASUrl">{{pageTxt.label[5]}}</el-dropdown-item>
-				</el-dropdown-menu>
-			</el-dropdown>
-	
-			<el-dropdown trigger="click" @command="account">
-				<span class="el-dropdown-link dropTop">
-					<span class="margin_left">{{userName}}</span>
-					<div class="ico5"><img class="csor" src="../img/selectdico1.png"></div>
-				</span>
-				<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item command="passwd">{{pageTxt.label[6]}}</el-dropdown-item>
-					<el-dropdown-item command="loginout">{{pageTxt.label[7]}}</el-dropdown-item>
-				</el-dropdown-menu>
-			</el-dropdown>-->
+			
 			
 			<div class="fbcs_lockBox">
-				<img id="fbcsMX_lock" v-show="isLock==true"  src="../img/lock.png"/>
-				<img id="fbcsMX_unlock" v-show="isLock==false" src="../img/unlock.png"/>
+				<!-- <img id="fbcsMX_lock" v-show="isLock==true"  src="../img/lock.png"/>
+				<img id="fbcsMX_unlock" v-show="isLock==false" src="../img/unlock.png"/> -->
+				<lock />
 			</div>
 		</div>
 		
@@ -77,11 +55,6 @@
 			</div>
 		</div>
 		<!-- <button class="sys" @click="system">消息系统</button> -->
-		<select class="sys sl" @change="system">
-			<option value="1">文件系统</option>
-			<option value="2" selected>消息系统</option>
-			<option value="3">互联网用户</option>
-		</select>
 	</div>
 </template>
 
@@ -201,6 +174,9 @@ import md5		 from "@/fbcsViews/libs/md5.js";
 //			getWarnTotal();
 			pwdm = addDrag(kit('.navHead .pwdMask'));
 		},
+		components: {
+			lock: resolve => require(['@/fbcsViews/view/LockMx.vue'], resolve)
+		},
 		beforeDestroy(){
 			// clearTimeout();
 		}
@@ -317,7 +293,7 @@ import md5		 from "@/fbcsViews/libs/md5.js";
 		}
 		timer.complete(init);
 		this.stop = function(arr){
-			clearTimeout(once);
+			// clearTimeout(once);
 			timer.stop();
 		};
 	}
@@ -368,8 +344,8 @@ import md5		 from "@/fbcsViews/libs/md5.js";
 	.userBox>div:nth-child(2){display: inline-block; margin-right: 12px;}
 	.userBox>div:nth-child(3){display: inline-block;}
 
-	.csor,.el-dropdown,.warn,.fbcs_lockBox img{cursor:pointer;}
-	.fbcs_lockBox{padding: 12px 10px;margin-top: 6px;}
+	.csor,.el-dropdown,.warn{cursor:pointer;}
+	.fbcs_lockBox{margin-top: 6px;}
 	
 	.pwdMask{display: block;position: fixed;height: 100%;width: 100%;background: rgba(0,0,0,0.2);top: 0;left: 0;z-index: 2;font-size: 0;text-align: center;}
 	.pwdMask .panle{display: inline-block;text-align: left;width: 664px;height: 335px;background: #FFF;border-radius: 6px;margin-top: 10%;}

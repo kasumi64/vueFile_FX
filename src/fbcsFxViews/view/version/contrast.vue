@@ -119,7 +119,7 @@ function keywords(val, fn, t){
 			for (i = defInput.length-1; i >= 0; i--) {
 				let label = defInput[i].toLocaleLowerCase();
 				let str = val.toLocaleLowerCase();
-				if(label.indexOf(str)!=-1) arr.unshift({label:label, value: label});
+				if(label.indexOf(str)!=-1) arr.unshift({label:defInput[i], value: defInput[i]});
 			}
 		}
 		fn(arr);

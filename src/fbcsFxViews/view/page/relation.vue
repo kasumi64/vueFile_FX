@@ -123,7 +123,7 @@ export default {
 		    showReview: false,
 		    reqsv: {uri:''},
 		    reviewTxt: '',
-		    parameter: ''
+		    parameter: null
 		};
 		
 		bingo.placeholder = this.$t('fbcsFile.tips.psel');
@@ -266,9 +266,10 @@ export default {
 				userID2: this.sid[0]
 			};
 			
-//			console.log(params);
+			utils.loadShow();
 			utils.post(params).then(res => {
 				_this.search();
+				utils.loadClose();
 				if(res.errcode!='0') return utils.alert({txt: res.errinfo});
 				_this.parameter = res;
 			});

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+	localStorage.setItem('authoritys', 'Auth_Fx_Config_Opt;Auth_Mx_Config_Opt');
 	export default {
 		name: 'App'
 	};

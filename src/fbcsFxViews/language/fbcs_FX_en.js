@@ -244,4 +244,19 @@ var obj = {
 		}
 	}
 };
-module.exports = {fbcsFile: obj};
+var other = {
+	fbcsLock: {
+		title: 'Tips', name: 'UserName：', pwd: 'User Password：',
+		ok: 'OK', cancel: 'Cancel',
+		pwdNull: 'Password cannot be empty',
+		errAuth: 'You do not have permission',
+		lock: 'Lock the system? System locking will disable the config modification by ordinary users.',
+		unlock: 'Unlock the system?',
+		lockTxt: 'Tips: the current system is locked, and the user has been forbidden to modify the config.'
+	}
+};
+
+module.exports = {
+	fbcsFile: obj,
+	'base': other
+};

@@ -244,4 +244,19 @@ var obj = {
 		}
 	}
 };
-module.exports = {fbcsFile: obj};
+var other = {
+	fbcsLock: {
+		title: '提示', name: '用户名称：', pwd: '用户密码：',
+		ok: '确定', cancel: '取消',
+		pwdNull: '用户密码不能为空',
+		errAuth: '您当前没有操作权限！',
+		lock: '是否锁定系统，系统锁定状态将禁用普通用户修改配置。',
+		unlock: '是否解除系统锁定状态？',
+		lockTxt: '提示：当前系统运维锁定状态，已禁止用户修改配置。'
+	}
+};
+
+module.exports = {
+	fbcsFile: obj,
+	'base': other
+};

@@ -120,11 +120,17 @@ export default {
 		review(){
 			if(this.cuList.length == 0) return utils.alert({txt: this.$t('fbcsFile.dispatch.noNode')});
 			
+			if(this.tyye == 4){
+				this.reqsv = {uri: 'batchDispatch/dispatch'};
+				this.showReview = true;
+				return;
+			}
+			
 			let isAll = (this.cuList.length == this.nodeList.length);
 			utils.confirm({
 				txt: _this.$t('fbcsFile.dispatch.' + (isAll ? 'dispatchAll' : 'dispatchPart')),
 				ok: () => {
-					if(this.type == '3'){
+					if(this.type == 3){
 						isPatch = true;
 						this.signalPage = 1;
 						signalSearch();  //类型为用户密码表时用，3，7
