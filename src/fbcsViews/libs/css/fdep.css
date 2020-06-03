@@ -95,7 +95,7 @@ body{font-family: "microsoft yahei", "Helvetica Neue", "Helvetica, arial, STHeiT
 #fbcs_MX ._zero{font-size: 0; line-height: 0;white-space: nowrap;}
 #fbcs_MX ._iBtn{padding: 6px 10px; font-size: 16px;}
 #fbcs_MX ._zero img{vertical-align: middle;cursor: pointer;}
-#fbcs_MX .opacity0{opacity: 0;display: block;position: fixed;top: -100px;left: 0;z-index: -1;pointer-events: none;}
+#fbcs_MX .opacity0{opacity: 0;display: block;position: fixed;top: -100px;left: -428px;z-index: -1;pointer-events: none;}
 ::-webkit-input-placeholder{color: #c0c4cc;}
 /*input[type=text],input[type=password],input[type=number],input[type=email],input[type=search],input[type=tel],input[type=url]{border: 1px solid #D7D8DA;}
 input[type=text]:focus,input[type=password]:focus,input[type=number]:focus{border: 2px solid #32CCF9;}*/
@@ -209,12 +209,12 @@ input[type=text]:focus,input[type=password]:focus,input[type=number]:focus{borde
 	border-radius:8px;background:rgba(38,38,38,.7);transform:translateY(50%);}
 #_weakTips ._container{color:#FFF;white-space:normal;font-size:14px;line-height:20px;}
 /* 带按钮的消息框 */
-#_hints{background: rgba(59, 65, 75, 0.2);word-break: break-word;}
+#_hints{background: rgba(0, 0, 0, 0.5);word-break: break-word;}
 #_hints *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 #_hints ._panle{display: inline-block; width: 600px; margin-top: 10%; background: #FFF; border-radius: 4px;}
 #_hints #_title{font-size: 16px; color: #656A73; font-weight: bold; text-align: left; text-indent: 20px; border-bottom: 1px solid #D7D8DA; 
 	line-height: 50px; height: 50px;cursor: move;-webkit-user-select: none;user-select: none;}
-#_hints #_close{position: absolute; top: 17px; right: 17px; cursor: pointer;}
+#_hints #old_close{position: absolute; top: 17px; right: 17px; cursor: pointer;}
 #_hints ._messaga{display: grid;min-height: 200px; overflow: hidden; padding: 40px;}
 #_hints #_ctxt{font-size: 16px; color: #666; line-height: 24px; white-space: pre-wrap;max-height: 500px;
 	margin: auto;overflow: auto;text-align: left;}
@@ -224,12 +224,12 @@ input[type=text]:focus,input[type=password]:focus,input[type=number]:focus{borde
 #_hints .part{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;text-overflow: ellipsis;text-align: left;}
 #_hints .red{color: #F00;}
 /* 操作员的输入框 */
-#_review{background: rgba(59, 65, 75, 0.2);}
+#_review{background: rgba(0, 0, 0, 0.5);} /* rgba(59, 65, 75, 0.2); */
 #_review *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 #_review ._panle{display: inline-block; width: 600px; margin-top: 10%; background: #FFF; border-radius: 4px;}
 #_review #_title{font-size: 16px; color: #656A73; font-weight: bold; text-align: left; text-indent: 20px; border-bottom: 1px solid #D7D8DA; 
 	line-height: 50px; height: 50px;cursor: move;-webkit-user-select: none;user-select: none;}
-#_review #_close{position: absolute; top: 17px; right: 20px; cursor: pointer;}
+#_review #rev_close{position: absolute; top: 17px; right: 20px; cursor: pointer;}
 #_review ._messaga{padding-top: 55px;text-align: left;height: 200px;}
 #_review *{vertical-align: middle;}
 #_review li:first-child{margin-bottom: 30px;}

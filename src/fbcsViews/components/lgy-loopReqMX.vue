@@ -15,7 +15,7 @@
 				</svg>
 			</div>
 		</div>
-		<el-dialog ref="cuBox" class="dialog" :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.components.result')"
+		<el-dialog ref="cuBox" :id="boxID" class="dialog" :visible.sync="showDialog" width="70%" :title="$t('fbcsFile.components.result')"
 			v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
 				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border stripe>
@@ -37,10 +37,10 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="close">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" @click="close" :id="cancel">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
-		<el-table ref="cuPox" :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border stripe>
+		<el-table ref="cuPox" :id="poxID" :data="cuList" v-if="showTable" :row-class-name="rowClass" max-height="294" highlight-current-row border stripe>
 			<el-table-column prop="serviceID" :label="$t('fbcsFile.dispatch.cuName')">
 				<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.serviceID}}</span>
 			</el-table-column>
@@ -138,19 +138,29 @@ function WheelReq(sv, self){
 	}
 }
 
-var _this, whr, data = {
-	loading: false,
-	showDialog: false,
-	cuList: [
-		{nodeName:'深圳', serviceID:'CU-2', errStr:'success', errinfo: 'ok', operationType:'用户'},
-	],
-	checkType: 0,
-};
+var _this, whr;
 
 export default {
 	name: 'lgy-loopReqMX',
-	data() { return data; },
+	data() {
+		let bingo = {
+			boxID: 'loopList',
+			poxID: 'loopTable',
+			cancel: 'loop',
+			loading: false,
+			showDialog: false,
+			cuList: [
+				{nodeName:'深圳', serviceID:'CU-2', errStr:'success', errinfo: 'ok', operationType:'用户'},
+			],
+			checkType: 0,
+		};
+		return bingo;
+	},
 	props: {
+		id: {
+			type: String,
+			default: ''
+		},
 		hideDialog: {
 			type: Boolean,
 			default: false
@@ -199,6 +209,12 @@ export default {
 		this.showDialog = false;
 		this.checkType = 0;
 		this.cuList = [];
+		if(this.id){
+			let str = '_' + this.id;
+			this.boxID += str;
+			this.poxID += str;
+			this.cancel += str;
+		}
 	}
 };
 

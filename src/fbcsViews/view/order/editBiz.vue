@@ -2,7 +2,7 @@
 	<div class="userEdit">
 		<div class='header'>
 			<img class="header_img" @click="back" src="@/fbcsViews/img/ico.png">
-			<span class="header_txt1" @click="back">{{pageTxt.label[0]}}</span>
+			<span class="header_txt1" @click="back" id="back">{{pageTxt.label[0]}}</span>
 			<div class="header_line"></div>
 			<span class='header_txt2'>{{$t('fbcsFile.order.editBiz.title')}}</span>
 		</div>
@@ -68,68 +68,68 @@
 					<el-col :span="18">
 						<ul class="right">
 							<li>
-								<el-input auto-complete="off" v-model="info.bizKey" disabled></el-input>
+								<el-input id="bizKey" auto-complete="off" v-model="info.bizKey" disabled></el-input>
 							</li>
 							<li>
-								<el-input auto-complete="off" v-model="info.userID" disabled></el-input>
+								<el-input id="userID" auto-complete="off" v-model="info.userID" disabled></el-input>
 							</li>
 							<li>
-								<input v-model="info.userName" maxlength="128" :placeholder="pageTxt.tips.must" autocomplete="off"/>
+								<input id="userName" v-model="info.userName" maxlength="128" :placeholder="pageTxt.tips.must" autocomplete="off"/>
 							</li>
 							<li>
-								<el-select v-model="info.userType" placeholder="">
+								<el-select id="type" v-model="info.userType" placeholder="">
 									<el-option v-for="item in userType" :label="item.name" :key="item.id" :value="item.id"></el-option>
 								</el-select>
 							</li>
 							<li>
-								<el-select v-model="info.userDistrict" placeholder="">
+								<el-select id="dist" v-model="info.userDistrict" placeholder="">
 									<el-option v-for="item in cities" :label="item.name" :key="item.id" :value="item.id"></el-option>
 								</el-select>
 							</li>
 							<li>
-								<input type="text" data-k='speedCtrlKbps' v-model="info.speedCtrlKbps" @input="inputInt2" maxlength="18" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+								<input id="speed" type="text" data-k='speedCtrlKbps' v-model="info.speedCtrlKbps" @input="inputInt2" maxlength="18" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
 								<span class="kbit">{{pageTxt.label[6]}}</span>
 							</li>
 							<li>
-								<input type="text" v-model="info.userInfo" maxlength="512" autocomplete="off">
+								<input id="info" type="text" v-model="info.userInfo" maxlength="512" autocomplete="off">
 							</li>
 							<li>
-								<el-select v-model="info.connSuGroupName" placeholder="">
+								<el-select id="group" v-model="info.connSuGroupName" placeholder="">
 									<el-option v-for="item in pageTxt.connect" :key="item.value" :label="item.groupID" :value="item.groupID"></el-option>
 								</el-select>
 							</li>
 							<li>
-								<el-select v-model="info.isAlarmIfOffLine" placeholder="">
+								<el-select id="online" v-model="info.isAlarmIfOffLine" placeholder="">
 									<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
 								</el-select>
 							</li>
 							<li class="icon40">
-								<el-date-picker v-model="info.softEncBeginDate" value-format='timestamp' type="datetime" 
+								<el-date-picker id="begin" v-model="info.softEncBeginDate" value-format='timestamp' type="datetime" 
 								:placeholder="pageTxt.label[24]" default-time="00:00:00"></el-date-picker>
 							</li>
 							<li class="icon40">
-								<el-date-picker v-model="info.softEncEndDate" value-format='timestamp' type="datetime" 
+								<el-date-picker id="end" v-model="info.softEncEndDate" value-format='timestamp' type="datetime" 
 								:placeholder="pageTxt.label[24]" default-time="23:59:59"></el-date-picker>
 							</li>
 							<li>
-								<el-select v-model="info.allowSendRecvFile" placeholder="">
+								<el-select id="recvFile" v-model="info.allowSendRecvFile" placeholder="">
 									<el-option v-for="item in pageTxt.online" :key="item.value" :label="item.label" :value="item.value"></el-option>
 								</el-select>
 							</li>
 							<li>
-								<input type="text" data-k='maxPubsCount' v-model="info.maxPubsCount" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+								<input id="pubs" type="text" data-k='maxPubsCount' v-model="info.maxPubsCount" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
 								<span v-show="maxPubsCount" class="errNum">{{pageTxt.tips.errNum}}</span>
 							</li>
 							<li>
-								<input type="text" data-k='maxSubsCount' v-model="info.maxSubsCount" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+								<input id="subs" type="text" data-k='maxSubsCount' v-model="info.maxSubsCount" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
 								<span v-show="maxSubsCount" class="errNum">{{pageTxt.tips.errNum}}</span>
 							</li>
 							<li>
-								<input type="text" data-k='maxDaysOfTopic' v-model="info.maxDaysOfTopic" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
+								<input id="maxDays" type="text" data-k='maxDaysOfTopic' v-model="info.maxDaysOfTopic" @input="inputInt" maxlength="4" :placeholder="pageTxt.tips.onlyNum" autocomplete="off">
 								<span v-show="maxDaysOfTopic" class="errNum">{{pageTxt.tips.errNum}}</span>
 							</li>
 							<li>
-								<input type="text" data-k='remark' v-model="info.remark" maxlength="128" autocomplete="off">
+								<input id="remark" type="text" data-k='remark' v-model="info.remark" maxlength="128" autocomplete="off">
 							</li>
 							<!-- <li>
 								<el-input auto-complete="off" v-model="configTime" placeholder="" disabled></el-input>
@@ -139,8 +139,8 @@
 				</el-row>
 				<div class="btn">
 					<!-- <el-button v-if="auth>1" type="primary" @click='verify(sendDown)'>{{pageTxt.label[16]}}</el-button> -->
-					<el-button v-if="auth>1" type="primary" @click="verify(edit)">{{pageTxt.label[17]}}</el-button>
-					<el-button type="default" @click='back'>{{pageTxt.label[18]}}</el-button>
+					<el-button id="submit" v-if="auth>1" type="primary" @click="verify(edit)">{{pageTxt.label[17]}}</el-button>
+					<el-button id="back" type="default" @click='back2'>{{pageTxt.label[18]}}</el-button>
 				</div>
 			<!-- </el-tab-pane>
 
@@ -195,23 +195,23 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 		info[def[i]] = "";
 	}
 
-	var pageTxt = 'lang.userEdit', _this,
-	data = {
-		auth: globalVar.get('status').user,
-		userType: [],
-		cities: [],
-		info,
-		pageTxt,
-		headerText: "",
-		configTime: 0,
-		maxPubsCount: false,
-		maxSubsCount: false,
-		maxDaysOfTopic: false
-	};
-
+	var pageTxt = 'lang.userEdit', _this;
+	
 	export default {
 		data() {
-			return data;
+			let bingo = {
+				auth: globalVar.get('status').user,
+				userType: [],
+				cities: [],
+				info,
+				pageTxt,
+				headerText: "",
+				configTime: 0,
+				maxPubsCount: false,
+				maxSubsCount: false,
+				maxDaysOfTopic: false
+			};
+			return bingo;
 		},
 		methods: {
 			inputInt(e){

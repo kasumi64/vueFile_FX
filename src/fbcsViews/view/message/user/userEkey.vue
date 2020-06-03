@@ -2,9 +2,9 @@
 	<div>
 		<div class="Ekey">
 			<div class="btnBox">
-				<div v-if="auth>1" id='Add' @click="showAdd"><img src="@/fbcsViews/img/user/addEkey.png"><span> {{pageTxt.label[7]}}</span></div>
+				<div id="ekey-create" v-if="auth>1" @click="showAdd"><img src="@/fbcsViews/img/user/addEkey.png"><span> {{pageTxt.label[7]}}</span></div>
 			</div>
-			<el-table stripe border :data="EkeyData.lists" tooltip-effect="dark" @current-change="currentRow" highlight-current-row>
+			<el-table id="ekey-list" stripe border :data="EkeyData.lists" tooltip-effect="dark" @current-change="currentRow" highlight-current-row>
 				<!--<el-table-column width="50" label=" " type="index"></el-table-column>-->
 				<el-table-column prop="userID" :label="pageTxt.table[0]" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="userName" :label="pageTxt.table[1]" show-overflow-tooltip></el-table-column>
@@ -25,7 +25,7 @@
 							<p class="txt"><span class="red">*&nbsp;</span>{{pageTxt.popup[1]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" type="text" v-model="ainfo.userID" disabled class='picker'></el-input>
+							<el-input id="ekey-add-id" auto-complete="off" type="text" v-model="ainfo.userID" disabled class='picker'></el-input>
 						</div>
 					</li>
 					<li>
@@ -34,7 +34,7 @@
 						</div>
 						<div class="rightBox">
 							<span :class="{txt1:1,hide: !isOpenEkeyPrefixByWeb}">/C=CN/CN=</span>
-							<el-input auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
+							<el-input id="ekey-add-name" auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
 								v-model="ainfo.ekeyName" :maxlength="isOpenEkeyPrefixByWeb!= 0?55:64"></el-input>
 						</div>
 					</li>
@@ -43,7 +43,7 @@
 							<p class="txt">{{pageTxt.popup[15]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="ainfo.ekeyPasswd" maxlength="64"></el-input>
+							<el-input id="ekey-add-pwd" auto-complete="off" class='picker' v-model="ainfo.ekeyPasswd" maxlength="64"></el-input>
 							<p class="txt2">{{pageTxt.label[9]}}</p>
 						</div>
 					</li>
@@ -52,7 +52,7 @@
 							<p class="txt">{{pageTxt.popup[3]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-date-picker class='picker' v-model="ainfo.ekeyValidDate" format='yyyy-MM-dd HH:mm:ss' value-format="timestamp" 
+							<el-date-picker id="ekey-add-date" class='picker' v-model="ainfo.ekeyValidDate" format='yyyy-MM-dd HH:mm:ss' value-format="timestamp" 
 								type="datetime" default-time="23:59:59"></el-date-picker>
 						</div>
 					</li>
@@ -61,16 +61,17 @@
 							<p class="txt">{{pageTxt.popup[4]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="ainfo.comment" maxlength="64"></el-input>
+							<el-input id="ekey-add-comment" auto-complete="off" class='picker' v-model="ainfo.comment" maxlength="64"></el-input>
 						</div>
 					</li>
 				</ul>
 				<div slot="footer" class="_footBtn">
-					<button class="blueBtn" @click="addNow">{{pageTxt.popup[5]}}</button>
-					<button class="blueBtn" @click="submitAdd">{{pageTxt.popup[6]}}</button>
-					<button class="defBtn" @click="addEkey = false">{{pageTxt.popup[7]}}</button>
+					<button id="ekey-add-now" class="blueBtn" @click="addNow">{{pageTxt.popup[5]}}</button>
+					<button id="ekey-add-submit" class="blueBtn" @click="submitAdd">{{pageTxt.popup[6]}}</button>
+					<button id="ekey-add-close" class="defBtn" @click="addEkey = false">{{pageTxt.popup[7]}}</button>
 				</div>
 			</el-dialog>
+			
 			<el-dialog v-dialogDrag :title="pageTxt.popup[8]" :visible.sync="editEkdy" width='620px'>
 				<ul class="_dialog">
 					<li>
@@ -78,7 +79,7 @@
 							<p class="txt"><span class="red">*&nbsp;</span>{{pageTxt.popup[1]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="binfo.userID" :placeholder="pageTxt.popup[13]" disabled></el-input>
+							<el-input id="ekey-edit-id" auto-complete="off" class='picker' v-model="binfo.userID" :placeholder="pageTxt.popup[13]" disabled></el-input>
 						</div>
 					</li>
 					<li>
@@ -87,7 +88,7 @@
 						</div>
 						<div class="rightBox">
 							<span :class="{txt1:1,hide: !isOpenEkeyPrefixByWeb}">/C=CN/CN=</span>
-							<el-input disabled auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
+							<el-input id="ekey-edit-name" disabled auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
 								v-model="binfo.ekeyName" :maxlength="isOpenEkeyPrefixByWeb!= 0?55:64" :placeholder="pageTxt.popup[13]"></el-input>
 						</div>
 					</li>
@@ -96,7 +97,7 @@
 							<p class="txt">{{pageTxt.popup[14]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-checkbox class="flag" v-model="isModifyEkeyPasswd"></el-checkbox>
+							<el-checkbox id="ekey-edit-flag" class="flag" v-model="isModifyEkeyPasswd"></el-checkbox>
 						</div>
 					</li>
 					<li v-show="isModifyEkeyPasswd">
@@ -104,7 +105,7 @@
 							<p class="txt">{{pageTxt.popup[15]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="binfo.ekeyPasswd" maxlength="64"></el-input>
+							<el-input id="ekey-edit-pwd" auto-complete="off" class='picker' v-model="binfo.ekeyPasswd" maxlength="64"></el-input>
 							<p class="txt2">{{pageTxt.label[9]}}</p>
 						</div>
 					</li>
@@ -113,7 +114,7 @@
 							<p class="txt">{{pageTxt.popup[3]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-date-picker class='picker' v-model="binfo.ekeyValidDate" format='yyyy-MM-dd HH:mm:ss' value-format="timestamp" 
+							<el-date-picker id="ekey-edit-date" class='picker' v-model="binfo.ekeyValidDate" format='yyyy-MM-dd HH:mm:ss' value-format="timestamp" 
 								type="datetime" default-time="23:59:59"></el-date-picker>
 						</div>
 					</li>
@@ -122,14 +123,14 @@
 							<p class="txt">{{pageTxt.popup[4]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="binfo.comment" maxlength="64" ></el-input>
+							<el-input id="ekey-edit-comment" auto-complete="off" class='picker' v-model="binfo.comment" maxlength="64" ></el-input>
 						</div>
 					</li>
 				</ul>
 				<div slot="footer" class="_footBtn">
-					<button class="blueBtn" @click="editNow">{{pageTxt.popup[5]}}</button>
-					<button class="blueBtn" @click="submitEdit">{{pageTxt.popup[13]}}</button>
-					<button class="defBtn" @click="editEkdy = false">{{pageTxt.popup[7]}}</button>
+					<button id="ekey-edit-now" class="blueBtn" @click="editNow">{{pageTxt.popup[5]}}</button>
+					<button id="ekey-edit-submit" class="blueBtn" @click="submitEdit">{{pageTxt.popup[13]}}</button>
+					<button id="ekey-edit-close" class="defBtn" @click="editEkdy = false">{{pageTxt.popup[7]}}</button>
 				</div>
 			</el-dialog>
 			<div class="_pagination" v-if="max>pageSize">
@@ -138,6 +139,7 @@
 				<div class="rightTxt">{{paging.before1}}{{max}}{{paging.after}}</div>
 			</div>
 			<div class="onePage" v-else-if="max>0&&max<=pageSize">{{paging.before2}}{{max}}{{paging.after}}</div>
+			
 			<lgy-loopReqMX ref="loop"></lgy-loopReqMX>
 		</div>
 	</div>

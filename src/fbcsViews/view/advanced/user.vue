@@ -1,39 +1,39 @@
 <template>
 	<div class="advancedUser">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span id="back" class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.advanced.user.title')}}</b>
 		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.advanced.user.userID')}}</label>
-			<input v-model="info.userID" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<input id="userID" v-model="info.userID" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
-			<input v-model="info.userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<input id="userName" v-model="info.userName" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<!-- <label class="label">{{$t('fbcsFile.userInfo.encFlag')}}</label>
 			<el-select v-model="info.encFlag" class="words">
 				<el-option v-for="item in encSelect" :key="item.id" :label="item.name" :value="item.id">
 				</el-option>
 			</el-select> -->
 			<label class="label">{{$t('fbcsFile.advanced.user.userType')}}</label>
-			<el-select v-model="info.userType" class="words">
+			<el-select id="type" v-model="info.userType" class="words">
 				<el-option v-for="item in userType" :key="item.id" :label="item.name" :value="item.id">
 				</el-option>
 			</el-select>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.advanced.user.inZone')}}</label>
-			<el-select v-model="info.userDistrict" class="words">
+			<el-select id="inZone" v-model="info.userDistrict" class="words">
 				<el-option v-for="item in userDistrict" :key="item.id" :label="item.name" :value="item.id">
 				</el-option>
 			</el-select>
 			<label class="label">{{$t('fbcsFile.advanced.user.linkGroupName')}}</label>
-			<el-select v-model="info.connSuGroupName" class="words">
+			<el-select id="group" v-model="info.connSuGroupName" class="words">
 				<el-option v-for="item in group" :key="item" :label="item" :value="item">
 				</el-option>
 			</el-select>
-			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button id="search" class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="expcsv">
+			<li id="expcsv" @click="expcsv">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportBasicInformation.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.user.expcsv')}}</span>
 			</li>
@@ -45,13 +45,13 @@
 			<ul class="_dialog">
 				<li>
 					<span class="txt w80">{{$t('fbcsFile.advanced.user.fileName')}}</span>
-					<a class="a" :href="fileHref">{{fileName}}</a>
+					<a id="alink" class="a" :href="fileHref">{{fileName}}</a>
 				</li><li>
 					<p class="txt rClick">{{$t('fbcsFile.tips.rightClick')}}</p>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button id="close" class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 	</div>

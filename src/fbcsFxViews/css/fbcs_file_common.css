@@ -12,7 +12,7 @@ body{font-family: "microsoft yahei", "Helvetica Neue", "Helvetica, arial, STHeiT
 #fbcs_file .test{font-size: 16px;border: 1px solid silver;padding: 5px 10px;margin: 10px;}
 #fbcs_file .hide{display: none !important;}
 #fbcs_file .show{display: block !important;}
-#fbcs_file .autocompleteOFF{position: fixed;top: -100px;left: 0;opacity: 0;pointer-events: none;}
+#fbcs_file .autocompleteOFF{position: fixed;top: -100px;left: -428px;opacity: 0;pointer-events: none;}
 #fbcs_file .mr20{margin-right: 20px;}
 #fbcs_file input{font-size: 14px;color: #666;height: 30px;padding: 0 10px;border: 1px solid #D7D8DA;vertical-align: middle; border-radius: 0;}
 #fbcs_file input:focus{border: 2px solid #32ccF9;}

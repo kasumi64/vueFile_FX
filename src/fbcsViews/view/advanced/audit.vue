@@ -1,44 +1,44 @@
 <template>
 	<div class="advancedAudit">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span id="back" class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.advanced.audit.title')}}</b>
 		</header>
 		<div class="searchBar">
 			<label class="label">{{$t('fbcsFile.audit.operator')}}：</label>
-			<input v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<input id="operator" v-model="info.operator" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			<label class="label">{{$t('fbcsFile.audit.operatorType')}}：</label>
-			<lgy-candidateWords v-model="info.operationType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
-			<el-checkbox-group ref="linkage" v-model="linkage" class="linkage">
+			<lgy-candidateWords id="type" v-model="info.operationType" :keywords="idWords" @input="idInput" class="words"></lgy-candidateWords>
+			<el-checkbox-group id="linkage" ref="linkage" v-model="linkage" class="linkage">
 				<el-checkbox label="ekeyFlag">Ekey</el-checkbox>
 				<el-checkbox label="commFlag">{{$t('fbcsFile.advanced.audit.commFlag')}}</el-checkbox>
 				<el-checkbox label="userextFlag">{{$t('fbcsFile.advanced.audit.userextFlag')}}</el-checkbox>
 			</el-checkbox-group>
 			<label class="label">{{$t('fbcsFile.audit.sort')}}</label>
-			<el-radio-group v-model="info.sequence" class="mr20">
+			<el-radio-group id="sequence" v-model="info.sequence" class="mr20">
 				<el-radio :label="0">{{$t('fbcsFile.audit.lately')}}</el-radio>
 				<el-radio :label="1">{{$t('fbcsFile.audit.early')}}</el-radio>
 			</el-radio-group>
 			<p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.audit.times')}}</label>
-			<el-radio-group v-model="radio">
+			<el-radio-group id="radio" v-model="radio">
 				<el-radio :label="2">{{$t('fbcsFile.audit.today')}}</el-radio>
 				<el-radio :label="4">{{$t('fbcsFile.audit.week')}}</el-radio>
 				<el-radio :label="6">{{$t('fbcsFile.audit.month')}}</el-radio>
 				<el-radio :label="9">{{$t('fbcsFile.audit.begin')}}</el-radio>
 			</el-radio-group>
 			<!--<label class="label">{{$t('fbcsFile.audit.begin')}}</label>-->
-			<el-date-picker v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="begin" v-model="info.operationBeginTime" class="picker words ml" type="datetime" :clearable="false" :editable="false"
 				value-format="timestamp" default-time="00:00:00" :disabled='radio!=9'>
 			</el-date-picker>
 			<label class="label">{{$t('fbcsFile.audit.end')}}</label>
-			<el-date-picker v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
+			<el-date-picker id="end" v-model="info.operationEndTime" class="picker words" type="datetime" :clearable="false" :editable="false"
 				value-format="timestamp" default-time="23:59:59" :disabled='radio!=9'>
 			</el-date-picker>
-			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<button id="search" class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="expcsv">
+			<li id="expcsv" @click="expcsv">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportTheme.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.audit.expcsv')}}</span>
 			</li>
@@ -48,7 +48,7 @@
 		</lgy-table>
 		<el-dialog :visible.sync="showDialog" :title="$t('fbcsFile.tableDefined.detail')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<el-table :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
+				<el-table id="table-cuList" :data="cuList" :row-class-name="rowClass" max-height="294" highlight-current-row border>
 					<el-table-column prop="cuName" :label="$t('fbcsFile.dispatch.cuName')"></el-table-column>
 					<el-table-column prop="nodeName" :label="$t('fbcsFile.dispatch.nodeName')"></el-table-column>
 					<el-table-column prop="errStr" :label="$t('fbcsFile.dispatch.errcode')">
@@ -61,20 +61,20 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button id="close-detail" class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		<el-dialog :visible.sync="showDialog2" width="600px" :title="$t('fbcsFile.advanced.audit.expcsv')" v-dialogDrag :close-on-click-modal='false' :show-close="false">
 			<ul class="_dialog">
 				<li>
 					<span class="txt w80">{{$t('fbcsFile.advanced.user.fileName')}}</span>
-					<a class="a" :href="fileHref">{{fileName}}</a>
+					<a id="alink" class="a" :href="fileHref">{{fileName}}</a>
 				</li><li>
 					<p class="txt rClick">{{$t('fbcsFile.tips.rightClick')}}</p>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog2=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button id="close-exp" class="defBtn" @click="showDialog2=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 	</div>

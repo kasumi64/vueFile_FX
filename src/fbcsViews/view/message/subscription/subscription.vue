@@ -7,7 +7,7 @@
 			<label class="txt">{{pageTxt.label[1]}}</label>
 			<!--<el-input auto-complete="off" class='elInput' placeholder="" v-model="info.subUserID"></el-input>-->
 			<div class="c1">
-				<el-autocomplete @input='autoInput' auto-complete="off" class="elInput m0" v-model="idName" :fetch-suggestions="fetch" @select="idSelect" :trigger-on-focus="true">
+				<el-autocomplete id="id1" @input='autoInput' auto-complete="off" class="elInput m0" v-model="idName" :fetch-suggestions="fetch" @select="idSelect" :trigger-on-focus="true">
 					<div slot-scope="{item}">
 						<span class="name">{{item.userID}}</span>
 					    <span class="addr">({{item.userName}})</span>
@@ -18,7 +18,7 @@
 			
 			<label class="txt">{{pageTxt.label[6]}}</label>
 			<div class="c2">
-				<el-autocomplete @input='autoInput2' class="elInput m0" v-model="idName2" :fetch-suggestions="fetch" @select="idSelect2" :trigger-on-focus="true">
+				<el-autocomplete id="2" @input='autoInput2' class="elInput m0" v-model="idName2" :fetch-suggestions="fetch" @select="idSelect2" :trigger-on-focus="true">
 					<div slot-scope="{item}">
 						<span class="name">{{item.userID}}</span>
 					    <span class="addr">({{item.userName}})</span>
@@ -29,8 +29,8 @@
 			<!--<label class="txt">{{pageTxt.label[2]}}</label>
 			<el-input auto-complete="off" placeholder="" v-model="info.subUserName"></el-input>-->
 			<label class="txt">{{pageTxt.label[3]}}</label>
-			<el-input auto-complete="off" class='elInput' placeholder="" v-model="info.topicName" clearable></el-input>
-			<button class='blueBtn' type='primary' @click='search'>{{pageTxt.label[4]}}</button>
+			<el-input id="topicName" auto-complete="off" class='elInput' placeholder="" v-model="info.topicName" clearable></el-input>
+			<button id="search" class='blueBtn' type='primary' @click='search'>{{pageTxt.label[4]}}</button>
 		</div>
 		<div class="btnBox">
 			<!--<el-button @click='detail' class='btn' type='text'>
@@ -38,7 +38,7 @@
 				<span class="btnTxt">{{pageTxt.label[5]}}</span>
 			</el-button>-->
 		</div>
-		<el-table @sort-change='sortReq' @current-change="currenRow" @selection-change="selectionRow" highlight-current-row
+		<el-table id="tableID" @sort-change='sortReq' @current-change="currenRow" @selection-change="selectionRow" highlight-current-row
 			stripe border :data="data" tooltip-effect="dark" style="min-width: 1040px">
 			<!--<el-table-column width="50" :label="column" type="index"></el-table-column>-->
 			<!--<el-table-column type="selection" width="55"></el-table-column>-->

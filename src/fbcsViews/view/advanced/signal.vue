@@ -1,12 +1,12 @@
 <template>
 	<div class="signal">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span id="back" class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.advanced.signal.title')}}</b>
 		</header>
 		<div class="userH">
 			<span class="txt">{{pageTxt.label[1]}}：</span>
-			<el-select class="input_normal" v-model="searchInfo.bizType" placeholder="">
+			<el-select id="type" class="input_normal" v-model="searchInfo.bizType" placeholder="">
 				<el-option v-for="item in options1" :label="item.name" :key="item.id" :value="item.id"></el-option>
 			</el-select>
 			<span class="txt1">{{pageTxt.label[2]}}：</span>
@@ -25,12 +25,12 @@
 					<span class="name">({{item.userID}})</span>
 				</div>
 			</el-autocomplete>
-			<el-button type="primary" @click='search' class="btn">{{pageTxt.label[4]}}</el-button>
+			<el-button id="search" type="primary" @click='search' class="btn">{{pageTxt.label[4]}}</el-button>
 		</div>
 		<div class="btnBox">
-			<div @click="exportSignalInfo"><img src="@/fbcsViews/img/user/exportsignal.png"><span>{{pageTxt.label[6]}}</span></div>
+			<div id="expcsv" @click="exportSignalInfo"><img src="@/fbcsViews/img/user/exportsignal.png"><span>{{pageTxt.label[6]}}</span></div>
 		</div>
-		<el-table stripe border :data="list.lists" tooltip-effect="dark" @current-change="currentRow" highlight-current-row>
+		<el-table id="tableID" stripe border :data="list.lists" tooltip-effect="dark" @current-change="currentRow" highlight-current-row>
 			<el-table-column prop="typeStr" :label="pageTxt.table[0]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="userID1" :label="pageTxt.table[1]" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="userName1" :label="pageTxt.table[2]" show-overflow-tooltip></el-table-column>
@@ -48,13 +48,15 @@
 		
 		<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.popup[7]" :visible.sync="showExportSignalInfo" width='600px'>
 			<div class="_messaga">
-				<span class="txt">&nbsp;{{pageTxt.popup[8]}}<a :href="signalInfoSrc" style="color:#5C759D">{{signalInfoName}}</a></span>
+				<span class="txt">&nbsp;{{pageTxt.popup[8]}}
+					<a id="alink" :href="signalInfoSrc" style="color:#5C759D">{{signalInfoName}}</a>
+				</span>
 				<div class="_messaga_info">
 					<span class="info_txt">{{pageTxt.popup[9]}}</span>
 				</div>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<el-button type="default" @click="showExportSignalInfo=false">{{pageTxt.popup[10]}}</el-button>
+				<el-button id="close" type="default" @click="showExportSignalInfo=false">{{pageTxt.popup[10]}}</el-button>
 			</div>
 		</el-dialog>
 		

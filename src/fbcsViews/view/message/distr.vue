@@ -6,7 +6,7 @@
 			<li>
 				<label class="txt">{{pageTxt.label[1]}}</label>
 				<div class="rightBox">
-					<el-select v-model="type" @change="change">
+					<el-select id="type" v-model="type" @change="change">
 						<el-option v-for="item in pageTxt.options" :key="item.val" :label="item.label" :value="item.val">
 						</el-option>
 					</el-select>
@@ -24,7 +24,7 @@
 				<label class="txt">{{pageTxt.label[2]}}</label>
 				<div class="rightBox">
 					<p class="txt3">{{pageTxt.label[7]}}</p>
-					<el-table ref="table" class='suList' :data="data" tooltip-effect="dark" @current-change="currentRow" highlight-current-row
+					<el-table id="tableID" ref="table" class='suList' :data="data" tooltip-effect="dark" @current-change="currentRow" highlight-current-row
 					 @selection-change="selectionRow"stripe border>
 						<!--<el-table-column width="55" type="index"></el-table-column>-->
 						<el-table-column type="selection" width="55"></el-table-column>
@@ -53,7 +53,7 @@
 				<label class="txt">&nbsp;</label>
 				<div class="rightBox">
 					<p class="jg"></p>
-					<button v-if="auth>1" class="blueBtn" @click="submit">{{pageTxt.label[9]}}</button>
+					<button id="submit" v-if="auth>1" class="blueBtn" @click="submit">{{pageTxt.label[9]}}</button>
 				</div>
 			</li><li>
 				<label class="txt">&nbsp;</label>

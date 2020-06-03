@@ -7,7 +7,7 @@
 			<label class="txt">{{pageTxt.label[1]}}</label>
 			<!--<el-input auto-complete="off" placeholder="" v-model="info.pubUserID"></el-input>-->
 			<span class="m35">
-				<el-autocomplete @input='autoInput' auto-complete="off" class="elInput m0" v-model="idName" :fetch-suggestions="fetch" @select="idSelect" :trigger-on-focus="true">
+				<el-autocomplete id="userID" @input='autoInput' auto-complete="off" class="elInput m0" v-model="idName" :fetch-suggestions="fetch" @select="idSelect" :trigger-on-focus="true">
 					<div slot-scope="{item}">
 						<span class="name">{{item.userID}}</span>
 					    <span class="addr">({{item.userName}})</span>
@@ -18,27 +18,27 @@
 			<!--<label class="txt">{{pageTxt.label[2]}}</label>
 			<el-input auto-complete="off" placeholder="" v-model="info.pubUserName"></el-input>-->
 			<label class="txt">{{pageTxt.label[3]}}</label>
-			<el-input auto-complete="off" class='elInput' placeholder="" v-model="info.topicName" clearable></el-input>
+			<el-input id="topicName" auto-complete="off" class='elInput' placeholder="" v-model="info.topicName" clearable></el-input>
 			<label class="txt">{{pageTxt.label[5]}}</label>
 			<!--<el-date-picker class='daterange' v-model="picker" value-format="yyyy-MM-dd HH:mm:ss" :default-time="['00:00:00', '23:59:59']"
 				type="datetimerange" :range-separator="pageTxt.label[6]" start-placeholder="pageTxt.label[5]" end-placeholder="pageTxt.label[7]" >
 			</el-date-picker>-->
-			<el-date-picker class='picker' :picker-options='pickerBegin' v-model="info.beginDate" type="datetime" :clearable="false" :editable='false'
+			<el-date-picker id="begin" class='picker' :picker-options='pickerBegin' v-model="info.beginDate" type="datetime" :clearable="false" :editable='false'
 				value-format="yyyy-MM-dd HH:mm:ss" default-time="0:00:00">
 			</el-date-picker>
 			<label class="txt pickerTxt">{{pageTxt.label[7]}}</label>
-			<el-date-picker class='picker' :picker-options='pickerEnd' v-model="info.endDate" type="datetime" :clearable="false" :editable='false'
+			<el-date-picker id="end" class='picker' :picker-options='pickerEnd' v-model="info.endDate" type="datetime" :clearable="false" :editable='false'
 				value-format="yyyy-MM-dd HH:mm:ss" default-time="23:59:59">
 			</el-date-picker>
-			<button class='blueBtn' type='primary' @click='search'>{{pageTxt.label[8]}}</button>
+			<button id="search" class='blueBtn' type='primary' @click='search'>{{pageTxt.label[8]}}</button>
 			
 		</div>
 		<div class="btnBox">
-			<el-button v-if="auth>1" class='btn' @click='add' type='text'>
+			<el-button id="add" v-if="auth>1" class='btn' @click='add' type='text'>
 				<img src="@/fbcsViews/img/theme/add_2.png"/>
 				<span class="btnTxt">{{pageTxt.label[9]}}</span>
 			</el-button>
-			<el-button v-if="auth>1" class='btn' @click='delTheme' type='text'>
+			<el-button id="del" v-if="auth>1" class='btn' @click='delTheme' type='text'>
 				<img src="@/fbcsViews/img/theme/del_1.png"/>
 				<span class="btnTxt">{{pageTxt.label[11]}}</span>
 			</el-button>
@@ -49,12 +49,12 @@
 				<img src="@/fbcsViews/img/theme/detail_1.png"/>
 				<span class="btnTxt">{{pageTxt.label[12]}}</span>
 			</el-button> -->
-			<el-button class='btn' @click='download' type='text'>
+			<el-button id="download" class='btn' @click='download' type='text'>
 				<img src="@/fbcsViews/img/theme/download.png"/>
 				<span class="btnTxt">{{pageTxt.label[13]}}</span>
 			</el-button>
 		</div>
-		<el-table @sort-change='sortReq' @current-change="currenRow" @selection-change="selectionRow"  highlight-current-row
+		<el-table id="tableID" @sort-change='sortReq' @current-change="currenRow" @selection-change="selectionRow"  highlight-current-row
 			stripe border :data="data" tooltip-effect="dark" style="min-width: 1320px">
 			<!--<el-table-column width="50" :label="column" type="index"></el-table-column>-->
 			<el-table-column type="selection" width="55"></el-table-column>
@@ -86,13 +86,13 @@
 		
 		<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.label[13]" :visible.sync="downCSV" width='600px'>
 			<div class="_messaga">
-				<span class="txt">{{pageTxt.fileName}}<a :href="csvUrl" style="color:#5C759D">{{csvName}}</a></span>
+				<span class="txt">{{pageTxt.fileName}}<a id="alink" :href="csvUrl" style="color:#5C759D">{{csvName}}</a></span>
 				<div class="_messaga_info">
 					<span class="info_txt">{{pageTxt.label[14]}}</span>
 				</div>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="downCSV=false">{{pageTxt.label[15]}}</button>
+				<button id="close" class="defBtn" @click="downCSV=false">{{pageTxt.label[15]}}</button>
 			</div>
 		</el-dialog>
 		<lgy-loopReqMX ref="loop"></lgy-loopReqMX>

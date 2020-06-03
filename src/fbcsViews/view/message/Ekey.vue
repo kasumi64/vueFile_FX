@@ -6,8 +6,10 @@
 		<div class="Ekey">
 			<div class="user">
 				<span>{{pageTxt.label[1]}}：</span>
-				<el-radio v-model="search.type" :label="0">{{pageTxt.label[2]}}</el-radio>
-				<el-radio v-model="search.type" :label="1">{{pageTxt.label[3]}}</el-radio>
+				<el-radio-group id="radio" v-model="search.type">
+					<el-radio label="0">{{pageTxt.label[2]}}</el-radio>
+					<el-radio label="1">{{pageTxt.label[3]}}</el-radio>
+				</el-radio-group>
 				<span v-show='search.type==0' id="box" class="txt">{{pageTxt.label[4]}}：{{CN}}</span>
 				<!-- <el-input auto-complete="off" class='input_normal picker' v-show='search.type==0' v-model="search.ekeyName" ></el-input> -->
 				<el-autocomplete id="ekeyClose" suffix-icon="el-icon-circle-close" v-show='search.type==0' @focus="focusDisplay"
@@ -29,9 +31,9 @@
 			</div>
 			<div class="btnBox">
 				<div v-if="auth>1" @click="showAdd" id='Add'><img src="@/fbcsViews/img/user/addEkey.png"><span>{{pageTxt.label[7]}}</span></div>
-				<div @click="exportEkeyInfo"><img src="@/fbcsFxViews/img/FnIcon/searchEkey.png"><span>{{$t('fbcsFile.searchBar.advanced')}}</span></div>
+				<div id="toAdvanced" @click="exportEkeyInfo"><img src="@/fbcsFxViews/img/FnIcon/searchEkey.png"><span>{{$t('fbcsFile.searchBar.advanced')}}</span></div>
 			</div>
-			<el-table stripe border :data="EkeyData.lists" tooltip-effect="dark" @current-change="currentRow"
+			<el-table id="tableID" stripe border :data="EkeyData.lists" tooltip-effect="dark" @current-change="currentRow"
 			 highlight-current-row>
 				<!--<el-table-column width="50" label=" " type="index"></el-table-column>-->
 				<el-table-column prop="userID" :label="pageTxt.table[0]" show-overflow-tooltip></el-table-column>
@@ -60,7 +62,7 @@
 							<p class="txt"><span class="red">*&nbsp;</span>{{pageTxt.popup[1]}}</p>
 						</div>
 						<div class="rightBox" id="rightBox1">
-							<el-select v-model="ainfo.userID" filterable :filter-method="addEkeyFilter" id="Ekye_input"
+							<el-select id="Ekye_input" v-model="ainfo.userID" filterable :filter-method="addEkeyFilter"
 								popper-class="signal_select" :no-match-text='noData' :placeholder="placeholder">
 								<el-option v-for="item in options" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 							</el-select>
@@ -72,7 +74,7 @@
 						</div>
 						<div class="rightBox">
 							<span :class="{txt1:1,hide: !isOpenEkeyPrefixByWeb}">/C=CN/CN=</span>
-							<el-input auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
+							<el-input id="add-name" auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
 								v-model="ainfo.ekeyName" :maxlength="isOpenEkeyPrefixByWeb!= 0?55:64"></el-input>
 						</div>
 					</li>
@@ -81,7 +83,7 @@
 							<p class="txt">{{pageTxt.popup[15]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="ainfo.ekeyPasswd" maxlength="64"></el-input>
+							<el-input id="add-pwd" auto-complete="off" class='picker' v-model="ainfo.ekeyPasswd" maxlength="64"></el-input>
 							<p class="txt2">{{pageTxt.label[9]}}</p>
 						</div>
 					</li>
@@ -90,7 +92,7 @@
 							<p class="txt">{{pageTxt.popup[3]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-date-picker class='picker' v-model="ainfo.ekeyValidDate" value-format="timestamp" type="datetime"
+							<el-date-picker id="add-time" class='picker' v-model="ainfo.ekeyValidDate" value-format="timestamp" type="datetime"
 								placeholder="" default-time="23:59:59"></el-date-picker>
 						</div>
 					</li>
@@ -99,14 +101,14 @@
 							<p class="txt">{{pageTxt.popup[4]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="ainfo.comment" maxlength="64"></el-input>
+							<el-input id="add-comment" auto-complete="off" class='picker' v-model="ainfo.comment" maxlength="64"></el-input>
 						</div>
 					</li>
 				</ul>
 				<div slot="footer" class="_footBtn">
-					<el-button type="primary" @click="sendDown">{{pageTxt.popup[5]}}</el-button>
-					<el-button type="primary" @click="submitAdd">{{pageTxt.popup[6]}}</el-button>
-					<el-button @click="addEkey = false">{{pageTxt.popup[7]}}</el-button>
+					<el-button id="add-now" type="primary" @click="sendDown">{{pageTxt.popup[5]}}</el-button>
+					<el-button id="add-submit" type="primary" @click="submitAdd">{{pageTxt.popup[6]}}</el-button>
+					<el-button id="add-close" @click="addEkey = false">{{pageTxt.popup[7]}}</el-button>
 				</div>
 			</el-dialog>
 
@@ -117,7 +119,7 @@
 							<p class="txt"><span class="red">*&nbsp;</span>{{pageTxt.popup[1]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="binfo.userID" placeholder="" disabled></el-input>
+							<el-input id="edit-id" auto-complete="off" class='picker' v-model="binfo.userID" placeholder="" disabled></el-input>
 						</div>
 					</li>
 					<li>
@@ -126,7 +128,7 @@
 						</div>
 						<div class="rightBox">
 							<span :class="{txt1:1,hide: !isOpenEkeyPrefixByWeb}">/C=CN/CN=</span>
-							<el-input disabled auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
+							<el-input id="edit-name" disabled auto-complete="off" :class="{prefix156:!!isOpenEkeyPrefixByWeb,prefix250:!isOpenEkeyPrefixByWeb}"
 								v-model="binfo.ekeyName" :maxlength="isOpenEkeyPrefixByWeb!= 0?55:64"></el-input>
 						</div>
 					</li>
@@ -135,7 +137,7 @@
 							<p class="txt">{{pageTxt.popup[14]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-checkbox class="flag" v-model="isModifyEkeyPasswd"></el-checkbox>
+							<el-checkbox id="edit-flag" class="flag" v-model="isModifyEkeyPasswd"></el-checkbox>
 						</div>
 					</li>
 					<li v-show="isModifyEkeyPasswd">
@@ -143,7 +145,7 @@
 							<p class="txt">{{pageTxt.popup[15]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="binfo.ekeyPasswd" maxlength="64"></el-input>
+							<el-input id="edit-pwd" auto-complete="off" class='picker' v-model="binfo.ekeyPasswd" maxlength="64"></el-input>
 							<p class="txt2">{{pageTxt.label[9]}}</p>
 						</div>
 					</li>
@@ -152,7 +154,7 @@
 							<p class="txt">{{pageTxt.popup[3]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-date-picker class='picker' v-model="binfo.ekeyValidDate" value-format="timestamp" type="datetime"
+							<el-date-picker id="edit-time" class='picker' v-model="binfo.ekeyValidDate" value-format="timestamp" type="datetime"
 								placeholder="" default-time="23:59:59"></el-date-picker>
 						</div>
 					</li>
@@ -161,25 +163,25 @@
 							<p class="txt">{{pageTxt.popup[4]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-input auto-complete="off" class='picker' v-model="binfo.comment" maxlength="64"></el-input>
+							<el-input id="edit-comment" auto-complete="off" class='picker' v-model="binfo.comment" maxlength="64"></el-input>
 						</div>
 					</li>
 				</ul>
 				<div slot="footer" class="_footBtn">
-					<el-button type="primary" @click="editIssue">{{pageTxt.popup[5]}}</el-button>
-					<el-button type="primary" @click="submitEdit">{{pageTxt.popup[13]}}</el-button>
-					<el-button @click="editEkdy = false">{{pageTxt.popup[7]}}</el-button>
+					<el-button id="edit-now" type="primary" @click="editIssue">{{pageTxt.popup[5]}}</el-button>
+					<el-button id="edit-submit" type="primary" @click="submitEdit">{{pageTxt.popup[13]}}</el-button>
+					<el-button id="edit-close" @click="editEkdy = false">{{pageTxt.popup[7]}}</el-button>
 				</div>
 			</el-dialog>
 			<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.popup[9]" :visible.sync="showExportEkeyInfo" width='600px'>
 				<div class="_messaga">
-					<span class="txt">{{pageTxt.popup[10]}}&nbsp;<a :href="EkeyInfoSrc" style="color:#5C759D">{{EkeyInfoName}}</a></span>
+					<span class="txt">{{pageTxt.popup[10]}}&nbsp;<a id="csvName" :href="EkeyInfoSrc" style="color:#5C759D">{{EkeyInfoName}}</a></span>
 					<div class="_messaga_info">
 						<span class="info_txt">{{pageTxt.popup[11]}}</span>
 					</div>
 				</div>
 				<div slot="footer" class="_footBtn">
-					<el-button type="default" @click="showExportEkeyInfo=false">{{pageTxt.popup[12]}}</el-button>
+					<el-button id="csv-close" type="default" @click="showExportEkeyInfo=false">{{pageTxt.popup[12]}}</el-button>
 				</div>
 			</el-dialog>
 			

@@ -7,7 +7,7 @@
 			<el-tab-pane :label="$t('fbcsFile.order.manage.pwdOrder')" name="pwdOrder">密码指令</el-tab-pane>
 		</el-tabs>
 		<router-view />
-		<button v-if="fxAuth" class="blueBtn rig" @click="report">{{$t('fbcsFile.order.manage.reportBtn')}}</button>
+		<button v-if="fxAuth" class="blueBtn rig" @click="report" id="reporBOP">{{$t('fbcsFile.order.manage.reportBtn')}}</button>
 	</div>
 </template>
 

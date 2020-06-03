@@ -11,6 +11,7 @@
 }
 #lgy-candidateWords .inTip li{font-size: 12px;padding: 0 10px;color: #666;line-height: 30px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 #lgy-candidateWords .inTip li:hover{background: #f5f7fa;}
+.autocompleteOFF{position: fixed;top: -100px;left: -428px;opacity: 0;pointer-events: none;}
 </style>
 
 <template>
@@ -35,7 +36,7 @@ export default {
 		let bingo = {
 			AC: 'autocomplete-',
 			inputID: 'userID',
-			list: [],
+			list: []
 		};
 		return bingo;
 	},

@@ -1,7 +1,7 @@
 <template>
 	<div class="information">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span id="back" class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.advanced.information.title')}}</b>
 		</header>
 		<div class="searchBar">
@@ -14,17 +14,17 @@
 			<lgy-candidateWords v-model="info.userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.user.userName')}}</label>
 			<!-- <input v-model="info.userName" :disabled="listType=='BOP'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/> -->
-			<lgy-candidateWords v-model="info.userName" :disabled="listType=='BOP'" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
+			<lgy-candidateWords id="userName" v-model="info.userName" :disabled="listType=='BOP'" :keywords="nameWords" @input="nameInput" class="words" ></lgy-candidateWords>
 			<!-- <p class="jg"></p>
 			<label class="label">{{$t('fbcsFile.advanced.information.company')}}：</label>
 			<input v-model="info.opeartorCompany" :disabled="listType=='OPE'" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
 			 -->
 			<label class="label">{{$t('fbcsFile.advanced.information.ssccManager')}}：</label>
-			<input v-model="info.ssccManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
-			<button class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<input id="sscc" v-model="info.ssccManager" class="words" :placeholder="$t('fbcsFile.searchBar.placeholder')" autocomplete="off"/>
+			<button id="search" class="blueBtn words" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="expcsv('OPE')" :class="{disabled: disabledOPE}">
+			<li id="expcsv" @click="expcsv('OPE')" :class="{disabled: disabledOPE}">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportExtendInformation.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.information.expInfo')}}</span>
 			</li>
@@ -39,13 +39,13 @@
 			<ul class="_dialog">
 				<li>
 					<span class="txt w80">{{$t('fbcsFile.advanced.user.fileName')}}</span>
-					<a class="a" :href="fileHref">{{fileName}}</a>
+					<a id="alink" class="a" :href="fileHref">{{fileName}}</a>
 				</li><li>
 					<p class="txt rClick">{{$t('fbcsFile.tips.rightClick')}}</p>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button id="close" class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 	</div>
@@ -245,7 +245,7 @@ function searchOPE(){
 		var obj;
 		for (var i = 0; i < res.lists.length; i++) {
 			obj = res.lists[i];
-			obj.updateTimp = mounted(obj.operatorUpdateTime*1000).format('YYYY-MM-DD HH:mm:ss');
+			obj.updateTimp = moment(obj.operatorUpdateTime*1000).format('YYYY-MM-DD HH:mm:ss');
 		}
 		_this.listOPE = res.lists;
 		_this.pageOPE = res.currentPage;

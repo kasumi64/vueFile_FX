@@ -16,13 +16,12 @@
 
 <script>
 import  '@/fbcsViews/libs/css/fdep.css';
-import utils	 from '../libs/utils.js';
-import globalVar from '../libs/globalVar.js';
-import lang		 from '../language/lang.js';
-import md5       from '../libs/md5.js';
-import navhead   from '@/fbcsViews/view/navHead.vue';
-import sidebar   from '@/fbcsViews/view/sidebar.vue';
-import fxUtils from '@/fbcsFxViews/libs/utils.js';
+import utils		from '../libs/utils.js';
+import globalVar	from '../libs/globalVar.js';
+import lang			from '../language/lang.js';
+import navhead		from '@/fbcsViews/view/navHead.vue';
+import sidebar		from '@/fbcsViews/view/sidebar.vue';
+import fxUtils		from '@/fbcsFxViews/libs/utils.js';
 	
 var _this;
 
@@ -47,17 +46,13 @@ export default {
 	},
 	mounted(){
 		fxUtils.emit('fbcs_file', this.$refs['fbcs_MX']);
-		this.userName = globalVar.get('accountInfo').name;
 	},
 	computed: {
 		LockState(){
 			return showRedText();
 		}
 	},
-	components: {navhead, sidebar},
-	beforeDestroy(){
-		
-	},
+	components: {navhead, sidebar}
 };
 	
 function showRedText(){

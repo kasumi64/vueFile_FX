@@ -13,32 +13,32 @@
 					<li>
 						<label class="txt">{{pageTxt.label[2]}}</label>
 						<div class="rightBox">
-							<span class="txt1">{{info.topicName}}</span>
+							<span id="topicName" class="txt1">{{info.topicName}}</span>
 						</div>
 					</li><li>
 						<label class="txt">{{pageTxt.label[3]}}</label>
 						<div class="rightBox">
-							<span class="txt1">{{info.pubUserID}}</span>
+							<span id="pubUserID" class="txt1">{{info.pubUserID}}</span>
 						</div>
 					</li><li>
 						<label class="txt">{{pageTxt.label[4]}}</label>
 						<div class="rightBox">
-							<span class="txt1">{{info.pubTime}}</span>
+							<span id="pubTime" class="txt1">{{info.pubTime}}</span>
 						</div>
 					</li><li>
 						<label class="txt">{{pageTxt.label[17]}}</label>
 						<div class="rightBox">
-							<span class="txt1">{{info.effectiveDays}}</span>
+							<span id="maxDays" class="txt1">{{info.effectiveDays}}</span>
 						</div>
 					</li><li>
 						<label class="txt"><b class="red">*&nbsp;</b>{{pageTxt.label[5]}}</label>
 						<div class="rightBox">
-							<el-input auto-complete="off" :placeholder="pageTxt.must" v-model="info.topicDescr" maxlength="512" clearable></el-input>
+							<el-input id="topicDescr" auto-complete="off" :placeholder="pageTxt.must" v-model="info.topicDescr" maxlength="512" clearable></el-input>
 						</div>
 					</li><li>
 						<label class="txt"><b class="red">*&nbsp;</b>{{pageTxt.label[6]}}</label>
 						<div class="rightBox">
-							<el-input auto-complete="off" :placeholder="pageTxt.must" type='textarea' v-model="info.topicInfo" maxlength="2048" :autosize="{ minRows: 4, maxRows: 40}"></el-input>
+							<el-input id="topicInfo" auto-complete="off" :placeholder="pageTxt.must" type='textarea' v-model="info.topicInfo" maxlength="2048" :autosize="{ minRows: 4, maxRows: 40}"></el-input>
 						</div>
 					</li><li>
 						<label class="txt">{{pageTxt.label[7]}}</label>
@@ -47,11 +47,11 @@
 							<div class="tableBox ht">
 								<div class="title">{{pageTxt.label[8]}}</div>
 								<div class="searchBox">
-									<input class="search" v-model="leftWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
-									<button class="el-icon-search blueBtn" @click="leftSearch">{{pageTxt.label[18]}}</button>
+									<input id="leftWord" class="search" v-model="leftWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
+									<button id="leftSearch" class="el-icon-search blueBtn" @click="leftSearch">{{pageTxt.label[18]}}</button>
 								</div>
 								<div class="slotTitle">
-									<input v-model="leftSelect" @click='leftckAll($event)' type="checkbox" class="check" autocomplete="off"/>
+									<input id="leftckAll" v-model="leftSelect" @click='leftckAll($event)' type="checkbox" class="check" autocomplete="off"/>
 									<span class="itemTxt">{{pageTxt.list[0]}}</span>
 									<span class="itemTxt">{{pageTxt.list[1]}}</span>
 								</div>
@@ -65,18 +65,18 @@
 							</div>
 							
 							<div class="transferBtn">
-								<button @click="toRight" class="el-icon-arrow-right btn"></button>
-								<button @click="toFeft" class="el-icon-arrow-left btn"></button>
+								<button id="toRight" @click="toRight" class="el-icon-arrow-right btn"></button>
+								<button id="toFeft" @click="toFeft" class="el-icon-arrow-left btn"></button>
 							</div>
 							
 							<div class="tableBox ht">
 								<div class="title">{{pageTxt.label[15]}}</div>
 								<div class="searchBox">
-									<input class="search" v-model="rightWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
-									<button class="el-icon-search blueBtn" @click="rightSearch">{{pageTxt.label[18]}}</button>
+									<input id="rightWord" class="search" v-model="rightWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
+									<button id="rightSearch" class="el-icon-search blueBtn" @click="rightSearch">{{pageTxt.label[18]}}</button>
 								</div>
 								<div class="slotTitle">
-									<input v-model="rightSelect" @click='rightckAll($event)' type="checkbox" class="check" autocomplete="off"/>
+									<input id="rightckAll" v-model="rightSelect" @click='rightckAll($event)' type="checkbox" class="check" autocomplete="off"/>
 									<span class="itemTxt">{{pageTxt.list[0]}}</span>
 									<span class="itemTxt">{{pageTxt.list[1]}}</span>
 								</div>
@@ -95,15 +95,15 @@
 							<div class="tableBox ht">
 								<div class="title">{{pageTxt.label[16]}}</div>
 								<div class="searchBox">
-									<input class="search" v-model="appidWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
-									<button class="el-icon-search blueBtn" @click="appidSearch">{{pageTxt.label[18]}}</button>
+									<input id="appidWord" class="search" v-model="appidWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
+									<button id="appidSearch" class="el-icon-search blueBtn" @click="appidSearch">{{pageTxt.label[18]}}</button>
 								</div>
 								<div class="slotTitle">
 									<span class="itemTxt2 t2">{{pageTxt.list[0]}}</span>
 									<span class="itemTxt2 t2">{{pageTxt.list[1]}}</span>
 									<span class="itemTxt2 t2">{{pageTxt.list[2]}}</span>
 								</div>
-								<ul ref='appid' class="table">
+								<ul id="appTabel" ref='appid' class="table">
 									<li v-for="(obj, i) in appid" > <!--info.subsUserList-->
 										<img class="trsIcon" @click="delAppid(i)" src="@/fbcsViews/img/theme/del_1.png">
 										<span class="itemTxt2 t2" :title="obj.userID">{{obj.userID}}</span>
@@ -129,9 +129,9 @@
 						<label class="txt">&nbsp;</label>
 						<div class="rightBox">
 							<p class="jg"></p>
-							<button v-if="auth" class="blueBtn" @click="nowAll">{{pageTxt.label[14]}}</button>
-							<button v-if="auth" class="blueBtn" @click="submit">{{pageTxt.label[10]}}</button>
-							<button class="defBtn" @click="back">{{pageTxt.label[11]}}</button>
+							<button id="now" v-if="auth" class="blueBtn" @click="nowAll">{{pageTxt.label[14]}}</button>
+							<button id="submit" v-if="auth" class="blueBtn" @click="submit">{{pageTxt.label[10]}}</button>
+							<button id="back2" class="defBtn" @click="back">{{pageTxt.label[11]}}</button>
 							<p class="jg"></p>
 						</div>
 					</li>

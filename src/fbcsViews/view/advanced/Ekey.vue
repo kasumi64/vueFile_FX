@@ -1,7 +1,7 @@
 <template>
 	<div class="advancedEkey">
 		<header class="backHead">
-			<span class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
+			<span id="back" class="back" @click="back">&lt; {{$t('fbcsFile.tips.back')}}</span>
 			<b class="h1">{{this.$t('fbcsFile.advanced.Ekey.title')}}</b>
 		</header>
 		<div class="searchBar">
@@ -9,11 +9,11 @@
 			<lgy-candidateWords v-model="userID" :keywords="idWords" @input="idInput" class="words" ></lgy-candidateWords>
 			<label class="label">{{$t('fbcsFile.advanced.Ekey.ekeyName')}}</label>
 			<label class="label">{{prefix}}</label>
-			<lgy-candidateWords v-model="ekeyName" :keywords="ekNames" @input="ekNameInput" class="words"></lgy-candidateWords>
-			<button class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
+			<lgy-candidateWords id="ekeyName" v-model="ekeyName" :keywords="ekNames" @input="ekNameInput" class="words"></lgy-candidateWords>
+			<button id="search" class="blueBtn mr20" @click="search">{{$t('fbcsFile.searchBar.search')}}</button>
 		</div>
 		<ul class="fnField">
-			<li @click="expcsv">
+			<li id="expcsv" @click="expcsv">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/exportEkey.png"/>
 				<span class="label">{{$t('fbcsFile.advanced.Ekey.expcsv')}}</span>
 			</li>
@@ -24,13 +24,13 @@
 			<ul class="_dialog">
 				<li>
 					<span class="txt w80">{{$t('fbcsFile.advanced.user.fileName')}}</span>
-					<a class="a" :href="fileHref">{{fileName}}</a>
+					<a id="alink" class="a" :href="fileHref">{{fileName}}</a>
 				</li><li>
 					<p class="txt rClick">{{$t('fbcsFile.tips.rightClick')}}</p>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button id="close" class="defBtn" @click="showDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 	</div>

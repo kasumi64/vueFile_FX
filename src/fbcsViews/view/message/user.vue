@@ -1,27 +1,27 @@
 <template>
 	<div>
-		<input class="opacity0" autocomplete="on" />
+		<input class="opacity0" />
 		<!-- <div class='header'>
         <span class='header_txt'>{{pageTxt.label[0]}}</span>
     </div> -->
 		<div class="user">
 			<div class="userH">
 				<span class="txt">{{pageTxt.label[1]}}</span>
-				<el-input auto-complete="off" class="input_normal" v-model="userParam.id"></el-input>
+				<el-input id="userID" auto-complete="off" class="input_normal" v-model="userParam.id"></el-input>
 				<span class="txt">{{pageTxt.label[2]}}</span>
-				<el-input auto-complete="off" class="input_normal" v-model="userParam.name"></el-input>
-				<el-button type="primary" @click='userSearch'>{{pageTxt.label[3]}}</el-button>
+				<el-input id="userName" auto-complete="off" class="input_normal" v-model="userParam.name"></el-input>
+				<el-button id="search" type="primary" @click='userSearch'>{{pageTxt.label[3]}}</el-button>
 			</div>
 			<div class="btnBox">
-				<div v-if="auth>1" @click="createUser"><img src="@/fbcsViews/img/user/creatico.png"><span>{{pageTxt.label[4]}}</span></div>
-				<div v-if="auth>1" @click="showPromptBox"><img src="@/fbcsViews/img/user/deletuser.png"><span>{{pageTxt.table[6]}}</span></div>
-				<div v-if="auth>1" @click="eidtPasswd"><img src="@/fbcsViews/img/user/editPswd.png"><span>{{pageTxt.table[7]}}</span></div>
-				<div v-if="auth>1" @click="batchPwdShow"><img src="@/fbcsFxViews/img/FnIcon/batchPwd.png"><span>{{$t('fbcsFile.fnField.batchPwd')}}</span></div>
-				<div v-if="auth>1" @click="importExtInfo"><img src="@/fbcsViews/img/user/defalutico.png"><span>{{pageTxt.label[5]}}</span></div>
-				<div @click="exportExtInfo"><img src="@/fbcsFxViews/img/FnIcon/searchUser.png"><span>{{$t('fbcsFile.searchBar.advUser')}}</span></div>
-				<div @click="exportBasicsInfo"><img src="@/fbcsFxViews/img/FnIcon/searchInformation.png"><span>{{$t('fbcsFile.searchBar.advExp')}}</span></div>
+				<div v-if="auth>1" id="create" @click="createUser"><img src="@/fbcsViews/img/user/creatico.png"><span>{{pageTxt.label[4]}}</span></div>
+				<div v-if="auth>1" id="delUser" @click="showPromptBox"><img src="@/fbcsViews/img/user/deletuser.png"><span>{{pageTxt.table[6]}}</span></div>
+				<div v-if="auth>1" id="editPwd" @click="eidtPasswd"><img src="@/fbcsViews/img/user/editPswd.png"><span>{{pageTxt.table[7]}}</span></div>
+				<div v-if="auth>1" id="batchPwd" @click="batchPwdShow"><img src="@/fbcsFxViews/img/FnIcon/batchPwd.png"><span>{{$t('fbcsFile.fnField.batchPwd')}}</span></div>
+				<div v-if="auth>1" id="impExt" @click="importExtInfo"><img src="@/fbcsViews/img/user/defalutico.png"><span>{{pageTxt.label[5]}}</span></div>
+				<div id="toAdvancedUser" @click="exportExtInfo"><img src="@/fbcsFxViews/img/FnIcon/searchUser.png"><span>{{$t('fbcsFile.searchBar.advUser')}}</span></div>
+				<div id="toAdvancedExt" @click="exportBasicsInfo"><img src="@/fbcsFxViews/img/FnIcon/searchInformation.png"><span>{{$t('fbcsFile.searchBar.advExp')}}</span></div>
 			</div>
-			<el-table stripe border ref="multipleTable" tooltip-effect="dark" @select='toggleSelection' @selection-change="fn" :data="userData"
+			<el-table id="table-user" stripe border ref="multipleTable" tooltip-effect="dark" @select='toggleSelection' @selection-change="fn" :data="userData"
 			 @current-change="currentRow" highlight-current-row>
 				<!--<el-table-column width="50" label=" " type="index" show-overflow-tooltip></el-table-column>-->
 				<el-table-column width="50" type="selection" show-overflow-tooltip></el-table-column>
@@ -56,46 +56,46 @@
 			<el-dialog class="dialog_pop box1" v-dialogDrag :title="pageTxt.popup[0]" :visible.sync="showImportExtInfo" width='680px'>
 				<div class="_messaga box1">
 					<span class="txt"><span class="red">*&nbsp;</span>{{pageTxt.popup[1]}}</span>
-					<el-input auto-complete="off" class="Popup_input" v-model="csvFileName"></el-input>
+					<el-input id="csvName" auto-complete="off" class="Popup_input" v-model="csvFileName"></el-input>
 					<div class="_messaga1_info">
 						<span class="info_txt">{{pageTxt.popup[2]}}</span><br/>
 						<span class="info_txt">{{pageTxt.popup[3]}}</span>
 					</div>
 				</div>
 				<div slot="footer" class="_footBtn">
-					<el-button type="primary" @click="importExtInfoSubmit">{{pageTxt.popup[4]}}</el-button>
-					<el-button type="default" @click="showImportExtInfo=false" class="Popup_return">{{pageTxt.popup[5]}}</el-button>
+					<el-button id="import-OK" type="primary" @click="importExtInfoSubmit">{{pageTxt.popup[4]}}</el-button>
+					<el-button id="import-close" type="default" @click="showImportExtInfo=false" class="Popup_return">{{pageTxt.popup[5]}}</el-button>
 				</div>
 			</el-dialog>
 			
 			<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.popup[6]" :visible.sync="showExportExtInfo" width='600px'>
 				<div class="_messaga">
-					<span class="txt">{{pageTxt.popup[7]}}<a :href="exportCsvSrc" style="color:#5C759D">{{exportCsvName}}</a></span>
+					<span class="txt">{{pageTxt.popup[7]}}<a id="alink1" :href="exportCsvSrc" style="color:#5C759D">{{exportCsvName}}</a></span>
 					<div class="_messaga_info">
 						<span class="info_txt">{{pageTxt.popup[8]}}</span>
 					</div>
 				</div>
 				<div slot="footer" class="_footBtn">
-					<el-button type="default" @click="showExportExtInfo=false">{{pageTxt.popup[9]}}</el-button>
+					<el-button id="close1" type="default" @click="showExportExtInfo=false">{{pageTxt.popup[9]}}</el-button>
 				</div>
 			</el-dialog>
 			
 			<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.popup[10]" :visible.sync="showExportBasicsInfo" width='600px'>
 				<div class="_messaga">
-					<span class="txt">{{pageTxt.popup[7]}}&nbsp;<a :href="BasicsSrc" style="color:#5C759D">{{BasicsName}}</a></span>
+					<span class="txt">{{pageTxt.popup[7]}}&nbsp;<a id="alink2" :href="BasicsSrc" style="color:#5C759D">{{BasicsName}}</a></span>
 					<div class="_messaga_info">
 						<span class="info_txt">{{pageTxt.popup[8]}}</span>
 					</div>
 				</div>
 				<div slot="footer" class="_footBtn">
-					<el-button type="default" @click="showExportBasicsInfo=false">{{pageTxt.popup[9]}}</el-button>
+					<el-button id="close2" type="default" @click="showExportBasicsInfo=false">{{pageTxt.popup[9]}}</el-button>
 				</div>
 			</el-dialog>
 			
 			<el-dialog width="70%" :visible.sync="importErr" :title="$t('fbcsFile.tips.title')" v-dialogDrag 
 				:close-on-click-modal='false' :show-close="false">
 				<div class="_dialog">
-					<el-table :data="errList" max-height="294" highlight-current-row border stripe>
+					<el-table id="table-err" :data="errList" max-height="294" highlight-current-row border stripe>
 						<el-table-column prop="line" :label="$t('fbcsFile.userHome.line')"></el-table-column>
 						<el-table-column prop="userID" :label="$t('fbcsFile.tableTitle.userID')">
 							<span slot-scope="scope" class="redErr">{{scope.row.userID}}</span>
@@ -104,7 +104,7 @@
 					</el-table>
 				</div>
 				<div slot="footer" class="_footBtn">
-					<button class="defBtn" @click="importErr=false">{{$t('fbcsFile.tips.close')}}</button>
+					<button id="err-close" class="defBtn" @click="importErr=false">{{$t('fbcsFile.tips.close')}}</button>
 				</div>
 			</el-dialog>
 			
@@ -114,15 +114,15 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.userHome.setDate')}}</p>
 					</div><div class="right">
-						<el-radio-group v-model="batchType">
+						<el-radio-group id="batch-type" v-model="batchType">
 							<el-radio :label="0">{{$t('fbcsFile.userHome.defPwd')}}</el-radio>
 							<el-radio :label="1">{{$t('fbcsFile.userHome.neverPwd')}}</el-radio>
 						</el-radio-group>
 					</div>
 				</div>
 				<div slot="footer" class="_footBtn">
-					<button class="blueBtn" @click="batchPwd">{{$t('fbcsFile.tips.ok')}}</button>
-					<button class="defBtn" @click="isBatchShow=false">{{$t('fbcsFile.tips.close')}}</button>
+					<button id="batch-OK" class="blueBtn" @click="batchPwd">{{$t('fbcsFile.tips.ok')}}</button>
+					<button id="batch-close" class="defBtn" @click="isBatchShow=false">{{$t('fbcsFile.tips.close')}}</button>
 				</div>
 			</el-dialog>
 			<lgy-review :show.sync='showReview' :reqsv='reqsv' @submit='review' :txt='reviewTxt'></lgy-review>

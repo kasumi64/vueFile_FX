@@ -6,7 +6,7 @@
 			<hr class="_hr" />
 			<label class="txt">{{pageTxt.label[1]}}</label>
 			<span class="m35">
-				<el-autocomplete auto-complete="off" @input='autoInput' class="elInput m0" v-model="idName" :fetch-suggestions="fetch" 
+				<el-autocomplete id="userID" auto-complete="off" @input='autoInput' class="elInput m0" v-model="idName" :fetch-suggestions="fetch" 
 					:trigger-on-focus="true" @select="idSelect" :maxlength="parseInt(128)">
 					<div slot-scope="{item}">
 						<span>{{item.userID}}</span>
@@ -17,7 +17,7 @@
 			</span>
 			<!--<label class="txt">{{pageTxt.label[2]}}</label>
 			<el-input auto-complete="off" placeholder="" v-model="userName"></el-input>-->
-			<button class='blueBtn' type='primary' @click='search'>{{pageTxt.label[3]}}</button>
+			<button id="search" class='blueBtn' type='primary' @click='search'>{{pageTxt.label[3]}}</button>
 			<!--<label class="txt">{{pageTxt.label[4]}}</label>
 			<span class="txt">{{max}}</span>-->
 			
@@ -28,7 +28,7 @@
 				<span class="btnTxt">{{pageTxt.label[5]}}</span>
 			</el-button>-->
 		</div>
-		<el-table @current-change="currenRow" @selection-change="selectionRow" :data="data"	stripe border tooltip-effect="dark" highlight-current-row>
+		<el-table id="tableID" @current-change="currenRow" @selection-change="selectionRow" :data="data"	stripe border tooltip-effect="dark" highlight-current-row>
 			<!--<el-table-column width="50" :label="column" type="index"></el-table-column>-->
 			<!--<el-table-column type="selection" width="55"></el-table-column>-->
 			<el-table-column prop="userID" :label="pageTxt.list[0]"  show-overflow-tooltip></el-table-column>

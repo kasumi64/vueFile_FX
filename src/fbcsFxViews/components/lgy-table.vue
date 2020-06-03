@@ -30,7 +30,6 @@
 
 var _this;
 
-
 export default {
 	name: 'lgy-table',
 	data() {

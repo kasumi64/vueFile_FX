@@ -8,20 +8,22 @@
 			<header>
 				<div class="statist_herader">
 					<span>{{pageTxt.label[1]}}</span>
-					<el-input auto-complete="off" class='input_normal' v-model="modeType.user"></el-input>
+					<el-input id="userID" auto-complete="off" class='input_normal' v-model="modeType.user"></el-input>
 					<span class="txt ml">{{pageTxt.label[2]}}</span>
 					<!--<el-input class='input_normal' v-model="modeType.userType"></el-input>-->
-					<el-select class='select' v-model="modeType.userType" filterable clearable>
+					<el-select id="type" class='select' v-model="modeType.userType" filterable clearable>
 						<el-option v-for="obj in oprType" :key="obj.i" :label="obj.label" :value="obj.val">
 						</el-option>
 					</el-select>
 					<span class="txt ml">{{pageTxt.label[3]}}</span>
-					<el-radio v-model="statisticalMethod" label="0">{{pageTxt.label[4]}}</el-radio>
-					<el-radio v-model="statisticalMethod" label="1">{{pageTxt.label[5]}}</el-radio>
+					<el-radio-group id="sequence" v-model="statisticalMethod">
+						<el-radio label="0">{{pageTxt.label[4]}}</el-radio>
+						<el-radio label="1">{{pageTxt.label[5]}}</el-radio>
+					</el-radio-group>
 				</div>
 				<div class="lined">
 					<span class="txt m0">{{pageTxt.label[6]}}</span>
-					<el-radio-group v-model="radio">
+					<el-radio-group id="radio" v-model="radio">
 					    <el-radio :label="0">{{pageTxt.label[7]}}</el-radio>
 					    <el-radio :label="1">{{pageTxt.label[8]}}</el-radio>
 					    <el-radio :label="2">{{pageTxt.label[9]}}</el-radio>
@@ -30,22 +32,22 @@
 					<!--<el-date-picker class="date_picker" :disabled="radio!=3" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" 
 						v-model="search" type="datetimerange" :range-separator="pageTxt.label[11]" :start-placeholder="pageTxt.label[12]" :end-placeholder="pageTxt.label[13]">
 					</el-date-picker>-->
-					<el-date-picker :disabled="radio!=3" :picker-options='pickerBegin' v-model="beginDate" type="datetime" :clearable="false" :editable='false'
+					<el-date-picker id="begin" :disabled="radio!=3" :picker-options='pickerBegin' v-model="beginDate" type="datetime" :clearable="false" :editable='false'
 						class='picker' value-format="timestamp" format="yyyy-MM-dd HH:mm:ss" default-time="0:00:00">
 					</el-date-picker>
 					<label class="txt pickerTxt">{{pageTxt.label[13]}}</label>
-					<el-date-picker :disabled="radio!=3" :picker-options='pickerEnd' v-model="endDate" type="datetime"  :clearable="false" :editable='false'
+					<el-date-picker id="end" :disabled="radio!=3" :picker-options='pickerEnd' v-model="endDate" type="datetime"  :clearable="false" :editable='false'
 						class='picker' value-format="timestamp" format="yyyy-MM-dd HH:mm:ss" default-time="23:59:59">
 					</el-date-picker>
 					
-					<el-button @click="searchFn" type="primary" class="searchBtn">{{pageTxt.label[14]}}</el-button>
+					<el-button id="search" @click="searchFn" type="primary" class="searchBtn">{{pageTxt.label[14]}}</el-button>
 					<!-- <el-button @click="exportFn" type="primary" class="exportFn">{{pageTxt.label[15]}}</el-button> -->
 				</div>
 			</header>
 			<div>
-				<div @click="toAdvanced"><img src="@/fbcsFxViews/img/FnIcon/searchAudit.png"><span>{{$t('fbcsFile.searchBar.advanced')}}</span></div>
+				<div id="toAdvanced" @click="toAdvanced"><img src="@/fbcsFxViews/img/FnIcon/searchAudit.png"><span>{{$t('fbcsFile.searchBar.advanced')}}</span></div>
 			</div>
-			<el-table stripe border highlight-current-row :data="data.lists">
+			<el-table id="tableID" stripe border highlight-current-row :data="data.lists">
 				<!--<el-table-column width="50" label=" " type="index"></el-table-column>-->
 				<el-table-column prop="operationTime" width="170" :label="pageTxt.table[0]" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="operationType" width="180" :label="pageTxt.table[1]" show-overflow-tooltip></el-table-column>
@@ -79,7 +81,7 @@
 			
 			<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.table[6]" :visible.sync="showParticulars" width="70%">
 				<div class="_content">
-					<el-table highlight-current-row :data="responseDate" stripe border>
+					<el-table id="table-detail" highlight-current-row :data="responseDate" stripe border>
 						<el-table-column prop="serviceID" :label="pageTxt.serviceID" width="120" show-overflow-tooltip>
 							<span slot-scope="scope" :class="{red: scope.row.errcode!='0'}">{{scope.row.serviceID}}</span>
 						</el-table-column>
@@ -98,13 +100,13 @@
 		</div>
 		<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.popup[0]" :visible.sync="exportExcel" width='600px'>
 			<div class="_messaga">
-				<span class="txt">{{pageTxt.popup[1]}}<a :href="excelSrc" style="color:#5C759D">{{excelName}}</a></span>
+				<span class="txt">{{pageTxt.popup[1]}}<a id="csvName" :href="excelSrc" style="color:#5C759D">{{excelName}}</a></span>
 				<div class="_messaga_info">
 					<span class="info_txt">{{pageTxt.popup[2]}}</span>
 				</div>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="exportExcel=false">{{pageTxt.popup[3]}}</button>
+				<button id="close" class="defBtn" @click="exportExcel=false">{{pageTxt.popup[3]}}</button>
 			</div>
 		</el-dialog>
 	</div>

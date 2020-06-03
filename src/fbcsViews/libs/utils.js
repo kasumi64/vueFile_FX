@@ -147,19 +147,20 @@ function utils(){
 		var src = require('../img/close.png');
 		// 带按钮的消息框
 		var hintHtml = '<div id="_hints"><div class="_panle">'+
-			'<div><p id="_title">提示</p><img id="_close" src="'+src+'" />'+
+			'<div><p id="_title">提示</p><img id="old_close" src="'+src+'" />'+
 			'</div><div class="_messaga"><div id="_ctxt"></div></div>'+
-			'<div class="_footBtn"><button id="_now" class="blueBtn">立即下发</button><button id="_yes" class="blueBtn">确 定</button>'+
-			'<button id="_no" class="defBtn">取 消</button></div></div></div>';
+			'<div class="_footBtn"><button id="old_now" class="blueBtn">立即下发</button>'+
+			'<button id="old_yes" class="blueBtn">确 定</button>'+
+			'<button id="old_no" class="defBtn">取 消</button></div></div></div>';
 		var $hints = kit(hintHtml);
 		var hintsObj = {
 			el: $hints[0],
 			panle: $hints.find('._panle'),
 			title: $hints.find('#_title'),
-			yes: $hints.find('#_yes'),
-			no: $hints.find('#_no'),
+			yes: $hints.find('#old_yes'),
+			no: $hints.find('#old_no'),
 			ctxt: $hints.find('#_ctxt'),
-			now: $hints.find('#_now'),
+			now: $hints.find('#old_now'),
 			show: function(opt){
 				hintsObj.ctxt[0].innerHTML = opt.txt;
 				if(opt.btn==1){
@@ -215,7 +216,7 @@ function utils(){
 			if(typeof(_opt.now)=="function") _opt.now.call(_opt.that, _opt.nowArgs);
 			hintsObj.hide();
 		});
-		$hints.find('#_close').click(function(e){
+		$hints.find('#old_close').click(function(e){
 			hintsObj.runNo();
 			hintsObj.hide();
 		});
@@ -236,17 +237,17 @@ function utils(){
 		
 		// 复核操作员
 		var reviewHtml = '<div id="_review"><div class="_panle">'+
-			'<div><p id="_title">复核操作</p><img id="_close" src="'+src+'" />'+
+			'<div><p id="_title">复核操作</p><img id="rev_close" src="'+src+'" />'+
 			'</div><ul class="_messaga"><li><label class="lab">复核操作员：</label><input id="_name" class="inp" type="text" autocomplete="off"/></li>'+
 			'<li><label class="lab">复核员密码：</label><input id="_pass" class="inp" type="password" autocomplete="off"/></li></ul>'+
-			'<div class="_footBtn"><button id="_yes" class="blueBtn">提 交</button><button id="_no" class="defBtn">返 回</button></div></div></div>';
+			'<div class="_footBtn"><button id="rev_yes" class="blueBtn">提 交</button><button id="rev_no" class="defBtn">返 回</button></div></div></div>';
 		var $review = kit(reviewHtml), _rept;
 		var reObj = {
 			el: $review[0],
 			panle: $review.find('._panle'),
 			title: $review.find('#_title'),
-			yes: $review.find('#_yes'),
-			no: $review.find('#_no'),
+			yes: $review.find('#rev_yes'),
+			no: $review.find('#rev_no'),
 			label: $review.find('.lab'),
 			pass: $review.find('#_pass'),
 			name: $review.find('#_name'),
@@ -282,7 +283,7 @@ function utils(){
 			reObj.runNo();
 			reObj.hide();
 		});
-		$review.find('#_close').click(function(e){
+		$review.find('#rev_close').click(function(e){
 			reObj.runNo();
 			reObj.hide();
 		});

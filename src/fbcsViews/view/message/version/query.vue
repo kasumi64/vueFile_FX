@@ -5,14 +5,14 @@
 			<hr class="_hr" />
 			<div>
 				<label class="txt">{{pageTxt.label[1]}}</label>
-				<el-select class='select' v-model="config">
+				<el-select id="type" class='select' v-model="config">
 					<el-option v-for="obj in pageTxt.option" :key="obj.c" :label="obj.t" :value="obj.c">
 					</el-option>
 				</el-select>
 			</div>
 			<div class="ver">
 				<label class="txt">{{pageTxt.label[2]}}</label>
-				<el-radio-group v-model="radio">
+				<el-radio-group id="date" v-model="radio">
 				    <el-radio :label="0">{{pageTxt.label[3]}}</el-radio>
 				    <el-radio :label="1">{{pageTxt.label[4]}}</el-radio>
 				    <el-radio :label="2">{{pageTxt.label[5]}}</el-radio>
@@ -22,27 +22,27 @@
 				<!--<el-date-picker :disabled="radio!=3" class='daterange' v-model="picker" value-format="yyyy-MM-dd HH:mm:ss" :default-time="['00:00:00', '23:59:59']"
 					type="datetimerange" :range-separator="pageTxt.label[8]" start-placeholder="pageTxt.label[9]" end-placeholder="pageTxt.label[10]" >
 				</el-date-picker>-->
-				<el-date-picker :disabled="radio!=3" :picker-options='pickerBegin' v-model="beginDate" type="datetime" :clearable="false" :editable='false'
+				<el-date-picker id="begin" :disabled="radio!=3" :picker-options='pickerBegin' v-model="beginDate" type="datetime" :clearable="false" :editable='false'
 					 class='picker' value-format="yyyy-MM-dd HH:mm:ss" default-time="0:00:00">
 				</el-date-picker>
 				<label class="txt pickerTxt">{{pageTxt.label[10]}}</label>
-				<el-date-picker :disabled="radio!=3" :picker-options='pickerEnd' v-model="endDate" type="datetime"  :clearable="false" :editable='false'
+				<el-date-picker id="end" :disabled="radio!=3" :picker-options='pickerEnd' v-model="endDate" type="datetime"  :clearable="false" :editable='false'
 					 class='picker' value-format="yyyy-MM-dd HH:mm:ss" default-time="23:59:59">
 				</el-date-picker>
-				<button class='blueBtn' @click='search'>{{pageTxt.label[11]}}</button>
+				<button id="search" class='blueBtn' @click='search'>{{pageTxt.label[11]}}</button>
 				<!-- <button v-if="auth>1" class='blueBtn big' @click='bigVer'>{{pageTxt.label[14]}}</button> -->
 			</div>
 		</div>
 		<ul class="fnField">
-			<li @click="bigVer" v-if="auth>1">
+			<li id="bigVer" @click="bigVer" v-if="auth>1">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/bigVer.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.bigVer')}}</span>
-			</li><li @click="checkVer">
+			</li><li id="checkVer" @click="checkVer">
 				<img class="icon" src="@/fbcsFxViews/img/FnIcon/zdConfig.png"/>
 				<span class="label">{{$t('fbcsFile.fnField.checkZd')}}</span>
 			</li>
 		</ul>
-		<el-table stripe border @row-dblclick="dbl"  @current-change="currenRow" @selection-change="selectionRow" highlight-current-row
+		<el-table id="tableID" stripe border @row-dblclick="dbl"  @current-change="currenRow" @selection-change="selectionRow" highlight-current-row
 			:data="data" tooltip-effect="dark">
 			<!--<el-table-column width="50" :label="column" type="index"></el-table-column>-->
 			<!--<el-table-column type="selection" width="55"></el-table-column>-->
@@ -67,7 +67,7 @@
 		</div>
 		<div class="onePage" v-else-if="max>0&&max<=size">{{paging.before2}}{{max}}{{paging.after}}</div>
 		
-		<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.label[13]" :visible.sync="downCSV" width='600px'>
+		<el-dialog id="table-detail" class="dialog_pop" v-dialogDrag :title="pageTxt.label[13]" :visible.sync="downCSV" width='600px'>
 			<el-table class="popTable" stripe :data="detailData" tooltip-effect="dark">
 				<el-table-column width="50" :label="column" type="index"></el-table-column>
 				<el-table-column prop="fileName" :label="pageTxt.list[8]"  show-overflow-tooltip></el-table-column>
@@ -78,7 +78,7 @@
 		<el-dialog ref="zdBox" :visible.sync="checkDialog" :title="$t('fbcsFile.fnField.checkZd')" v-dialogDrag
 			:close-on-click-modal='false' :show-close="false">
 			<div class="_dialog">
-				<el-table :data="checkList" max-height="294" stripe border>
+				<el-table id="table-check" :data="checkList" max-height="294" stripe border>
 					<el-table-column type="index" width="50" label=" "></el-table-column>
 					<!--<el-table-column prop="type" :label="$t('fbcsFile.versionDetail.type')"></el-table-column>-->
 					<el-table-column prop="version" :label="$t('fbcsFile.versionQuery.version')"></el-table-column>
@@ -89,7 +89,7 @@
 				</el-table>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<button class="defBtn" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+				<button class="defBtn" id="check-close" @click="checkDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 			</div>
 		</el-dialog>
 		

@@ -2,11 +2,11 @@
 	<div class="signal">
 		<div class="userH">
 			<span class="txt">{{pageTxt.label[1]}}：</span>
-			<el-select class="input_normal" v-model="searchInfo.bizType" @change='cbizType' :placeholder="placeholder">
+			<el-select id="signal-type" class="input_normal" v-model="searchInfo.bizType" @change='cbizType' :placeholder="placeholder">
 				<el-option v-for="item in options1" :label="item.name" :key="item.id" :value="item.id"></el-option>
 			</el-select>
 			<span class="txt1">{{pageTxt.label[2]}}：</span>
-			<el-autocomplete disabled @input='autoInput1' class="input_normal" v-model="$store.state.transferEditID" :trigger-on-focus="true" @select="idSelect1">
+			<el-autocomplete id="signal-id1" disabled @input='autoInput1' class="input_normal" v-model="$store.state.transferEditID" :trigger-on-focus="true" @select="idSelect1">
 				<div slot-scope="{item}">
 					<span class="name">{{item.userID}}</span>
 					<span class="addr">({{item.userName}})</span>
@@ -24,8 +24,9 @@
 		</div>
 
 		<div class="btnBox">
-			<div v-if="auth>1" @click="showCreate"><img src="@/fbcsViews/img/user/creatsignal.png"><span>{{pageTxt.label[5]}}</span></div>
+			<div id="signal-create" v-if="auth>1" @click="showCreate"><img src="@/fbcsViews/img/user/creatsignal.png"><span>{{pageTxt.label[5]}}</span></div>
 		</div>
+		
 		<el-table stripe border :data="list.lists" tooltip-effect="dark" @current-change="currentRow" highlight-current-row>
 			<!--<el-table-column width="50" label=" " type="index"></el-table-column>-->
 			<el-table-column prop="typeStr" :label="pageTxt.table[0]" show-overflow-tooltip></el-table-column>
@@ -41,7 +42,6 @@
 				</div>
 			</el-table-column>
 		</el-table>
-		
 		<div class="_pagination" v-if="max>pageSize">
 			<el-pagination @current-change='handleCurrentChange' background layout="prev, pager, next, jumper"
 				:current-page.sync='currPage' @size-change="handleSizeChange" :page-size="pageSize" :total="max">
@@ -57,7 +57,7 @@
 						<p class="txt">{{pageTxt.popup[1]}}</p>
 					</div>
 					<div class="rightBox">
-						<el-select popper-class="fbcs_MX_signal_select" class="input_normal" v-model="creatInfo.bizType" :placeholder="placeholder">
+						<el-select id="signal-type" popper-class="fbcs_MX_signal_select" class="input_normal" v-model="creatInfo.bizType" :placeholder="placeholder">
 							<el-option v-for="item in optionsCreat" :label="item.name" :key="item.id" :value="item.id">
 							</el-option>
 						</el-select>
@@ -68,7 +68,7 @@
 						<p class="txt">{{pageTxt.popup[2]}}</p>
 					</div>
 					<div class="rightBox">
-						<el-input auto-complete="off" class="input_normal" v-model="$store.state.transferEditID" disabled></el-input>
+						<el-input id="signal-id" auto-complete="off" class="input_normal" v-model="$store.state.transferEditID" disabled></el-input>
 						<span class="cleartxt" @click="clear">{{pageTxt.popup[4]}}</span>
 					</div>
 				</li>
@@ -80,7 +80,7 @@
 						</p>
 					</div>
 					<div class="rightBox">
-						<el-select popper-class="fbcs_MX_signal_select" class="input_normal select_" v-model="creatInfo.other" 
+						<el-select id="signal-other" popper-class="fbcs_MX_signal_select" class="input_normal select_" v-model="creatInfo.other" 
 							multiple filterable remote :remote-method="remote2" :reserve-keyword="false" @focus="focus" :placeholder="placeholder">
 							<el-option v-for="item in multipleList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 						</el-select>
@@ -88,8 +88,8 @@
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<el-button type="primary" @click="submit">{{pageTxt.popup[5]}}</el-button>
-				<el-button @click="dialogAdd = false">{{pageTxt.popup[6]}}</el-button>
+				<el-button id="signal-submit" type="primary" @click="submit">{{pageTxt.popup[5]}}</el-button>
+				<el-button id="signal-close" @click="dialogAdd = false">{{pageTxt.popup[6]}}</el-button>
 			</div>
 		</el-dialog>
 	</div>

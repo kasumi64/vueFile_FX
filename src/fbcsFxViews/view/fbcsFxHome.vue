@@ -33,7 +33,7 @@
 import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 
-var _this, unlock, lock, lockTime = 0;
+var _this;
 
 //require('../img/logo.png');
 export default {
@@ -41,10 +41,7 @@ export default {
 	data() {
 		let bingo = {
 			isCollapse: false,
-			userName: 'local',
-			showReview: false,
-			pwd: '',
-			uri: '',
+			userName: 'local'
 		};
 		return bingo;
 	},
@@ -72,10 +69,9 @@ export default {
 	},
 	created(){
 		_this = this;
-		let name = localStorage.getItem('userName') || 'LOCAL';
+		let name = localStorage.getItem('userName') || 'DEBUG';
 		this.userName = name;
 		utils.setArgs('userName', name); //accountInfo
-		this.showReview = false;
 //		this.isCollapse = true;
 //		this.$router.replace({path: '/main/fxCfg/userHome'});
 	},

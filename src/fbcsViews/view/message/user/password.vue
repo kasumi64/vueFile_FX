@@ -7,7 +7,7 @@
 						<p class="txt">{{pageTxt.label[1]}}</p>
 					</div>
 					<div class="rightBox">
-						<el-input auto-complete="off" v-model="this.$store.state.transferEditID" placeholder="" disabled></el-input>
+						<el-input id="pwd-userID" auto-complete="off" v-model="this.$store.state.transferEditID" placeholder="" disabled></el-input>
 					</div>
 				</li><li>
 					<div class="leftBox">
@@ -15,7 +15,7 @@
 					</div>
 					<div class="rightBox">
 						<div class="psw">
-							<el-checkbox v-model="checked">　</el-checkbox>
+							<el-checkbox id="pwd-edit" v-model="checked">　</el-checkbox>
 						</div>
 					</div>
 				</li><li v-if="checked">
@@ -23,8 +23,10 @@
 						<p class="txt">{{pageTxt.label[2]}}</p>
 					</div>
 					<div class="rightBox">
-						<el-radio v-model="info.isModifyDefaultPasswd" :label="0" @change="changeNewPassword">{{pageTxt.label[3]}}</el-radio>
-						<el-radio v-model="info.isModifyDefaultPasswd" :label="1" @change="changeNewPassword">{{pageTxt.label[4]}}</el-radio>
+						<el-radio-group id="pwd-def" v-model="info.isModifyDefaultPasswd" @change="changeNewPassword">
+							<el-radio :label="0">{{pageTxt.label[3]}}</el-radio>
+							<el-radio :label="1">{{pageTxt.label[4]}}</el-radio>
+						</el-radio-group>
 					</div>
 				</li><li v-if="checked">
 					<div class="leftBox">
@@ -32,7 +34,7 @@
 						<span class="txt">{{pageTxt.label[5]}}</span>
 					</div>
 					<div class="rightBox">
-						<input class="blueInput" v-model="info.npasswd" @input='inputVal' data-key="npasswd" autocomplete="off"
+						<input id="pwd-password" class="blueInput" v-model="info.npasswd" @input='inputVal' data-key="npasswd" autocomplete="off"
 							:placeholder="info.isModifyDefaultPasswd?'':'111111'" :disabled="info.isModifyDefaultPasswd==0"></input>
 					</div>
 				</li><li v-if="checked">
@@ -41,7 +43,7 @@
 						<span class="txt">{{pageTxt.label[6]}}</span>
 					</div>
 					<div class="rightBox">
-						<input class="blueInput" v-model="info.again" @input='inputVal' data-key="again" name='again' autocomplete="off"
+						<input id="pwd-again" class="blueInput" v-model="info.again" @input='inputVal' data-key="again" name='again' autocomplete="off"
 							:placeholder="info.isModifyDefaultPasswd?'':'111111'" :disabled="info.isModifyDefaultPasswd==0"></input>
 					</div>
 				</li><li>
@@ -49,18 +51,19 @@
 						<p class="txt">{{pageTxt.label[10]}}</p>
 					</div>
 					<div class="rightBox">
-						<el-select v-model='info.pwdTime' >
+						<el-select id="pwd-time" v-model='info.pwdTime' >
 							<el-option v-for="item in pageTxt.pwdTime" :label="item.txt" :key="item.val" :value="item.val"></el-option>
 						</el-select>
 					</div>
 				</li>
 			</ul>
 			<div slot="footer" class="_footBtn">
-				<el-button type="primary" @click="sendDown">{{pageTxt.label[7]}}</el-button>
-				<el-button type="primary" @click="verify">{{pageTxt.label[8]}}</el-button>
-				<el-button type="default" @click="goBack">{{pageTxt.label[9]}}</el-button>
+				<el-button id="pwd-now" type="primary" @click="sendDown">{{pageTxt.label[7]}}</el-button>
+				<el-button id="pwd-submit" type="primary" @click="verify">{{pageTxt.label[8]}}</el-button>
+				<el-button id="pwd-close" type="default" @click="goBack">{{pageTxt.label[9]}}</el-button>
 			</div>
 		</el-dialog>
+		
 		<lgy-loopReqMX ref="loop"></lgy-loopReqMX>
 	</div>
 </template>

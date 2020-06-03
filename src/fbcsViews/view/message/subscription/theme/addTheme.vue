@@ -1,7 +1,7 @@
 <template>
 	<div class="addTheme">
 		<h2 class="h2">
-			<em @click="back">
+			<em @click="back" id="back">
 				<img class="icon" src="@/fbcsViews/img/ico.png" />
 				<span class="topBack">{{pageTxt.label[13]}}</span>
 			</em>
@@ -11,13 +11,13 @@
 			<li>
 				<label class="txt"><b class="red">*&nbsp;</b>{{pageTxt.label[1]}}</label>
 				<div class="rightBox">
-					<el-input auto-complete="off" :placeholder="pageTxt.must" v-model="info.topicName" maxlength="16"></el-input>
+					<el-input id="topicName" auto-complete="off" :placeholder="pageTxt.must" v-model="info.topicName" maxlength="16"></el-input>
 				</div>
 			</li><li>
 				<label class="txt"><b class="red">*&nbsp;</b>{{pageTxt.label[2]}}</label>
 				<div class="rightBox">
 					<!--<el-input auto-complete="off" placeholder="" v-model="info.pubUserID" clearable></el-input>-->
-					<el-autocomplete @blur='blur' @input='autoInput' class="autocomplete" v-model="idName" :maxlength="parseInt(32)"
+					<el-autocomplete id="userID" @blur='blur' @input='autoInput' class="autocomplete" v-model="idName" :maxlength="parseInt(32)"
 						:fetch-suggestions="fetch" @select="idSelect" :trigger-on-focus="true" :placeholder="pageTxt.must">
 						<div slot-scope="{item}">
 							<span class="name">{{item.userID}}</span>
@@ -35,17 +35,17 @@
 			<li>
 				<label class="txt"><b class="red">*&nbsp;</b>{{pageTxt.label[4]}}</label>
 				<div class="rightBox">
-					<el-input auto-complete="off" :placeholder="pageTxt.must" v-model="info.topicDescr" maxlength="512"></el-input>
+					<el-input id="topicDescr" auto-complete="off" :placeholder="pageTxt.must" v-model="info.topicDescr" maxlength="512"></el-input>
 				</div>
 			</li><li>
 				<label class="txt"><b class="red">*&nbsp;</b>{{pageTxt.label[5]}}</label>
 				<div class="rightBox">
-					<el-input auto-complete="off" :placeholder="pageTxt.must" type='textarea' v-model="info.topicInfo" maxlength="2048" :autosize="{ minRows: 4, maxRows: 40}"></el-input>
+					<el-input id="topicInfo" auto-complete="off" :placeholder="pageTxt.must" type='textarea' v-model="info.topicInfo" maxlength="2048" :autosize="{ minRows: 4, maxRows: 40}"></el-input>
 				</div>
 			</li><li>
 				<label class="txt"><b class="red">*&nbsp;</b>{{pageTxt.label[6]}}</label>
 				<div class="rightBox">
-					<el-input auto-complete="off" @input='number($event)' :placeholder="maxDays" v-model="info.effectiveDays" maxlength="4"></el-input>
+					<el-input id="maxDays" auto-complete="off" @input='number($event)' :placeholder="maxDays" v-model="info.effectiveDays" maxlength="4"></el-input>
 					<span class="errNum" v-show="errNum">{{pageTxt.tips.effectiveNum}}</span>
 				</div>
 			</li><li>
@@ -55,11 +55,11 @@
 					<div class="tableBox">
 						<div class="title">{{pageTxt.label[9]}}</div>
 						<div class="searchBox">
-							<input class="search" v-model="leftWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
-							<button class="el-icon-search blueBtn" @click="leftSearch">{{pageTxt.label[14]}}</button>
+							<input id="leftWord" class="search" v-model="leftWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
+							<button id="leftSearch" class="el-icon-search blueBtn" @click="leftSearch">{{pageTxt.label[14]}}</button>
 						</div>
 						<div class="slotTitle">
-							<input v-model="leftSelect" @click='leftckAll($event)' type="checkbox" class="check" autocomplete="off"/>
+							<input id="leftckAll" v-model="leftSelect" @click='leftckAll($event)' type="checkbox" class="check" autocomplete="off"/>
 							<span class="itemTxt">{{pageTxt.list[0]}}</span>
 							<span class="itemTxt">{{pageTxt.list[1]}}</span>
 						</div>
@@ -73,18 +73,18 @@
 					</div>
 					
 					<div class="transferBtn">
-						<button @click="toRight" class="el-icon-arrow-right btn"></button>
-						<button @click="toFeft" class="el-icon-arrow-left btn"></button>
+						<button id="toRight" @click="toRight" class="el-icon-arrow-right btn"></button>
+						<button id="toFeft" @click="toFeft" class="el-icon-arrow-left btn"></button>
 					</div>
 					
 					<div class="tableBox">
 						<div class="title">{{pageTxt.label[10]}}</div>
 						<div class="searchBox">
-							<input class="search" v-model="rightWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
-							<button class="el-icon-search blueBtn" @click="rightSearch">{{pageTxt.label[14]}}</button>
+							<input id="rightWord" class="search" v-model="rightWord" :placeholder="pageTxt.tips.word" autocomplete="off"/>
+							<button id="rightSearch" class="el-icon-search blueBtn" @click="rightSearch">{{pageTxt.label[14]}}</button>
 						</div>
 						<div class="slotTitle">
-							<input v-model="rightSelect" @click='rightckAll($event)' type="checkbox" class="check" autocomplete="off"/>
+							<input id="rightckAll" v-model="rightSelect" @click='rightckAll($event)' type="checkbox" class="check" autocomplete="off"/>
 							<span class="itemTxt">{{pageTxt.list[0]}}</span>
 							<span class="itemTxt">{{pageTxt.list[1]}}</span>
 						</div>
@@ -109,9 +109,9 @@
 				<label class="txt">&nbsp;</label>
 				<div class="rightBox">
 					<p class="jg"></p>
-					<button v-if="auth" class="blueBtn" @click="now">{{pageTxt.label[11]}}</button>
-					<button v-if="auth" class="blueBtn" @click="send">{{pageTxt.label[12]}}</button>
-					<button class="defBtn" @click="back">{{pageTxt.label[13]}}</button>
+					<button id="now" v-if="auth" class="blueBtn" @click="now">{{pageTxt.label[11]}}</button>
+					<button id="send" v-if="auth" class="blueBtn" @click="send">{{pageTxt.label[12]}}</button>
+					<button id="back2" class="defBtn" @click="back">{{pageTxt.label[13]}}</button>
 					<p class="jg"></p>
 				</div>
 			</li>

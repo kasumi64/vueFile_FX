@@ -8,31 +8,31 @@
 				<el-tab-pane :label="pageTxt.label[1]" name="first">
 					<div class="switch_box">
 						<span class='title_txt'><span class="red">*&nbsp;</span>{{pageTxt.label[2]}}</span>
-						<el-switch v-if="auth>1" v-model="switchValue1" :active-text="pageTxt.label[7]" active-color='#0DB9EB' :inactive-text="pageTxt.label[6]" inactive-color='#D7D8DA'></el-switch>
+						<el-switch id="enable1" v-if="auth>1" v-model="switchValue1" :active-text="pageTxt.label[7]" active-color='#0DB9EB' :inactive-text="pageTxt.label[6]" inactive-color='#D7D8DA'></el-switch>
 						<span class='prompt_txt'>{{pageTxt.label[9]}}</span>
 					</div>
 					<div class="mxContent">
-						<el-input auto-complete="off" type="textarea" rows="15" v-model="textareaValue1" :disabled="!switchValue1"></el-input>
+						<el-input id="textarea1" auto-complete="off" type="textarea" rows="15" v-model="textareaValue1" :disabled="!switchValue1"></el-input>
 					</div>
-					<button v-if="auth>1" class="blueBtn" :disabled="!switchValue1" @click="showReviewFn">{{pageTxt.label[3]}}</button>
-					<button v-if="auth>1" class="blueBtn mt" :disabled="!switchValue1" @click="history(textareaValue1)">{{$t('fbcsFile.tips.contrast')}}</button>
+					<button id="submit1" v-if="auth>1" class="blueBtn" :disabled="!switchValue1" @click="showReviewFn">{{pageTxt.label[3]}}</button>
+					<button id="contrast1" v-if="auth>1" class="blueBtn mt" :disabled="!switchValue1" @click="history(textareaValue1)">{{$t('fbcsFile.tips.contrast')}}</button>
 				</el-tab-pane>
 				<el-tab-pane :label="pageTxt.label[4]" name="second">
 					<div class="switch_box">
 						<span class='title_txt'><span class="red">*&nbsp;</span>{{pageTxt.label[5]}}</span>
-						<el-switch v-if="auth>1" v-model="switchValue2" :active-text="pageTxt.label[7]" active-color='#0DB9EB' :inactive-text="pageTxt.label[6]" inactive-color='#D7D8DA'></el-switch>
-						<span class='prompt_txt'>{{pageTxt.label[10]}}</span>
+						<el-switch id="enable2" v-if="auth>1" v-model="switchValue2" :active-text="pageTxt.label[7]" active-color='#0DB9EB' :inactive-text="pageTxt.label[6]" inactive-color='#D7D8DA'></el-switch>
+						<span id="textarea2" class='prompt_txt'>{{pageTxt.label[10]}}</span>
 					</div>
 					<div class="mxContent">
 						<el-input auto-complete="off" type="textarea" rows="15" v-model="textareaValue2" :disabled="!switchValue2"></el-input>
 					</div>
-					<button v-if="auth>1" class="blueBtn" :disabled="!switchValue2" @click="showReviewFn">{{pageTxt.label[3]}}</button>
-					<button v-if="auth>1" class="blueBtn mt" :disabled="!switchValue2" @click="history(textareaValue2)">{{$t('fbcsFile.tips.contrast')}}</button>
+					<button id="submit2" v-if="auth>1" class="blueBtn" :disabled="!switchValue2" @click="showReviewFn">{{pageTxt.label[3]}}</button>
+					<button id="contrast2" v-if="auth>1" class="blueBtn mt" :disabled="!switchValue2" @click="history(textareaValue2)">{{$t('fbcsFile.tips.contrast')}}</button>
 				</el-tab-pane>
 			</el-tabs>
 			<div v-if="auth>1" class="mxContent">
 				<h2 class="h2">{{$t('fbcsFile.suConfig.h2')}}</h2>
-				<el-table v-if="auth>1" :data="list" :row-class-name="rowClass"  highlight-current-row border stripe >
+				<el-table id="table-contrast" v-if="auth>1" :data="list" :row-class-name="rowClass"  highlight-current-row border stripe >
 					<el-table-column prop="section" :label="$t('fbcsFile.suConfig.section')"></el-table-column>
 					<el-table-column prop="field" :label="$t('fbcsFile.suConfig.field')"></el-table-column>
 					<el-table-column prop="type" :label="$t('fbcsFile.suConfig.type')"></el-table-column>
@@ -42,7 +42,7 @@
 			<el-dialog ref="diaTab" :visible.sync="errDialog" width="70%" :title="$t('fbcsFile.suConfig.err')" v-dialogDrag
 				:close-on-click-modal='false' :show-close="false">
 				<div class="_dialog">
-					<el-table :data="errList" :row-class-name="rowClass" max-height="294" border stripe>
+					<el-table id="talbe-errList" :data="errList" :row-class-name="rowClass" max-height="294" border stripe>
 						<el-table-column prop="section" :label="$t('fbcsFile.suConfig.section')"></el-table-column>
 						<el-table-column prop="field" :label="$t('fbcsFile.suConfig.field')"></el-table-column>
 						<el-table-column prop="oldValue" :label="$t('fbcsFile.suConfig.oldValue')"></el-table-column>
@@ -51,7 +51,7 @@
 					</el-table>
 				</div>
 				<div slot="footer" class="_footBtn">
-					<button class="defBtn" @click="errDialog=false">{{$t('fbcsFile.tips.close')}}</button>
+					<button id="close" class="defBtn" @click="errDialog=false">{{$t('fbcsFile.tips.close')}}</button>
 				</div>
 			</el-dialog>
 		</div>

@@ -49,31 +49,31 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.order.editBiz.bizKey')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.bizKey" disabled autocomplete="off"/>
+						<input v-model="ekeyInfo.bizKey" id="bizKey" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.userID')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.userID" disabled autocomplete="off"/>
+						<input v-model="ekeyInfo.userID" id="userID" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.order.ekeyOrder.userName')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.userName" disabled autocomplete="off"/>
+						<input v-model="ekeyInfo.userName" id="userName" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyName')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyName" disabled maxlength="63" autocomplete="off"/>
+						<input v-model="ekeyInfo.ekeyName" id="ekeyName" disabled maxlength="63" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyDate')}}</p>
 					</div><div class="right">
-						<el-date-picker v-model="ekeyInfo.validDate" class="picker" type="datetime" :clearable="true" :editable="false"
+						<el-date-picker v-model="ekeyInfo.validDate" id="validDate" class="picker" type="datetime" :clearable="true" :editable="false"
 							:placeholder="$t('fbcsFile.tips.date')" value-format="timestamp" default-time="23:59:59" >
 						</el-date-picker>
 					</div>
@@ -81,7 +81,7 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.Ekey.ekeyInfo')}}</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.ekeyComment" maxlength="255" autocomplete="off"/>
+						<input v-model="ekeyInfo.ekeyComment" id="comment" maxlength="255" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
@@ -90,7 +90,7 @@
 							{{$t('fbcsFile.order.editBiz.remark')}}
 						</p>
 					</div><div class="right">
-						<input v-model="ekeyInfo.remark" maxlength="128" autocomplete="off"/>
+						<input v-model="ekeyInfo.remark" id="remark" maxlength="128" autocomplete="off"/>
 					</div>
 				</li>
 			</div>
@@ -124,8 +124,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
 var tick = require('@/fbcsFxViews/img/order/tick.png'),
-   cross = require('@/fbcsFxViews/img/order/cross.png');
-
+	cross = require('@/fbcsFxViews/img/order/cross.png');
 
 var _this, enable;
 

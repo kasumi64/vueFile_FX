@@ -68,8 +68,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
 var tick = require('@/fbcsFxViews/img/order/tick.png'),
-   cross = require('@/fbcsFxViews/img/order/cross.png');
-
+	cross = require('@/fbcsFxViews/img/order/cross.png');
 
 var _this, enable;
 
@@ -299,7 +298,7 @@ export default {
 		}
 	},
 	components: {
-		// modifyPwd: resolve => require(['@/fbcsFxViews/view/order/modifyPwdOrder.vue'], resolve),
+		// modifyPwd: resolve => require(['@/fbcsFxViews/view/order/modifyPwdOrder.vue'], resolve)
 	}
 }
 

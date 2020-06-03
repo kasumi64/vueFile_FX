@@ -66,8 +66,7 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 import moment from 'moment';
 
 var tick = require('@/fbcsFxViews/img/order/tick.png'),
-   cross = require('@/fbcsFxViews/img/order/cross.png');
-
+	cross = require('@/fbcsFxViews/img/order/cross.png');
 
 var _this, enable;
 

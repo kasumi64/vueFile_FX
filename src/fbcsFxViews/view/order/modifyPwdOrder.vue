@@ -6,25 +6,25 @@
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.order.editBiz.bizKey')}}</p>
 					</div><div class="right">
-						<input v-model="info.bizKey" id="bizKey" disabled autocomplete="off"/>
+						<input v-model="info.bizKey" id="orderPwd-bizKey" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.password.id')}}</p>
 					</div><div class="right">
-						<input v-model="info.userID" id="userID" disabled autocomplete="off"/>
+						<input v-model="info.userID" id="orderPwd-userID" disabled autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.password.pwd')}}</p>
 					</div><div class="right">
-						 <el-checkbox v-model="isEdit" id="isEdit"></el-checkbox>
+						 <el-checkbox v-model="isEdit" id="orderPwd-isEdit"></el-checkbox>
 					</div>
 				</li><li v-if="isEdit">
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.password.reset')}}</p>
 					</div><div class="right">
-						 <el-radio-group id="isDefPwd" v-model="info.isModifyDefaultPasswd" @change="defPwd" class="radio">
+						 <el-radio-group id="orderPwd-isDefPwd" v-model="info.isModifyDefaultPasswd" @change="defPwd" class="radio">
 						    <el-radio :label="0">{{$t('fbcsFile.password.def')}}</el-radio>
 						    <el-radio :label="1">{{$t('fbcsFile.password.hm')}}</el-radio>
 						</el-radio-group>
@@ -36,7 +36,7 @@
 							{{$t('fbcsFile.password.new')}}
 						</p>
 					</div><div class="right">
-						<input v-model="passwd" id="passwd" :disabled="info.isModifyDefaultPasswd==0" maxlength="18" autocomplete="off"/>
+						<input v-model="passwd" id="orderPwd-pwd" :disabled="info.isModifyDefaultPasswd==0" maxlength="18" autocomplete="off"/>
 					</div>
 				</li><li v-if="isEdit">
 					<div class="left">
@@ -45,13 +45,13 @@
 							{{$t('fbcsFile.password.again')}}
 						</p>
 					</div><div class="right">
-						<input v-model="again" id="again" :disabled="info.isModifyDefaultPasswd==0" maxlength="18" autocomplete="off"/>
+						<input v-model="again" id="orderPwd-again" :disabled="info.isModifyDefaultPasswd==0" maxlength="18" autocomplete="off"/>
 					</div>
 				</li><li>
 					<div class="left">
 						<p class="txt">{{$t('fbcsFile.password.indate')}}</p>
 					</div><div class="right">
-						<el-select v-model="info.expiredTimeFlag" id="expired">
+						<el-select v-model="info.expiredTimeFlag" id="orderPwd-expired">
 							<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
@@ -63,7 +63,7 @@
 							{{$t('fbcsFile.order.editBiz.remark')}}
 						</p>
 					</div><div class="right">
-						<input v-model="info.remark" id="remark" maxlength="128" autocomplete="off"/>
+						<input v-model="info.remark" id="orderPwd-remark" maxlength="128" autocomplete="off"/>
 					</div>
 				</li>
 			</div>
@@ -83,7 +83,6 @@ import utils from '@/fbcsFxViews/libs/utils.js';
 import md5 from '@/fbcsFxViews/libs/md5.js';
 
 var _this, defaultPwd;
-
 
 export default {
 	data(){

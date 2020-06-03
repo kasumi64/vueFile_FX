@@ -5,7 +5,7 @@
 			<hr class="_hr" />
 			<div>
 				<label class="txt">{{pageTxt.label[1]}}</label>
-				<el-select class='select' v-model="config">
+				<el-select id="type" class='select' v-model="config">
 					<el-option v-for="obj in pageTxt.option" :key="obj.c" :label="obj.t" :value="obj.c">
 					</el-option>
 				</el-select>
@@ -13,7 +13,7 @@
 			<div class="ver">
 				<label class="txt">{{pageTxt.label[2]}}</label>
 				<div class="verbox">
-					<el-autocomplete @input='autoInput1' v-model="info.ver1" class="elInput" :fetch-suggestions="fetch" 
+					<el-autocomplete id="ver1" @input='autoInput1' v-model="info.ver1" class="elInput" :fetch-suggestions="fetch" 
 						:placeholder="pageTxt.label[3]" :trigger-on-focus="true" @select="idSelect1">
 						<div slot-scope="{item}">
 							<span>{{item.version}}</span>
@@ -23,7 +23,7 @@
 				</div>
 				<label class="txt">{{pageTxt.label[4]}}</label>
 				<div class="verbox">
-					<el-autocomplete @input='autoInput2' v-model="info.ver2" class="elInput" :fetch-suggestions="fetch" 
+					<el-autocomplete id="ver2" @input='autoInput2' v-model="info.ver2" class="elInput" :fetch-suggestions="fetch" 
 						:placeholder="pageTxt.label[5]" :trigger-on-focus="true" @select="idSelect2">
 						<div slot-scope="{item}">
 							<span class="name">{{item.version}}</span>
@@ -31,11 +31,11 @@
 					</el-autocomplete>
 					<label for='autoInput_1' class="el-icon-circle-close clearTXT verClose2"></label>
 				</div>
-				<el-button class='btnS' type='primary' @click='search'>{{pageTxt.label[6]}}</el-button>
+				<el-button id="search" class='btnS' type='primary' @click='search'>{{pageTxt.label[6]}}</el-button>
 				<!--<span class="txt">{{pageTxt.label[7]}}</span>-->
 			</div>
 		</div>
-		<el-table stripe border @current-change="currenRow" @selection-change="selectionRow" :data="data" tooltip-effect="dark" highlight-current-row>
+		<el-table id="tableID" stripe border @current-change="currenRow" @selection-change="selectionRow" :data="data" tooltip-effect="dark" highlight-current-row>
 			<el-table-column v-if="this.config<3" prop="section" :label="pageTxt.list[0]" width='180px'  show-overflow-tooltip></el-table-column>
 			<el-table-column v-if="this.config<3" prop="field" :label="pageTxt.list[1]" width='180px'  show-overflow-tooltip></el-table-column>
 			<el-table-column prop="type" :label="pageTxt.list[2]" width='180px'  show-overflow-tooltip></el-table-column>

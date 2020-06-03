@@ -6,7 +6,7 @@
 		<div class="signal">
 			<div class="userH">
 				<span class="txt">{{pageTxt.label[1]}}：</span>
-				<el-select class="input_normal" v-model="searchInfo.bizType" placeholder="">
+				<el-select id="type" class="input_normal" v-model="searchInfo.bizType" placeholder="">
 					<el-option v-for="item in options1" :label="item.name" :key="item.id" :value="item.id"></el-option>
 				</el-select>
 				<span class="txt1">{{pageTxt.label[2]}}：</span>
@@ -28,11 +28,11 @@
 				<el-button type="primary" @click='search' class="btn">{{pageTxt.label[4]}}</el-button>
 			</div>
 			<div class="btnBox">
-				<div v-if="auth>1" @click="showCreate"><img src="@/fbcsViews/img/user/creatsignal.png"><span>{{pageTxt.label[5]}}</span></div>
+				<div id="create" v-if="auth>1" @click="showCreate"><img src="@/fbcsViews/img/user/creatsignal.png"><span>{{pageTxt.label[5]}}</span></div>
 				<!-- <div @click="exportSignalInfo"><img src="@/fbcsViews/img/user/exportsignal.png"><span>{{pageTxt.label[6]}}</span></div> -->
-				<div @click="toAdvanced"><img src="@/fbcsFxViews/img/FnIcon/searchSignal.png"><span>{{pageTxt.adv}}</span></div>
+				<div id="toAdvanced" @click="toAdvanced"><img src="@/fbcsFxViews/img/FnIcon/searchSignal.png"><span>{{pageTxt.adv}}</span></div>
 			</div>
-			<el-table stripe border :data="list.lists" tooltip-effect="dark" @current-change="currentRow" highlight-current-row>
+			<el-table id="tableID" stripe border :data="list.lists" tooltip-effect="dark" @current-change="currentRow" highlight-current-row>
 				<!--<el-table-column width="50" label=" " type="index"></el-table-column>-->
 				<el-table-column prop="typeStr" :label="pageTxt.table[0]" show-overflow-tooltip></el-table-column>
 				<el-table-column prop="userID1" :label="pageTxt.table[1]" show-overflow-tooltip></el-table-column>
@@ -61,7 +61,7 @@
 							<p class="txt">{{pageTxt.popup[1]}}</p>
 						</div>
 						<div class="rightBox">
-							<el-select class="input_normal" v-model="creatInfo.bizType" placeholder="">
+							<el-select id="add-type" class="input_normal" v-model="creatInfo.bizType" placeholder="">
 								<el-option v-for="item in optionsCreat" :label="item.name" :key="item.id" :value="item.id"></el-option>
 							</el-select>
 						</div>
@@ -78,7 +78,7 @@
 								filterable remote :remote-method="remote1" @visible-change="visible" @change="changevalue" :placeholder="placeholder">
 								<el-option v-for="item in oneidList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 							</el-select>
-							<span class="cleartxt" @click="clear">{{pageTxt.popup[4]}}</span>
+							<span id="add-clear" class="cleartxt" @click="clear">{{pageTxt.popup[4]}}</span>
 						</div>
 					</li>
 					<li>
@@ -89,7 +89,7 @@
 							</p>
 						</div>
 						<div class="rightBox">
-							<el-select popper-class="fbcs_MX_signal_select" class="input_normal select_" :disabled="creatInfo.user?false:true" v-model="creatInfo.other"
+							<el-select id="add-other" popper-class="fbcs_MX_signal_select" class="input_normal select_" :disabled="creatInfo.user?false:true" v-model="creatInfo.other"
 								multiple filterable remote :remote-method="remote2" :reserve-keyword="false" @focus="focus" :placeholder="placeholder">
 								<el-option v-for="item in multipleList" :key="item.userID" :label="item.userName" :value="item.userID"></el-option>
 							</el-select>
@@ -97,20 +97,20 @@
 					</li>
 				</ul>
 				<div slot="footer" class="_footBtn">
-					<el-button type="primary" @click="submit">{{pageTxt.popup[5]}}</el-button>
-					<el-button @click="dialogAdd = false">{{pageTxt.popup[6]}}</el-button>
+					<el-button id="add-submit" type="primary" @click="submit">{{pageTxt.popup[5]}}</el-button>
+					<el-button id="add-close" @click="dialogAdd = false">{{pageTxt.popup[6]}}</el-button>
 				</div>
 			</el-dialog>
 		</div>
 		<el-dialog class="dialog_pop" v-dialogDrag :title="pageTxt.popup[7]" :visible.sync="showExportSignalInfo" width='600px'>
 			<div class="_messaga">
-				<span class="txt">&nbsp;{{pageTxt.popup[8]}}<a :href="signalInfoSrc" style="color:#5C759D">{{signalInfoName}}</a></span>
+				<span class="txt">&nbsp;{{pageTxt.popup[8]}}<a id="csvName" :href="signalInfoSrc" style="color:#5C759D">{{signalInfoName}}</a></span>
 				<div class="_messaga_info">
 					<span class="info_txt">{{pageTxt.popup[9]}}</span>
 				</div>
 			</div>
 			<div slot="footer" class="_footBtn">
-				<el-button type="default" @click="showExportSignalInfo=false">{{pageTxt.popup[10]}}</el-button>
+				<el-button id="close" type="default" @click="showExportSignalInfo=false">{{pageTxt.popup[10]}}</el-button>
 			</div>
 		</el-dialog>
 		
