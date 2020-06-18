@@ -21,7 +21,7 @@
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>
-		<lgy-table ref="table" :list="list" :title="title" :defined="defined" :total="total" :selection="true" :currentPage="page"
+		<lgy-table id="signalTable" ref="table" :list="list" :title="title" :defined="defined" :total="total" :selection="true" :currentPage="page"
 			@selectChange="selectChange" @changePage="changePage" >
 		</lgy-table>
 		

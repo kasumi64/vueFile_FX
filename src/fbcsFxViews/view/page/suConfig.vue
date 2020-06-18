@@ -11,7 +11,7 @@
 				<el-switch id="enabled" v-if="fxAuth" :inactive-text="$t('fbcsFile.suConfig.only')" :active-text="$t('fbcsFile.suConfig.edit')" v-model="enabled"></el-switch>
 			</div>
 			<div class="textarea">
-				<el-input v-model="txtVal" @input="filter($event)" type="textarea" rows="14" :disabled="!enabled" resize="none">
+				<el-input id="textarea" v-model="txtVal" @input="filter($event)" type="textarea" rows="14" :disabled="!enabled" resize="none">
 				</el-input>
 				<button v-if="fxAuth" id="submit" class="blueBtn mt" @click="submit" :disabled="!enabled">{{$t('fbcsFile.tips.submit')}}</button>
 				<button v-if="fxAuth" id="contrast" class="blueBtn mt" @click="history" :disabled="!enabled">{{$t('fbcsFile.tips.contrast')}}</button>

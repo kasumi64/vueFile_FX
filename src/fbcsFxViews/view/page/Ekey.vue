@@ -17,7 +17,7 @@
 				<span class="label">{{$t('fbcsFile.searchBar.advanced')}}</span>
 			</li>
 		</ul>
-		<lgy-table ref="table" :list="list" :title="title" :defined="defined" :total="total" :currentPage="page" @changePage="changePage" >
+		<lgy-table id="ekeyTable" ref="table" :list="list" :title="title" :defined="defined" :total="total" :currentPage="page" @changePage="changePage" >
 		</lgy-table>
 		
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag

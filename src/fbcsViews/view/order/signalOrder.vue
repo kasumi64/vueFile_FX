@@ -106,7 +106,7 @@
 		
 		<el-dialog :visible.sync="showDialog" :title="dialogTitle" v-dialogDrag width="70%" @open="open"
 			:close-on-click-modal='false' :show-close="false">
-			<div class="_dialog orderPane" ref="orderPane">
+			<div class="_dialog orderPane" ref="orderPane" :key="batch">
 				<lgy-table id="accept" stripe class="table" v-if="batch=='accept'" :width="width" :list="submitList" :title="acceptTitle" 
 					:size="200" :total="submitList.length">
 				</lgy-table>
