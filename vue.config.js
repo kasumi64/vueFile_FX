@@ -89,7 +89,7 @@ module.exports = {
 	devServer: {
 		open: process.env.NODE_ENV === 'development',
 		host: '0.0.0.0', // 设置为0.0.0.0则所有的地址均能访问
-		port: 8080,
+		port: 5000,
 		https: false,
 		hotOnly: false,
 		stats: 'errors-only',

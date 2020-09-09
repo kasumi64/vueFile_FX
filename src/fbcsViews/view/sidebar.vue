@@ -144,8 +144,8 @@ import fxUtils   from '@/fbcsFxViews/libs/utils.js';
 			this.auth = obj;
 			this.pageTxt = lang().sidebar;
 			
-			globalVar.set('urlIP', 'http://localhost:8088/fbcs_mx/');
-			fxUtils.setBaseURL('http://localhost:8088/fbcs_mx/mx/');
+			globalVar.set('urlIP', 'http://localhost:5500/fbcs_mx/');
+			fxUtils.setBaseURL('http://localhost:5500/fbcs_mx/mx/');
 			// globalVar.set('urlIP', 'http://10.10.218.26:8080/fbcs_mx/');
 			// fxUtils.setBaseURL('http://10.10.218.26:8080/fbcs_mx/mx/');
 		},
